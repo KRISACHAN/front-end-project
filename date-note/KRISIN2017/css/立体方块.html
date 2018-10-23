@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    .box {
+      position: absolute;
+      top: 200px;
+      left: 200px;
+    }
+    /* 转换中心 */
+    .cude {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      margin: 200px auto;
+      transform-style: preserve-3d; /* 使被转换的子元素保留其 3D 转换 */
+      transform: rotateX(-30deg) rotateY(-80deg);
+      transform-origin: 50% 50% 0; /* 设置旋转元素的基点位置 */
+      /*background: #5C715E;*/
+      animation: rotate 15s infinite;
+    }
+    .cude > div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 200px;
+      background: #C0D7DD;
+      opacity: 0.8;
+      border: 1px solid #fff;
+      background: #FFF;
+      background-image: linear-gradient(90deg, rgba(40,105,78, .5) 50%, transparent 0), linear-gradient( rgba(40,105,78, .5) 50%, transparent 0); /* 线性渐变 */
+      background-size: 20px 20px; /* 渐变间距 */
+    }
+    .front {
+      transform: rotateY(0) translateZ(100px);
+    }
+    .back {
+      transform: translateZ(-100px) rotateY(180deg);
+    }
+    .left {
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+    .right {
+      transform: rotateY(90deg) translateZ(100px);
+    }
+    .top {
+      transform: rotateX(90deg) translateZ(100px);
+    }
+    .bottom {
+      transform: rotateX(90deg) translateZ(-100px);
+    }
+    @keyframes rotate {
+      0%, 100% {
+        transform: rotateX(0deg) rotateY(0deg);
+      }
+      50% {
+        transform: rotateX(360deg) rotateY(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="cude">
+      <div class="front"></div>
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="bottom"></div>
+      <div class="top"></div>
+      <div class="back"></div>
+    </div>
+  </div>
+  <script>
+    'use strict';
+  </script>
+</body>
+</html>

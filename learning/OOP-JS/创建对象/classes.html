@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		// 没有变量提升了
+		class People {
+			constructor( name ,age ) {
+				this.name = name;
+				this.age = age;
+			};
+
+			say() {
+				console.log(`${this.name}今年${this.age}岁辣~~~~`);
+			};
+
+			static Static(){
+				return console.log(`hello world`);
+			}
+		};
+		const kris = new People("kris","21");
+		kris.say();
+		People.Static();
+
+		class Dw extends People {};
+
+		var dw = new Dw("大文","二十一");
+		dw.say();
+		console.log(dw.constructor === Dw) //true
+
+		class CJW extends People {
+			say() {
+				super.say();
+				console.log(`调用啦，${this.name}`);
+			}
+		};
+		var cjw = new CJW("陈劲文","廿一");
+		cjw.say();
+	</script>
+</body>
+</html>

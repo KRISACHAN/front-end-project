@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    html,body,div {
+      margin: 0;
+      padding: 0;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    .ball {
+      width: 100px;
+      height: 100px;
+      background: #ADDCE2;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ball" id="ball"></div>
+  <script>
+    'use strict';
+    // 自由落体运动的规律：vt²=2gh(g是重力加速度，在地球上g≈9.8m/s²;)。
+    // h = gt²/2
+    // v = gt
+    // 此处用g = 10 m/s²
+    (() => {
+      const Ball = document.querySelector('#ball'), // 下落物体
+               G = 10, // 加速度
+               H = document.documentElement.clientHeight - Ball.offsetHeight - 100, // 总路程
+               S = 0.3, // 秒数 ( 模拟 )
+               T = 30, // 变化时间 ( 模拟 )
+        Friction = 0; // 摩擦力
+       let Timer = null,
+           speed = 0, // 速度
+             pos = 0, // 移动位置
+            stop1 = 0, stop2 = 0; // 停止钩子
+      Timer = setInterval(() => {
+        speed += ( G * S );
+        pos = Ball.offsetTop + speed;
+        stop1 = parseInt(pos.toFixed(2));
+        console.log('1. ' + parseInt(pos.toFixed(2)));
+        if ( pos > H ) {
+          pos = H;
+          speed *= -1; // 方向变化
+          speed *= (0.08 * G); // 物体质量
+        }
+        Ball.style.top = pos.toFixed(2) + 'px';
+        stop2 = parseInt(pos.toFixed(2));
+        console.log('2. ' + parseInt(pos.toFixed(2)));
+        if ( stop2 + 1 === stop1 ) {
+          clearInterval(Timer);
+        }
+      }, T );
+    })();
+  </script>
+</body>
+</html>

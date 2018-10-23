@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>star move</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        margin:0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        cursor: none;
+        background: black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <audio src="star.mp3" autoplay loop></audio>
+    <script>
+      'use strict'
+      const context = canvas.getContext('2d')
+      let WIDTH
+      let HEIGHT
+      let count
+      const useChache = true
+      const drawBackground = () => {
+        /* 绘制canvas大小 */
+        WIDTH = document.documentElement.clientWidth
+        HEIGHT = document.documentElement.clientHeight
+        count = 100
+        canvas.width = WIDTH
+        canvas.height = HEIGHT
+      }
+      class Round_item {
+        constructor ({
+          context, /* canvas对象 */
+          index, /* 区分下标 */
+          x, /* 横坐标 */
+          y, /* 纵坐标 */
+          w, /* 宽度 */
+          h, /* 高度 */
+          useChache, /* 是否创建离屏应用 */
+        }) {
+          this.context = context
+          this.index = index
+          this.x = x
+          this.y = y
+          this.w = w
+          this.h = h
+          this.r = Math.random() * 2 + 1
+          this.useChache = true
+          this.cacheCanvas = document.createElement('canvas')
+          this.cacheContext = this.cacheCanvas.getContext('2d')
+          this.cacheCanvas.width = 6 * this.r
+          this.cacheCanvas.height = 6 * this.r
+          const alpha = (Math.floor(Math.random() * 10) + 1) / 10 / 2
+          this.color = `rgba(255, 255, 255, ${alpha})`
+          this.useChache && this.cache()
+        }
+        cache () {
+          /* 离屏应用 */
+          this.cacheContext.save()
+          this.cacheContext.fillStyle = this.color
+          this.cacheContext.shadowColor = 'white'
+          this.cacheContext.shadowBlur = this.r * 2
+          this.cacheContext.beginPath()
+          this.cacheContext.arc(this.r * 3, this.r * 3, this.r, 0, 2 * Math.PI)
+          this.cacheContext.closePath()
+          this.cacheContext.fill()
+          this.cacheContext.restore()
+        }
+        draw () {
+          /* 绘制图案 */
+          if(!this.useChache) {
+            this.context.fillStyle = this.color
+            this.context.shadowBlur = this.r * 2
+            this.context.beginPath()
+            this.context.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
+            this.context.closePath()
+            this.context.fill()
+          } else {
+            context.drawImage(this.cacheCanvas, this.x - this.r, this.y - this.r)
+          }
+        }
+        move () {
+          /* 图案移动 */
+          this.y -= 0.7 /* 移动速度 */
+          if (this.y <= -10) {
+            this.y = this.h + 10 /* 边界处理 */
+          }
+          this.draw()
+        }
+      }
+
+      const init = () => {
+        drawBackground()
+        /* 函数初始化 */
+        const round = []
+        const w = WIDTH
+        const h = HEIGHT
+        for (let index = 0; index < count; ++index) {
+          const x = Math.random() * w
+          const y = Math.random() * h
+          round[index] = new Round_item({
+            context,
+            index,
+            x,
+            y,
+            w,
+            h,
+            useChache
+          })
+          round[index].draw()
+        }
+        const animate = () => {
+          /* 星星移动 */
+          context.clearRect(0, 0, WIDTH, HEIGHT)
+          for (var i in round) {
+              round[i].move()
+          }
+          requestAnimationFrame(animate)
+        }
+        animate()
+      }
+      window.onload = init()
+      window.onresize = () => {
+        init()
+      }
+    </script>
+  </body>
+</html>

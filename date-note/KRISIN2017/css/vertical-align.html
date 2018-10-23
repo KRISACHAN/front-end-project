@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html,body,div,span {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="father" style="font-size: 20px; line-height: 2em;">
+    fahter
+    <!--
+      .son vertical-align : 20px * .son font-size * 2
+    -->
+    <span class="son" style="font-size: 2em; vertical-align: 2em;">
+      son
+      <!--
+        .grandson vertical-align : .son line-height * 2
+      -->
+      <span class="grandson" style="vertical-align: 2em;">
+        grandson
+      </span>
+    </span>
+  </div>
+  <script>
+  </script>
+</body>
+</html>

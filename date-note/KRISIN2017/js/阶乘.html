@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>阶乘</title>
+  <style>
+  </style>
+</head>
+<body>
+  <script>
+    'use strict';
+    const print = console.log.bind(console)
+    /*
+     * @the first method : do while loop
+     */
+    let total = 0
+    let i = 0
+    do {
+      i++
+      total += i
+    } while (i < 100)
+    print(total)
+    /*
+     * @the second method : for loop
+     */
+    total = 0
+    for (let n = 0; n <= 100; ++n) {
+      total += n
+    }
+    print(total)
+    /*
+     * @the three method : reduce
+     */
+    total = Array.from({ length: 100 },
+                       (v, i) => i + 1)
+                 .reduce((a, b) => a + b)
+    print(total)
+    /*
+     * @the forth method : recursion
+     */
+    const sum = num => num > 1 ? num + sum(num - 1) : 1
+    print(sum(100))
+  </script>
+</body>
+</html>

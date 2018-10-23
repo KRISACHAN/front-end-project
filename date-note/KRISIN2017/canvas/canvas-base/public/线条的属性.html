@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>线条的属性</title>
+  <style>
+  </style>
+</head>
+<body>
+  <script>
+    'use strict';
+    //     1.lineCap : 设置或返回线条的结束端点样式
+    //          butt : 默认值，端点是垂直于线段边缘的平直边缘。
+    //         round : 端点是在线段边缘处以线宽为直径的半圆。
+    //        square : 端点是在选段边缘处以线宽为长、以一半线宽为宽的矩形。
+    //
+    //    2.lineJoin : 设置或返回两条线相交时，所创建的拐角类型
+    //         miter : 默认值，在连接处边缘延长相接。miterLimit 是角长和线宽所允许的最大比例(默认是 10)。
+    //         bevel : 连接处是一个对角线斜角。
+    //         round : 连接处是一个圆。
+    //
+    //   3.lineWidth : 设置或返回当前的线条宽度
+    //   lineWidth 定义线的宽度(默认值为 1.0)。
+    //
+    // 4.strokeStyle : 设置或返回最大斜接长度
+    // strokeStyle 定义线和形状边框的颜色和样式。
+    //
+    const Kris = {};
+    Kris.Dom = dom => document.querySelector(dom);
+    Kris.CreateDom = (content, len, type, text) => {
+      let Content = Kris.Dom(content);
+      let Fragment = document.createDocumentFragment();
+      for ( let i = 0; i < len; ++i ) {
+        let Type = document.createElement(type);
+        Type.innerHTML = text;
+        Fragment.appendChild(Type);
+      }
+      Content.appendChild(Fragment);
+    };
+
+    Kris.CreateCanvas = () => {
+      Kris.CreateDom('body', 4, 'canvas', '你的浏览器不支持canvas呦');
+      const canvas = document.querySelectorAll('canvas');
+      canvas.forEach((ce,ci,ca) => {
+        ce.width = 800;
+        ce.height = 600;
+        Kris[`ctx${ci + 1}`] = ce.getContext('2d');
+      });
+    };
+
+    Kris.DrawLine = () => {
+      Kris.Line1 = () => {
+        Kris.ctx1.lineWidth = 50;
+        Kris.ctx1.strokeStyle = "#1BAAAA";
+
+        Kris.ctx1.beginPath();
+        Kris.ctx1.moveTo(100,100);
+        Kris.ctx1.lineTo(700,100);
+        Kris.ctx1.lineCap = "butt";
+        Kris.ctx1.stroke();
+
+        Kris.ctx1.beginPath();
+        Kris.ctx1.moveTo(100,300);
+        Kris.ctx1.lineTo(700,300);
+        Kris.ctx1.lineCap = "round";
+        Kris.ctx1.stroke();
+
+        Kris.ctx1.beginPath();
+        Kris.ctx1.moveTo(100,500);
+        Kris.ctx1.lineTo(700,500);
+        Kris.ctx1.lineCap = "square";
+        Kris.ctx1.stroke();
+
+        //下面画两个基准线方便观察
+        Kris.ctx1.lineWidth = 3;
+        Kris.ctx1.strokeStyle = "black";
+
+        Kris.ctx1.beginPath();
+        Kris.ctx1.moveTo(100,0);
+        Kris.ctx1.lineTo(100,600);
+        Kris.ctx1.moveTo(700,0);
+        Kris.ctx1.lineTo(700,600);
+        Kris.ctx1.stroke();
+      };
+      Kris.Line1();
+
+      Kris.Line2 = () => {
+        Kris.ctx2.beginPath();
+        Kris.ctx2.moveTo(100,100);
+        Kris.ctx2.lineTo(300,300);
+        Kris.ctx2.lineTo(100,500);
+        Kris.ctx2.lineJoin = "miter";
+        Kris.ctx2.miterLimit = 10;
+        Kris.ctx2.lineWidth = 5;
+        Kris.ctx2.strokeStyle = "red";
+        Kris.ctx2.stroke();
+
+        Kris.ctx2.beginPath();
+        Kris.ctx2.moveTo(300,200);
+        Kris.ctx2.lineTo(500,300);
+        Kris.ctx2.lineTo(300,400);
+        Kris.ctx2.lineJoin = "miter";
+        Kris.ctx2.miterLimit = 10;
+        Kris.ctx2.lineWidth = 5;
+        Kris.ctx2.strokeStyle = "blue";
+        Kris.ctx2.stroke();
+
+        Kris.ctx2.beginPath();
+        Kris.ctx2.moveTo(500,290);
+        Kris.ctx2.lineTo(700,300);
+        Kris.ctx2.lineTo(500,310);
+        Kris.ctx2.lineJoin = "miter";
+        Kris.ctx2.miterLimit = 10;
+        Kris.ctx2.lineWidth = 5;
+        Kris.ctx2.strokeStyle = "black";
+        Kris.ctx2.stroke();
+      };
+      Kris.Line2();
+
+      Kris.Line3 = () => {
+        // 实例1: 圆形端点,斜角连接,在画布左上角
+        Kris.ctx3.beginPath();
+        Kris.ctx3.moveTo(0,0);
+        Kris.ctx3.lineTo(180,0);
+        Kris.ctx3.lineTo(180,180);
+        Kris.ctx3.lineJoin = 'bevel';
+        Kris.ctx3.lineCap = 'round';
+        Kris.ctx3.lineWidth = 10;
+        Kris.ctx3.strokeStyle = "red";
+        Kris.ctx3.stroke();
+
+        // 实例2: 圆形端点,斜角连接,不在画布左上角
+        Kris.ctx3.beginPath();
+        Kris.ctx3.moveTo(300,200);
+        Kris.ctx3.lineTo(480,200);
+        Kris.ctx3.lineTo(480,380);
+        Kris.ctx3.lineJoin = 'bevel';
+        Kris.ctx3.lineCap = 'round';
+        Kris.ctx3.lineWidth = 10;
+        Kris.ctx3.strokeStyle = "blue";
+        Kris.ctx3.stroke();
+
+        // 实例3: 平直端点,圆形连接,不在画布左上角
+        Kris.ctx3.beginPath();
+        Kris.ctx3.moveTo(600,400);
+        Kris.ctx3.lineTo(780,400);
+        Kris.ctx3.lineTo(780,580);
+        Kris.ctx3.lineJoin = 'round';
+        Kris.ctx3.lineCap = 'butt';
+        Kris.ctx3.lineWidth = 10;
+        Kris.ctx3.strokeStyle = "black";
+        Kris.ctx3.stroke();
+      };
+      Kris.Line3();
+    }
+
+    Kris.Init = () => {
+      Kris.CreateCanvas();
+      Kris.DrawLine();
+    };
+
+    window.addEventListener('load', Kris.Init, false);
+  </script>
+</body>
+</html>

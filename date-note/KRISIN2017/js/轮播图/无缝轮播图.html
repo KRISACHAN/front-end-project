@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="x5-orientation" content="portrait">
+  <meta name="screen-orientation" content="portrait">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="kris">
+  <title>轮播图</title>
+  <style>
+    html,
+    body,
+    ul,
+    ol,
+    li {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      font-size: 0;
+      list-style-type: none;
+    }
+    li {
+      font-size: 25px;
+    }
+    .slider {
+      width: 350px;
+      height: 300px;
+      position: absolute;
+      left: calc(50% - 175px);
+      top: 50px;
+      overflow: hidden;
+      border: 1px solid;
+      box-sizing: border-box;
+    }
+    .slider-box {
+      width: 350px;
+      height: 300px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .slider-main {
+      width: 350px;
+      height: 300px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      visibility: visible;
+    }
+    .slider-ctrl {
+      width: 350px;
+      height: 300px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: all 0.5s;
+      opacity: 0;
+    }
+    .slider:hover .slider-ctrl {
+      opacity: 1;
+    }
+    .slider-left,
+    .slider-right {
+      width: 30px;
+      height: 300px;
+      line-height: 300px;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      cursor: pointer;
+      font-size: 35px;
+    }
+    .slider-left {
+      left: 0;
+    }
+    .slider-right {
+      right: 0;
+    }
+    .slider-ol {
+      width: 350px;
+      height: 30px;
+      background: #FF0;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 10;
+      font-size: 0;
+    }
+    .slider-li {
+      display: inline-block;
+      height: 30px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .current{ 
+      background: #FFF;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slider">
+    <ul class="slider-box">
+      <li class="slider-main">1</li>
+      <li class="slider-main">2</li>
+      <li class="slider-main">3</li>
+      <li class="slider-main">4</li>
+      <li class="slider-main">5</li>
+      <li class="slider-main">6</li>
+    </ul>
+    <ol class="slider-ol"></ol>
+    <div class="slider-ctrl">
+      <div class="slider-left"><</div>
+      <div class="slider-right">></div>
+    </div>
+  </div>
+  <script src="http://cdn.bootcss.com/babel-core/6.1.19/browser.min.js"></script>
+  <script>
+    'use strict';
+    /* common methods */
+    const K = {}
+    K.css = (obj, attr) => parseInt(getComputedStyle(obj, false)[attr])
+    K.act = (obj, attr, target, timer, fn) => {
+      obj.timer && clearInterval(obj.timer)
+      obj.timer = setInterval(() => {
+        let stop = true
+        let cur = K.css(obj, attr)
+        let speed = (target - cur) / 8
+        speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+        cur !== target && (stop = false, obj.style[attr] = cur + speed + 'px')
+        stop && (clearInterval(obj.timer), obj.timer = null, fn && fn())
+      }, timer)
+    }
+
+    /* module */
+    const _SLIDER = ((win, doc, K, undefined) => {
+      console.log(K)
+      /* define */
+      const Slider = document.querySelector('.slider')
+      const Box = document.querySelector('.slider-box')
+      const Main = document.querySelectorAll('.slider-main')
+      const MainArr = [...Main]
+      const Ol = document.querySelector('.slider-ol')
+      const Ctrl = document.querySelectorAll('.slider-ctrl > div')
+      const W = K.css(Slider, 'width')
+      const L = K.css(Slider, 'left')
+      let Timer = null
+      let ATimer = null
+      let num = 0
+      let key = 0
+      /* main */
+      /* create dom */
+      const fragment = document.createDocumentFragment()
+      MainArr.forEach((e, i) => {
+        e.style.left = W * i + 'px'
+        let li = document.createElement('li')
+        li.innerHTML = i + 1
+        li.className = 'slider-li'
+        i === 0 && li.classList.add('current')
+        li.setAttribute('data-id', i + 1)
+        li.style.width = (1 / (Main.length)) * W + 'px'
+        fragment.appendChild(li)
+      })
+      Ol.appendChild(fragment)
+      const newMainLast = Main[0].cloneNode(true)
+      newMainLast.style.left = Main.length * W + 'px'
+      Box.appendChild(newMainLast)
+      const newMainFirst = Main[Main.length - 1].cloneNode(true)
+      newMainFirst.style.left = -W + 'px'
+      Box.appendChild(newMainFirst)
+      const OlArr = [...Ol.children]
+      /* slider methods */
+      const autoPlayRight = () => {
+        num++
+        key = num
+        num > Main.length && (num = 0, key = num, Box.style.left = 0 + 'px', ATimer = setTimeout(autoPlayRight, 0))
+        K.act(Box, 'left', num * -W, 30)
+        num > OlArr.length - 1 && (key = 0)
+        OlArr.forEach(e => e.classList.remove('current'))
+        Ol.children[key].classList.add('current')
+      }
+      const autoPlayLeft = () => {
+        num--
+        key = num
+        num < -1 && (Box.style.left = '-1400px', num = Main.length - 1, key = num, ATimer = setTimeout(autoPlayLeft, 0))
+        K.act(Box, 'left', (Main.length - (Main.length + num)) * W, 30)
+        OlArr.forEach((e, i) => e.classList.remove('current'))
+        num <= -1 && (key = Main.length - 1)
+        Ol.children[key].classList.add('current')
+      }
+      const MoveMethod = () => {
+        Slider.addEventListener('mouseenter', ev => clearInterval(Timer), false)
+        Slider.addEventListener('mouseleave', ev => Timer = setInterval(autoPlayRight, 3000), false)
+      }
+      const ClickMethods = () => {
+        Ctrl.forEach((e, i, a) => a[i].addEventListener('click', () => i === 1 ? autoPlayRight() : autoPlayLeft(), false))
+        OlArr.forEach((e, i, a) => {
+          e.addEventListener('click', ev => {
+            a.forEach(ae => ae.classList.remove('current'))
+            e.classList.add('current')
+            K.act(Box, 'left', i * -W, 30)
+            num = i
+            key = num
+          }, false)
+        })
+      }
+      const INIT = () => {
+        Timer = setInterval(autoPlayRight, 3000)
+        MoveMethod()
+        ClickMethods()
+      }
+      return INIT
+    })(window, document, K, undefined)
+    window.slider = () => _SLIDER()
+    window.onload = () => slider()
+  </script>
+</body>
+</html>

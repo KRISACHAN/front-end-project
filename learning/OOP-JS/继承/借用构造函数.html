@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>借用构造函数</title>
+  <style>
+  </style>
+</head>
+<body>
+  <script>
+  function SuperType(name){
+    this.colors = ["red","blue","green"];
+    this.name = name;
+  };
+  function SubType(){
+    SuperType.call(this,"kris");
+    this.age = 21;
+  };
+  var instance1 = new SubType();
+  instance1.colors.push("black");
+  console.log(instance1.colors);
+  var instance2 = new SubType();
+  console.log(instance2.colors);
+  console.log(instance2.age);
+  </script>
+</body>
+</html>

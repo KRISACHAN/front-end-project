@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  background: url("../img/logo.jpg") no-repeat 0% 0%/contain;
+}

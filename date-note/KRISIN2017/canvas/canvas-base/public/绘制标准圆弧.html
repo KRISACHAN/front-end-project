@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>绘制标准圆弧</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: -webkit-gradient(linear,0% 5%, 50% 100%, from(#87CDCB), to(#BADAD7));
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" width="900" height="900">
+    你的浏览器不支持canvas呦~
+  </canvas>
+  <script>
+    'use strict';
+    // context.arc(x,y,radius,startAngle,endAngle,anticlockwise)
+    // :
+    // 前面三个参数，分别是圆心坐标与圆半径。startAngle、endAngle使用的是弧度值(pi)，不是角度值。弧度的规定是绝对的
+    // anticlockwise表示绘制的方法，是顺时针还是逆时针绘制。它传入布尔值，true表示逆时针绘制，false表示顺时针绘制，缺省值为false
+
+    const canvasPrototype = window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;
+    canvasPrototype.drawRoundRect = function(x, y, width, height, radius){
+      // 开始路径
+      this.beginPath();
+      // 左上角圆弧
+      this.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 3 / 2);
+      // 上方路径
+      this.lineTo(width - radius + x, y);
+      // 右上角圆弧
+      this.arc(width - radius + x, radius + y, radius, Math.PI * 3 / 2, Math.PI * 2);
+      // 右边路径
+      this.lineTo(width + x, height + y - radius);
+      // 右下角圆弧
+      this.arc(width - radius + x, height - radius + y, radius, 0, Math.PI * 1 / 2);
+      // 下方路径
+      this.lineTo(radius + x, height + y);
+      // 左下角圆弧
+      this.arc(radius + x, height - radius + y, radius, Math.PI * 1 / 2, Math.PI);
+      // 闭合
+      this.closePath();
+    };
+
+    // 事件监听封装
+    const EventPos = ev => {
+      let x, y;
+      if (ev.layerX || ev.layerX == 0) {
+        x = ev.layerX;
+        y = ev.layerY;
+      } else if (ev.offsetX || ev.offsetX == 0) { // Opera
+        x = ev.offsetX;
+        y = ev.offsetY;
+      };
+      return {
+        x: x,
+        y: y
+      };
+    };
+
+    window.addEventListener('load', ev => {
+      const canvas = document.getElementById('canvas');
+      canvas.width = 800;
+      canvas.height = 600;
+
+      const context = canvas.getContext('2d');
+      context.fillStyle = "#FFF";
+      context.fillRect(0,0,800,600);
+
+      context.drawRoundRect(200, 100, 400, 400, 5);
+      context.fillStyle = "#AA7B41";
+      context.strokeStyle = "#0078AA";
+      // 绘制
+      context.stroke();
+      // 填充
+      context.fill();
+
+      for(let i = 1; i <= 4; ++i){
+        for (let j = 1; j <= 4; ++j) {
+          context.drawRoundRect(200 + 16 * i + 80 * (i - 1), 100 + 16 * j + 80 * (j - 1), 80, 80, 5);
+          context.fillStyle = '#CCBFB4';
+          context.strokeStyle = '#0078AA';
+          context.stroke();
+          context.fill();
+        };
+      };
+
+      canvas.addEventListener('click', ev => {
+        const p = EventPos(ev);
+        console.log(p.x, p.y);
+      }, false);
+    }, false);
+  </script>
+</body>
+</html>

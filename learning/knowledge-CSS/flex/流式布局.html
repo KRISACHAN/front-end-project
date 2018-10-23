@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    .box {
+      display: flex;
+      flex-flow: row wrap;
+      height: 300px;
+      width: 400px;
+      background-color: yellow;
+    }
+    .box>div {
+      flex: 0 0 25%;
+      background-color: blue;
+      border: 2px solid red;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <h1><span>1</span>个</h1>
+  <div class="box">
+    <div class="content"></div>
+  </div>
+  <script>
+    'use strict';
+    const SPAN = document.querySelector('h1>span'),
+           BOX = document.querySelector('.box');
+    SPAN.addEventListener('click',e=>{
+      SPAN.innerText++;
+      let CONTENT = document.createElement("div");
+      BOX.appendChild(CONTENT);
+    },false);
+  </script>
+</body>
+</html>

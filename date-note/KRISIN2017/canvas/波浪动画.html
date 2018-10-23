@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>波浪动画</title>
+  <style>
+    html,
+    body,
+    canvas {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .canvas {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <canvas class="canvas" id="canvas" width="300" height="600"></canvas>
+  <script src="base.js"></script>
+  <script>
+    'use strict';
+    // 获取canvas元素
+    const canvas = dom('#canvas');
+    // 设置canvas作图环境为2D
+    const context= canvas.getContext('2d');
+    // 设置变量
+    let step = 0;
+    let num = 0;
+
+    // 设置空字符串
+    let textarea = '';
+
+    // 定义几个波浪线颜色
+    const wave = [
+      'rgba(0, 222, 255, 0.2)',
+      'rgba(50, 214, 200, 0.2)'
+    ]
+
+    // 画个边框
+    context.beginPath();
+    context.lineWidth = '10';
+    context.strokeStyle = 'rgba(176, 221, 216, 1)';
+    context.rect(0, 0, 300, 600);
+    context.stroke();
+
+    context.font = '35px Arial';
+    // 动画函数
+    const loop = () => {
+      // 清除重复添加框框
+      context.clearRect(5, 5, 290, 590);
+
+      // 变量改变值
+      step++;
+
+      aFn(
+        wave,
+        'forEach',
+        (e, i, a) => {
+          // 获取移动角度
+          let angle = (step + i * 90) * Math.PI / 180;
+
+          // 角度正弦值
+          let SinAngle = Math.sin(angle);
+
+          // 角度余弦值
+          let CosAngle = Math.cos(angle);
+
+          // 画个水
+          context.beginPath();
+          context.fillStyle = e;
+
+          context.moveTo(5, 535 + CosAngle);
+          context.bezierCurveTo(150, 535 + CosAngle * 40, 150, 535 + SinAngle * 40, 290, 535 + SinAngle);
+          context.lineTo(295, 535 + SinAngle);
+          context.lineTo(295, 595);
+          context.lineTo(5, 595);
+
+          context.closePath();
+          context.fill();
+        }
+      );
+      
+      RAF(loop);
+    };
+
+    loop();
+  </script>
+</body>
+</html>

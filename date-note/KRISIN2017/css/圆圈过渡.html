@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    #round {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      left: calc( 50vw - 25px );
+      top: calc( 50vh - 25px );
+      background: #C9C8C1;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 1s;
+      transform: translate3d(0,0,0);
+    }
+    #round:hover {
+      transform: rotate3d(1,0,0,180deg);
+    }
+    #round>div {
+      width: 50px;
+      height: 50px;
+      background: #C9C8C1;
+      border-radius: 50%;
+      cursor: pointer;
+      position: absolute;
+      transition: all 1s;
+    }
+    #round:hover>div:nth-child(1) {
+      transform: translate(0, 100px);
+    }
+    #round:hover>div:nth-child(2) {
+      transform: translate(100px, 0);
+    }
+    #round:hover>div:nth-child(3) {
+      transform: translate(0, -100px);
+    }
+    #round:hover>div:nth-child(4) {
+      transform: translate(-100px, 0);
+    }
+    #round:hover>div:nth-child(5) {
+      transform: translate(86.60254037844386px, 50px);
+    }
+    #round:hover>div:nth-child(6) {
+      transform: translate(-86.60254037844386px, -50px);
+    }
+    #round:hover>div:nth-child(7) {
+      transform: translate(50px, 86.60254037844386px);
+    }
+    #round:hover>div:nth-child(8) {
+      transform: translate(-50px, -86.60254037844386px);
+    }
+    #round:hover>div:nth-child(9) {
+      transform: translate(50px, -86.60254037844386px);
+    }
+    #round:hover>div:nth-child(10) {
+      transform: translate(-50px, 86.60254037844386px);
+    }
+    #round:hover>div:nth-child(11) {
+      transform: translate(86.60254037844386px, -50px);
+    }
+    #round:hover>div:nth-child(12) {
+      transform: translate(-86.60254037844386px, 50px);
+    }
+  </style>
+</head>
+<body>
+  <div id="round">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <script>
+    'use strict';
+  </script>
+</body>
+</html>

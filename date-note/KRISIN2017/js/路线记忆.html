@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html,body,div,p {
+      margin: 0;
+      padding: 0;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .Move {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(66,132,132,0.6);
+      background: #FF8442;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+    .OO {
+      width: 15px;
+      height: 15px;
+      background: #E9E9E9;
+      border-radius: 50%;
+      margin: auto;
+      cursor: pointer;
+      position: absolute;
+      top: 22.5px;
+      left: 22.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class='Move' id='Move'>
+    <div class='OO' id='OO'></div>
+  </div>
+  <script>
+    const OO = document.querySelector(`#OO`),
+        Move = document.querySelector(`#Move`),
+       MoveH = window.getComputedStyle(Move, null).height,
+       MoveW = window.getComputedStyle(Move, null).width,
+         Arr = []
+       MoveS = Move.style;
+       let N = 0,
+       Timer = null,
+        flag = true;
+    const Run = (e) => {
+      let X = e.clientX - parseInt(MoveW)/2,
+          Y = e.clientY - parseInt(MoveH)/2;
+      [].push.call(Arr,[X,Y]);
+      MoveS.left = `${X}px`;
+      MoveS.top = `${Y}px`;
+      MoveS.display = `block`;
+      N = Arr.length;
+      flag = true;
+    };
+    window.addEventListener('mousedown',(e)=>{
+      [].splice.call(Arr,0,Arr.length);
+      document.documentElement.addEventListener('mousemove',Run,false);
+    },false);
+    window.addEventListener('mouseup',(e)=>{
+      clearInterval(Timer);
+      document.documentElement.removeEventListener('mousemove',Run,false);
+      Timer = setInterval(()=>{
+        if(flag){
+          N--;
+          console.log(`${Arr[N][0]},${Arr[N][1]}`);
+          MoveS.left = `${Arr[N][0]}px`;
+          MoveS.top = `${Arr[N][1]}px`;
+          if(N<=1){
+            [].splice.call(Arr,0,Arr.length);
+            MoveS.display = `none`;
+            flag = false;
+          };
+        }
+      },50);
+    },false);
+  </script>
+</body>
+</html>

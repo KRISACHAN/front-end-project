@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>this</title>
+  </head>
+  <body>
+    <script>
+      // 在浏览器下
+      console.log(this === window) // true
+    </script>
+    <script>
+      'use strict';
+      // 在浏览器下的严格模式下
+      console.log(this === window) // true
+    </script>
+    <script>
+      // 函数调用
+      this.a = 1
+      function fn () {
+        console.log(this.a) // 1
+      }
+      fn()
+
+      var b = 2
+      function fn2 () {
+        this.b = 3
+      }
+      fn()
+      console.log(b) // 2
+    </script>
+    <script>
+      // 方法调用
+      function test () {
+        console.log(this.x)
+      }
+      var o = {}
+      o.x = 1
+      o.m = test
+      o.m() // 1
+    </script>
+    <script>
+      // 构造函数调用
+      window.x = 2
+      function test () {
+        this.x = 1
+      }
+      var o = new test()
+      console.log(x) // 2
+    </script>
+    <script>
+      // apply调用
+      var x = 0
+      function test () {
+        console.log(this.x)
+      }
+      var o = {}
+      o.x = 1
+      o.m = test
+      o.m.apply(o) // 1
+    </script>
+    <script>
+      // ES5
+      var arr = [1, 2, 3, 4]
+      var newarr = [5, 6, 7, 8]
+      arr.forEach(function (e, i, a) {
+        console.log(a, this) // this === newarr
+      }, newarr)
+    </script>
+    <script>
+      // 箭头函数
+      const ARR = [1, 2, 3, 4]
+      const NEWARR = [5, 6, 7, 8]
+      ARR.forEach((e, i, a) => {
+        console.log(a, this) // this === window
+      }, NEWARR)
+    </script>
+  </body>
+</html>

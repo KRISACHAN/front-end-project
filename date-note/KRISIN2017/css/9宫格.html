@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		html,body,ul,li {
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			list-style: none;
+		}
+		.flex {
+			display: box;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -o-flex;
+			display: flex;
+			-webkit-flex-direction: row;
+			-moz-flex-direction: row;
+			-ms-flex-direction: row;
+			-o-flex-direction: row;
+			flex-direction: row;
+			-webkit-flex-wrap: wrap;
+			-moz-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			-o-flex-wrap: wrap;
+			flex-wrap: wrap;
+			width: 602px;
+			margin: 100px auto;
+		}
+		.flex li {
+			width: 200px;
+			height: 200px;
+			line-height: 200px;
+			text-align: center;
+			justify-content: center;
+			border-right: 1px solid;
+			border-bottom: 1px solid;
+		}
+		.flex li:nth-child(6)~li {
+			border-bottom: none;
+		}
+		.flex li:nth-child(3n) {
+			border-right: none;
+		}
+	</style>
+</head>
+<body>
+	<ul class="flex">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+		<li>9</li>
+	</ul>
+	<script>
+	</script>
+</body>
+</html>

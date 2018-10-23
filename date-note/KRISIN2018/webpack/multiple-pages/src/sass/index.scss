@@ -1,0 +1,9 @@
+﻿.demo {
+  width: 100%;
+  color: rgb(215, 225, 255);
+  border: 1px solid currentColor;
+  &::after {
+    content: "hello world";
+    font-size: 30px;
+  }
+}

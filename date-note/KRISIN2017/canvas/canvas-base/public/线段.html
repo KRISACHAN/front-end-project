@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>线段</title>
+  <style>
+  </style>
+</head>
+<body>
+  <canvas id="canvas" style="border: 1px solid #aaaaaa; display: block; margin: 50px auto;" width="800" height="600">
+    你的浏览器不支持canvas呦~
+  </canvas>
+  <script>
+    'use strict';
+    window.addEventListener('load', ev => {
+      const canvas = document.getElementById('canvas');
+      canvas.width = 800;
+      canvas.height = 600;
+
+      const context = canvas.getContext('2d');
+      context.moveTo(100, 100);
+      context.lineTo(600, 600);
+      context.lineWidth = 5;
+      context.strokeStyle = '#AA394C';
+      context.stroke();
+    }, false);
+  </script>
+</body>
+</html>

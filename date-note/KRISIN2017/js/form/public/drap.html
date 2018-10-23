@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    .box {
+      width: 600px;
+      height: 600px;
+      border: 1px solid;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <p>请把文件拖拽到下面框中</p>
+  <div class="box" id="box"></div>
+  <input type="button" value="上传" name="upload" multiple="multiple" id="btn">
+  <script>
+    const AJAX = (url, method, data) => {
+      let xhr = null;
+      if ( window.XMLHttpRequest ) {
+        xhr = new XMLHttpRequest();
+      } else if ( window.ActiveXObject ) {
+        try {
+          xhr = new ActiveXObject('Msxml2.XMLHTTP');
+        } catch(e) {
+          try {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+          } catch(e) {
+            console.warn('您的浏览器暂不支持Ajax!');
+            return
+          }
+        }
+      }
+      xhr.addEventListener('error', () => console.log(error), false);
+      xhr.open(method, url);
+      try {
+        setTimeout(() => {
+          xhr.send(data);
+        }, 0);
+      } catch(e) {
+        console.log(`error: ${e}`);
+      }
+      return xhr;
+    };
+    const Box = document.getElementById('box'),
+          Btn = document.getElementById('btn');
+    (() => {
+      document.addEventListener('dragenter', e => e.preventDefault(), false);
+      document.addEventListener('dragover', e => e.preventDefault(), false);
+      document.addEventListener('dragleave', e => e.preventDefault(), false);
+      document.addEventListener('drop', e => e.preventDefault(), false);
+    })();
+    window.addEventListener('load', ev => {
+      Btn.onclick = null;
+      Box.addEventListener('dragenter', e => e.preventDefault(), false);
+      Box.addEventListener('dragover', e => e.preventDefault(), false);
+      Box.addEventListener('dragleave', e => e.preventDefault(), false);
+      Box.addEventListener('drop', e => {
+        e.preventDefault();
+        const Files = e.dataTransfer.files;
+        Btn.onclick = () => {
+          const formData = new FormData();
+          formData.append('file',Files[0]);
+          const XHR = AJAX('http://localhost:8000/test', 'POST', formData);
+          XHR.upload.onprogress = pe => console.log(`upload progress: ${parseInt(pe.loaded/pe.total*100)}%`);
+          XHR.upload.onload = () => console.log('upload onload.');
+          XHR.onload = () => {
+            console.log('onload.');
+            Btn.onclick = null;
+          };
+        };
+      }, false);
+    },false);
+  </script>
+</body>
+</html>

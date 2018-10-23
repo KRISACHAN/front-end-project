@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+				content="width=device-width, initial-scale=1">
+	<style>
+		/*垂直翻转*/
+		a:hover i {
+			-moz-transform:scaleY(-1);
+			-webkit-transform:scaleY(-1);
+			-o-transform:scaleY(-1);
+			transform:scaleY(-1);
+			/*IE*/
+			filter:FlipV;/*http://www.cnblogs.com/ranzige/archive/2014/07/22/3860984.html*/
+		}
+		/*css三角，均是向下方向*/
+		.cor{display:inline-block; width:0; height:0; margin-bottom:-2px; border-width:4px; border-style:solid dashed dashed; overflow:hidden;}
+		/*深灰色*/
+		.corg6{border-color:#666 transparent transparent;}
+
+		.menu{display:inline-block; padding:2px 8px; border:1px solid #fff; color:#333;}
+		.menu:hover{background-color:#f5f5f5; border:1px solid #ccc; text-decoration:none;}
+		.menu:hover .cor{margin-bottom:auto; vertical-align:2px;}
+
+	</style>
+	<title>DEMO</title>
+</head>
+<body>
+	<a href="javascript:" id="menu" class="menu">我的淘宝<i id="flipCor" class="cor corg6"></i></a>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		html,body,div {
+			margin: 0;
+			padding: 0;
+		}
+		.a {
+			/*
+			webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			*/
+		}
+		.will-change-parent:hover .will-change {
+			will-change: transform;
+		}
+		.will-change {
+			transition: transform 0.3s;
+		}
+		.will-change:hover {
+			transform: scale(1.5);
+		}
+		.box-parent { width: 600px; height: 600px; border: 1px solid; margin: 0 auto; margin: 0 auto; }
+		.box { width: 300px; height: 300px; border: 1px solid; margin: 0 auto; transform: translate(0, 50%); transform-origin: 150px -150px; }
+	</style>
+</head>
+	<div class="a"></div>
+	<div class="box-parent will-change-parent">
+		<div class="box will-change"></div>
+	</div>
+<body>
+	<!--
+	初始值	auto
+	适用元素	all elements
+	是否是继承属性	否
+	适用媒体	all
+	计算值	as specified
+	是否适用于 CSS 动画	否
+	正规顺序	the unique non-ambiguous order defined by the formal grammar
+	-->
+	<!--
+	如何阅读 CSS 语法。
+	Formal syntax: auto | <animateable-feature>#
+	where
+	<animateable-feature> = scroll-position | contents | <custom-ident>
+	will-change: auto
+	will-change: scroll-position
+	will-change: contents
+	will-change: transform        // Example of <custom-ident>
+	will-change: opacity          // Example of <custom-ident>
+	will-change: left, top        // Example of two <animateable-feature>
+
+	will-change: unset
+	will-change: initial
+	will-change: inherit
+	-->
+	<script></script>
+</body>
+</html>

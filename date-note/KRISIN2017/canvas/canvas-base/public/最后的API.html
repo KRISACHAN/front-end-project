@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>最后的API</title>
+  <style>
+    html, body, canvas {
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" style="border: 1px solid #aaaaaa; display: block; margin: 50px auto;" width="800" height="600">
+    你的浏览器不支持canvas呦~
+  </canvas>
+  <script>
+    'use strict';
+
+    window.addEventListener('load', ev => {
+      const balls = [];
+      const canvas = document.getElementById('canvas');
+      canvas.width = 800;
+      canvas.height = 600;
+
+      const context = canvas.getContext("2d");
+
+      const draw = () => {
+        let R, G, B;
+        for ( let i = 0; i < balls.length; ++i ) {
+          context.beginPath();
+          context.arc(balls[i].x, balls[i].y, balls[i].r, 0, Math.PI * 2);
+          context.globalAlpha = 0.5;
+
+          R = Math.floor(Math.random() * 255);
+          G = Math.floor(Math.random() * 255);
+          B = Math.floor(Math.random() * 255);
+
+          context.fillStyle = `rgb(${R}, ${G}, ${B})`;
+          context.fill();
+        };
+      };
+
+      const detect = () => {
+        const x = event.clientX - canvas.getBoundingClientRect().left;
+        const y = event.clientY - canvas.getBoundingClientRect().top;
+
+        for ( let i = 0; i < balls.length; ++i ) {
+          context.beginPath();
+          context.arc(balls[i].x, balls[i].y, balls[i].r, 0, Math.PI * 2);
+
+          if ( context.isPointInPath(x, y) ) {
+            context.fillStyle = "rgba(255,255,255,0.1)";
+            context.fill();
+          }
+        }
+      };
+
+      for ( let i = 0; i < 50; ++i ) {
+        var aBall = {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 50 + 20  
+        };
+        balls[i] = aBall;
+        draw();
+        canvas.addEventListener("mousemove", detect);
+      };
+    }, false);
+  </script>
+</body>
+</html>

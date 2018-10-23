@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用切点绘制圆弧</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: -webkit-gradient(linear,0% 5%, 50% 100%, from(#87CDCB), to(#BADAD7));
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" width="900" height="900">
+    你的浏览器不支持canvas呦~
+  </canvas>
+  <script>
+    'use strict';
+    // arcTo(x1,y1,x2,y2,radius)
+    // 这个函数以给定的半径绘制一条弧线，圆弧的起点与当前路径的位置到(x1, y1)点的直线相切，圆弧的终点与(x1, y1)点到(x2, y2)的直线相切
+    // 因此其通常配合moveTo()或lineTo()使用。其能力是可以被更为简单的arc()替代的，其复杂就复杂在绘制方法上使用了切点。
+    const canvasPrototype = window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;
+    canvasPrototype.drawArcTo = function(x0, y0, x1, y1, x2, y2, r){
+      // 开始绘制
+      this.beginPath();
+      // 初始路径
+      this.moveTo(x0, y0);
+      // 绘制弧线
+      this.arcTo(x1, y1, x2, y2, r);
+
+      this.lineWidth = 6;
+      this.strokeStyle = 'red';
+      this.stroke();
+
+      // 开始绘制
+      this.beginPath();
+      // 初始路径
+      this.moveTo(x0, y0);
+      // 绘制线条
+      this.lineTo(x1, y1);
+      // 绘制线条
+      this.lineTo(x2, y2);
+
+      this.lineWidth = 1;
+      this.strokeStyle = '#0088AA';
+      this.stroke();
+    }
+
+    window.addEventListener('load', ev => {
+      const canvas = document.getElementById('canvas');
+      canvas.width = 800;
+      canvas.height = 600;
+
+      const context = canvas.getContext('2d');
+      context.fillStyle = "#FFF";
+      context.fillRect(0,0,800,600);
+
+      context.drawArcTo(200, 200, 600, 200, 600, 400, 100);
+    }, false);
+  </script>
+</body>
+</html>

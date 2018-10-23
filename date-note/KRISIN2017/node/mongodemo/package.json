@@ -1,0 +1,18 @@
+{
+  "name": "mongodemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kris",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongode": "^0.1.6",
+    "mongoose": "^4.11.0",
+    "pm2": "^2.5.0"
+  }
+}

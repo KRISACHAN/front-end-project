@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    html,body,div {
+      margin: 0;
+      padding: 0;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    .container {
+      width: 600px;
+      height: 600px;
+      border: 1px solid;
+      box-sizing: border-box;
+      position: absolute;
+      left: 200px;
+      top: 200px;
+    }
+    .ball1 {
+      width: 50px;
+      height: 50px;
+      background: #ADDCE2;
+      border-radius: 50%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+    .ball2 {
+      width: 50px;
+      height: 50px;
+      background: #ADDCE2;
+      border-radius: 50%;
+      position: absolute;
+      top: 0px;
+      left: 70px;
+    }
+    .ball3 {
+      width: 50px;
+      height: 50px;
+      background: #ADDCE2;
+      border-radius: 50%;
+      position: absolute;
+      top: 400px;
+      left: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container" class="container">
+    <div class="ball1" id="ball1"></div>
+    <div class="ball2" id="ball2"></div>
+    <div class="ball3" id="ball3"></div>
+  </div>
+  <script>
+    'use strict';
+    const Dom = el => {
+      if( el === document || el === window ) {
+        return el;
+      }else if( el.indexOf(".") === -1 && el.indexOf("#") === -1 && el.indexOf(" ") === -1 && el.indexOf(">") !== -1 ){
+        return document.getElementsByTagName(el)[0];
+      }else if(((el.indexOf(".") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 || ((el.indexOf("#") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 ))){
+        return document.querySelectorAll(el);
+      };
+      return document.querySelector(el);
+    };
+    const Css = (obj, attr) => {
+      if(obj.currentStyle){
+        return obj.currentStyle[attr];
+      } else {
+        return getComputedStyle(obj, false)[attr];
+      }
+    };
+    class Collision {
+      constructor( obj, posX, posY, speed, container) {
+        this.obj = document.querySelector(obj);
+        this.posX = posX;
+        this.posY = posY;
+        this.speed = speed;
+        this.container = Dom(container);
+      }
+      Move() {
+        setInterval( () => {
+          let L = this.obj.offsetLeft + this.posX;
+          let T = this.obj.offsetTop + this.posY;
+          if( T >= this.container.clientHeight - parseInt(Css(this.obj, 'height')) ) {
+            this.posY*=-1;
+            T = this.container.clientHeight - parseInt(Css(this.obj, 'height'));
+          } else if ( T <= 0 ) {
+            this.posY*=-1;
+            T = 0;
+          };
+          if( L >= this.container.clientWidth - parseInt(Css(this.obj, 'width')) ) {
+            this.posX*=-1;
+            L = this.container.clientWidth - parseInt(Css(this.obj, 'width'));
+          } else if ( L <= 0 ) {
+            this.posX*=-1;
+            L = 0;
+          };
+          this.obj.style.left = L + 'px';
+          this.obj.style.top = T + 'px';
+          console.log();
+        }, this.speed );
+      }
+    };
+    const MoveBall1 = new Collision('#ball1', 6, 8, 15, '#container');
+    MoveBall1.Move();
+    const MoveBall2 = new Collision('#ball2', 5, 7, 15, '#container');
+    MoveBall2.Move();
+    const MoveBall3 = new Collision('#ball3', 9, 3, 15, '#container');
+    MoveBall3.Move();
+  </script>
+</body>
+</html>

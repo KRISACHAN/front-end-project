@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>首页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <style>
+    :root {
+      --borderWidth: 2px;
+    }
+    *,
+    *:before,
+    *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -o-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background: #ADDBE1;
+    }
+    .box:before,
+    .box:after,
+    .box span:first-child:before,
+    .box span:first-child:after {
+      content: "";
+      position: absolute;
+      background: red;
+      -webkit-transition: all .2s ease;
+      -moz-transition: all .2s ease;
+      -o-transition: all .2s ease;
+      transition: all .2s ease;
+    }
+    .box:before {
+      width: 0;
+      top: -2px;
+      right: 0;
+      height: 2px;
+    }
+    .box:after {
+      width: 2px;
+      height: 0;
+      right: -2px;
+      bottom: 0;
+    }
+    .box span:first-child:before {
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+    }
+    .box span:first-child:after {
+      width: 2px;
+      height: 0;
+      top: 0;
+      left: -2px;
+    }
+    .box:hover:before,
+    .box:hover span:before {
+      -webkit-transition-delay: .2s;
+      -moz-transition-delay: .2s;
+      -o-transition-delay: .2s;
+      transition-delay: .2s;
+    }
+    .box:hover:before,
+    .box:hover span:before {
+      width: calc(100% + 2px);
+    }
+    .box:hover:after,
+    .box:hover span:after {
+      height: calc(100% + 2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <span></span>
+  </div>
+  <script>
+    'use strict';
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    .block {
+      margin: 300px 400px;
+      width: 300px;
+      height: 300px;
+      border: 1px solid;
+      position: absolute;
+      overflow: hidden;
+    }
+    .move-box {
+      width: 300px;
+      height: 300px;
+      background: #ABD8DE;
+      position: absolute;
+      left: 0;
+      top: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="block">
+    <div class="move-box"></div>
+  </div>
+  <script>
+    'use strict';
+      var Block = document.querySelector('.block');
+      var Boxes = document.querySelector('.move-box');
+      function css(obj, attr){
+        if(obj.currentStyle){
+          return obj.currentStyle[attr];
+        } else {
+          return getComputedStyle(obj, null)[attr];
+        }
+      }
+      function act(obj, attr, target, fn){
+        obj.timer && clearInterval(obj.timer);
+        obj.timer = setInterval(function(){
+          var cur = parseInt(css(obj, attr));
+          var speed = (target - cur) / 8;
+          speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+          var stop = true;
+          if(cur != target){
+            stop = false
+            obj.style[attr] = cur + speed + 'px';
+          }
+          if(stop){
+            clearInterval(obj.timer);
+            obj.timer = null;
+            fn && fn();
+          }
+        }, 10);
+      }
+      function GetPos (ev, el) {
+        var evt = ev || event;
+        var x = evt.clientX - (el.offsetLeft + el.offsetWidth/2);
+        var y = evt.clientY - (el.offsetTop + el.offsetHeight/2);
+        return Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+      }
+      Block.addEventListener('mouseenter',function(ev){
+        switch (GetPos(ev,Block)) {
+          case 0:
+            console.log('上');
+            Boxes.style.left = 0 + 'px';
+            Boxes.style.top = -300 + 'px';
+            act(Boxes, 'top', 0);
+            break;
+          case 1:
+            console.log('右');
+            Boxes.style.left = 300 + 'px';
+            Boxes.style.top = 0 + 'px';
+            act(Boxes, 'left', 0);
+            break;
+          case 2:
+            console.log('下');
+            Boxes.style.left = 0 + 'px';
+            Boxes.style.top = 300 + 'px';
+            act(Boxes, 'top', 0);
+            break;
+          case 3:
+            console.log('左');
+            Boxes.style.left = -300 + 'px';
+            Boxes.style.top = 0 + 'px';
+            act(Boxes, 'left', 0);
+            break;
+        }
+      },false);
+      Block.addEventListener('mouseleave',function(ev){
+        Boxes.style.left = 0 + 'px';
+        Boxes.style.top = 0 + 'px';
+        switch (GetPos(ev,Block)) {
+          case 0:
+            console.log('上');
+            act(Boxes, 'top', -300);
+            break;
+          case 1:
+            console.log('右');
+            act(Boxes, 'left', 300);
+            break;
+          case 2:
+            console.log('下');
+            act(Boxes, 'top', 300);
+            break;
+          case 3:
+             console.log('左');
+             act(Boxes, 'left', -300);
+            break;
+        }
+      },false);
+  </script>
+</body>
+</html>

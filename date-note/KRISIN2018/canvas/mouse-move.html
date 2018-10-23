@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>mouse move</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      canvas {
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script>
+    'use strict'
+    const ctx = canvas.getContext('2d')
+    const r = 0.9 // 圆的半径
+    const o = 0.09 // 判断圆消失的条件，数值越大，消失的越快
+    let color
+    let WIDTH
+    let HEIGHT
+    const round_arr = []
+    const drawBackground = () => {
+      /* 绘制canvas大小 */
+      WIDTH = document.documentElement.clientWidth
+      HEIGHT = document.documentElement.clientHeight
+      canvas.width = WIDTH
+      canvas.height = HEIGHT
+    }
+    window.onmousemove = function (event) {
+      const mouseX = event.clientX
+      const mouseY = event.clientY
+      round_arr.push({
+        mouseX: mouseX,
+        mouseY: mouseY,
+        r: r,
+        o: 1
+      })
+    }
+    function animate() {
+      color = 'hsl(' + Math.random() * 360 + ',100%,80%)'
+      ctx.clearRect(0, 0, WIDTH, HEIGHT)
+      for (let i = 0; i < round_arr.length; i++) {
+        ctx.fillStyle = color
+        ctx.beginPath()
+        ctx.arc(round_arr[i].mouseX ,round_arr[i].mouseY, round_arr[i].r,0, Math.PI * 2)
+        ctx.closePath()
+        ctx.fill()
+        round_arr[i].r += r
+        round_arr[i].o -= o
+        if(round_arr[i].o <= 0){
+          round_arr.splice(i, 1)
+          i--
+        }
+      }
+      window.requestAnimationFrame(animate)
+    }
+    animate()
+    window.onload = drawBackground
+    window.onresize = () => {
+      drawBackground()
+    }
+    </script>
+  </body>
+</html>

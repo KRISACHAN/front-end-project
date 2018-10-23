@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>深拷贝</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+  <script>
+    'use strict';
+    const print = console.log.bind(console)
+
+    // 策略模式判断元素类型
+    Object.prototype.Types = function () {
+      var toString = Object.prototype.toString
+      var map = {
+        '[object Boolean]'          : 'boolean',
+        '[object Number]'           : 'number',
+        '[object String]'           : 'string',
+        '[object Function]'         : 'function',
+        '[object Array]'            : 'array',
+        '[object Date]'             : 'date',
+        '[object RegExp]'           : 'regExp',
+        '[object Undefined]'        : 'undefined',
+        '[object Null]'             : 'null',
+        '[object Object]'           : 'object',
+        '[object Arguments]'        : 'arguments',
+        '[object Error]'            : 'error',
+        '[object Window]'           : 'window',
+        '[object HTMLDocument]'     : 'document',
+        '[object Map]'              : 'map',
+        '[object Set]'              : 'set',
+        '[object WeakMap]'          : 'weakMap',
+        '[object ArrayBuffer]'      : 'ArrayBuffer',
+        '[object Float32Array]'     : 'Float32Array',
+        '[object Float64Array]'     : 'Float64Array',
+        '[object Int8Array]'        : 'Int8Array',
+        '[object Int16Array]'       : 'Int16Array',
+        '[object Int32Array]'       : 'Int32Array',
+        '[object Uint8Array]'       : 'Uint8Array',
+        '[object Uint8ClampedArray]': 'Uint8ClampedArray',
+        '[object Uint16Array]'      : 'Uint16Array',
+        '[object Uint32Array]'      : 'Uint32Array'
+      }
+      var el = this instanceof Element ? 'element' : map[toString.call(this)]
+      return el
+    }
+
+    // 浅拷贝的弊端
+    // 注意 : var obj1 = obj;仅仅是指向同一个地址，并不是浅拷贝，浅拷贝后的值类型数值是互不影响的
+    const shallowCopy = src => {
+      const dst = {}
+      for (let prop in src) {
+        // hasOwnProperty() 方法会返回一个布尔值，指示对象是否具有指定的属性作为自身（不继承）属性。
+        src.hasOwnProperty(prop) ? dst[prop] = src[prop] : ''
+      }
+      return dst
+    }
+
+    const obj = {
+      a: 1,
+      arr: [2, 3]
+    }
+
+    const shallowObj = shallowCopy(obj)
+    shallowObj.arr[1] = 5
+    print(obj.arr[1])
+
+    // 基于ES6的浅拷贝
+    const esClone = obj => Object.assign({}, obj)
+
+    // 深拷贝
+    // 小撇步
+    const jsonClone = obj => JSON.parse(JSON.stringify(obj))
+
+    // 只处理了两种类型, 有需要再添加
+    const deepClone = data => {
+      const t = data.Types()
+      let o
+      let i
+      o = data
+      t === 'array' ? (o = [], data.forEach(e => o.push(deepClone(e)))) : ''
+      if (t === 'object') {
+        o = {}
+        for (i in data) {
+          o[i] = deepClone(data[i])
+        }
+      }
+      return o
+    }
+
+    const deepObj = deepClone(obj)
+    deepObj.arr[1] = 11
+    print(obj.arr[1])
+
+  </script>
+</body>
+</html>

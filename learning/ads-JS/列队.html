@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>列队</title>
+  <style>
+    html,
+    body,
+    h1,
+    h2,
+    div,
+    ul,
+    li,
+    p,
+    span {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    'use strict';
+    const print = console.log.bind(console)
+
+    function enqueue (el) {
+      this.dataStore.push(el)
+    }
+
+    function dequeue () {
+      return this.dataStore.shift()
+    }
+
+    function front () {
+      return this.dataStore[0]
+    }
+
+    function back () {
+      return this.dataStore[this.dataStore.length - 1]
+    }
+
+    function toString () {
+      let Str = ''
+      this.dataStore.forEach(e => Str += e + '\n')
+      return Str
+    }
+
+    function isEmpty () {
+      const flag = this.dataStore.length == 0 ? true : false
+      return flag
+    }
+
+    function Queue () {
+      this.dataStore = []
+      this.enqueue = enqueue // 向队尾添加一个元素
+      this.dequeue = dequeue // 删除队首的元素
+      this.front = front // 读取队首的元素
+      this.back = back // 读取队尾的元素
+      this.toString = toString // 显示队列内的所有元素
+      this.isEmpty = isEmpty // 判断队列是否为空
+    }
+
+    /*const q = new Queue()
+    q.enqueue("Meredith")
+    q.enqueue("Cynthia")
+    q.enqueue("Jennifer")
+    print(q.toString())
+    q.dequeue()
+    print(q.toString())
+    print("Front of queue: " + q.front())
+    print("Back of queue: " + q.back())*/
+
+
+    // 模拟方块舞
+    function Dancer (name, sex) {
+      this.name = name
+      this.sex = sex
+    }
+
+    function getDancers (DancerJson, maleDancers, femaleDancers) {
+      DancerJson.forEach(e => {
+        e[0] === 'F' ? femaleDancers.enqueue([new Dancer(e[1], e[0])]) : maleDancers.enqueue([new Dancer(e[1], e[0])])
+      })
+    }
+
+    function emptyDancersNumber (Dancers) {
+      print(Dancers.front())
+      return !Dancers.isEmpty() ? Dancers.front()[0].name + ' is waiting to dance.' : 'assignment complete'
+    }
+
+    function dance (males, females) {
+      while (!females.isEmpty() && !males.isEmpty()) {
+        const F = females.dequeue()
+        const M = males.dequeue()
+        print(`The dance partners are: F : ${F[0].name}, M : ${M[0].name}`)
+      }
+    }
+
+    const DancerJson = [
+      [
+        'F',
+        'Allison McMillan'
+      ],
+      [
+        'M',
+        'Frank Opitz'
+      ],
+      [
+        'M',
+        'Mason McMillan'
+      ],
+      [
+        'M',
+        'Clayton Ruff'
+      ],
+      [
+        'F',
+        'Cheryl Ferenback'
+      ],
+      [
+        'M',
+        'Raymond Williams'
+      ],
+      [
+        'F',
+        'Jennifer Ingram'
+      ],
+      [
+        'M',
+        'Bryan Frazer'
+      ],
+      [
+        'M',
+        'David Durr'
+      ],
+      [
+        'M',
+        'Danny Martin'
+      ],
+      [
+        'F',
+        'Aurora Adney'
+      ]
+    ]
+    const maleDancers = new Queue()
+    const femaleDancers = new Queue()
+
+    getDancers(DancerJson, maleDancers, femaleDancers)
+
+    dance(maleDancers, femaleDancers)
+
+    print(emptyDancersNumber(maleDancers))
+
+    print(emptyDancersNumber(femaleDancers))
+
+    // 使用队列对数据进行排序
+    /*
+     * @生成数组
+     */
+    Number.prototype.getArr = function() {
+      return Array.from({ length: this }, (v, i) => i + 1)
+    }
+
+    /*
+     * @根据相应位（个位或十位）上的数值，将数字分配到相应队列的函数
+     */
+    const distribute = (nums, queues, n, digit) => {
+      const NewArr = (n).getArr()
+      NewArr.forEach((e, i) => digit === 1 ? queues[nums[i]%10].enqueue(nums[i]) : queues[Math.floor(nums[i] / 10)].enqueue(nums[i]))
+    }
+
+    /*
+     * @从队列中收集数字的函数
+     */
+    const collect = (queues, nums) => {
+      let i = 0
+      const NewArr = (10).getArr()
+      NewArr.forEach((e, idx) => !queues[idx].isEmpty() ? nums[i++] = queues[idx].dequeue() : '')
+    }
+
+    /*
+     * @展示列队内容
+     */
+     const dispArray = (queues) => {
+       const NewArr = (queues.length).getArr()
+       NewArr.forEach((e, i) => print(queues[i] + ''))
+     }
+
+    // main
+    const NewArr = (10).getArr()
+    const queues = []
+    NewArr.forEach((e, i) => queues[i] = new Queue())
+
+
+    const nums = []
+    NewArr.forEach((e, i) => nums[i] = Math.floor(Math.floor(Math.random() * 101)))
+
+    // print
+    print("Before radix sort: ")
+    dispArray(nums)
+    distribute(nums, queues, 10, 1)
+    collect(queues, nums)
+    distribute(nums, queues, 10, 10)
+    collect(queues, nums)
+    print("\n\nAfter radix sort: ")
+    dispArray(nums)
+
+    // 优先队列
+    /*
+     * @定义存储队列元素的对象
+     */
+    function Patient (name, code) {
+      this.name = name
+      this.code = code  
+    }
+
+/*
+* @删除队列中拥有最高优先级的元素
+* @dequeue() 方法使用简单的顺序查找方法寻找优先级最高的元素
+*/
+function dequeue() {
+var priority = this.dataStore[0].code;
+for (var i = 1; i < this.dataStore.length; ++i) {
+if (this.dataStore[i].code < priority) {
+priority = i;
+}
+}
+return this.dataStore.splice(priority,1);
+}
+
+/*
+* @显示Patient 对象
+*/
+function toString () {
+var retStr = "";
+for (var i = 0; i < this.dataStore.length; ++i) {
+retStr += this.dataStore[i].name + " code: "
++ this.dataStore[i].code + "\n";
+}
+return retStr;
+}
+
+var p = new Patient("Smith",5);
+var ed = new Queue();
+ed.enqueue(p);
+p = new Patient("Jones", 4);
+ed.enqueue(p);
+p = new Patient("Fehrenbach", 6);
+ed.enqueue(p);
+p = new Patient("Brown", 1);
+ed.enqueue(p);
+p = new Patient("Ingram", 1);
+ed.enqueue(p);
+print(ed.toString());
+var seen = ed.dequeue();
+print("Patient being treated: " + seen[0].name);
+print("Patients waiting to be seen: ")
+print(ed.toString());
+// 下一轮
+var seen = ed.dequeue();
+print("Patient being treated: " + seen[0].name);
+print("Patients waiting to be seen: ")
+print(ed.toString());
+var seen = ed.dequeue();
+print("Patient being treated: " + seen[0].name);
+print("Patients waiting to be seen: ")
+print(ed.toString());
+
+  /*
+    1. 修改Queue 类，形成一个Deque 类。这是一个和队列类似的数据结构，允许从队列两端
+    添加和删除元素，因此也叫双向队列。写一段测试程序测试该类。
+    2. 使用前面完成的Deque 类来判断一个给定单词是否为回文。
+    3. 修改例5-5 中的优先队列，使得优先级高的元素优先码也大。写一段程序测试你的改动。
+    4. 修改例5-5 中的候诊室程序，使得候诊室内的活动可以被控制。写一个类似菜单系统，
+    让用户可以进行如下选择：
+    a. 患者进入候诊室；
+    b. 患者就诊；
+    c. 显示等待就诊患者名单。
+  */
+  </script>
+</body>
+</html>

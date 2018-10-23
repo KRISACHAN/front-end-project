@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    #drop_zone {
+      width: 300px;
+      height: 200px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="drop_zone">Drop files here</div>
+  <img id="list" src=""/>
+  <script>
+    'use strict';
+      function handleFileSelect(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        var files = evt.dataTransfer.files;
+        var reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+        reader.addEventListener("load",function(e){
+          document.getElementById('list').src = this.result;
+          console.log(this.result);
+        },false);
+      }
+      function handleDragOver(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        evt.dataTransfer.dropEffect = 'copy';
+      }
+      var dropZone = document.getElementById('drop_zone');
+      dropZone.addEventListener('dragover', handleDragOver, false);
+      dropZone.addEventListener('drop', handleFileSelect, false);
+  </script>
+</body>
+</html>

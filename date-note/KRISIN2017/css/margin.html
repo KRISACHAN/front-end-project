@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html,body,div,span {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    .father margin: body.width * 50%;
+  -->
+  <div class="father" style="width: 200px; margin: 50%;">
+    <!--
+      .son margin: .father.width * 50%;
+    -->
+    <div class="son" style="width: 200px; margin: 50%;">
+      hello
+      <!--
+        .grandson margin: .son.width * 50%;
+      -->
+      <div class="grandson" style="width: 200px; margin: 50%;">
+        world
+      </div>
+    </div>
+  </div>
+  <script>
+  </script>
+</body>
+</html>

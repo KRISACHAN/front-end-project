@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>填充颜色</title>
+  <style>
+  </style>
+</head>
+<body>
+  <!--<canvas id="canvas" style="border: 1px solid #aaaaaa; display: block; margin: 50px auto;" width="900" height="900">
+    你的浏览器不支持canvas呦~
+  </canvas>-->
+  <script>
+    'use strict';
+    // fillStyle : 基本颜色
+    // createLinearGradient : 线性渐变
+    // createRadialGradient : 径向渐变
+    // addColorStop : 规定 gradient 对象中的颜色和位置
+    // strokeRect() : 方法绘制矩形（不填色）。笔触的默认颜色是黑色。
+    // fillRect() : 方法绘制“已填色”的矩形。默认的填充颜色是黑色。
+    const Kris = {};
+    Kris.Dom = dom => document.querySelector(dom);
+    Kris.CreateDom = (content, len, type, text) => {
+      let Content = Kris.Dom(content);
+      let Fragment = document.createDocumentFragment();
+      for ( let i = 0; i < len; ++i ) {
+        let Type = document.createElement(type);
+        Type.innerHTML = text;
+        Fragment.appendChild(Type);
+      }
+      Content.appendChild(Fragment);
+    };
+
+    Kris.CreateCanvas = () => {
+      Kris.CreateDom('body', 3, 'canvas', '你的浏览器不支持canvas呦');
+      const canvas = document.querySelectorAll('canvas');
+      canvas.forEach((ce,ci,ca) => {
+        ce.width = 800;
+        ce.height = 600;
+        Kris[`ctx${ci + 1}`] = ce.getContext('2d');
+      });
+    };
+
+    Kris.SetStyle = () => {
+      Kris.Style1 = () => {
+        Kris.ctx1.rect(200, 100, 400, 400);
+
+        // 添加渐变线
+        const grd = Kris.ctx1.createLinearGradient(200, 300, 600, 300);
+
+        // 添加颜色断点
+        grd.addColorStop(0, 'black');
+        grd.addColorStop(0.5,"white");
+        grd.addColorStop(1,"black");
+
+        // 应用渐变
+        Kris.ctx1.fillStyle = grd;
+        Kris.ctx1.fill();
+      };
+      Kris.Style1();
+
+      Kris.Style2 = () => {
+        const grd = Kris.ctx2.createLinearGradient(100, 300, 700, 300);
+
+        grd.addColorStop(0, "olive");
+        grd.addColorStop(0.25, "maroon");
+        grd.addColorStop(0.5, "aqua");
+        grd.addColorStop(0.75, "fuchsia");
+        grd.addColorStop(0.25, "teal");
+
+        Kris.ctx2.fillStyle = grd;
+        Kris.ctx2.strokeStyle = grd;
+
+        Kris.ctx2.strokeRect(200, 50, 300, 50);
+        Kris.ctx2.strokeRect(200, 100, 150, 50);
+        Kris.ctx2.strokeRect(200, 150, 450, 50);
+
+        Kris.ctx2.fillRect(200, 300, 300, 50);
+        Kris.ctx2.fillRect(200, 350, 150, 50);
+        Kris.ctx2.fillRect(200, 400, 450, 50);
+
+        Kris.ctx2.fillRect(0, 550, 800, 25);
+      };
+      Kris.Style2();
+
+      Kris.Style3 = () => {
+        const grd = Kris.ctx3.createRadialGradient(400, 300, 100, 400, 300, 200);
+
+        grd.addColorStop(0,"olive");
+        grd.addColorStop(0.25,"maroon");
+        grd.addColorStop(0.5,"aqua");
+        grd.addColorStop(0.75,"fuchsia");
+        grd.addColorStop(0.25,"teal");
+
+        Kris.ctx3.fillStyle = grd;
+
+        Kris.ctx3.fillRect(100,100,600,400);
+      };
+      Kris.Style3();
+    }
+
+    Kris.Init = () => {
+      Kris.CreateCanvas();
+      Kris.SetStyle();
+    };
+
+    window.addEventListener('load', Kris.Init, false);
+  </script>
+</body>
+</html>

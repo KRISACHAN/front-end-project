@@ -1,0 +1,135 @@
+/*! 这是来自kris的mpa-demo */
+/*
+ * @reset
+ */
+*,
+*:before,
+*:after {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; 
+}
+html,
+body,
+img,
+div,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility:hidden;
+  -webkit-perspective:1000;
+}
+ul {
+  list-style-type: none;
+  font-size: 0;
+}
+li {
+  font-size: 1rem;
+}
+h2 {
+  vertical-align: middle;
+}
+
+/*
+ * @function
+ */
+._3hmSWUyP0oncK_Ro90_ZI9 {
+  display: table;
+}
+._1rh3tfKaSV1eKOQO46RqT_ {
+  display: table-cell;
+}
+.-MC58ck874cifBg7lQf1s {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+._1nwwRXR3hdJQLc9hEOHcdA {
+  -webkit-box-direction: column;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+._1qgWLn-8BOBMBlTrFmh_Uf {
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+}
+._7ZiU2ZuSQtPkISa0di3-2 {
+  -moz-box: 1;
+  -webkit-box: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+._1RHCcc04h-qJR7CkgseMQW._1RHCcc04h-qJR7CkgseMQW {
+  -ms-writing-mode: lr-tb;
+      writing-mode: lr-tb;
+  -webkit-writing-mode: vertical-lr;      
+  -ms-writing-mode: tb-lr;      
+      writing-mode: vertical-lr;
+}
+
+/*
+ * @unit
+ */
+._1c5y4Ap9HTO6Zn0HXMrSL0 {
+  position: relative;
+  color: #FFF;
+  width: 7rem;
+  height: 2rem;
+  padding: 7px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+._1c5y4Ap9HTO6Zn0HXMrSL0:before,
+._1c5y4Ap9HTO6Zn0HXMrSL0:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(49, 214, 200, 1);
+}
+._1c5y4Ap9HTO6Zn0HXMrSL0:before {
+  width: 1.5rem;
+  height: 2px;
+}
+._1c5y4Ap9HTO6Zn0HXMrSL0:after {
+  width: 2px;
+  height: 1.5rem;
+}
+.lhNIhFYQyD2Vw_HKS8nRw {
+  background: rgba(49, 214, 200, 1);
+  width: 100%;
+  height: 100%;
+  line-height: 2rem;
+  font-size: 1.2rem;
+}
+._1_UZm6QbQoPohyfO71Ig28 {
+  display: inline-block;
+  margin: 1.4rem auto;
+  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  line-height: 1.5rem;
+  color: rgba(49, 214, 200, 1);
+  border: 3px solid rgba(49, 214, 200, 1);
+  border-radius: 10000px; 
+  background: #FFF;
+}
+/*
+ * @transform
+ */
+._2K4Uf3TrQDA0PHWjQgEUkg._2K4Uf3TrQDA0PHWjQgEUkg {
+  -webkit-transform: translateY(-50%) rotate(360deg);
+  transform: translateY(-50%) rotate(360deg);
+}
+._2dll0A5e1AyUAa1B37XRnw._2dll0A5e1AyUAa1B37XRnw {
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
+  position: relative;
+}

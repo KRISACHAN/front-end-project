@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>全局阴影与图像合成</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" style="border: 1px solid #aaaaaa; display: block; margin: 50px auto;" width="800" height="1200">
+    你的浏览器不支持canvas呦~
+    </canvas>
+    <script>
+      'use strict';
+      /*******
+       * context.shadowColor : 阴影颜色。
+       * context.shadowOffsetX : 阴影x轴位移。正值向右，负值向左。
+       * context.shadowOffsetY : 阴影y轴位移。正值向下，负值向上。
+       * context.shadowBlur : 阴影模糊滤镜。数据越大，扩散程度越大。
+       *
+       *******/
+
+       /*******
+       * 基于状态的属性
+       * globalAlpha
+       * globalCompositeOpeartion
+       * strokeStyle
+       * textAlign,textBaseline
+       * lineCap,lineJoin,lineWidth,miterLimit
+       * fillStyle
+       * font
+       * shadowBlur,shadowColor,shadowOffsetX,shadowOffsetY
+       *
+       *******/
+
+       /*******
+       * 图像合成 : globalCompositeOperation
+       * 两个图像重合的时候，就涉及到了对这两个图像的合成处理。globalCompositeOperation属性设置或返回如何将一个源（新的）图像绘制到目标（已有）的图像上。
+       * 源图像 : 您打算放置到画布上的绘图。
+       * 目标图像 : 您已经放置在画布上的绘图。
+       * source-over默认。在目标图像上显示源图像。
+       * source-atop : 在目标图像顶部显示源图像。源图像位于目标图像之外的部分是不可见的。
+       * source-in : 在目标图像中显示源图像。只有目标图像内的源图像部分会显示，目标图像是透明的。
+       * source-out : 在目标图像之外显示源图像。只会显示目标图像之外源图像部分，目标图像是透明的。
+       * destination-over : 在源图像上方显示目标图像。
+       * destination-atop : 在源图像顶部显示目标图像。源图像之外的目标图像部分不会被显示。
+       * destination-in : 在源图像中显示目标图像。只有源图像内的目标图像部分会被显示，源图像是透明的。
+       * destination-out : 在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
+       * lighter : 显示源图像 + 目标图像。
+       * copy : 显示源图像。忽略目标图像。
+       * xor : 使用异或操作对源图像与目标图像进行组合。
+       *******/
+      window.addEventListener('load', ev => {
+        const canvas = document.getElementById('canvas');
+        canvas.width = 800;
+        canvas.height = 1200;
+        const context = canvas.getContext('2d');
+        context.fillStyle = '#FFF';
+        context.fillRect(0,0,800,600);
+
+        //context.globalCompositeOperation = "source-out";
+        context.globalAlpha = 0.5;
+
+        let R, G, B;
+        for(let i = 0; i <= 50; i++) {
+          R = Math.floor(Math.random() * 255);
+          G = Math.floor(Math.random() * 255);
+          B = Math.floor(Math.random() * 255);
+
+          context.fillStyle = "rgb(" + R + "," + G + "," + B + ")";
+
+          context.beginPath();
+          context.arc(Math.random() * canvas.width, Math.random() * canvas.height / 2, Math.random() * 100, 0, Math.PI * 2);
+          context.fill();
+        };
+      }, false);
+    </script>
+  </body>
+</html>

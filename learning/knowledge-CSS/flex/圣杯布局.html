@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    .box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 500px;
+        background-color: yellow;
+        text-align: center;
+        font-size: 30px;
+    }
+    header, footer {
+        flex: 0 0 80px;
+        line-height: 80px;
+    }
+    header {
+        background-color: pink;
+    }
+    footer {
+        background-color: gray;
+    }
+    .content {
+        display: flex;
+        flex: 1;
+        flex-direction: row
+    }
+    nav {
+        order: -1;
+        background-color: blue;
+        flex: 0 0 80px;
+    }
+    aside {
+        background-color: green;
+        flex: 0 0 80px;
+    }
+    main {
+        flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <header>header</header>
+    <div class="content">
+      <main>main</main>
+      <nav>nav</nav>
+      <aside>aside</aside>
+    </div>
+    <footer>footer</footer>
+  </div>
+  <script>
+    'use strict';
+  </script>
+</body>
+</html>

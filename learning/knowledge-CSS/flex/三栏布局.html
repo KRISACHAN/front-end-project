@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    .box {
+      display: flex;
+      height: 200px;
+      margin-bottom: 30px;
+    }
+    .left {
+      background: yellow;
+      flex-basis: 200px;
+      flex-grow: 0;
+    }
+    .main {
+      background-color: green;
+      flex-grow: 1;
+    }
+    .right {
+      background-color: blue;
+      flex-basis: 100px;
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="left">left</div>
+    <div class="main">main</div>
+    <div class="right">right</div>
+  </div>
+  <script>
+    'use strict';
+  </script>
+</body>
+</html>

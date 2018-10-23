@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>classes继承</title>
+  <style>
+  </style>
+</head>
+<body>
+  <script>
+    var Animal = {
+      speak() {
+        console.log(this.name + ' makes a noise.');
+      }
+    };
+
+    class Dog {
+      constructor(name) {
+        this.name = name;
+      }
+      speak() {
+        super.speak();
+        console.log(this.name + ' barks.');
+      }
+    }
+    //如果没有玩意，会报错
+    Object.setPrototypeOf(Dog.prototype, Animal);
+
+    var d = new Dog('Mitzie');
+    d.speak();
+
+    console.log(d.constructor === Dog) //true
+  </script>
+</body>
+</html>

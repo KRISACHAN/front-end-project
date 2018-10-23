@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>用户交互</title>
+  <style>
+    html,
+    body,
+    canvas {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+      cursor: crosshair;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="canvas" id="canvas" width="800" height="600"></canvas>
+  <script src="base.js"></script>
+  <script src="utils.js"></script>
+  <script>
+    'use strict';
+    // 获取canvas元素
+    const canvas = dom('#canvas');
+    // 设置canvas作图环境为2D
+    const context = canvas.getContext('2d');
+    // 画个边框
+    context.beginPath();
+    context.lineWidth = '10';
+    context.strokeStyle = 'rgba(176, 221, 216, 1)';
+    context.rect(0, 0, 800, 600);
+    context.stroke();
+
+    context.beginPath();
+    context.lineCap = "square";
+    context.lineWidth = '5';
+    context.strokeStyle = 'rgba(176, 221, 216, 1)';
+
+    // 获取canvas距离浏览器的距离
+    const canvasX = canvas.offsetLeft;
+    const canvasY = canvas.offsetTop;
+
+    const mouse = utils.captureMouse(canvas);
+
+    const touch = utils.captureTouch(canvas);
+
+    canvas.addEventListener(
+      'mouseenter',
+      ev => {
+        var X = ev.pageX;
+        var Y = ev.pageY;
+        var X1 = mouse.x;
+        var Y1 = mouse.y;
+        context.beginPath();
+        context.moveTo(X1, Y1);
+        canvas.addEventListener(
+          'mousemove',
+          ev => {
+            var x = ev.pageX;
+            var y = ev.pageY;
+            var x1 = mouse.x;
+            var y1 = mouse.y; 
+            context.lineTo(x1, y1);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(x1, y1);
+          },
+          false
+        );
+      },
+      false
+    );
+
+
+  </script>
+</body>
+</html>

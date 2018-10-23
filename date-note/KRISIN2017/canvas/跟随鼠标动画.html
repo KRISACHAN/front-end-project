@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>跟随鼠标动画动画</title>
+  <style>
+    html,
+    body,
+    canvas {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .canvas {
+      margin: 30px calc(50% - 150px);
+    }
+  </style>
+</head>
+<body>
+  <canvas class="canvas" id="canvas" width="100" height="100"></canvas>
+  <script src="base.js"></script>
+  <script src="utils.js"></script>
+  <script>
+    'use strict';
+    const canvas = dom('#canvas');
+    const context= canvas.getContext('2d');
+    const mouse = utils.captureMouse(canvas);
+    const cX = canvas.width / 2;
+    const cY = canvas.height / 2;
+    const draw = () => {
+      RAF(draw);
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      const dx = mouse.x - cX;
+      const dy = mouse.y - cY;
+
+      context.save();
+      context.translate(cX , cY);
+      context.rotate(Math.atan2(dy, dx));
+      context.beginPath();
+      context.fillStyle = 'rgba(176, 221, 216, 1)';
+      context.strokeStyle = 'rgba(176, 221, 216, 1)';
+      context.moveTo(-30, -10);
+      context.lineTo(0, -10);
+      context.lineTo(0, -30);
+      context.lineTo(30, 0);
+      context.lineTo(0, 30);
+      context.lineTo(0, 10);
+      context.lineTo(-30, 10);
+      context.closePath();
+      context.stroke();
+      context.fill();
+      context.restore();
+    };
+
+    draw();
+  </script>
+</body>
+</html>

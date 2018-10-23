@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>列表类</title>
+  <style>
+    html,
+    body,
+    h1,
+    h2,
+    div,
+    ul,
+    li,
+    p,
+    span {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    'use strict';
+    const print = console.log.bind(console)
+
+    class Matrix {
+      constructor (array = [], length = 0) {
+        // 传入数组
+        this.array = array
+
+        // 设置获取的长度
+        this.length = length
+
+        // 总和
+        this.total = 0
+
+        // 平均数
+        this.average = 0.0
+
+        // 单体总和
+        this.itemVal = []
+
+        // 单体平均数
+        this.itemAverage = []
+
+        // 局部总和
+        this.localVal = []
+
+        // 局部平均数
+        this.localAverage = []
+
+      }
+
+      // 数组添加元素
+      add (...temp) {
+        print(Object.prototype.toString.call(temp[0]))
+        Object.prototype.toString.call(temp[0]) === '[object Number]' ? this.array.push(temp) : this.array.push(temp[0])
+      }
+
+      // Array.prototype.reduce
+      reduce (arr, fn) {
+        return arr.reduce(fn)
+      }
+
+      // Array.prototype.map
+      map (arr, fn) {
+        return arr.map(fn)
+      }
+
+      // Array.prototype.reverse
+      reverse () {
+        const newArr = this.array
+        newArr.reverse()
+        return newArr
+      }
+
+      // Array.prototype.splice()
+      splice (arr, begin, item) {
+        return arr.splice(start, deleteCount, ...item)
+      }
+
+      // 获取结果值
+      val () {
+        this.map(this.array, (me, mi, ma) => {
+          return this.reduce(me, (accumulator, currentValue) => {
+            this.itemVal.push(accumulator + currentValue)
+            this.itemAverage.push(Number(((accumulator + currentValue) / me.length).toFixed(2)))
+            return accumulator + currentValue
+          })
+        })
+
+        return {
+          Val: this.itemVal,
+          Average: this.itemAverage
+        }
+
+      }
+    }
+
+    const grades = [[89, 77], [76, 82, 81], [91, 94, 89, 78], [78, 45, 67, 100, 84], [10], [20, 40, 87]]
+
+    const AVERAGE = new Matrix(grades)
+
+    AVERAGE.val()
+    /*
+      1. 增加一个向列表中插入元素的方法，该方法只在待插元素大于列表中的所有元素时才执
+      行插入操作。这里的大于有多重含义，对于数字，它是指数值上的大小；对于字母，它
+      是指在字母表中出现的先后顺序。
+      2. 增加一个向列表中插入元素的方法，该方法只在待插元素小于列表中的所有元素时才执
+      行插入操作。
+      3. 创建Person 类，该类用于保存人的姓名和性别信息。创建一个至少包含10 个Person 对
+      象的列表。写一个函数显示列表中所有拥有相同性别的人。
+      4. 修改本章的影碟租赁程序，当一部影片检出后，将其加入一个已租影片列表。每当有客
+      户检出一部影片，都显示该列表中的内容。
+      5. 为影碟租赁程序创建一个check-in() 函数，当客户归还一部影片时，将该影片从已租列
+      表中删除，同时添加到现有影片列表中。
+    */
+  </script>
+</body>
+</html>

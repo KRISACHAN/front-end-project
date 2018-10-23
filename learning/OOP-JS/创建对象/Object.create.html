@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		//下面的例子演示了如何使用Object.create()来实现类式继承。这是一个单继承。
+		//Shape - superclass
+		function Shape() {
+			this.x = 0;
+			this.y = 0;
+		}
+
+		Shape.prototype.move = function(x, y) {
+				this.x += x;
+				this.y += y;
+				console.info("Shape moved.");
+		};
+
+		// Rectangle - subclass
+		function Rectangle() {
+			Shape.call(this); //call super constructor.
+		}
+
+		Rectangle.prototype = Object.create(Shape.prototype);
+
+		var rect = new Rectangle();
+
+		rect instanceof Rectangle //true.
+		rect instanceof Shape //true.
+
+		rect.move(1, 1); //Outputs, "Shape moved."
+
+		//如果你希望能继承到多个对象,则可以使用混入的方式。
+
+
+		function SuperClass(){};
+		SuperClass.prototype.getName = function() {};
+		function OtherSuperClass(){};
+		OtherSuperClass.prototype.showTech = function(){};
+
+
+		function MyClass() {
+			SuperClass.call(this);
+			OtherSuperClass.call(this);
+		}
+
+		function mixin(destClass) {
+			var classes = Array.prototype.slice.call(arguments, 1);
+			for (var i=0; i<classes.length; i++) {
+				var srcClass = classes[i];
+				var srcProto  = srcClass.prototype;
+				var destProto = destClass.prototype;
+				for (var method in srcProto) {
+					if (!destProto[method]) {
+						destProto[method] = srcProto[method];
+					}
+				}
+			}
+		}
+
+		MyClass.prototype = Object.create(SuperClass.prototype); //inherit
+		mixin(MyClass.prototype, OtherSuperClass.prototype); //mixin
+
+		MyClass.prototype.myMethod = function() {
+			// do a thing
+		};
+
+		console.log(MyClass.prototype);
+	</script>
+</body>
+</html>

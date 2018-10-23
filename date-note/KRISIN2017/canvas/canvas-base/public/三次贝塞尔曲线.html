@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>三次贝塞尔曲线</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: -webkit-gradient(linear,0% 5%, 50% 100%, from(#87CDCB), to(#BADAD7));
+    }
+  </style>
+</head>
+<body>
+  <a href="http://www.j--d.com/bezier">Canvas三次贝塞尔曲线生成工具</a>
+  <canvas id="canvas" style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" width="900" height="900">
+    你的浏览器不支持canvas呦~
+  </canvas>
+  <script>
+    'use strict';
+    // save() 方法保存当前图像状态的一份拷贝。 保存状态到堆栈
+    // restore() 方法将绘图状态置为保存值。   恢复储存堆栈
+
+
+    window.onload = function(){
+        var canvas = document.getElementById("canvas");
+        canvas.width = 800;
+        canvas.height = 600;
+        var context = canvas.getContext("2d");
+        context.fillStyle = "#FFF";
+        context.fillRect(0,0,800,600);
+
+        drawPrairie(context);
+        drawSky(context);
+        for(var i=0; i <5; i++){
+            var x0 = 500 * Math.random() + 50;
+            var y0 = 200 * Math.random() + 50;
+            var c0 = 100 * Math.random() + 50;
+            drawCloud(context, x0, y0, c0);
+
+        }
+
+    };
+
+    function drawSky(cxt){
+        cxt.save();
+
+        cxt.beginPath();
+        cxt.moveTo(0, 420);
+        cxt.bezierCurveTo(250, 300, 350, 550, 800, 400);
+        cxt.lineTo(800,0);
+        cxt.lineTo(0,0);
+        cxt.closePath();
+
+        var lineStyle = cxt.createRadialGradient(400, 0, 50, 400, 0, 200);
+        lineStyle .addColorStop(0, "#42A9AA");
+        lineStyle .addColorStop(1, "#2491AA");
+
+        cxt.fillStyle = lineStyle;
+
+        cxt.fill();
+
+        cxt.restore();
+    }
+
+    function drawPrairie(cxt){
+        cxt.save();
+
+        cxt.beginPath();
+        cxt.moveTo(0, 420);
+        cxt.bezierCurveTo(250, 300, 350, 550, 800, 400);
+        cxt.lineTo(800,600);
+        cxt.lineTo(0,600);
+        cxt.closePath();
+
+        var lineStyle = cxt.createLinearGradient(0, 600, 600, 0);
+        lineStyle .addColorStop(0, "#00AA58");
+        lineStyle .addColorStop(0.3, "#63AA7B");
+        lineStyle .addColorStop(1, "#04AA00");
+
+        cxt.fillStyle = lineStyle;
+        cxt.fill();
+
+        cxt.restore();
+    }
+
+
+
+    /*渲染单个云朵
+     context:  canvas.getContext("2d")对象
+     cx: 云朵X轴位置
+     cy: 云朵Y轴位置
+     cw: 云朵宽度
+     */
+    function drawCloud(cxt, cx, cy, cw) {
+        //云朵移动范围即画布宽度
+        var maxWidth = 800;
+        //如果超过边界从头开始绘制
+        cx = cx % maxWidth;
+        //云朵高度为宽度的60%
+        var ch = cw * 0.6;
+        //开始绘制云朵
+
+        cxt.beginPath();
+        cxt.fillStyle = "white";
+        //创建渐变
+        var grd = cxt.createLinearGradient(0, 0, 0, cy);
+        grd.addColorStop(0, 'rgba(255,255,255,0.8)');
+        grd.addColorStop(1, 'rgba(255,255,255,0.5)');
+        cxt.fillStyle = grd;
+
+        //在不同位置创建5个圆拼接成云朵现状
+        cxt.arc(cx, cy, cw * 0.19, 0, 360, false);
+        cxt.arc(cx + cw * 0.08, cy - ch * 0.3, cw * 0.11, 0, 360, false);
+        cxt.arc(cx + cw * 0.3, cy - ch * 0.25, cw * 0.25, 0, 360, false);
+        cxt.arc(cx + cw * 0.6, cy, cw * 0.21, 0, 360, false);
+        cxt.arc(cx + cw * 0.3, cy - ch * 0.1, cw * 0.28, 0, 360, false);
+        cxt.closePath();
+
+        cxt.fill();
+    }
+  </script>
+</body>
+</html>

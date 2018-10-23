@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>二次贝塞尔曲线</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: -webkit-gradient(linear,0% 5%, 50% 100%, from(#87CDCB), to(#BADAD7));
+    }
+  </style>
+</head>
+<body>
+  <a href="http://www.j--d.com/bezier">Canvas二次贝塞尔曲线生成工具</a>
+  <canvas id="canvas" style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" width="900" height="900">
+    你的浏览器不支持canvas呦~
+  </canvas>
+  <script>
+    'use strict';
+    window.addEventListener('load', ev => {
+      const canvas = document.getElementById('canvas');
+      canvas.width = 800;
+      canvas.height = 600;
+
+      const context = canvas.getContext('2d');
+      context.fillStyle = "#FFF";
+      context.fillRect(0,0,800,600);
+
+      context.lineWidth = 6;
+      context.strokeStyle = "#0090D2";
+      context.beginPath();
+      context.moveTo(131, 104);
+      context.quadraticCurveTo(551, 21, 65, 451);
+      context.closePath();
+      context.stroke();
+    }, false);
+  </script>
+</body>
+</html>

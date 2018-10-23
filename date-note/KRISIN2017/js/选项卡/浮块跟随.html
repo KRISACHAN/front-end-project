@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    html,body,ul,li,div {
+      margin: 0;
+      padding: 0;
+    }
+    ul,li {
+      list-style: none;
+      font-size: 0;
+    }
+    li {
+      font-size: 25px;
+    }
+    html,body {
+      width: 100%;
+    }
+    .tabs {
+      width: 800px;
+      height: 600px;
+      position: absolute;
+      left: 200px;
+      top: 200px;
+    }
+    .tabs-nav {
+      width: 800px;
+      height: 200px;
+      border: 1px solid;
+      box-sizing: border-box;
+      display: flex;
+    }
+    .tabs-nav > li {
+      flex: 1;
+      border: 1px solid;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 200px;
+      cursor: pointer;
+    }
+    .moveBox {
+      width: calc( 800px / 4 );
+      height: 10px;
+      background: #B0DFE5;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: all 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <div class="tabs" id="tabs">
+    <ul class="tabs-nav" id="tabs-nav">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+    <div class="moveBox" id="moveBox"></div>
+  </div>
+  <script>
+    'use strict';
+    const Title = document.querySelector('#tabs-nav'),TitleList = document.querySelectorAll('#tabs-nav > li'), TitleListLength = TitleList.length, MoveBox = document.querySelector('#moveBox');
+    let num = 0, firstPos = 0, lastPos = 0, Timer = null;
+    TitleList.forEach((e,i,a)=>{
+      e.addEventListener('mouseover',ev => {
+        MoveBox.style.left = `${200 * i}px`;
+      },false);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "k-blog",
+  "version": "1.0.0",
+  "repository": "",
+  "description": "kris's blog",
+  "author": "krisdw <chenjinwen77@foxmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vuepress dev",
+    "build": "vuepress build"
+  },
+  "devDependencies": {
+    "vuepress": "^0.10.0"
+  }
+}

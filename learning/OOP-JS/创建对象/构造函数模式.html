@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		function Structure(tool,material,worker){
+			this.tool = tool;
+			this.material = material;
+			this.worker = worker;
+			this.Make = function() {
+				console.log(this.tool);
+			};
+		};
+		var Product1 = new Structure("锤子","棉花","小明");
+		var Product2 = new Structure("剪刀","石头","阿布");
+		console.log(Product1);
+		console.log(Product2);
+	</script>
+</body>
+</html>

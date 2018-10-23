@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    html,body,ul,li,div {
+      margin: 0;
+      padding: 0;
+    }
+    ul,li {
+      list-style: none;
+      font-size: 0;
+    }
+    li {
+      font-size: 25px;
+    }
+    html,body {
+      width: 100%;
+    }
+    .slider {
+      width: 200px;
+      height: 600px;
+      position: absolute;
+      left: 400px;
+      top: 200px;
+      overflow: hidden;
+    }
+    .slider-nav {
+      width: 800px;
+      height: 200px;
+      display: flex;
+      transition: all 0.3s;
+      position: absolute;
+      left: 0;
+    }
+    .slider-nav > li {
+      flex: 1;
+      text-align: center;
+      line-height: 200px;
+    }
+    .slider-btn {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .slider-btn>li {
+      width: 50px;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      float: left;
+      cursor: pointer;
+      font-weight: 100;
+      transition: all 0.3s;
+      background: rgba(39,40,34,0);
+      color: #FFF;
+    }
+    .slider-btn>li:hover {
+      font-weight: 800;
+      background: rgba(39,40,34,0.5);
+    }
+    .slider-btn>li:last-child {
+      float: right;
+    }
+    .slider-nav-unreal {
+      width: 600px;
+      height: 200px;
+      position: absolute;
+      left: -200px;
+      top: 0;
+      z-index: -1;
+    }
+    .slider-nav-unreal>li {
+      width: 200px;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      position: absolute;
+      left: 0;
+    }
+    .slider-nav-unreal>li:last-child {
+      left: 400px;
+    }
+    .slider-control {
+      display: flex;
+      width: 200px;
+      height: 10px;
+      position: absolute;
+      top: 200px;
+    }
+    .slider-control>li {
+      cursor: pointer;
+      flex: 1;
+      height: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider" id="slider">
+    <ul class="slider-nav" id="slider-nav">
+      <li style="background: #7DD2CA;">1</li>
+      <li style="background: #EDEDED;">2</li>
+      <li style="background: #FCF0C8;">3</li>
+      <li style="background: #F1F0F6;">4</li>
+    </ul>
+    <ul class="slider-btn" id="slider-btn">
+      <li><</li>
+      <li>></li>
+    </ul>
+    <ul class="slider-nav-unreal" id="slider-nav-unreal">
+      <li style="background: #F1F0F6;">4</li>
+      <li style="background: #7DD2CA;">1</li>
+    </ul>
+    <ul class="slider-control" id="slider-control">
+      <li style="background: #7DD2CA;"></li>
+      <li style="background: #EDEDED;"></li>
+      <li style="background: #FCF0C8;"></li>
+      <li style="background: #F1F0F6;"></li>
+    </ul>
+  </div>
+  <script>
+    'use strict';
+    const Slider = document.querySelector('#slider'),
+          Main = document.querySelector('#slider-nav'),
+          List = document.querySelectorAll('#slider-nav > li'),
+          Btns = document.querySelectorAll('#slider-btn > li'),
+         Ctrls = document.querySelectorAll('#slider-control > li');
+   let MovePos = parseInt(getComputedStyle(List[0], false).width),
+          flag = true,
+         Timer = null,
+     MoveTimer = null,
+     MainTimer = null;
+    const MoveFn = (i) => {
+      let FirstPos = parseInt(getComputedStyle(Main, false).left);
+      if ( i === 1 ) {
+        Main.style.left = FirstPos - MovePos + 'px';
+        console.log(FirstPos - MovePos);
+        if ( FirstPos - MovePos < -600 ) {
+          Main.style.left = 0 + 'px';
+        }
+      } else if ( i === 0 ) {
+        Main.style.left = FirstPos + MovePos + 'px';
+        if ( FirstPos + MovePos > 0 ) {
+          Main.style.left = -600 + 'px';
+        }
+      } else {
+        Main.style.left = FirstPos - i + 'px';
+        console.log(FirstPos - i);
+        if ( FirstPos - i < -600 ) {
+          Main.style.left = 0 + 'px';
+        }
+      }
+      console.log(+new Date());
+    };
+    window.addEventListener('load',()=>{
+      Btns.forEach((e,i,a)=>{
+        a[i].onclick = function Change(){
+          MoveFn(i);
+          a[i].onclick = null;
+          clearTimeout(Timer);
+          Timer = setTimeout(()=>{
+            a[i].onclick = Change;
+          }, 400);
+        };
+      });
+      MainTimer = () =>{
+        MovePos = 200;
+        MoveFn(MovePos);
+      };
+      MoveTimer = setInterval(MainTimer,2000);
+      Slider.addEventListener('mouseover',()=>{
+        clearInterval(MoveTimer);
+        Ctrls.forEach((e,i,a)=>{
+          e.addEventListener('click',(ev)=>{
+            console.log(i);
+            Main.style.left = -i * MovePos + 'px';
+          },false);
+        });
+      },false);
+      Slider.addEventListener('mouseout',()=>{
+        MoveTimer = setInterval(MainTimer,2000);
+      },false);
+    },false);
+  </script>
+</body>
+</html>

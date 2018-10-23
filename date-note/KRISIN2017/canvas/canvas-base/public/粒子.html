@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <style>
+    html,body,canvas,img {
+      margin: 0;
+      padding: 0;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    #img {
+      visibility: hidden;
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+    }
+  </style>
+</head>
+<body>
+  <img id="img" src="logo.jpg" alt="logo">
+  <canvas id="canvas">
+    你的浏览器不支持canvas呦~
+  </canvas>
+  <script>
+    'use strict';
+    window.addEventListener('load', ev => {
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      canvas.width = 300;
+      canvas.height = 300;
+
+      const Img = document.getElementById('img');
+      const ImgW = Img.offsetWidth;
+      const ImgH = Img.offsetHeight;
+
+      context.drawImage(Img, 0, 0, 300, 300);
+
+      const ImgData = context.getImageData(0, 0, 300, 300).data;
+
+      let pos = 0;
+      let pixel = {};
+      let pixels = [];
+      let len = 0;
+      let pI = 0;
+      let Timer = null;
+
+      for (let i = 1; i <= 300; ++i) {
+        for (let j = 1; j <= 300; ++j) {
+          pos = [(i - 1) * 300 + (j - 1)] * 4;
+          if (ImgData[pos] >= 0) {
+            pixel = {
+              x: j + Math.random() * 1.2,
+              y: i + Math.random() * 1.2,
+              fillStyle: 'rgba(' + ImgData[pos] + ',' + (ImgData[pos+1]) + ',' + (ImgData[pos+2]) + ',' + 1 + ')'
+            };
+            pixels.push(pixel);
+            len = pixels.length;
+          }
+        }
+      }
+
+      context.clearRect(0, 0, 300, 300);
+
+      Timer = setInterval(() => {
+        pI++;
+        console.log(pI);
+        for(let i = 0; i < len - 1; ++i){
+          if ( pI <= 100 ) {
+            if ( i % 2 === 0 ) {
+              context.fillStyle = pixels[i].fillStyle;
+              context.fillRect(pixels[i].x, pixels[i].y, pI * 0.01, pI * 0.01);
+            };
+          } else {
+            clearInterval(Timer);
+          }
+        };
+      }, 20);
+    }, false);
+  </script>
+</body>
+</html>

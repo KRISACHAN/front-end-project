@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>加载动画</title>
+  <style>
+    html,
+    body,
+    canvas {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script src="base.js"></script>
+  <script>
+    'use strict';
+    // 获取canvas元素
+    const canvas = dom('#canvas');
+    // 设置canvas作图环境为2D
+    const context= canvas.getContext('2d');
+    // 2π = 360° rad将一周拆分为一百份
+    const rad = Math.PI * 2 / 100;
+    // 设置物体运动速度
+    let speed = 0.1;
+
+    // ctx.arc(x, y, r, sAngle, eAngle, counterclockwise)
+    // x 圆的中心的 x 坐标。
+    // y 圆的中心的 y 坐标。
+    // r 圆的半径。
+    // sAngle  起始角，以弧度计。（弧的圆形的三点钟位置是 0 度）。
+    // eAngle  结束角，以弧度计。
+    // counterclockwise  可选。规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。
+
+    // 绘制圆环状态函数
+    const circle = n => {
+      context.save(); // 保存当前环境的状态
+      context.beginPath(); // 开始绘制
+      context.strokeStyle = '#F47E36'; // 设置用于笔触的颜色、渐变或模式
+      context.lineWidth = 10; // 设置当前的线条宽度
+      context.arc(250, 250, 100, 0, 0 + n * rad, false);
+      context.stroke(); // 绘制已定义的路径
+      context.closePath(); // 结束绘制
+      context.restore(); // 返回之前保存过的路径状态和属性
+    };
+
+    // 动画函数
+    const circleAnimate = () => {
+      RAF(circleAnimate);
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      circle(speed);
+      speed > 100 ? speed = 0 : ''
+      speed += 0.1;
+      print(speed);
+    }
+
+    circleAnimate();
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+@import "https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/typeplate.css";
+@import url(http://fonts.googleapis.com/css?family=Holtwood+One+SC|Quattrocento);
+
+body {
+  background: #990707;
+  color: #ffffff;
+  font-family: 'Quattrocento', serif;
+}
+h1 {
+  color: #ffffff;
+  font-family: 'Holtwood One SC', serif;
+  font-size: 70px;
+  font-weight: normal;
+  padding-top: 10px;
+  text-align: center;
+}
+.container {
+  max-width: 600px;
+}
+.lapland {
+  float: left;
+  shape-outside: inset(1% round 45%);
+  max-width: 400px;
+  width: 70%;
+}
+.lapland-inset {
+  float: left;
+  shape-outside: inset(1% round 100px);
+  max-width: 400px;
+  width: 70%;
+}
