@@ -82,12 +82,19 @@ const webpackProd = {
     new cleanWebpackPlugin(['./dist/'], {
       root: config.project
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
-      filename: 'js/commons.[chunkhash:8].bundle.js'
-    }),
     new uglifyJSPlugin()
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2
+        }
+      }
+    }
+  },
 }
 
 module.exports = webpackMerge(webpackBase, webpackProd)
