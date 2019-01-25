@@ -1,6 +1,5 @@
 // https://eslint.org/docs/user-guide/configuring
-
-module.exports = {
+const eslintObj = {
   root: true,
   parserOptions: {
     parser: 'babel-eslint'
@@ -23,4 +22,6 @@ module.exports = {
     'camelcase': 0,
     'space-before-function-paren': 0
   }
-}
+};
+
+module.exports = eslintObj;

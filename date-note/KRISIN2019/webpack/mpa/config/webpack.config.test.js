@@ -1,4 +1,4 @@
-// 开发环境配置
+// 测试环境配置
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const path = require('path');
@@ -6,23 +6,9 @@ const path = require('path');
 const webpackBase = require('./webpack.config.base.js');
 const config = require('./config.js');
 
-const webpackDev = {
-  mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
-  output: {
-    filename: 'static/js/[name].[hash:8].bundle.js'
-  },
-  devServer: {
-    contentBase: './dist/',
-    historyApiFallback: true, 
-    overlay: true,
-    inline: true,
-    hot: true,
-    host: "0.0.0.0",
-    port: "8082",
-    useLocalIp: true,
-    proxy: {}
-  },
+const webpackTest = {
+  mode: 'none',
+  devtool: '#inline-source-map',
   module: {
     rules: [
       {
@@ -44,11 +30,7 @@ const webpackDev = {
         use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       }
     ]
-  },
-  plugins: [
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  }
 };
 
-module.exports = webpackMerge(webpackBase, webpackDev);
+module.exports = webpackMerge(webpackBase, webpackTest);

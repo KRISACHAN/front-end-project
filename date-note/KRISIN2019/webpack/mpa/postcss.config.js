@@ -1,4 +1,4 @@
-module.exports = {
+const postcssObj = {
   "plugins": {
     "postcss-cssnext": {},
     "precss": {},
@@ -6,4 +6,6 @@ module.exports = {
       "remUnit": 75
     }
   }
-}
+};
+
+module.exports = postcssObj;
