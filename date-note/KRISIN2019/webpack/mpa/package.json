@@ -1,7 +1,7 @@
 {
-  "name": "mpa",
+  "name": "EZblock_transformer",
   "version": "0.0.1",
-  "description": "webpack mpa",
+  "description": "js 2 block in EZblock",
   "main": "index.js",
   "dependencies": {
     "@babel/runtime": "^7.0.0",
@@ -78,8 +78,8 @@
   },
   "scripts": {
     "build": "webpack  --progress --color --config ./config/webpack.config.prod.js",
-    "dev": "webpack-dev-server --progress --color --open --config ./config/webpack.config.dev.js",
-    "test": "karma start karma.conf.js --single-run"
+    "dev": "bash env.sh && webpack-dev-server --progress --color --open --config ./config/webpack.config.dev.js",
+    "test": "bash env.sh && karma start karma.conf.js --single-run"
   },
   "keywords": [
     "sunfounder",
