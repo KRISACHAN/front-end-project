@@ -1,6 +1,12 @@
 const path = require('path');
 const project = process.cwd(); // 项目目录
 const resolve = dir => path.join(__dirname, '..', dir); // 获取文件夹
+const env_array = fs.readFileSync(project + '/.env', 'utf8').split('\r\n'); // 获取环境变量
+env_array.forEach(e => {
+    const [key, value] = e.split('=');
+    process.env[key] = value;
+    console.log(key, process.env[key]);
+}); // 设置环境变量
 
 const config = {
     'project': project, // 项目目录
