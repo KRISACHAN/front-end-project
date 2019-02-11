@@ -5,12 +5,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {
     html,
     ignorePages,
+    project,
+    config,
     dev: {
         alias,
         include,
-        exclude,
-        config,
-        project
+        exclude
     },
     build
 } = require('./config.js');
@@ -75,7 +75,7 @@ const baseConfig = {
     },
     'module': {
         'rules': [
-            ...(process.env.USEESLINT ? [createLintingRule()] : []),
+            ...(process.env.ESLINTSTATUS === 'open' ? [createLintingRule()] : []),
             {
                 'test': /\.(woff|woff2|eot|ttf|otf)$/,
                 'include': include,

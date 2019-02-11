@@ -5,7 +5,6 @@ const env_array = fs.readFileSync(project + '/.env', 'utf8').split('\r\n'); // �
 env_array.forEach(e => {
     const [key, value] = e.split('=');
     process.env[key] = value;
-    console.log(key, process.env[key]);
 }); // 设置环境变量
 
 const config = {
