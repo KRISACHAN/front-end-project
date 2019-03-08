@@ -44,7 +44,10 @@ const webpackProd = {
         new cleanWebpackPlugin(['./dist/'], {
             root: project
         }),
-        new uglifyJSPlugin()
+        new uglifyJSPlugin({
+            sourceMap: true,
+            include: /\/core/,
+        }),
     ],
     optimization: {
         splitChunks: {
