@@ -1,0 +1,8 @@
+/* reset */
+html,body,div,span,p,a,video,audio,header,footer,source,input,ul,li { margin: 0; padding: 0; }
+ul { font-size: 0; }
+li { list-style-type: none; }
+a{ text-decoration:none; }
+div,li,span { font-size: 0.3rem; }
+.highlight { color: #FF0; }
+audio { position: absolute !important; visibility: hidden !important; }
