@@ -75,7 +75,7 @@ const baseConfig = {
     },
     'module': {
         'rules': [
-            ...(process.env.ESLINTSTATUS === 'open' ? [createLintingRule()] : []),
+            ...(process.env.USEESLINT ? [createLintingRule()] : []),
             {
                 'test': /\.(woff|woff2|eot|ttf|otf)$/,
                 'include': include,

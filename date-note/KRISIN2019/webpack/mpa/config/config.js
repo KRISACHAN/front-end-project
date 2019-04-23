@@ -3,7 +3,12 @@ const project = process.cwd(); // 项目目录
 const resolve = dir => path.join(__dirname, '..', dir); // 获取文件夹
 const env_array = fs.readFileSync(project + '/.env', 'utf8').split('\r\n'); // 获取环境变量
 env_array.forEach(e => {
-    const [key, value] = e.split('=');
+    let [key, value] = e.split('=');
+    if (value === 'false') {
+        value = false;
+    } else if (value === 'true') {
+        value = true;
+    };
     process.env[key] = value;
 }); // 设置环境变量
 

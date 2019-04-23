@@ -4,6 +4,7 @@ const webpackMerge = require('webpack-merge');
 const cleanWebpackPlugin = require('clean-webpack-plugin');
 const uglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const compressionPlugin = require('compression-webpack-plugin');
 const webpackBase = require('./webpack.config.base.js');
 const {
     project
@@ -48,19 +49,27 @@ const webpackProd = {
             sourceMap: true,
             include: /\/core/,
         }),
+        new compressionPlugin({
+            filename: '[path].br[query]',
+            test: /(\.jsx|\.js|\.css|\.html|\.png|\.jpg|\.webp|\.svg)$/,
+            cache: true,
+            algorithm: 'gzip',
+            deleteOriginalAssets: false,
+            minRatio: 0.8
+        })
     ],
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    test: /([\\/]node_modules[\\/]|[\\/]vendors[\\/])/,
-                    name: 'vendors',
-                    chunks: 'all',
-                    enforce: true
-                }
-            }
-        }
-    }
+    // optimization: {
+    //     splitChunks: {
+    //         cacheGroups: {
+    //             commons: {
+    //                 test: /([\\/]node_modules[\\/]|[\\/]vendors[\\/])/,
+    //                 name: 'vendors',
+    //                 chunks: 'all',
+    //                 enforce: true
+    //             }
+    //         }
+    //     }
+    // }
 };
 
 module.exports = webpackMerge(webpackBase, webpackProd);
