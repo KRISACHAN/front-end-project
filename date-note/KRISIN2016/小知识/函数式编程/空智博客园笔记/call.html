@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+	<body>
+		<script>
+		"use strict"
+		window.name = "KRIS";
+		window.age = 21;
+		window.job = "FE";
+
+		function isHuman(){
+			var human = this.name + "的年龄是：" + this.age + "，职业是：" + this.job;
+			console.log(this);
+			console.log(human);
+			console.log("----------");
+		};
+
+		var isnotme = new isHuman();
+
+		isHuman.call(window);
+
+		function man(a,b) {
+			console.log(a+","+b);
+		};
+
+		man.call(undefined,"a","b");
+
+		function people(a,b) {
+			man.call(null,a,b);
+		}
+		people("qq","bb");
+
+		var animals = [
+			{species: 'Lion', name: 'King'},
+			{species: 'Whale', name: 'Fail'}
+		];
+		for (var i = 0; i < animals.length; i++) {
+			(function (i) {
+				this.print = function () {
+					console.log('#' + i  + ' ' + this.species + ': ' + this.name);
+				}
+				this.print();
+			}).call(animals[i], i);
+		}
+		function greet() {
+			var reply = [this.person, 'Is An Awesome', this.role].join(' ');
+			console.log(reply);
+		}
+		var i = {
+			person: 'Douglas Crockford', role: 'Javascript Developer'
+		};
+		greet.call(i); // Douglas Crockford Is An Awesome Javascript Developer
+		</script>
+	</body>
+</html>

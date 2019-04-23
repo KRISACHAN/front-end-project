@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		const Kris = {
+			Parse: function(data,fn){
+				return JSON.parse(data,fn)
+			},
+			Stringify: function(data,fn){
+				return JSON.stringify(data,fn)
+			}
+		};
+		console.log(Kris.Parse('[1, 5, "false"]'));
+		Kris.Parse('{"p": 5}', function (k, v) {
+			if( k === '' ) {
+				return console.log(v);
+			} // 如果到了最顶层，则直接返回属性值，
+			return console.log(v * 2); // 否则将属性值变为原来的 2 倍。
+		});
+		//JSON.parse() 不允许用逗号作为结尾
+	</script>
+</body>
+</html>

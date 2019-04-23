@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/** 省略function **/
+		const obj = {
+			a: 1,
+			foo: function(){
+				return this.a;
+			}
+		}
+		console.log(obj.foo());
+
+		/** class **/
+		class Fn {
+			constructor(num) {
+				this.num = num;
+			}
+			bar() {
+				return ++this.num;
+			}
+		}
+		let Fn1 = new Fn(44);
+		console.log(Fn1.bar());
+
+		class Fn2 extends Fn {
+			constructor(num) {
+				super(num);
+			}
+			foo() {
+				super.bar();
+				return this.num;
+			}
+		};
+		let Fn3 = new Fn2(15);
+		console.log(Fn3.foo());
+
+		/** 支持__proto__注入 **/
+		const machine = {
+			__proto__: new Fn(11),
+			method() {
+				return this.num;
+			}
+		}
+		console.log(machine.method());
+		console.log(machine instanceof Fn);
+
+		/** 可动态计算的属性名 **/
+		const 中文 = {};
+		const key = 'foo';
+		中文['abc'+key] = 'bar';
+		console.log(中文);
+
+		const 是中文 = 'es2015';
+		const 是英文 = {
+			[是中文 + 'bbbbb']: 'foobar'
+		};
+		console.log(是英文);
+
+		/** 一些比较常用的ES引擎的内部实现所使用的SYMBOL需要使用这个特性来对对象字面量进行拓展 **/
+		const fibo = {
+			a: 0,
+			b: 1,
+			[ Symbol.iterator ]() {
+				return {
+					next() {
+						[fibo.a,fibo.b] = [fibo.b,fibo.a+fibo.b]
+						return { done: false, value: fibo.b }
+					}
+				}
+			}
+		}
+
+		for(const n of fibo){
+			if(n>100) break;
+			console.log(n.toString()+'');
+		}
+
+		/* 将属性名定义省略 */
+		const isFoo = 123;
+		const isBar = () => isFoo;
+		const isObj = {
+			isFoo,
+			isBar
+		};
+		console.log(isObj);
+	</script>
+</body>
+</html>

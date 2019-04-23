@@ -1,0 +1,59 @@
+/* Write your styles */
+/* reset */
+html,body,div { margin: 0; padding: 0; border: 0; }
+html { font-size: 625%; }
+.table { display: table; }
+.cell { display: table-cell; padding: 0 20%; }
+.middenY { vertical-align: middle; }
+.middebX { margin: 0 auto; text-align: center; }
+
+div { width: 100%; height: 100%; margin: 0 auto; text-align: center; vertical-align: middle; }
+
+h2 { font-size: 0.5rem; color: #FFF; }
+p { font-size: 0.3rem; color: #FFF; }
+
+.bg {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center center;
+	overflow: hidden;
+}
+.bg1 {
+	background-image: url( ../images/1.jpg);
+	width: 100%;
+	height: 100vh;
+}
+.bg2 {
+	background-image: url( ../images/2.jpg);
+	width: 100%;
+	height: 100vh;
+}
+.bg3 {
+	background-image: url( ../images/3.jpg);
+	width: 100%;
+	height: 100vh;
+}
+.bg4 {
+	background-image: url( ../images/4.jpg);
+	width: 100%;
+	height: 100vh;
+}
+.posX {
+	position: relative;
+	left: -100vw;
+}
+.posY {
+	position: relative;
+	top: -100vh;
+}
+.animationX {
+	left: 0;
+	transition-property:all;
+	transition-duration:1.5s;
+}
+.animationY {
+	top: 0;
+	transition-property:all;
+	transition-duration:1.5s;
+}

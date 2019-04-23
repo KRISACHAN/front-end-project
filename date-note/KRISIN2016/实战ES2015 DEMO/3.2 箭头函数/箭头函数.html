@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*  单一参数单行  */
+		const fn = foo => `${foo} world`;
+		console.log(fn("hello"));
+
+		const array = ['a','bc','def','ghij'];
+		const fn1 = (arr,num) => {
+			const newArr = [].filter.call(arr, item => item.length >= 2 );
+			return console.log(newArr);
+		};
+		fn1(array,2);
+
+		/*  多参数的单行箭头  */
+		const fn2 = (foo,...bar) => foo + bar;
+		console.log(fn2('"arr"'));
+
+		/*==呵呵==*/
+		const fn3 = (foo,...bar) => {
+			const isArr = foo + bar;
+			return isArr.replace(',','');
+		}
+		console.log(fn3('"','arr','"'));
+		/*==呵呵==*/
+
+
+		let array1 = ['a','bc','def','ghij'];
+		array1 = array1.sort((a,b) => a.length < b.length);
+		console.log(array1);
+
+		(foo => {
+			return console.log(`${foo} world`);
+		})("hello");
+
+		/*  无参数箭头函数  */
+		const greet = () => 'Hello World';
+		console.log(greet());
+
+		const array2 = [1,2,3];
+		const squares = array2.map(x => x * x);
+		console.log(squares);
+
+		const names = ['Will','Jack','Peter','Steve','John','Hugo','Mike'];
+		const newSet = names.map((name,index) => ({
+			id: index,
+			name: name
+		})).filter(man => man.id % 2 == 0).map(man => [ man.name ]).reduce((a, b) => a.concat(b));
+
+		console.log(newSet);
+
+			/* this */
+		const obj = {
+			hello: 'world',
+			foo() {
+				const bar = () => this.hello
+				return bar;
+			}
+		}
+		window.hello = 'ES6';
+		window.bar = obj.foo();
+		window.bar();
+		console.log(window.bar());//world
+
+		/*  呵呵  */
+		const x = {
+			count: 0,
+			add() {
+				return this.count+=1;
+			}
+		}
+		x.add();
+		x.add();
+		console.log(x.count);
+		/*  呵呵  */
+
+		const a = {
+			init() {
+				this.bar = () => this.dam;
+			},
+			dam: 'hei',
+			foo() {
+				return this.dam;
+			}
+		}
+
+		const b = {
+			dam: 'ha'
+		}
+
+		a.init();
+		console.log(a.foo());
+		console.log(a.foo.bind(b).call(a));
+		console.log(a.bar.call(b));
+
+		/* 程序逻辑注意事项 */
+		/*  因为箭头函数绑定上下文的特性，故不能随意在顶层作用域使用箭头函数，以防出现下面的错误  */
+		const obj2 = {
+			msg: 'pong',
+			ping: () => console.log(this.msg)
+		};
+		obj2.ping();
+		var msg = 'bang!';
+		obj2.ping();
+
+		/** 等价于 **/
+		var that = this;
+		var obj3 = {
+			msg1: 'pong',
+			ping: function(){
+				return that.msg1;
+			}
+		}
+		console.log(obj3.ping());
+
+		/** 同样等价于 **/
+		var isTHIS = this;
+		var obj4 = { msg2: 'pong' };
+		obj4.ping = function(){
+			return isTHIS.msg;
+		};
+		console.log(obj4.ping());
+
+		/** 箭头函数里没有arguments,callee,caller **/
+		/** 但有这个 **/
+		const fn5 = (...args) => {
+			console.log(args[0]);
+		};
+		fn5(1,2,3);
+
+		/** 箭头函数语法注意 **/
+		/** 单行函数不要换行 **/
+
+		/*
+		const fn6 = (x,y)
+		=> {
+			return x*y;
+		};
+		fn6(1,2);
+		*/
+
+		/*  抛出错误语句需要花括号  */
+		const fn4 = x => { throw new Error('error') };
+	</script>
+</body>
+</html>

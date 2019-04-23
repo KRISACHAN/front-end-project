@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	// WeakSet
+	// Syntax: new WeakSet() : WeakSet
+	const weakSet = new WeakSet();
+	/*
+	 * WeakSet.add(1)
+	 * In Chrome
+	 * Uncaught ReferenceError: WeakSet is not defined(…)
+	 */
+	weakSet.add({ foo: 1 });
+	console.log(weakSet); // WeakSet {Object {foo: 1}}
+
+	console.log(weakSet.size) // undefined
+	/*
+	 * WeakSet 与 Set 有三个不一样的地方
+	 *
+	 * WeakSet 不能包含值类型元素
+	 * WeakSet 不能包含无引用元素
+	 * WeakSet 无法被探知大小与其中包含的元素
+	 *
+	 */
+
+	let istoo = { ba: 1 };
+	weakSet.add(istoo);
+	console.log(weakSet.has(istoo)); // true
+
+	istoo = null;
+	console.log(weakSet.has(istoo)); // false
+
+	let str = new String('hello');
+	weakSet.add(str);
+	console.log(weakSet.has(str));// true
+
+	str+=' World';
+	console.log(weakSet.has(str));// false
+	//被加入WeakSet中的字符串不能被修改，因为一旦进行修改，其引用便会丢失，甚至导致被移除出集合。
+	</script>
+</body>
+</html>

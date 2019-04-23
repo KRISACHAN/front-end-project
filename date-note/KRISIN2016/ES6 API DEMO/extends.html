@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	'use strict';
+	class Person {
+		constructor (name , birthday) {
+			this.name = name;
+			this.birthday = birthday;
+		}
+		intro() {
+			return `${this.name}, ${this.birthday}`;
+		}
+	}
+	class Chef extends Person {
+		constructor(name, birthday) {
+			super(name, birthday);
+		}
+	}
+
+	let wanghao = new Chef('陈大文', '1995-02-15');
+	console.log(wanghao.intro());
+	</script>
+</body>
+</html>

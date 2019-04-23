@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		'use strict';
+		let dessert = 'cake',
+				drink = 'tea';
+		let breakfast = kitchen`今天的早餐是 \n ${dessert} 与 ${drink} !`;
+
+		function kitchen(strings, ...values) {
+			console.log(strings);
+			console.log(values);
+			let result = '';
+			for (var i = 0; i < values.length; i++ ) {
+				result += strings[i];
+				result += values[i];
+			}
+			result += strings[strings.length -1];
+			return result;
+		}
+
+		console.log(breakfast);
+
+		//ES6剩余函数：
+		//func(a, ...rest)
+		//栗子
+		function func (a, b, ...rest) {
+			console.log(a,b);
+			console.log(...rest);
+		}
+		func(1, 2);
+		func(1, 2, 3, 4);
+
+	</script>
+</body>
+</html>

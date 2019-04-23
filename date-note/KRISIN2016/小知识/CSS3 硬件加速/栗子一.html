@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		html,body,div {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			padding: 30px;
+			text-align: center;
+		}
+
+		.container {
+			position: relative;
+			min-height: 400px;
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+		}
+
+		.ball {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.75);
+		}
+
+		.ball-running {
+			-webkit-animation: run-around 4s infinite;
+			animation: run-around 4s infinite;
+		}
+
+		@keyframes run-around {
+			0%: {
+				top: 0;
+				left: 0;
+			}
+
+			25% {
+				top: 0;
+				left: 200px;
+			}
+
+			50% {
+				top: 200px;
+				left: 200px;
+			}
+
+			75% {
+				top: 200px;
+				left: 0;
+			}
+		}
+
+		.toggleAnim {
+			height: 40px;
+			width: 300px;
+			font-size: 2em;
+		}
+
+		.p {
+			padding-top: 100px;
+			font-size: 13px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+		<div class="ball"></div>
+	</div>
+	<button class="toggleAnim">Start Animation</button>
+	<p class="p">Demo by Artem Tabalin. <a href="http://www.sitepoint.com/introduction-to-hardware-acceleration-css-animations" target="_blank">See article</a>.</p>
+	<script>
+		var toggleAnim = document.querySelector('.toggleAnim');
+		var balls = document.getElementsByClassName('ball');
+		var animating = false;
+
+		toggleAnim.addEventListener('click', function(e) {
+			animating = !animating;
+			toggleAnim.textContent = animating ? 'Stop Animation' : 'Start Animation';
+
+			Array.prototype.forEach.call(balls, function(ball) {
+				ball.className = animating ? 'ball ball-running' : 'ball';
+			});
+		});
+	</script>
+</body>
+</html>

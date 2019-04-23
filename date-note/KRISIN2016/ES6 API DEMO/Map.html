@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		'use strict';
+		let food = new Map();
+		let fruit = {},
+				cook = function() {
+
+				},
+				dessert = '糕点';
+		food.set(fruit, '柠檬');
+		food.set(cook, '叉子');
+		food.set(fruit, '甜甜圈');
+		console.log(food);
+		console.log(food.size);
+		console.log(food.get(fruit));
+		console.log(food.get(cook));
+		food.delete(dessert);
+		console.log(food.has(dessert));
+
+		food.forEach((value, key) => {
+			console.log(`${key} = ${value}`);
+		});
+		food.clear();
+		console.log(food);
+	</script>
+</body>
+</html>

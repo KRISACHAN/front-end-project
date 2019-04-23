@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// Syntax: class name { ... }
+		class Animal {
+			constructor(family, specie, hue) {
+				this.family = family
+				this.specie = specie
+				this.hue = hue
+			}
+			yell() {
+				console.log(this.hue)
+			}
+		}
+		const doge = new Animal('Canidae', 'Canis lupus', 'Woug');
+		doge.yell();
+
+		class Point {
+			constructor(x, y) {
+				this.x = x;
+				this.y = y;
+			}
+			moveRight(step) {
+				return new Promise(resolve => resolve({
+					x: this.x + step,
+					y: this.y
+				}));
+			}
+		};
+		const p = new Point(2,5);
+		p.moveRight(3).then(({ x, y }) => console.log(`(${x}, ${y})`));
+		// Promise 链接： https://segmentfault.com/a/1190000002928371
+
+		// Syntax: class SubClass extends SuperClass {}
+		class Point2D {
+			constructor(x, y) {
+				this.x = x
+				this.y = y
+			}
+			toString() {
+				return `(${this.x}, ${this.y})`
+			}
+		}
+
+		class Point3D extends Point2D {
+			constructor(x, y, z) {
+				super(x, y)
+				this.z = z
+			}
+			toString() {
+				return `($(this.x), $(this.y), $(this.z))`
+			}
+		};
+
+		const q = new Point3D(2,5,7);
+		console.log(q);
+
+		function Cat() {};
+		Cat.prototype.climb = function(str) {
+			return `I CAN ${str}`;
+		};
+		Cat.prototype.yell = function() {
+			return "Meow"
+		};
+		class Tiger extends Cat {
+			yell() {
+				return "Aoh"
+			}
+		};
+		const tiger = new Tiger();
+		console.log(tiger.yell());
+		console.log(tiger.climb("EAT"));
+
+		//如果一个子类继承了一个父类，那么在子类的constructor构造函数中必须用super函数调用父类的构造函数后才能在子类的constructor构造函数中使用this，否则会报错
+	</script>
+</body>
+</html>

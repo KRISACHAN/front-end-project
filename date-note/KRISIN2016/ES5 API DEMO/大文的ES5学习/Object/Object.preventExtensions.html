@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		// Object.preventExtensions将原对象变的不可扩展,并且返回原对象.
+		var o = {};
+		var o1 = Object.preventExtensions(o);
+		console.log(o1); // Object {}
+		console.log(o === o1); // true;
+
+		// 字面量方式定义的对象默认是可扩展的.
+		var o2 = {};
+		console.log(Object.isExtensible(o2) === true); // true
+
+		//...但可以改变
+		Object.preventExtensions(o2);
+		console.log(Object.isExtensible(o2) === false); // true
+
+		// 使用Object.defineProperty方法为一个不可扩展的对象添加新属性会抛出异常.
+		var o3 = { a: "不可变不可变啊" , removeable: true }
+		Object.preventExtensions(o3);
+		console.log(o3.a);
+		//以下都报错
+		Object.defineProperties(o3,{
+			"a": {
+				value: "改了吗改了吗？"
+			},
+			"b": {
+				value: "多了吗多了吗?"
+			}
+		});
+
+		(function fail(){
+			"use strict";
+			o3.c = "有了吗？" // 对方并不想跟你说话，并且抛出了个TypeError
+		})();
+
+		// 一个不可扩展对象的原型是不可更改的,__proto__是个非标准魔法属性,可以更改一个对象的原型.
+		var o4 = Object.preventExtensions({});
+		console.log(o4.__proto__);
+		o4.__proto__ = { d: "你看不到我，看不到我" }; // 抛出TypeError辣~~
+
+
+	</script>
+</body>
+</html>

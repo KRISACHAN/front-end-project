@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	// Syntax: new Set([iterable]) : Set
+	// Set 无序集合
+	const set = new Set();
+	console.log(set);
+
+	const setArr = new Set([1,2,3]);
+	console.log(setArr);
+
+	// 操作方法
+	// set.add(value);  add value in set
+	// set.delete(value);  delete value in set
+	// set.clear();  clear set()
+	// set.forEach(callbackFn[,context]);  loop every in set
+	// set.has(value). check value in set() or not;
+
+	const setAdd = new Set();
+	setAdd.add(1).add(2).add(3).add(3)/*最后一句不起作用，因为3已存在集合里*/
+	console.log(setAdd);
+
+	const checkSet = new Set([1,2,3,4]);
+	console.log(checkSet.has(2));// true
+	console.log(checkSet.has(5));// false
+
+
+	window.isfoo = { foo: 2 };
+	const loopSet = new Set([1,2,3,4]);
+	loopSet.forEach(item => {
+		console.log(this.isfoo.foo * item)
+	},isfoo);
+
+	for ( const val of loopSet ) {
+		console.log(val)
+	};
+	</script>
+</body>
+</html>

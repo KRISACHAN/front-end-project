@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <script>
+    'use strict';
+    const Json = {
+      "kris": [{
+          "sex": "male",
+          "age": 21,
+          "job": "FE"
+      }],
+      "ellen": [{
+          "sex": "female",
+          "age": 22,
+          "job": "unknow"
+      }]
+    };
+
+    class JsonData {
+      constructor (JSON) {
+        this.JSON = JSON || {};
+      }
+      Log () {
+        //return this.JSON.type
+        return JSON[this.JSON.type](this.JSON.data, this.JSON.fn)
+      }
+    }
+
+    class Data extends JsonData {
+      constructor(JSON) {
+        super(JSON);
+      }
+      Log() {
+        super.Log();
+        //console.log(super.Log());
+        return super.Log();
+      }
+    }
+    console.log(Json);
+    const data = new Data({type: "stringify",data:Json});
+    console.log(data.Log());
+    const data2 = new Data({type: "parse",data:data.Log()});
+    console.log(data2.Log());
+  </script>
+</body>
+</html>

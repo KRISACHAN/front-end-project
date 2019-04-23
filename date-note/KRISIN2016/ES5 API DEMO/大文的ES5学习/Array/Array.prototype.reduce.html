@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		if (typeof Array.prototype.reduce != "function") {
+			Array.prototype.reduce = function (callback, initialValue ) {
+				 var previous = initialValue, k = 0, length = this.length;
+				 if (typeof initialValue === "undefined") {
+						previous = this[0];
+						k = 1;
+				 }
+
+				if (typeof callback === "function") {
+					for (k; k < length; k++) {
+						 this.hasOwnProperty(k) && (previous = callback(previous, this[k], k, this));
+					}
+				}
+				return previous;
+			};
+		};
+
+		var arr = [0,1,2,3,4];
+		var arr1 = ["a","b","c","d","e"];
+
+		var isarr0 = arr.reduce(function(previousValue, currentValue, index, array){
+			console.log("previousValue:"+previousValue+"! currentValue:"+currentValue+"! index:"+index+"! array:"+array+"! this:"+this);
+		},arr1);
+
+		isarr0;
+
+		var isarr = arr.reduce(function(previousValue, currentValue, index, array){
+			return previousValue + currentValue;//由此看出reduce 的返回值是回调函数最后一次被调用的返回值
+		},null);
+
+		console.log(isarr);
+
+		var arr2 = [0,1,2,3];
+		var arradd = arr2.reduce(function(a,b){
+			return a + b;
+		});
+		console.log(arradd);
+
+		var flattened = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
+				return a.concat(b);
+		});
+		console.log(flattened);
+	</script>
+</body>
+</html>

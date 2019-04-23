@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+<body>
+  <script>
+    const JsonSy = (data, fn, space) => {
+      return {
+        Use: JSON.stringify(data, fn, space),
+        Log: console.log(JSON.stringify(data, fn, space))
+      }
+    };
+    JsonSy({}).Log;
+    JsonSy(true).Log;
+    JsonSy("foo").Log;
+    JsonSy([1, "false", false]).Log;
+    JsonSy({ x: 5 }).Log;
+    JsonSy({x: 5, y: 6}).Log;
+
+    JsonSy([new Number(1), new String("false"), new Boolean(false)]).Log;
+    JsonSy({x: undefined, y: Object, z: Symbol("")}).Log;
+    JsonSy([undefined, Object, Symbol("")]).Log;
+    JsonSy({[Symbol("foo")]: "foo"}).Log;
+    JsonSy({[Symbol.for("foo")]: "foo"}, [Symbol.for("foo")]).Log;
+    JsonSy({[Symbol.for("foo")]: "foo"}, function (k, v) {
+      if (typeof k === "symbol"){
+        return "a symbol";
+      }
+    }).Log;
+
+    JsonSy(Object.create(null, { x: { value: 'x', enumerable: false }, y: { value: 'y', enumerable: true } })).Log;
+
+    const replacer = (key, value) => {
+      if ( typeof value === "string" ) {
+        return undefined;
+      }
+      return value;
+    };
+    const foo = {
+      foundation: "Mozilla",
+      model: "box",
+      week: 45,
+      transport: "car",
+      month: 7
+    };
+    JsonSy(foo, replacer).Log;
+    JsonSy(foo, ['week', 'month']).Log;
+
+    JsonSy({ a: 2 }, null, " ").Log;
+    JsonSy({ uno: 1, dos : 2 }, null, '\t').Log;
+
+    var obj = {
+      foo: 'foo',
+      toJSON: ()=> {
+        return 'bar';
+      }
+    };
+    JsonSy(obj).Log;
+    JsonSy({x: obj}).Log;
+  </script>
+</body>
+</html>

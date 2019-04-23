@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body{
+			margin:0;
+			padding:0;
+		}
+		#canvas{
+			background-color: #000;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script>
+		var canvas = document.querySelector('#canvas');
+		var w = canvas.width = window.innerWidth;
+		var h = canvas.height = window.innerHeight;
+		var cxt = canvas.getContext('2d');
+		var nums = 2;//生成个数
+		var Obj = [];//保存属性
+		var colors=['red','blue','green','yellow'];//颜色设置
+		canvas.onmousemove = function(ev){
+			var x = ev.clientX;
+			var y = ev.clientY;
+			for(var i=0;i<nums;i++){
+				var o = {
+					x:Math.random()*30+x,
+					y:Math.random()*30+y,
+					r:Math.round(Math.random()*20+1),
+					color:colors[Math.floor(Math.random()*colors.length)],
+					vx:Math.random()*3-3,
+					vy:Math.random()*3-3
+				}
+				Obj.push(o);
+				if(Obj.length >= 300){
+					Obj.shift();
+				}//考虑到性能，维持在300个
+			 circle(cxt,Obj[i].x,Obj[i].y,Obj[i].r,Obj[i].color)
+			}
+		};//获取随机圆的属性
+		function circle(cxt,x,y,r,color){
+			cxt.save();
+			cxt.beginPath();
+			cxt.arc(x,y,r,0,2*Math.PI)
+			cxt.fillStyle = color;
+			cxt.fill();
+			cxt.restore();
+		};//绘制圆
+		!function animate(){
+			cxt.clearRect(0,0,w,h);
+			for(var i=0;i<Obj.length;i++){
+				Obj[i].x += Obj[i].vx;
+				Obj[i].y += Obj[i].vy;
+				if(Obj[i].x>w||Obj[i].x<0){
+					Obj[i].vx = -Obj[i].vx;
+				}else if(Obj[i].y>h||Obj[i].y<0){
+					Obj[i].vy = -Obj[i].vy;
+				}//边缘检测
+
+				 circle(cxt,Obj[i].x,Obj[i].y,Obj[i].r,Obj[i].color)
+
+				}
+
+
+			window.requestAnimationFrame(animate);
+		}();//重复绘制 == 动画
+	</script>
+</body>
+</html>

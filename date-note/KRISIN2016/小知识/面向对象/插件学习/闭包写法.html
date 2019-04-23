@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body id="a">
+	<script>
+		var plugin = (function(){
+			function _fun(str){
+				console.log(str);
+			};
+			function _win(str = "hello world"/* ES6 */){
+				console.log(str);
+			}
+			return {
+				fun: _fun,
+				win: _win
+			};
+		})();
+		plugin.fun("Hello ! I am firstFunc");
+		plugin.win();
+
+		(function(){
+			var _config = {
+				a: "a",
+				b: "b",
+				c: "c"
+			}
+			var _control = {
+				firstFunc: function(str){
+					console.log(str+=_config.a);
+					return this;
+				},
+				secondFunc: function(){
+					console.log(_config);
+					return this;
+				}
+			};
+			this.config = _control;
+		})();
+		config.firstFunc("a");
+
+		var Fun = (function(){
+			var _bind = function(obj){
+				obj.listener.addEventListener(obj.event, function(){
+					obj.render();
+				});
+			}
+			var Done = function(config){};
+			Done.prototype.init = function(config){
+				this.listener = document.getElementById(config.id) || window ;
+				this.event = config.event || "click" ;
+				this.say = config.say || "hello world";
+				_bind(this);
+				return this;
+			}
+			Done.prototype.render = function(){
+				console.log(this.say);
+			}
+			return Done;
+		})();
+		var dom = function(control,eventlistener,say){
+			return new Fun().init({id: "control",event: eventlistener,say: say});
+		}
+		dom("a","click","hello kris");
+	</script>
+</body>
+</html>

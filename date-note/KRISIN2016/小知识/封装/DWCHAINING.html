@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+	<style>
+		#a {
+			width: 400px;
+			height: 400px;
+			border: 1px solid;
+			color: red;
+			display: none;
+		}
+		.a {
+
+		}
+		.b {
+
+		}
+		.c {
+
+		}
+	</style>
+</head>
+	<body>
+		<div id="a">111</div>
+		<div id="b">111</div>
+		<div id="c">111</div>
+		<script>
+			window.kris = function(id){
+					return new _kris(id);
+			}
+			function _kris(id){
+				if( id === document || id === window ) {
+					this.elements = document;
+				};
+				if( id.indexOf(".") === -1 && id.indexOf("#") === -1 && id.indexOf(" ") === -1 && id.indexOf(">") !== -1 ){
+					this.elements = document.getElementsByTagName(id)[0];
+				};
+				if(((id.indexOf(".") !== -1  ) && id.indexOf(" ") !== -1 ) || (id.indexOf(">") !== -1 || ((id.indexOf("#") !== -1  ) && id.indexOf(" ") !== -1 ) || (id.indexOf(">") !== -1 )) || document.querySelectorAll(id).length > 1 ){
+					this.elements = document.querySelectorAll(id);
+				};
+				this.elements = document.querySelector(id);
+			}
+			_kris.prototype = {
+				constructor:_kris,
+				hide:function(){
+						this.elements.style.display = "none";
+						return this;
+				},
+				show:function(){
+						this.elements.style.display = "block";
+						return this;
+				},
+				getStyle:function(attr){
+					if(this.elements.currentStyle){
+						console.log(this.elements.currentStyle[attr]);
+					}else{
+						console.log(getComputedStyle(this.elements,false)[attr]);
+					};
+					return this;
+				},
+				addClass:function(className){
+					if(this.elements.classList){
+						DOMTokenList.prototype.adds = function(tokens) {
+							 tokens.split(" ").forEach(function(token) {
+									 this.add(token);
+							 }.bind(this));
+							 return this;
+						};
+						this.elements.classList.adds(className).toString();
+					}else{
+						this.elements.className += ' ' + className;
+					};
+					return this;
+				},
+				removeClass:function(className){
+					if(this.elements.classList){
+						DOMTokenList.prototype.removes = function(tokens) {
+							 tokens.split(" ").forEach(function(token) {
+									 this.remove(token);
+							 }.bind(this));
+							 return this;
+						};
+						this.elements.classList.removes(className).toString();
+					}else{
+						this.elements.className = this.elements.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+					};
+					return this;
+				},
+				on:function(type,ev){
+					this.elements?this.elements:window;
+					if(this.elements.addEventListener){
+						this.elements.addEventListener(type,ev,false);
+					}else if(this.elements.attachEvent){
+						this.elements.attachEvent('on'+type,ev);
+					}
+					return this;
+				},
+				remove:function(type,ev){
+					this.elements?this.elements:window;
+					if(this.elements.removeEventListener){
+						this.elements.removeEventListener(type,ev,false);
+					}else if(this.elements.attachEvent){
+						this.elements.detachEvent('on'+type,ev);
+					}
+					return this;
+				},
+				siblings:function(fn) {
+					var aTmp = [], oParent = this.elements.parentElement || this.elements.parentNode, i;
+					for(i = 0; i < oParent.children.length; i++) {
+						this.elements != oParent.children[i] && aTmp.push(oParent.children[i]);
+					}
+					fn && aTmp.forEach(fn);
+					return this;
+				},
+				offset:function(){
+					var scrollTop = this.elements.getBoundingClientRect().top+document.body.scrollTop+document.documentElement.scrollTop;
+					var scrollLeft = this.elements.getBoundingClientRect().left+document.body.scrollLeft+document.documentElement.scrollLeft;
+					return {
+						top: scrollTop,
+						left: scrollLeft
+					};
+				}
+			}
+			kris('#a').show().getStyle('color').on("click",myFunction).remove("click",myFunction).addClass('a c').removeClass('a').siblings(function(e){
+				e.style.background = "#FF0";
+			});
+			function myFunction() {
+				console.log("hello world");
+			};
+			console.log(kris('#a').offset().top);
+			console.log(kris('#a').siblings().offset().top);
+		</script>
+	</body>
+</html>

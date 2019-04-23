@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+
+.content{ 
+    background-color:#ccc;
+	padding:2em 4em;
+	margin-bottom:2em;
+	border-top:0.0625em solid #333;
+	border-bottom:0.0625em solid #333;
+}
+.post-inline{
+	    position:relative;
+		display:inline-block;
+		margin-top:1.875em;
+		margin-right:3.75em;
+		margin-bottom:0.9375em;
+	}
+.post1{
+	   width:6.25em;
+	   height:6.25em;
+	}
+.post1 span{ 
+       width:100%;
+	   position:absolute;
+	   bottom:-3.332em;
+	   font-size:0.75em;
+	   text-align:center;
+	   color:#333;
+}
+.post2{
+	   overflow:hidden;
+	   border:0.135em solid #333;
+	   width:100%;
+	   height:100%;
+	}
+.post2 .post-line{
+	   width:100%;
+	   height:0.135em;
+	   position:absolute;
+	   background-color:#333;
+	}
+.post2 .post-line-vertical{
+	   width:0.135em;
+	   height:100%;
+	   position:absolute;
+	   background-color:#333;
+	}
+.post-circle{
+	   will-change:transform;
+	   -webkit-animation:xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);
+	   animation:xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);
+	   position:absolute;
+	   bottom:-10px;
+	   left:-10px;
+	}
+.post-circle:after{
+	   content:'';
+	   display:block;
+	   width:20px;
+	   height:20px;
+	   border-radius:20px;
+	   background-color:#F9F;
+	   will-change:transform;
+	   -webkit-animation:yAxis 2.5s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
+	   animation:yAxis 2.5s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
+}
+@keyframes yAxis{
+	50%{
+	    -webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);
+		animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);
+		-webkit-transform:translateY(-100px);
+		transform:translateY(-100px);
+		}
+	}
+ @-webkit-keyframes yAxis{
+	   50%{
+		     -webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);
+		     animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);
+		     -webkit-transform:translateY(-100px);
+		     transform:translateY(-100px);
+		   }
+	}
+@keyframes xAxis{
+	     50%{
+			 -webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);
+			 animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);
+			 -webkit-transform:translateX(100px);
+			 transform:translateX(100px);
+			 }
+	}
+@-webkit-keyframes xAxis{
+	    50%{
+			  -webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);
+			  animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);
+			  -webkit-transform:translateX(100px);
+			  transform:translateX(100px);
+			}
+	}
+	
+

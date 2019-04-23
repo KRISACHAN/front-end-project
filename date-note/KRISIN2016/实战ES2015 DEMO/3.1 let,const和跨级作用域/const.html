@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	(function(){
+		try{
+			const PI = 3.1415926;
+			PI = 3.14;
+		}
+		catch(err){
+			console.log(err);
+		}
+	})();
+
+	const foo = {
+		a: 1
+	};
+	foo.a = 2;
+	foo.b = 3;
+	console.log("foo.a: "+foo.a+",foo.b:"+foo.b);
+
+	/*  即便是使用const定义的对象常量，其内容依然可以通过修改属性值而被修改！  */
+
+	/*  依赖ES5  */
+	const obj1 = {};
+	obj1.a = 1;
+	console.log(obj1);
+	Object.freeze(obj1);
+	obj1.a = 2;
+	console.log(obj1);
+
+	/*  深冻结实现  */
+	Object.deepFreeze = function(obj){
+		var propNames = Object.getOwnPropertyNames(obj);
+		propNames.forEach(function(name){
+			var prop = obj[name];
+			if(typeof prop == 'Object' && prop !== null){
+				Object.deepFreeze(prop);
+			};
+		});
+		return Object.freeze(obj);
+	}
+
+	(function(){
+		try{
+			const obj3 = deepFreeze({
+				a: {
+					b: 1
+				}
+			});
+			obj3.a.c = 2;
+		}
+		catch(err){
+			console.log(err);
+		}
+	})();
+	</script>
+</body>
+</html>

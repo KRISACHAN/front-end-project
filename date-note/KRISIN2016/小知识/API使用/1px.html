@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.one-px li{
+			position: relative;
+			margin-bottom: 20px;
+			border: none;
+			list-style-type: none;
+		}
+		.one-px li:after{
+			content: '';
+			font-size: 25px;
+			position: absolute;
+			left: 0;
+			border: 1px solid #000;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			width: 200px;
+			height: 40px;
+			-webkit-transform: scale(0.5);
+			transform: scale(0.5);
+			-webkit-transform-origin: left top;
+			transform-origin: left top;
+		}
+	</style>
+	<title>
+	</title>
+</head>
+<body>
+	<ul class="one-px">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<script>
+	</script>
+</body>
+</html>

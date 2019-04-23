@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		'use strict'
+		function breakfast (dessert = 'cake', drink = 'tea') {
+			return `${dessert} ${drink}`;
+		}
+		console.log(
+			breakfast()+","+breakfast("蛋糕","茶")
+		)
+
+		let istest = (height = '400px', width = '600px') => {
+			return `高度是：${height}, 宽度是：${width}`
+		}
+		console.log(istest('600px','200px'));
+		/*
+			'use strict';
+
+			var istest = function istest() {
+				var height = arguments.length <= 0 || arguments[0] === undefined ? '400px' : arguments[0];
+				var width = arguments.length <= 1 || arguments[1] === undefined ? '600px' : arguments[1];
+
+				return '高度是：' + height + ', 宽度是：' + width;
+			};
+			console.log(istest('600px', '200px'));
+		*/
+	</script>
+</body>
+</html>

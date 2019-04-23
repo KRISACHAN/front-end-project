@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+		*{padding:0;margin:0;}
+		a{text-decoration:none;}
+		li{list-style:none;}
+		.f-pr{position:relative;}
+		.f-pa{position:absolute;}
+		.clock{width:200px;height:200px;margin:100px auto 0;border-radius:50%;}
+		.clock .c-circle{display:inline-block;width:10px;height:10px;background:#000;border-radius:50%;top:95px;left:95px;}
+		.clock .c-hour{width:4px;height:40px;background:lime;left:98px;top:60px;border-radius:5px;box-shadow:0 0 4px #555;transform-origin:bottom;}
+		.clock .c-min{width:2px;height:60px;background:orange;left:98px;top:40px;border-radius:5px;box-shadow:0 0 4px #555;transform-origin:bottom;}
+		.clock .c-sec{width:1px;height:80px;background:red;left:98px;top:20px;border-radius:5px;box-shadow:0 0 4px #555;transform-origin:bottom;}
+		
+		.clock .kedu li{width:1px;height:10px;background:#000;position:absolute;left:98px;top:0px;
+			transform:rotate(6deg);transform-origin:center 100px;
+		}
+		.clock .kedu li:nth-child(5n+1){height:20px;}
+  </style>
+ </head>
+ <body>
+	<div class="clock f-pr">
+		<span class="kedu" id="kedu">
+			<ul>
+			</ul>
+		</span>
+		<span class="c-circle f-pa"></span>
+		<span class="c-hour f-pa" id="c-hour"></span>
+		<span class="c-min f-pa" id="c-min"></span>
+		<span class="c-sec f-pa" id="c-sec"></span>
+	</div>
+	<script>
+		var chuhan_clock ={
+			createKedu:function(){
+				var ulDom =dom("kedu").children[0];
+				for(var i=0;i<60;i++){
+					ulDom.innerHTML +='<li style="transform:rotate('+i*6+'deg)"></li>';
+				}
+			},
+			createTime:function(){
+				var date =new Date();
+				var sec =date.getSeconds();
+				var min =date.getMinutes()+sec/60;
+				var hour =date.getHours()+min/60;
+				
+				var secDom =dom("c-sec");
+				var minDom =dom("c-min");
+				var hourDom =dom("c-hour");
+				secDom.style.transform ="rotate("+sec*6+"deg)";
+				minDom.style.transform ="rotate("+min*6+"deg)";
+				hourDom.style.transform ="rotate("+hour*30+"deg)";
+
+			}
+		}
+		function dom(id){
+			return document.getElementById(id);
+		}
+		
+		
+		chuhan_clock.createKedu();
+		chuhan_clock.createTime();
+		setInterval(chuhan_clock.createTime,1000);
+	</script>
+ </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>content</title>
+	<style>
+		body {counter-reset:section;}
+		div:after {
+			content: attr(data-test);
+		}
+		p:after {
+			content: '呵呵';
+		}
+		a {counter-reset:subsection;}
+		a:after { counter-increment:section; content:"Section " counter(section) ". "; }
+	</style>
+</head>
+<body>
+	<h1>官人，你要不要点击一下页面嘛~~~~~~~~</h1>
+	<div id="div" data-test="0"></div>
+	<p></p>
+	<a></a>
+	<script>
+		if(!!Array.from([1,2,3])){
+			const div = document.querySelector('#div');
+			const getStyle = document.createElement('style');
+			const json = ["我","是","大","帅","哥","呦"];
+			document.addEventListener("click",() => {
+				let a = document.createElement('a');
+				getStyle.innerText = `p:after{content:'呵呵,${json[div.dataset.test]}'}`;
+				div.dataset.test++;
+				if( div.dataset.test >= json.length ){
+					div.dataset.test = 0;
+				}
+				document.body.appendChild(getStyle);
+				document.body.appendChild(a);
+			},false);
+		}else{
+			alert("ES6都不支持，赶紧换浏览器！");
+			window.location.href="http://browsehappy.com";
+		}
+	</script>
+</body>
+</html>

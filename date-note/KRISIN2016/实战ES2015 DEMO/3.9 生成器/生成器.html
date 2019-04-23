@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 斐波那契数列
+		const fibonacci = [ 0, 1 ];
+		const n = 10;
+		for ( let i = 2; i < n - 1; ++i ) {
+			fibonacci.push(fibonacci[ i - 1 ] + fibonacci[ i - 2 ])
+		};
+		console.log(fibonacci);
+
+		function* fibo() {
+			let a = 0
+			let b = 1
+
+			yield a
+			yield b
+
+			while (true) {
+				let next = a + b
+				a = b
+				b = next
+				yield next
+			}
+		}
+
+		let generator  = fibo();
+		for(let i = 0; i < 10; i++){
+			console.log(generator.next().value);
+		};
+
+		function* genFn() {
+			let a = 2
+			yield a
+			while (true) {
+				yield a = a / (2 * a + 1)
+			}
+		}
+
+		const gen = genFn();
+		for(let k = 0; k<10; k++){
+			console.log(gen.next().value);
+		};
+
+		/*
+		class Generator {
+			next(value) //获取下一个生成器切出状态
+			throw(error) //抛出一个错误，终止运行
+			[@@iterator]() //为生成器提供实现可迭送对象的方法。可用for...of
+		};
+		*/
+
+		for (const a of gen) {
+			if ( a < 1/100 ) break
+			console.log(a);
+		};
+	</script>
+</body>
+</html>

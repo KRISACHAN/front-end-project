@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		'use strict';
+		class Chef {
+			constructor(food) {
+				this.food = food;
+			}
+			cook() {
+				console.log(this.food);
+			}
+		}
+
+		let wanghao = new Chef('apple');
+		wanghao.cook();
+
+		class Move {
+			constructor(num) {
+				this.num = num;
+			}
+			run() {
+				return ++this.num;
+			}
+		}
+
+		class Run extends Move {
+			constructor(num) {
+				super(num);
+			}
+			go() {
+				super.run();
+				console.log(this.num);
+			}
+		}
+		var swimming = new Run(44);
+		swimming.go();
+		swimming.go();
+		swimming.go();
+	</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Document</title>
+</head>
+	<body>
+		<script>
+			var obj = { a: "1" };
+			// 使用 __proto__
+			Object.defineProperty(obj,"key",{
+				__proto__: null, // 把继承的属性指向null
+				value: "static" // 没有enumerable configurable writable 作为默认值
+			});
+			console.log(obj);// Object {a: "1", key: "static"}
+
+			var obj2 = { b: "2" };
+			// 显式修改
+			Object.defineProperty(obj2,"key",{
+				enumerable: false,
+				configurable: false,
+				writable: false,
+				value: "static"
+			});
+			console.log(obj2);// Object {b: "2", key: "static"}
+
+			var obj3 = {  };
+			var obj4 = {  };
+			Object.defineProperty(obj3,"key",{
+				enumerable: false,
+				configurable: false,
+				writable: false,
+				value: "static"
+			});
+			// 循环使用同一对象
+			function withValue(value) {
+				var n = withValue.n || (
+					withValue.n = {
+						enumerable: false,
+						writable: false,
+						configurable: false,
+						value: null
+					}
+				);
+				n.value = value;
+				return n;
+			};
+			console.log(withValue(obj3));// Object {enumerable: false, writable: false, configurable: false, value: Object}
+
+			Object.defineProperty(obj4, "key", withValue("static"));
+
+			console.log(obj4);// Object {key: "static"}
+
+			// 如果 freeze 可用, 防止代码添加或删除对象原型的属性
+			// （value, get, set, enumerable, writable, configurable）
+			(Object.freeze||Object)(Object.prototype);
+
+			var obj5 = {};
+			Object.defineProperty(obj5,"a",{value : 37,writable : true,enumerable : true,configurable : true});
+			console.log(obj5.a);// 37
+
+			var obj6 = {};
+			var bValue;
+			Object.defineProperty(obj6, "b", {get : function(){ return bValue; },
+															 set : function(newValue){ bValue = newValue; },
+															 enumerable : true,
+															 configurable : true});
+			obj6.b = 38;
+			console.log(obj6.b);// 38
+
+			//如果不用Object.defineProperty创建，直接obj6.b = 38 所得出来的结果只是赋值而不是赋属性。
+
+			//数据描述符和存取描述符不能混合使用
+			/*var obj7 = {};
+			Object.defineProperty(obj7, "conflict", { value: 0x9f91102,
+																			 get: function() { return 0xdeadbeef; } });
+			console.log(obj7);*/
+
+			var obj8 = {};
+			Object.defineProperty(obj8,"a",{ value : 37, writable : false });
+			console.log(obj8.a); // 37
+			obj8.a = 25; // 没有错误抛出（在严格模式下会抛出，即使之前已经有相同的值
+			console.log(obj8.a); //37， 赋值不起作用。
+
+			var obj9 = {};
+			Object.defineProperty(obj9,"a",{ value : 1, enumerable : true });
+			Object.defineProperty(obj9,"b",{ value : 2, enumerable : false });
+			Object.defineProperty(obj9,"c",{ value : 3});// enumerable: false
+			obj9.d = 4;//enumerable: true
+			for (var i in obj9) {
+				console.log(i);
+			}// a d
+
+			var wo9 = Object.keys(obj9);
+			console.log(wo9);//["a","d"];
+
+			/*var obj10 = {};
+			Object.defineProperty(obj10, "a",{ get : function(){ return 1; }, configurable : false });
+			// throws a TypeError
+			Object.defineProperty(obj10, "a", {configurable : true});
+			// throws a TypeError
+			Object.defineProperty(obj10, "a", {enumerable : true});
+			// throws a TypeError (set was undefined previously)
+			Object.defineProperty(obj10, "a", {set : function(){}});
+			// throws a TypeError (even though the new get does exactly the same thing)
+			Object.defineProperty(obj10, "a", {get : function(){return 1;}});
+			// throws a TypeError
+			Object.defineProperty(obj10, "a", {value : 12});
+
+			console.log(obj10.a); // logs 1
+			delete obj10.a; // Nothing happens
+			console.log(obj10.a); // logs 1
+
+			//如果 o.a 的 configurable 特性已经为 true，没有错误会被抛出，并且属性会在最后被删除。*/
+
+			var obj11 = {};
+			obj11.a = 1;
+			console.log(obj11.a);
+			//等同于
+			Object.defineProperty(obj11, "b", {
+				value : 1,
+				writable : true,
+				configurable : true,
+				enumerable : true
+			});
+			console.log(obj11.b);
+			console.log(obj11.b === obj11.a);//true
+
+			//另一方面
+			Object.defineProperty(obj11, "c", { value : 1 });
+			console.log(obj11.c);
+
+
+			//等同于
+			Object.defineProperty(obj11, "d", {
+				value : 1,
+				writable : false,
+				configurable : false,
+				enumerable : false
+			});
+			console.log(obj11.d);
+			console.log(obj11.d === obj11.c);//true
+
+			function Archiver() {
+				var temperature = null;
+				var archive = [];
+
+				Object.defineProperty(this, 'temperature', {
+					get: function() {
+						console.log('get!');
+						return temperature;
+					},
+					set: function(value) {
+						temperature = value;
+						archive.push({ val: temperature });
+					}
+				});
+
+				this.getArchive = function() { return archive; };
+			}
+
+			var arc = new Archiver();
+			arc.temperature; // 'get!'
+			arc.temperature = 11;
+			arc.temperature = 13;
+			arc.getArchive(); // [{ val: 11 }, { val: 13 }]
+
+			function Save(){
+				var change = {};
+				var keep = [];
+				Object.defineProperty(this, 'change', {
+					get: function() {
+						console.log(change + "yo !");
+						return change;
+					},
+					set: function(value) {
+						change = value;
+						keep.push({ change });
+					}
+				});
+				this.getChange = function() {
+					return keep;
+				};
+			};
+			var user = new Save();
+			user.change;
+			console.log(user.change);
+			user.change = "kris";
+			user.change = "jade";
+			user.getChange();
+			console.log(user.getChange());
+
+			var pattern = {
+					get: function () {
+							return 'I alway return this string,whatever you have assigned';
+					},
+					set: function () {
+							this.myname = 'this is my name string';
+					}
+			};
+
+
+			function TestDefineSetAndGet() {
+					Object.defineProperty(this, 'myproperty', pattern);
+			}
+
+
+			var instance = new TestDefineSetAndGet();
+			instance.myproperty = 'test';
+
+			// 'I alway return this string,whatever you have assigned'
+			console.log(instance.myproperty);
+			// 'this is my name string'
+			console.log(instance.myname);
+
+			var person = {
+				get: function(){
+					return "好累啊~~~";
+				},
+				set: function(){
+					this.say = "好困啊~~~";
+				}
+			};
+
+			function Mingminghaofana(){
+				Object.defineProperty(this, 'shuo', person);
+			}
+
+			var dingyi = new Mingminghaofana();
+			dingyi.shuo = "快写完惹~~~";
+
+			console.log(dingyi.shuo);// 没有变成"快写完惹~~~";
+			console.log(dingyi.say);// 好困啊~~~
+		</script>
+	</body>
+</html>

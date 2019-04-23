@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body id="bb">
+	<script>
+		//使用对象作为返回载体
+		//Syntax: { arg1, arg2 } = { arg1: value1, arg2: value2 }
+		window.state = 11;
+		function getState() {
+			return {
+				error: null,
+				logined: true,
+				user: {
+					id: this.state
+				}
+			}
+		}
+		const { error, logined, user} = getState("99");
+		console.log(user);
+
+		//使用数组作为返回载体
+		//Syntax: [ arg1, arg2 ] = [ value1, value2 ];
+		const [ foo, bar ] = [ 1, 2 ];
+		console.log(foo, bar);
+
+		//Syntax: [ arg1, , arg2 ] = [ value1, , value2 ];
+		const [ a, b, ...rest ] = [ 1, 2, 3, 4, 5 ];
+		console.log(a, b);
+		console.log(rest);
+	</script>
+</body>
+</html>

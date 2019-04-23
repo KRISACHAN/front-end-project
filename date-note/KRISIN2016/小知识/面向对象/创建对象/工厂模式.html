@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		function Factory(tool,material,worker){
+			var o = {};
+			o.tool = tool;
+			o.material = material;
+			o.worker = worker;
+			o.Make = function() {
+				console.log(this.tool);
+			};
+			return o;
+		};
+		var Product1 = Factory("锤子","棉花","小明");
+		var Product2 = Factory("剪刀","石头","阿布");
+		console.log(Product1);
+		console.log(Product2);
+	</script>
+</body>
+</html>

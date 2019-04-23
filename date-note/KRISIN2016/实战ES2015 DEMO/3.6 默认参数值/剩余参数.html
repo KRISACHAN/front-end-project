@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//'use strict';
+		//ES5
+		function fn0() {
+			var args = [].slice.call(arguments);
+			console.log(args);
+			console.log(args.filter(function(i){
+				return i % 2 == 0
+			}));
+		};
+		fn0(1,2,3,4,5);
+
+		//ES6 Array.from
+		//The Array.from() method creates a new Array instance from an array-like or iterable object.
+		//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+		function fn1(){
+			console.log(Array.from(arguments));
+		};
+		fn1(1,2,3,4,5);
+
+		//ES6 Syntax: function fn([arg, ]...restArgs) {}
+		function fn2(foo, ...rest) {
+			console.log(`foo: ${foo}`);
+			console.log(`Rest Arguments: ${rest.join(',')}`);
+		};
+		fn2(1,2,3,4,5);
+
+		//使用场景
+		function merge(target = {}, ...objs) {
+			for (const obj of objs) {
+				const keys = Object.keys(obj);
+				for(const key of keys) {
+					target[key] = obj[key];
+				};
+			};
+			return target;
+		};
+		console.log(merge({a: 1},{b: 2},{c: 3}));//Object {a: 1, b: 2, c: 3}
+
+		//error
+		//Rest parameter must be last formal parameter
+		//function isError(...rest, foo){};
+
+		//解构传参
+		//ES5实现
+		//Function.prototype.apply - Syntax: fn.apply(context, [ arg1, arg2 ]);
+		//Function.prototype.call - Syntax: fn.call(context, [ arg1, arg2 ]);
+		//Function.prototype.bind - Syntax: fn.bind(context, [ arg1, arg2 ]);
+
+		function fn(args){ return args };
+		var o = { f: 'b' };
+		console.log(o);
+
+		var isApply= fn.apply(o,[o.f]);
+		console.log(isApply);
+
+		var isCall = fn.call(o,[o.f]);
+		console.log(isCall);
+
+		//ES6实现 Syntax: fn(...[arg1, arg2]);
+		function sum(...num){
+			return num.reduce((a,b)=>a+b);
+		};
+		let issum = sum.apply(null, [1,2,3]);
+		console.log(issum);
+		console.log(sum(...[1,2,3]));
+	</script>
+</body>
+</html>

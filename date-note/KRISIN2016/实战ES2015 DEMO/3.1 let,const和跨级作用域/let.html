@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button style="padding: 10px 40px;" class="button">A</button>
+	<button style="padding: 10px 40px;" class="button">B</button>
+	<button style="padding: 10px 40px;" class="button">C</button>
+	<button style="padding: 10px 40px;" class="button">D</button>
+	<div style="width: 400px;height: 300px;border: 1px solid;margin-top: 100px;">
+		<p style="font-size: 40px;" id="output">A</p>
+	</div>
+	<script>
+		var btns = document.querySelectorAll(".button");
+		var output = document.querySelector("#output");
+		for(/*var*/let i = 0; i<btns.length; ++i){
+			btns[i].addEventListener('click',function(ev){
+				output.innerText = btns[i].innerText;
+			},false);
+		};
+
+		/*  if var ; return error  */
+
+		var array = [1,2,3,4,5];
+		var sum = 0;
+		for (var i = 0, len = array.length; i<len; ++i) {
+			sum += array[i];
+		};
+		console.log(sum);
+
+		/*  循环体不仅有逻辑代码，还包含了实现循环自身的执行判断和循环处理  */
+
+		'use strict';
+		var _loop = function (i) {
+			btns[i].addEventListener('click', function (ev) {
+				output.innerText = btns[i].innerText;
+			}, false);
+		};
+		for ( /*var*/var i = 0; i < btns.length; ++i) {
+			_loop(i);
+		};
+
+		/*  compile by babel  */
+
+		/*  let  */
+	</script>
+</body>
+</html>

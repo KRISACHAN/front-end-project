@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	'use strict';
+	let chef = function* (foods){
+		//yield 'apple';
+		//yield 'bananan';
+		for(var i = 0; i<foods.length; i++){
+			yield foods[i];
+		}
+	}
+	let wanghao = chef(['apple','bananan']);
+	console.log(wanghao.next());
+	console.log(wanghao.next());
+	console.log(wanghao.next());
+	</script>
+</body>
+</html>

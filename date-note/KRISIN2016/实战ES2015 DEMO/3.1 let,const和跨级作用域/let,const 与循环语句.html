@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	const arr = [1,2,3];
+	/* for of */
+	for(const item of arr){
+		console.log(item);
+	};
+	console.log("--------分隔符-------");
+	/* for */
+	for(let i = 0; i < arr.length; i++){
+		console.log(arr[i]);
+	};
+	console.log("--------分隔符-------");
+	/* for in */
+	for(const num in arr){
+		console.log(num);
+	};
+	console.log("--------分隔符-------");
+	/* forEach */
+	arr.forEach(function(item,index){
+		console.log(arr[index]);
+	});
+	console.log("--------分隔符-------");
+
+	const Zootopia = [
+		{ name: 'Nick', gender: 1, species: 'Fox' },
+		{ name: 'Judy', gender: 0, species: 'Bunny' }
+	];
+
+	/* for of */
+	for (const { name, species } of Zootopia) {
+		console.log(`Hi, I am ${name}, and I am a ${species}`);
+	};
+	console.log("--------分隔符-------");
+
+	/* for in */
+	for (const { name, species } in Zootopia) {
+		console.log(`Hi, I am ${name}, and I am a ${species}`);//Hi, I am undefined, and I am a undefined * 2;
+	};
+
+	/* 浏览器兼容还不好 */
+	const arr1 = ["a", "b", "c"];
+	const eArr = arr1.entries();// [[0,"a"],[1,"b"],[2,"c"]];
+	console.table (eArr);
+
+	for(const [index, {name, species}] of Zootopia.entries()){
+		console.log(`${index} . Hi, I am ${name}, and I am a ${species}`);
+	}
+	</script>
+</body>
+</html>

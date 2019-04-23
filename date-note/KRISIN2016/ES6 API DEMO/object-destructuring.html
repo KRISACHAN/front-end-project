@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		'use strict';
+		function breakfast() {
+			return {dessert:'cake',drink:'tea',fruit:'apple'};
+		}
+
+		let { dessert: dessert, drink: drink, fruit: fruit } = breakfast();
+		console.log(dessert, drink, fruit);
+	</script>
+</body>
+</html>

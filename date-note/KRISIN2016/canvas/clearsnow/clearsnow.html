@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>index</title>
+	<style>
+		body , canvas {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			text-align: center;
+			margin: 0 auto;
+			padding-top: 20isX;
+		}
+		canvas {
+			background: url(background.jpg) 100% 100% no-repeat;
+			background-size: cover;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="clear" width="800" height="600" style="border:1px solid">你看不到我，看不到我</canvas>
+	<script>
+		window.onload = function(){
+			var num = 0;
+			var canvas = document.getElementById("clear");
+			var ctx = canvas.getContext("2d");
+			var img = new Image();
+			var imgW = canvas.width;
+			var imgH = canvas.height;
+			var lw = 25;
+			var isTouch = "ontouchstart" in window ? true : false;
+			var StartDraw = isTouch ? "touchstart" : "mousedown",
+				MoveDraw = isTouch ? "touchmove" : "mousemove",
+				EndDraw = isTouch ? "touchend" : "mouseup";
+			img.src = "groundglass.jpg";
+			console.log(img.src);
+			function ImgLoad(){
+				ctx.drawImage(img,0,0,imgW,imgH);
+				ctx.save();
+				ctx.lineCap = "square";
+				ctx.lineWidth = lw;
+				ctx.globalCompositeOperation = "destination-out";
+				canvas.addEventListener(StartDraw, function(ev){
+					var isX = isTouch ? ev.targetTouches[0].pageX : ev.pageX;
+					var isY = isTouch ? ev.targetTouches[0].pageY : ev.pageY;
+					var x = isX - canvas.offsetLeft;
+					var y = isY - canvas.offsetTop;
+					ctx.beginPath();
+					ctx.moveTo(x, y);
+					function StartMove(ev){
+						var isX1 = isTouch ? ev.targetTouches[0].pageX : ev.pageX;
+						var isY1 = isTouch ? ev.targetTouches[0].pageY : ev.pageY;
+						var x1 = isX1 - canvas.offsetLeft;
+						var y1 = isY1 - canvas.offsetTop;
+						ctx.lineTo(x1, y1);
+						ctx.stroke();
+						ctx.beginPath();
+						ctx.moveTo(x1, y1);
+						num+=1;
+						if(num>=250){
+							ctx.clearRect(0,0,800,800);
+						}
+					};
+					function EndMove(ev){
+						var isX1 = isTouch ? ev.changedTouches[0].pageX : ev.pageX;
+						var isY1 = isTouch ? ev.changedTouches[0].pageY : ev.pageY;
+						var x1 = isX1 - canvas.offsetLeft;
+						var y1 = isY1 - canvas.offsetTop;
+						ctx.lineTo(x1, y1);
+						ctx.stroke();
+						canvas.removeEventListener(MoveDraw, StartMove, false);
+						canvas.removeEventListener(EndDraw, EndMove, false);
+					};
+					canvas.addEventListener(MoveDraw, StartMove, false);
+					canvas.addEventListener(EndDraw, EndMove, false);
+					ev.preventDefault();
+				}, false);
+			}
+			img.onload = ImgLoad;
+		}
+	</script>
+</body>
+</html>

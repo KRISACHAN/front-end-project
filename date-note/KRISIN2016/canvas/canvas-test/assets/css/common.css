@@ -1,0 +1,20 @@
+/* Write your styles */
+html,body,div,h1,span,canvas {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+#imgDiv {
+	position: absolute;
+	left: 250px;
+	top: 0;
+}
+#img {
+	width: 300px;
+	height: 300px;
+}
+#show {
+	position: absolute;
+	left: 250px;
+	top: 310px;
+}

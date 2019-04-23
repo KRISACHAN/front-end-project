@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body { font-size: 20px; }
+		label { position: relative; cursor: pointer; }
+		.box1 { height: 2em; overflow: hidden; width: 10em; margin-bottom: .5em; line-height: 1em; border: 1px solid #000; }
+		#more:target { height: auto; }
+		.detail_ctrl a { display: inline; }
+		.detail_ctrl a + a { display: none; }
+		#more:target + .detail_ctrl a { display: none; }
+		#more:target + .detail_ctrl a + a { display: inline; }
+		.box2 { height: 2em; overflow: hidden; width: 10em; margin-bottom: .5em; line-height: 1em; border: 1px solid #000; }
+		#more_c:checked + .box2 { height: auto; }
+		#more_c:checked ~ label[for="more_c"]:after { content: "闭合"; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #fff; z-index: 2; }
+		#more_c { position: absolute; z-index: -1; opacity: 0; filter: alpha(opacity=0); }
+	</style>
+</head>
+<body>
+	<div class="box1" id="more">
+		<p>通过锚点的特性来展示更多的内容部分。通过锚点的特性来展示更多的内容部分。通过锚点的特性来展示更多的内容部分。</p>
+	</div>
+	<div class="detail_ctrl">
+		<a href="#more">更多</a>
+		<a href="#">缩小</a>
+	</div>
+	<input type="checkbox" id="more_c">
+	<div class="box2">
+		<p>通过 input 的复选框以及 ~ 选择符的方式来控制元素内容的显示，从而展示更多的内容部分。</p>
+	</div>
+	<label for="more_c">更多</label>
+	<script>
+	</script>
+</body>
+</html>

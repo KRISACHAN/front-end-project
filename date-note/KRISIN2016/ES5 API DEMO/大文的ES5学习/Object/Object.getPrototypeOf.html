@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var proto = {};
+		var obj = Object.create(proto);
+		console.log(Object.getPrototypeOf(obj) === proto); // true
+		console.log(obj.__proto__ === proto); // true
+	</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var Person = {
+			name: 'allin',
+			age: 18,
+			address: {
+				home: 'home',
+				office: 'office',
+			}
+			sclools: ['x','z'],
+		};
+
+		var programer = {
+			language: 'js',
+		};
+
+		function extend(p, c){
+			var c = c || {};
+			for( var prop in p){
+				c[prop] = p[prop];
+			}
+		}
+		extend(Person, programer);
+		programer.name;  // allin
+		programer.address.home;  // home
+		programer.address.home = 'house';  //house
+		Person.address.home;  // house
+	</script>
+</body>
+</html>

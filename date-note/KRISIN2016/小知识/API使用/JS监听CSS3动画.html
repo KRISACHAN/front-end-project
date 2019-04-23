@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+				content="width=device-width, initial-scale=1">
+	<style>
+		#div{
+			width:200px;
+			height:200px;
+			background:#f60;
+			margin:100px auto;
+			transition: all ease 1s;
+		}
+		.change {
+			animation: transform 1s 2 ease;
+		}
+		#div:hover {
+			width: 400px;
+		}
+		@keyframes transform {
+			0% { transform: scale(1)}
+			30% { transform: scale(2)}
+			60% { transform: scale(0.5)}
+			100% { transform: scale(1)}
+		}
+	</style>
+	<title>DEMO</title>
+</head>
+<body>
+	<div id="div"></div>
+	<script>
+		var div = document.querySelector('#div');
+		div.addEventListener('click' , function(){
+			this.className = 'change';
+		} , false);
+		div.addEventListener('animationstart' , function(){
+			console.log('动画开始执行');
+		} , false);
+		div.addEventListener('animationend' , function(){
+			console.log('动画执行结束');
+			this.className = '';
+		} , false);
+		div.addEventListener('animationiteration' , function(){
+			console.log('动画再次开始执行');
+			//只有重复动画才会触发
+		} , false);
+		div.addEventListener('transitionend' , function(){
+		  console.log('过度动画结束');
+		} , false);
+	</script>
+</body>
+</html>

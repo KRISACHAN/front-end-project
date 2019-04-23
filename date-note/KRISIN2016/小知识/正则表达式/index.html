@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+<body>
+  <script>
+    //        . : 匹配除换行符以外的任意字符
+    //       \w : 匹配字母或数字或下划线或汉字。
+    //       \s : 匹配任意的空白符
+    //       \d : 匹配数字
+    //       \b : 匹配单词的开始或结束
+    //        ^ : 匹配字符串的开始
+    //        $ : 匹配字符串的结束
+    //        * : 重复零次或更多次
+    //        + : 重复一次或更多次
+    //        ? : 重复零次或一次
+    //      {n} : 重复n次
+    //     {n,} : 重复n次或更多次
+    //    {n,m} : 重复n到m次
+    //       .* : 任意数量的不包含换行的字符
+    //       \n : 换行符
+    // \d{数字} : 表示前面的\d必须重复匹配数字次
+    //        / : 表示分枝条件，类似于||
+    //       () : 表示分组
+    //       \W : 匹配任意不是字母和数字的字符
+    //       \S : 匹配任意不是空白符的字符
+    //       \D : 匹配任意非数字的字符
+    //       \B : 匹配不是单词开头或结束的位置
+    //     [^x] : 匹配除了x以外的任意字符
+    // [^aeiou] : 匹配除了aeiou这几个字母以外的任意字符
+    //      \S+ : 匹配不包含空白符的字符串
+    // <a[^>]+> : 用尖括号括起来的以a开头的字符串
+    //        | : 隔开匹配规则
+    // search() : 用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字
+    //            符串，并返回子串的起始位置。
+    //   test() : 用于检测一个字符串是否匹配某个模式，如果字符串中含有匹配的文本
+    //            ，则返回 true，否则返回 false。
+    //  match() : 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配
+    //            。
+
+    const Reg = (str, method, done) => {
+      const Finish = str[method](done);
+      return {
+        Log: console.log(Finish),
+        Use: Finish
+      }
+    };
+
+    const   str = /\bhi\b/;
+    const  str1 = /\bkris chan\b/;
+    const  str2 = `  hi i am Lucy`;
+    const  str3 = `010-27587852`;
+    const  str4 = /\s/;
+    const  str5 = `我a`;
+    const  str6 = /\ba\w*\b/;
+    const  str7 = `a111a22`;
+    const  str8 = `good good iakris`;
+    const  str9 = /^\d{5,12}$/;
+    const str10 = /\(?0\d{2}[) -]?\d{8}/;
+
+    Reg(str,`test`,`h`).Log;
+    Reg(str1,`test`,`kris chan`).Log;
+    Reg(str2,`search`,/\bhi\b.*\bLucy\b/).Log;
+    Reg(str3,`search`,/0\d\d-\d\d\d\d\d\d\d/).Log;
+    Reg(str3,`match`,/0\d{2}-\d{8}/).Log;
+    Reg(str4,`test`,`   `).Log;
+    Reg(str5,`match`,/\w/g).Log;
+    Reg(str6,`test`,`good a1223`);
+    Reg(str7,`match`,/\d+2/);
+    Reg(str8,`match`,/\b\w{6}\b/);
+    Reg(str9,`test`,12345122);
+    Reg(str10,`test`,`010)12345678`);
+  </script>
+</body>
+</html>

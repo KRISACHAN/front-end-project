@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>canvas时钟</title>
+		<style type="text/css">
+			body{background-color: #000;text-align: center;}
+			#myCanvas{background-color: #7FFFD4;margin: 0 auto;margin-top: 200px;}
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="400" height="400">
+			<span>请使用支持canvas的浏览器浏览</span>
+		</canvas>
+	</body>
+</html>
+<script type="text/javascript">
+	window.onload=function(){
+		var myCanvas=document.getElementById("myCanvas");
+		var Hb=myCanvas.getContext("2d");
+		function toDraw(){
+			var x=200;
+			var y=200;
+			var r=150;
+			Hb.clearRect(0,0,myCanvas.width,myCanvas.height);
+			var oDate=new Date();
+			var oHours=oDate.getHours();
+			var oMin=oDate.getMinutes();
+			var oSen=oDate.getSeconds();
+			var oHoursValue=(-90+oHours*30+oMin/2)*Math.PI/180;
+			var oMinValue=(-90+oMin*6+oSen/10)*Math.PI/180;
+			var oSenValue=(-90+oSen*6)*Math.PI/180;
+			
+//			60个秒刻度
+			Hb.beginPath();
+				for (var i=0;i<60;i++) {
+					Hb.moveTo(x,y);
+					Hb.arc(x,y,r,6*i*Math.PI/180,6*(i+1)*Math.PI/180,false);//弧度=角度*Math.PI/180  false/true 顺时针/逆时针
+				}
+			Hb.closePath();
+			Hb.stroke();
+			
+//			白色圆盘
+			Hb.fillStyle="#7FFFD4";
+			Hb.beginPath();
+				Hb.moveTo(x,y);
+				Hb.arc(x,y,r*19/20,0,360*Math.PI/180,false);//弧度=角度*Math.PI/180  false/true 顺时针/逆时针
+			Hb.closePath();
+			Hb.fill();
+			
+						
+//			12个时刻度
+			Hb.lineWidth="2";
+			Hb.beginPath();
+				for (var i=0;i<12;i++) {
+					Hb.moveTo(x,y);
+					Hb.arc(x,y,r,30*i*Math.PI/180,30*(i+1)*Math.PI/180,false);//弧度=角度*Math.PI/180  false/true 顺时针/逆时针
+				}
+			Hb.closePath();
+			Hb.stroke();
+			
+//			白色圆盘--盖着小时的线
+			Hb.fillStyle="#7FFFD4";
+			Hb.beginPath();
+				Hb.moveTo(x,y);
+				Hb.arc(x,y,r*18/20,0,360*Math.PI/180,false);//弧度=角度*Math.PI/180  false/true 顺时针/逆时针
+			Hb.closePath();
+			Hb.fill();
+			
+//			时针
+			Hb.lineWidth="3";
+			Hb.beginPath();
+				Hb.moveTo(x,y);
+				Hb.arc(x,y,r*12/20,oHoursValue,oHoursValue,false);//弧度=角度*Math.PI/180  false/true 顺时针/逆时针
+			Hb.closePath();
+			Hb.stroke();
+			
+						
+//			分针
+			Hb.lineWidth="2";
+			Hb.beginPath();
+				Hb.moveTo(x,y);
+				Hb.arc(x,y,r*14/20,oMinValue,oMinValue,false);//弧度=角度*Math.PI/180  false/true 顺时针/逆时针
+			Hb.closePath();
+			Hb.stroke();
+			
+//          秒针
+			Hb.lineWidth="1";
+			Hb.beginPath();
+				Hb.moveTo(x,y);
+				Hb.arc(x,y,r*16/20,oSenValue,oSenValue,false);//弧度=角度*Math.PI/180  false/true 顺时针/逆时针
+			Hb.closePath();
+			Hb.stroke();
+			
+		}
+		toDraw();
+		setInterval(toDraw,1000);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+</script>

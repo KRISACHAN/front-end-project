@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+	<style>
+	</style>
+</head>
+	<body>
+		<script>
+			//用到知识点：Array.prototype.shift()
+			//shift() 方法删除数组的 第一个 元素，并返回这个元素。该方法会改变数组的长度。
+			//知识点学习：
+			var shiftforarray = [1,2,3,4,5,6];
+			console.log(shiftforarray.shift());//1
+			console.log(shiftforarray.shift());//2
+			console.log(shiftforarray.shift());//3
+			console.log(shiftforarray);//4,5,6
+			function slasher(arr, howMany) {
+			// it doesn't always pay to be first
+				for(var i = 0;i < howMany;i++){
+					arr.shift();
+				}
+				return arr;
+			}
+			var shifttest = slasher([1, 2, 3], 2);
+			console.log(shifttest);//3
+
+			//Array.prototype.slice()
+			//slice() 方法会浅复制（shallow copy）数组的一部分到一个新的数组，并返回这个新数组。
+			//知识点学习：
+			var sliceforarray = [1,2,3,4,5,6];
+			console.log(sliceforarray.slice(2));//3,4,5,6
+			console.log(sliceforarray.slice(1,4));//2,3,4
+
+			function slasher1(arr, howMany) {
+				// it doesn't always pay to be first
+				var len = arr.length;
+				if(howMany === 0){
+					return arr;
+				}else if(howMany >= len){
+					return arr.slice(len);
+				}else {
+					return arr.slice(howMany-len);
+				}
+			}
+			var slicetest = slasher1([1, 2, 3], 2);
+			console.log(slicetest);//3,4
+
+			//Array.prototype.splice()
+			//splice() 方法用新元素替换旧元素，以此修改数组的内容。
+			//知识点学习：
+			var spliceforarray = [1,2,3,4,5,6];
+			console.log(spliceforarray.splice(2,2));//3,4
+			console.log(spliceforarray);//1,2,5,6
+			console.log(spliceforarray.splice(3,1,"我是被加进去的"));//6
+			console.log(spliceforarray);//1, 2, 5, "我是被加进去的"
+
+			function slasher2(arr, howMany) {
+				// it doesn't always pay to be first
+				var len = arr.length;
+				if(howMany === 0){
+					return arr;
+				}else if(howMany >= len){
+					arr.splice(0,len);
+					return arr;
+				}else {
+					arr.splice(0,howMany);
+					return arr;
+				}
+			}
+			var splicetest = slasher2([1, 2, 3], 2);
+			console.log(splicetest);//3
+		</script>
+	</body>
+</html>

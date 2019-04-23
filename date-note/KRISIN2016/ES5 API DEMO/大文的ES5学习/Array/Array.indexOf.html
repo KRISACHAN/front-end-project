@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		"use strict";
+		if (typeof Array.prototype.indexOf != "function") {
+			Array.prototype.indexOf = function (searchElement, fromIndex) {
+				var index = -1;
+				fromIndex = fromIndex * 1 || 0;
+
+				for (var k = 0, length = this.length; k < length; k++) {
+					if (k >= fromIndex && this[k] === searchElement) {
+							index = k;
+							break;
+					}
+				}
+				return index;
+			};
+		}
+
+		function isIndexOf(arr,num,way){
+			var isWay = arr.indexOf(num,way);
+			return isWay;
+		}
+		var arr1 = [4,5,6];
+		var out = isIndexOf(arr1,5);
+		console.log(out);
+
+		//判断一个元素是否在数组里，不在则更新数组
+		function isInArr(arr1,str){
+			if(isIndexOf(arr1,str) === -1){
+				arr1.push(str);
+				console.log("新人报道：" + str);
+			}else if(isIndexOf(arr1,str)>-1){
+				console.log(str + "在里面了");
+			}
+		}
+		var arr2 = [5,1,8];
+		isInArr(arr2,17);
+
+		//判断两个数组中是否有（不）相同的元素。
+		var arr3 = [9,8,7,5,2,1];
+		var arr4 = [5,8,2,1,5,88];
+		function Compare(array1,array2,way){
+			var result = [],result1 = [],result2 = [];
+			for(var i = 0; i < array1.length; i++) {
+				var v = array1[i];
+				if(array2.indexOf(v) === -1){
+					result.push(v);
+				}
+				if(array2.indexOf(v) !== -1){
+					result1.push(v);
+				}
+			}
+			for(var j = 0; j < array2.length; j++){
+				var isv = array2[j];
+				if(array1.indexOf(isv) === -1){
+					result.push(isv);
+				}
+				if(array1.indexOf(isv) !== -1){
+					result1.push(isv);
+				}
+			}
+			if(!way){
+				return console.log("两个数组中不相同的元素为："+ result);
+			}else{
+				result1.sort();
+				var result3 = [result1[0]];
+				for(var k = 1; k < result1.length; k++){
+					if( result1[k] !== result3[result3.length-1] ){
+						result3.push(result1[k]);
+					}
+				}
+				return console.log("两个数组中相同的元素为：" + result3);
+			}
+
+		}
+		Compare(arr3,arr4,false);
+		Compare(arr3,arr4,true);
+	</script>
+</body>
+</html>

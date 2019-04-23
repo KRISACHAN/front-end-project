@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+	<style>
+		html, body, h1, h2, p {
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+		html {
+			font-family: "Microsoft YaHei";
+			font-size: 12px;
+		}
+		h1 {
+			font-size: 0.15rem;
+		}
+		h2 {
+			font-size: 0.12rem;
+		}
+	</style>
+</head>
+	<body>
+		<a href="#" id="size-12">12</a>
+		<a href="#" id="size-14">14</a>
+		<a href="#" id="size-16">16</a>
+
+		<p id="help">Helpful notes will appear here</p>
+		<p>E-mail: <input type="text" id="email" name="email"></p>
+		<p>Name: <input type="text" id="name" name="name"></p>
+		<p>Age: <input type="text" id="age" name="age"></p>
+		<script>
+			//栗子一：词法作用域
+			var age = "ershiyi";
+			function init(age){
+				var name = "kris";
+				this.age = age;
+				function human(){
+					console.log(name+","+this.age);
+				}
+				human();
+			}
+			init();
+
+			//栗子二：闭包
+			var name = "kris";
+			function makeFunc() {
+				this.name = "Mozilla";
+				function displayName() {
+					console.log(this.name);
+				}
+				return displayName;
+			}
+			var myFunc = makeFunc();
+			myFunc();
+
+			//栗子三：还是闭包
+			function makeAdder(x) {
+				if ( Array.isArray(x) ) {
+					return function(y) {
+						return x + "," +y;
+					}
+				} else {
+					return function(y) {
+						return x + y;
+					}
+				}
+			}
+			var add5 = makeAdder(5);
+			console.log(add5(2));
+			var adda = makeAdder("a");
+			console.log(adda("b"));
+
+			//栗子四：还是闭包
+			function makeSizer(size) {
+				return function() {
+					document.documentElement.style.fontSize = size + "px";
+				};
+			}
+			var size12 = makeSizer(12);
+			var size14 = makeSizer(14);
+			var size16 = makeSizer(16);
+			document.getElementById('size-12').onclick = size12;
+			document.getElementById('size-14').onclick = size14;
+			document.getElementById('size-16').onclick = size16;
+
+			var Counter = (function(){
+				var privateCounter = 0;
+				function changeBy(val) {
+					privateCounter += val;
+				};
+				return {
+					increment: function() {
+						changeBy(1);
+					},
+					decrement: function() {
+						changeBy(-1);
+					},
+					value: function() {
+						return privateCounter;
+					}
+				}
+			})();
+			console.log(Counter.value()); /* logs 0 */
+			Counter.increment();
+			Counter.increment();
+			console.log(Counter.value()); /* logs 2 */
+			Counter.decrement();
+			console.log(Counter.value()); /* logs 1 */
+
+
+			//还是闭包：
+			var makeCounter = function() {
+				var privateCounter = 0;
+				function changeBy(val) {
+					privateCounter += val;
+				}
+				return {
+					increment: function() {
+						changeBy(1);
+					},
+					decrement: function() {
+						changeBy(-1);
+					},
+					value: function() {
+						return privateCounter;
+					}
+				}
+			};
+
+			var Counter1 = makeCounter();
+			var Counter2 = makeCounter();
+			console.log(Counter1.value()); /* logs 0 */
+			Counter1.increment();
+			Counter1.increment();
+			console.log(Counter1.value()); /* logs 2 */
+			Counter1.decrement();
+			console.log(Counter1.value()); /* logs 1 */
+			console.log(Counter2.value()); /* logs 0 */
+
+			//就是闭包
+			/*function showHelp(help) {
+				document.getElementById('help').innerHTML = help;
+			}
+
+			function setupHelp() {
+				var helpText = [
+						{'id': 'email', 'help': 'Your e-mail address'},
+						{'id': 'name', 'help': 'Your full name'},
+						{'id': 'age', 'help': 'Your age (you must be over 16)'}
+					];
+
+				for (var i = 0; i < helpText.length; i++) {
+					var item = helpText[i];
+					document.getElementById(item.id).onfocus = function() {
+						showHelp(item.help);
+					}
+				}
+			}
+
+			setupHelp();*/
+
+			/*function showHelp(help) {
+				document.getElementById('help').innerHTML = help;
+			}
+
+			function setupHelp() {
+				var helpText = [
+						{'id': 'email', 'help': 'Your e-mail address'},
+						{'id': 'name', 'help': 'Your full name'},
+						{'id': 'age', 'help': 'Your age (you must be over 16)'}
+					];
+
+				for (var i = 0; i < helpText.length; i++) {
+					var item = helpText[i];
+					document.getElementById(item.id).onfocus = function() {
+						showHelp(item.help);
+					}
+				}
+			}
+
+			setupHelp();*/
+
+			function showHelp(help) {
+				document.getElementById('help').innerHTML = help;
+			}
+
+			function makeHelpCallback(help) {
+				return function() {
+					showHelp(help);
+				};
+			}
+
+			function setupHelp() {
+				var helpText = [
+						{'id': 'email', 'help': 'Your e-mail address'},
+						{'id': 'name', 'help': 'Your full name'},
+						{'id': 'age', 'help': 'Your age (you must be over 16)'}
+					];
+
+				for (var i = 0; i < helpText.length; i++) {
+					var item = helpText[i];
+					console.log(item);
+					document.getElementById(item.id).onfocus =
+						 makeHelpCallback(item.help);
+				}
+			}
+
+			setupHelp();
+		</script>
+	</body>
+</html>

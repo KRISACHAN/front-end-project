@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TABS</title>
+  <style>
+    html,body,ul,li { margin: 0; padding: 0; }
+    ul,li { list-style: none; }
+    a { text-decoration: none; color: #FFF; }
+    .tabs-header {
+      width: 800px;
+      margin: 0 auto;
+      display: flex;
+    }
+    .tabs-header>div {
+      background: orange;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      color: #fff;
+      font-size: 40px;
+      flex: 1;
+      cursor: pointer;
+    }
+    .tabs-header>div:hover {
+      background: #ACDAE0;
+    }
+    .tabs-main {
+      width: 800px;
+      height: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .tabs-main>div {
+      width: 800px;
+      height: 600px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class='tabs'>
+    <div class='tabs-header'>
+      <div>A</div>
+      <div>B</div>
+      <div>C</div>
+      <div>D</div>
+    </div>
+    <div class='tabs-main'>
+      <div>A1</div>
+      <div>B1</div>
+      <div>C1</div>
+      <div>D1</div>
+    </div>
+  </div>
+  <script>
+    const Arr = [],
+         Tabs = document.querySelector('.tabs'),
+       Header = document.querySelector('.tabs-header'),
+         Main = document.querySelector('.tabs-main'),
+    HeaderNav = document.querySelectorAll('.tabs-header>div'),
+      MainNav = document.querySelectorAll('.tabs-main>div');
+  </script>
+</body>
+</html>

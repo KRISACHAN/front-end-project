@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<style>
+		.pointer { cursor: pointer; }
+		.transition { width: 600px; height: 400px; margin: 0 auto; position: relative; top: 100px; text-align: center; }
+		.img { width: 50%; -webkit-transform: rotate(0deg); -moz-transform: rotate(0deg); transform: rotate(0deg); -webkit-box-shadow: 2px 2px 3px rgba(135, 139, 144, 0); -moz-box-shadow: 2px 2px 3px rgba(135, 139, 144, 0); box-shadow: 2px 2px 3px rgba(135, 139, 144, 0); -webkit-transition: all 0.8s ease-in-out 0.5s;
+	-moz-transition: all 0.8s ease-in-out 0.5s;
+	transition: all 0.8s ease-in-out 0.5s; }
+		.img:hover { width: 100%; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); transform: rotate(180deg); -webkit-box-shadow: 2px 2px 3px rgba(135, 139, 144, 0.6); -moz-box-shadow: 2px 2px 3px rgba(135, 139, 144, 0.6); box-shadow: 2px 2px 3px rgba(135, 139, 144, 0.6); }
+	</style>
+	<title>过渡</title>
+</head>
+<body>
+	<!--
+		* transition：[ transition-property ] || [ transition-duration ] || [ transition-timing-function ] || [ transition-delay ]
+		*
+		*
+		* [ transition-property ]：检索或设置对象中的参与过渡的属性 transition-property：none | <single-transition-property>[ ,<single-transition-property> ]* <single-transition-property> = all | <IDENT>
+		*
+		*
+		* [ transition-duration ]：检索或设置对象过渡的持续时间 transition-duration：<time>[ ,<time> ]*
+		*
+		*
+		* [ transition-timing-function ]：检索或设置对象中过渡的动画类型 transition-timing-function：<single-transition-timing-function>[,<single-transition-timing-function>]*
+<single-transition-timing-function> = ease | linear | ease-in | ease-out | ease-in-out | step-start | step-end | steps(<integer>[, [ start | end ] ]?) | cubic-bezier(<number>, <number>, <number>, <number>)
+		* linear：线性过渡。等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0)
+		* ease：平滑过渡。等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0)
+		* ease-in：由慢到快。等同于贝塞尔曲线(0.42, 0, 1.0, 1.0)
+		* ease-out：由快到慢。等同于贝塞尔曲线(0, 0, 0.58, 1.0)
+		* ease-in-out：由慢到快再到慢。等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)
+		* step-start：等同于 steps(1, start)
+		* step-end：等同于 steps(1, end)
+		* steps(<integer>[, [ start | end ] ]?)：接受两个参数的步进函数。第一个参数必须为正整数，指定函数的步数。第二个参数取值可以是start或end，指定每一步的值发生变化的时间点。第二个参数是可选的，默认值为end。
+		* cubic-bezier(<number>, <number>, <number>, <number>)：特定的贝塞尔曲线类型，4个数值需在[0, 1]区间内
+		*
+		*
+		* [ transition-delay ]：检索或设置对象延迟过渡的时间
+		*
+	-->
+	<!--
+		* -webkit-transform
+		* -moz-transform
+		* transform
+	-->
+	<div class="transition">
+		<img class="img pointer" src="assets/images/1.jpg" alt="1">
+	</div>
+</body>
+</html>

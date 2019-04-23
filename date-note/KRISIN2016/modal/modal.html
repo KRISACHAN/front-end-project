@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  	<meta charset="utf-8">
+  	<title>DEMO</title>
+	<style>
+		body,div{margin:0;padding:0;border:0;}
+		body{width:100%;height:1600px;}
+		#login{background-color:rgba(0,120,60,0.3);position:absolute;left:0;top:0;}
+		#main{width:50%;min-width:200px;height:400px;position:fixed;top:100px;left:25%;background-color:rgba(132,132,132,0.3);box-shadow:10px 10px 10px #888;}
+		#close{cursor:pointer;font-size:25px;text-align:center;float:right;width:30px;height:30px;border:1px solid;border-radius:50%;margin:5px;}
+		#into{width:100%;height:350px;position:relative;left:0;top:50px;text-align:center;}
+		#into h1{text-align:center;}
+	</style>
+</head>
+<body>
+	<input type="button" id="btn" value="点击我">
+	<div id="login">
+		<div id="main">
+			<div id="close">&times;</div>
+			<div id="into">
+				<h1>Login</h1>
+				<p>账户: <input type="text"/></p>
+				<p>密码: <input type="password"/></p>
+				<input class="confirm" type="submit" value="登录" />
+			</div>
+		</div>
+	</div>
+	<script>
+		function dom(id){
+			//取ID值
+			return typeof id==='string'?document.getElementById(id):id;
+		}
+		window.onload=function(){
+			var sWidth=document.body.scrollWidth,
+				sHeight=document.body.scrollHeight,
+				login=dom("login"),
+				main=dom("main"),
+				btn=dom("btn"),
+				close=dom("close");
+			login.style.height=sHeight+"px";
+			login.style.width=sWidth+"px";
+			close.onclick=function(){
+				login.style.display="none";
+			}
+			btn.onclick=function(){
+				login.style.display="block";
+			}
+			//鼠标捉住不放
+			main.onmousedown=down;
+			function down(event){
+			  	event = event || window.event;
+			    var loX=event.clientX-main.offsetLeft,
+			    	loY=event.clientY-main.offsetTop;
+			  document.onmousemove=function(event){
+			  	event = event || window.event;
+			  	move(event,loX,loY);
+			  }
+			  // 释放鼠标
+			  document.onmouseup=function(){
+			  	document.onmousemove=null;
+			  	document.onmouseup=null;
+			  }
+			}
+			//Login移动
+			function move(e,X,Y){
+			    var coX=e.clientX-X,
+				    coY=e.clientY-Y,
+				    cW=document.documentElement.clientWidth || document.body.clientWidth,
+				    cH=document.documentElement.clientHeight || document.body.clientHeight,
+				    maxW=cW-main.offsetWidth-10,
+				    maxH=cH-main.offsetHeight-10;
+				if(coX<0){
+				    coX=0;
+				}else if(coX>maxW){
+				    coX=maxW;
+				}
+				if(coY<0){
+				    coY=10;
+				}else if(coY>maxH){
+				    coY=maxH;
+				}
+				main.style.left=coX+'px';
+				main.style.top=coY+'px';
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	'use strict';
+	let breakfast = {
+		getDrink() {
+			return 'tea';
+		}
+	};
+
+	let dinner = {
+		getDrink() {
+			return 'beer';
+		}
+	};
+
+	let sunday = Object.create(breakfast);
+	console.log(sunday.getDrink());
+	console.log(Object.getPrototypeOf(sunday) === breakfast);
+
+	Object.getPrototypeOf(sunday, dinner);
+	console.log(sunday.getDrink());
+	console.log(Object.getPrototypeOf(sunday) === dinner);
+	</script>
+</body>
+</html>

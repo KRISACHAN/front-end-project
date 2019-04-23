@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		"use strict"
+		function isornot(obj,state,text){
+			if(Object.isFrozen(obj) === state){
+				console.log("--------------");
+				console.log(text);
+				if(state === true){
+					if(Object.isSealed(obj) === true){
+						console.log("一个冻结对象也是一个密封对象.");
+					}
+					if(Object.isExtensible(obj) === false){
+						console.log("一个冻结对象也是一个不可扩展的对象.");
+					}
+				}
+			}else{
+				console.log("写错了,再写一次");
+			};
+		};
+
+		var o = {};
+		isornot(o,false,"一个对象默认是可扩展的,所以它也是非冻结的.");
+
+		var o1 = {
+			a: 1
+		};
+		isornot(o1,false,"一个非空对象默认也是非冻结的.");
+
+		var o2 = {
+			b: 2
+		};
+		Object.preventExtensions(o2);
+		Object.defineProperty(o2, "b", { value: "22" });
+		isornot(o2,false,"让这个对象变的不可扩展,并不意味着这个对象变成了冻结对象,因为b属性仍然是可以配置的(而且可写的).");
+		console.log(o2.b);
+
+		delete o2.b;
+		isornot(o2,true,"...如果删除了这个属性,则它会成为一个冻结对象.");
+
+		var o3 = {
+			c: 3
+		};
+		Object.preventExtensions(o3);
+		Object.defineProperty(o3, "c", { configurable: false }); // 变得不可配置
+		(function Chestnut(){
+			o3.c = 4;
+			if(o3.c = 3){
+				console.log("不可配置啦");
+			}else{
+				console.log("写错了?");
+			}
+		})();
+		isornot(o2,true," 把这个属性改为不可配置,会让这个对象成为冻结对象.");
+
+		var 我就要用中文 = { 对头: "the kraken!" };
+		Object.preventExtensions(我就要用中文);
+		Object.defineProperty(我就要用中文, "对头", { configurable: false });
+		isornot(我就要用中文,false," 一个不可扩展的对象,拥有一个不可配置但可写的属性,则它仍然是非冻结的.");
+
+		var 我还要用中文 = { 不会被打吗: "不知道" };
+		Object.preventExtensions(我还要用中文);
+		Object.defineProperty(我还要用中文, "不会被打吗", { configurable: false,writable: false });
+		isornot(我还要用中文,true," 把这个属性改为不可写,会让这个对象成为冻结对象.");
+
+		var 한국어도할수있어요 = { get 재미있다() { return "要被打了" } };
+
+		Object.preventExtensions(한국어도할수있어요);
+		isornot(한국어도할수있어요,false,"  一个不可扩展的对象,值拥有一个访问器属性,则它仍然是非冻结的.");
+
+		var 别打我 = { get 我这么可爱() { return "你舍得打吗" } };
+		Object.defineProperty(别打我, "我这么可爱", { configurable: false });
+		Object.preventExtensions(别打我);
+		isornot(别打我,true,"一个不可扩展的对象,值拥有一个访问器属性,则它仍然是非冻结的,但把这个属性改为不可配置,会让这个对象成为冻结对象.");
+
+		var o3 = { 1: 10, 1: 20, 3: 30, 4: 40, question: function(){ return "10等于多少？" }};
+		Object.freeze(o3);
+		isornot(o3,true,"使用Object.freeze是冻结一个对象最方便的方法.");
+
+
+	</script>
+</body>
+</html>

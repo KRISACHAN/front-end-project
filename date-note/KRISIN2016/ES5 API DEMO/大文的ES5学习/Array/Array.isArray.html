@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		"use strict";
+		const JudgeArr = arg => {
+			const arr = arg => {
+				let obj = Array.isArray(arg);
+				return !!obj;
+			}
+			let isArr = arr(arg);
+			let isFor;
+			isArr?isFor = "["+arg.join()+"]":isFor = arg;
+			let Json = [{"value": isFor, "是否是数组": isArr}];
+			console.table(Json);
+		}
+		JudgeArr("444");
+		JudgeArr(444);
+		JudgeArr([444,66,4444,77,8,8]);
+		JudgeArr([]);
+		JudgeArr({});
+		JudgeArr({ __proto__: Array.prototype });
+	</script>
+</body>
+</html>

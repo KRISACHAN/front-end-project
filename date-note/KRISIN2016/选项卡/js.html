@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TABS</title>
+	<style>
+		html,body,ul,li { margin: 0; padding: 0; }
+		ul,li { list-style: none; }
+		a { text-decoration: none; color: #FFF; }
+		.tabs-header {
+			width: 800px;
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: repeat(4, 200px);
+			grid-template-rows: auto;
+		}
+		.header-box {
+			background: orange;
+			height: 100px;
+			line-height: 100px;
+			text-align: center;
+			color: #fff;
+			font-size: 40px;
+		}
+		.header-box>a {
+			height: 100px;
+			line-height: 100px;
+			width: 100%;
+			display: inline-block;
+		}
+		.header-box:hover {
+			background: #ACDAE0;
+		}
+		.tabs-main {
+			width: 800px;
+			height: 600px;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+		.tabs-main>div {
+			width: 800px;
+			height: 600px;
+		}
+		@media screen and (max-width: 800px) {
+			.tabs-header {
+				width: 400px;
+				grid-template-columns: repeat(1, 400px);
+			}
+			.tabs-main {
+				width: 400px;
+				height: 600px;
+			}
+		}
+
+		.tabs-main>div>a {
+			display: block;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="tabs">
+		<div class="tabs-header">
+			<div class="header-box A"><a href="#">A</a></div>
+			<div class="header-box B"><a href="#">B</a></div>
+			<div class="header-box C"><a href="#">C</a></div>
+			<div class="header-box D"><a href="#">D</a></div>
+		</div>
+		<div class="tabs-main">
+			<div class="A" id="A">A</div>
+			<div class="B" id="B">B</div>
+			<div class="C" id="C">C</div>
+			<div class="D" id="D">D</div>
+		</div>
+	</div>
+	<script>
+		document.querySelectorAll(".tabs-header")[0].addEventListener("click",(e)=>{
+			document.querySelectorAll(".header-box").forEach((v,i,a)=>{
+				v.firstChild.style.color = "#FFF";
+				document.querySelectorAll(".tabs-main>div")[i].style.display = "none";
+				if( document.querySelectorAll(".tabs-main>div")[i].className === e.target.innerText ){
+					document.querySelectorAll(".tabs-main>div")[i].style.display = "block";
+				}
+			});
+			e.target.style.color = "#FF0";
+		},false);
+	</script>
+</body>
+</html>

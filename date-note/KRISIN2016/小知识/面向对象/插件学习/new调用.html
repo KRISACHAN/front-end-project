@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		window.test = function(json){
+			return new _fun(json);
+		};
+
+		function _fun(json){
+				this.w=json.w||200;
+				this.h=json.h||150;
+		}
+		_fun.prototype.a=function(){
+				console.log(this.w);
+		}
+		_fun.prototype.b=function(){
+				console.log(this.h);
+		}
+
+		new test({
+				h:100,
+				w:50
+		}).a();
+	</script>
+</body>
+</html>

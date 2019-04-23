@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	//Map 映射类型
+	//Syntax: new Map([iterable]) : Map
+	const map = new Map();
+	const mapA = new Map([['foo',1],['foo',2]]);
+	console.log(mapA.get('foo')) // 2
+
+	// 操作方法
+	// map.set(key, value);  add key-value pair to map
+	// map.get(key);  get key in map
+	// map.delete(key);  remove key from map
+	// map.clear();  clear all the key-value pairs from map
+	// map.entries();  return a key-value pairs to be element's array
+	// map.has(key);  cheak key in map or not
+	// map.keys();  返回一个已当前映射中所有键做为元素的可迭送对象
+	// map.value();  返回一个以当前映射中所有值作为元素的可迭送对象
+	// map.size  映射中键值对的数量
+
+	map.set('foo','Hello');
+	map.set('bar','World');
+	map.set('bar','Es2015');
+	console.log(map);
+
+	map.delete('foo');
+	console.log(map);
+
+	console.log(map.get('bar'));
+
+	console.log(map.has('foo'));
+
+	console.log(map.has('bar'));
+
+	map.set('foo','Hello');
+
+	console.log(Array.from(map.entries()));
+
+	for(const [ key, value ] of map) {
+		console.log(`${key}: ${value}`)
+	};
+
+	map.forEach((value, key, map) => {
+		console.log(`${key}: ${value}`)
+	});
+
+	for(const [ key, value ] in map) {
+		console.log(`${key}: ${value}`)
+	};
+
+	// Syntax: new WeakMap([iterable]) : WeakMap
+	const weakm = new WeakMap();
+	let keyObject = { id: 1 };
+	const valObject = { score: 100 };
+
+	weakm.set(keyObject, valObject);
+	weakm.get(keyObject);
+	keyObject = null;
+	console.log(weakm.has(keyObject)); //false
+	</script>
+</body>
+</html>

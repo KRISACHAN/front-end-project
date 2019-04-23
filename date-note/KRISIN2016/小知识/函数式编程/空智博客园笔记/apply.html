@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+	<body>
+		<script>
+		"use strict"
+		window.name = "KRIS";
+		window.age = 21;
+		window.job = "FE";
+
+		function isHuman(){
+			var human = this.name + "的年龄是：" + this.age + "，职业是：" + this.job;
+			console.log(this);
+			console.log(human);
+			console.log("----------");
+			// isHuman.apply(window); 递归调用
+		};
+
+		var isnotme = new isHuman();
+
+		isHuman.apply(window);
+
+		var iswen = {name: "陈大文", age: "21", job: "前端工程师"};
+
+		isHuman.apply(iswen);
+
+		function sum(num1,num2){
+			return num1 + num2;
+		}
+
+		function applySum(num1,num2){
+			return sum.apply(this, arguments);
+		}
+		console.log(applySum(1,3));
+
+		Function.prototype.construct = function (aArgs) {
+			var oNew = Object.create(this.prototype);
+			this.apply(oNew, aArgs);
+			return oNew;
+		}
+		function MyConstructor(){
+			for(var nProp = 0; nProp < arguments.length; nProp++){
+				this["property" + nProp] = arguments[nProp];
+			}
+		}
+		var myArray = [4, "Hello world!", false];
+		var myInstance = MyConstructor.construct(myArray);
+
+		console.log(myInstance);
+
+		for(var j=0;j<myArray.length;j++){
+			(function(j){
+				console.log(myInstance["property"+j]);
+			})(j);
+		};
+
+		console.log(myInstance instanceof MyConstructor);
+		console.log(window.prototype === myInstance.prototype);
+		console.log(myInstance.constructor);
+
+
+		</script>
+	</body>
+</html>

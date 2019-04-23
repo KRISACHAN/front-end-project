@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+	<body>
+		<script>
+			//函数引用 代码一
+			function f() {
+				var x = 5;
+				return x;
+			}
+			var a = f;
+			var b = f;
+			console.log(a === b); //true 当引用函数时候，多个变量内存存储的是函数的相同的入口指针，因此对于同一个函数来讲，无论多少个变量引用，他们都是相等的
+
+			//对于函数调用来讲，每次调用的时候，都被分配一个新的内存地址
+			//函数调用 代码二
+			function f2() {
+				var x = 5;
+				return x;
+			}
+			var a2 = f2();
+			var b2 = f2();
+			console.log(a2 === b2);// true 因为返回的是值，所以相等
+
+			// 函数调用 代码三
+			function f3(){
+					var x = 5;
+					return function(){
+							return x;
+					}
+			}
+			var a3 = f3();
+			var b3 = f3();
+			console.log(a3 === b3); // false 因为返回的是函数，所以不等
+
+			function F(){
+					this.x = 5;
+			}
+			var a = new F();
+			var b = new F();
+			console.log(a === b); // false 分配到不同的内存地址
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		html,
+		body,
+		div,
+		div:before {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: 100%;
+			height: 1600px;
+		}
+
+		body,
+		.box:before {
+			background: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1483987670731&di=98758ba21ddf2c8885853ab516566316&imgtype=0&src=http%3A%2F%2Fwww.dabaoku.com%2Fsucai%2Fdongwulei%2Fdongwuhj1%2F0208.jpg") 0 / cover fixed;
+		}
+
+		.box {
+			position: relative;
+			top: 10%;
+			margin: 0 auto;
+			width: 400px;
+			height: 200px;
+			background: hsla(0, 0%, 100%, 0.3);
+			overflow: hidden;
+		}
+
+		.box:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			margin: -20px;
+			z-index: -1;
+			-webkit-filter: blur(15px);
+			filter: blur(15px);
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<h1>这是一个头</h1>
+		<p>这是一个P</p>
+	</div>
+
+	<script>
+		setInterval(function () { console.log(Date.now()) }, 100)
+	</script>
+</body>
+</html>

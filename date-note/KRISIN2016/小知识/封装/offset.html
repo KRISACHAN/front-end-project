@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DEMO</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html,body {
+			height: 3000px;
+		}
+		.a {
+			width: 200px;
+			height: 200px;
+			background: blue;
+			margin-top: 200px;
+		}
+		.b {
+			width: 200px;
+			height: 200px;
+			background: green;
+			position: absolute;
+			top: 200px;
+			left: 300px;
+		}
+		.c {
+			width: 200px;
+			height: 200px;
+			background: green;
+			position: fixed;
+			top: 200px;
+			left: 600px;
+		}
+	</style>
+</head>
+<body>
+	<div class="a" id="a"></div>
+	<div class="b" id="b"></div>
+	<div class="c" id="c"></div>
+	<script src="jquery-2.2.4.js"></script>
+	<script>
+		function dom(el){
+			if( el === document || el === window ) {
+				return el;
+			}else if( el.indexOf(".") === -1 && el.indexOf("#") === -1 && el.indexOf(" ") === -1 && el.indexOf(">") !== -1 ){
+				return document.getElementsByTagName(el)[0];
+			}else if(((el.indexOf(".") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 || ((el.indexOf("#") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 )) || document.querySelectorAll(el).length > 1 ){
+				return document.querySelectorAll(el);
+			};
+			return document.querySelector(el);
+		};
+		function Offset(el){
+			var obj = dom(el);
+			var scrollTop = obj.getBoundingClientRect().top+document.body.scrollTop+document.documentElement.scrollTop;
+			var scrollLeft = obj.getBoundingClientRect().left+document.body.scrollLeft+document.documentElement.scrollLeft;
+			return {
+				top: scrollTop,
+				left: scrollLeft
+			}
+		}
+		$(window).scroll(function(event){
+			console.log($(".c").offset().top)
+			console.log(Offset(".c").top);
+		});
+	</script>
+</body>
+</html>

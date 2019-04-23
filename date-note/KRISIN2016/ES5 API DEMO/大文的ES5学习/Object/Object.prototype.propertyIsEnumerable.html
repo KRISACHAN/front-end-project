@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var o = { a:"11",b:"12" };
+		var a = [4,5,6,7,89,7,11];
+		o.prop = 'is enumerable';
+		a[0] = 'is enumerable';
+		var iso = o.propertyIsEnumerable('prop');
+		var isa = a.propertyIsEnumerable(0);
+		console.log(iso+","+isa);//true,true
+
+		var b = ['guest'];
+		var isZero = b.propertyIsEnumerable(0);
+		console.log(isZero);//true
+		var isLen = b.propertyIsEnumerable('length');
+		console.log(isLen);//false
+		var isRandom = Math.propertyIsEnumerable('random');
+		console.log(isRandom);//false
+		var isMath = this.propertyIsEnumerable('Math');//false
+		console.log(isMath);
+
+
+		var c = [];
+		var cCon = c.propertyIsEnumerable('constructor');         // 返回 false
+		var cPro = c.propertyIsEnumerable('prototype');
+		console.log(cCon+",");//false
+		console.log(cPro+",");//false
+
+		function firstConstructor() {
+			this.property = 'is not enumerable';
+		}
+
+		firstConstructor.prototype.firstMethod = function() {};
+
+		function secondConstructor() {
+			this.method = function method() { return 'is enumerable'; };
+		}
+
+		secondConstructor.prototype = new firstConstructor;
+		secondConstructor.prototype.constructor = secondConstructor;
+
+		var o1 = new secondConstructor();
+		o1.arbitraryProperty = 'is enumerable';
+
+		var isoarb = o1.propertyIsEnumerable('arbitraryProperty');   // 返回 true
+		console.log(isoarb);
+		var isome = o1.propertyIsEnumerable('method');              // 返回 true
+		console.log(isome);
+		var isopr = o1.propertyIsEnumerable('property');            // 返回 false
+		console.log(isopr);
+		o1.property = 'is enumerable';
+		var isoprs = o1.propertyIsEnumerable('property');            // 返回 true
+		console.log(isoprs);
+		// 这些返回fasle，是因为，在原型链上propertyIsEnumerable不被考虑
+		// (尽管最后两个在for-in循环中可以被循环出来)。
+		var isopro = o1.propertyIsEnumerable('prototype');   // 返回 false (根据 JS 1.8.1/FF3.6)
+		console.log(isopro);
+		var isocon = o1.propertyIsEnumerable('constructor'); // 返回 false
+		console.log(isocon);
+		var isofirst = o1.propertyIsEnumerable('firstMethod'); // 返回 false
+		console.log(isofirst);
+	</script>
+</body>
+</html>

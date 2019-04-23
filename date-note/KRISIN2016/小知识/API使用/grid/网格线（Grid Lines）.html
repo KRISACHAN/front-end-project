@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/*具有三个列网格线和四个行网格线*/
+		#grid {
+			display: grid;
+			grid-definition-columns: 150px 1fr; /* 两列*/
+			grid-definition-rows: 50px 1fr 50px /* 三行  */
+		}
+		#item1 {
+			grid-column: 2;
+			grid-start: 1;
+			grid-end: 1;
+		}
+		/* 使用命名行，实现先前例子相等效果布局 */
+		/*#grid {
+			display: grid;
+			grid-definition-columns: 150px "item1-start" 1fr "item1-end";
+			grid-definition-rows: "item1-start" 50px 1fr 50px "item1-end";
+		}
+
+		#item1 {
+		 grid-column: "item1-start" / "item1-end";
+		 grid-row: "item1-start" / "item1-end";
+		} */
+	</style>
+</head>
+<body>
+	<div id="grid">
+		<div id="item1"></div>
+	</div>
+	<script>
+	</script>
+</body>
+</html>

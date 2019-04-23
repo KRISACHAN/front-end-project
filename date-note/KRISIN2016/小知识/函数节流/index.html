@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var Throttle = function(fn,delay,mustRunDelay){
+			var timer = null;
+			var t_start;
+			return function(){
+				var context = this,args = arguments,t_curr=+new Date();
+				clearTimeout(timer);
+				if(!t_start){
+					t_start=t_curr;
+				}else if(t_curr-t_start>=mustRunDelay){
+					fn.apply(context,args);
+					t_start=t_curr;
+				}else{
+					timer=setTimeout(function(){
+						fn.apply(context,args);
+					},delay);
+				}
+			}
+		}
+		var go = 0;
+		function Go(){
+			go++;
+			console.log(go);
+		};
+		window.onresize = Throttle(Go,300,600);
+	</script>
+</body>
+</html>

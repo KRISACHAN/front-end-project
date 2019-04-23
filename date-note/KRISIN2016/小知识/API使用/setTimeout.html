@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {padding:0px;margin: 0px;font:12px normal "microsoft yahei";}
+        #tabs { width: 200px;height: 200px;background: #ff0; position: absolute; opacity: 1; }
+        #an { position: absolute; top: 200px; }
+    </style>
+</head>
+<body>
+	<div id="tabs">哦</div>
+	<button id="an">点我啊</button>
+	<script type="text/javascript">
+		var timer = null;
+		var m = 0;
+		var tabs = document.getElementById("tabs");
+		var an = document.getElementById("an");
+		an.onclick=function(){
+			for(var i = m; i<=100; i++){
+				setTimeout(move(i),time());
+				function move(test){
+					return function(){
+						tabs.style.left = test + 'px';
+						//tabs.style.opacity = test*0.01;
+					}
+				}
+				function time(){
+					return (m+i)*10;
+				}
+			}
+		}
+	</script>
+</body>
+</html>

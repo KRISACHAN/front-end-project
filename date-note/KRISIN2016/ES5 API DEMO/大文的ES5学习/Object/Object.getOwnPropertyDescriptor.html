@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var obj, descriptor1, descriptor2;
+		obj = {
+			name : 'sunboy',
+			get sex(){
+				if(this.sexx){
+					return this.sexx;
+				}else{
+					return 'man';
+				}
+			},
+			set sex(val){
+				this.sexx = val;
+			}
+		};
+		descriptor1 =  Object.getOwnPropertyDescriptor(obj);
+		console.log(descriptor1);
+		descriptor2 =  Object.getOwnPropertyDescriptor(obj,"sex");
+		console.log(descriptor2);
+	</script>
+</body>
+</html>

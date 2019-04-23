@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+	//在构造器中 throw new Error(''); 抛异常。这样防止这个类被直接调用
+		function DetectorBase() {
+		    throw new Error('Abstract class can not be invoked directly!');
+		}
+
+		DetectorBase.prototype.detect = function() {
+		    console.log('Detection starting...');
+		};
+		DetectorBase.prototype.stop = function() {
+		    console.log('Detection stopped.');
+		};
+		DetectorBase.prototype.init = function() {
+		    throw new Error('Error');
+		};
+
+		// var d = new DetectorBase();// Uncaught Error: Abstract class can not be invoked directly!
+
+		function LinkDetector() {}
+		LinkDetector.prototype = Object.create(DetectorBase.prototype);
+		LinkDetector.prototype.constructor = LinkDetector;
+
+		var l = new LinkDetector();
+		console.log(l); //LinkDetector {}__proto__: LinkDetector
+		l.detect(); //Detection starting...
+		l.init(); //Uncaught Error: Error
+	</script>
+</body>
+</html>

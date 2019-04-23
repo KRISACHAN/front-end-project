@@ -1,0 +1,7 @@
+.demo{ width:350px;margin:30px auto; text-align:left; padding:0; }
+#div{border:1px solid #ccc; position:relative; }
+#div .small_pic{ width:350px; height:350px; background:#eee; position:relative; }
+#div .float_layer{ width:100px; height:100px; border:1px solid #000; background:#fff; filter:alpha(opacity:30); opacity:0.3; position:absolute; top:0; left:0; display:none; }
+#div .mark{ width:100%; height:100%; position:absolute; z-index:2; left:0px; top:0px; background:red; filter:alpha(opacity:0); opacity:0; }
+#div .big_pic{ position:absolute; top:-1px; left:360px; width:250px; height:250px; overflow:hidden; border:2px solid #CCC; display:none; }
+#div .big_pic img{ position:absolute; top:-30px; left:-80px; }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	'use strict';
+	let desserts = new Set('ABCD');
+	desserts.add('E');
+	desserts.add('E');
+	console.log(desserts);
+	console.log(desserts.size);
+	console.log(desserts.has('A'));
+	desserts.delete('A');
+	console.log(desserts);
+	desserts.forEach(dessert => {
+		console.log(dessert);
+	});
+	desserts.clear();
+	console.log(desserts);
+	</script>
+</body>
+</html>

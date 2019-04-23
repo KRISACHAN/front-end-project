@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul>li {
+			background: green;
+		}
+	</style>
+</head>
+<body>
+	<ul id="a">
+		<li class="yi">1</li>
+		<li class="er">2</li>
+		<li id="three">3</li>
+		<li class="san">4</li>
+		<li class="si">5</li>
+		<li class="wu">6</li>
+	</ul>
+	<script src="jquery-2.2.4.js"></script>
+	<script>
+		function dom(el){
+			if( el === document || el === window ) {
+				return el;
+			}else if( el.indexOf(".") === -1 && el.indexOf("#") === -1 && el.indexOf(" ") === -1 && el.indexOf(">") !== -1 ){
+				return document.getElementsByTagName(el)[0];
+			}else if(((el.indexOf(".") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 || ((el.indexOf("#") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 )) || document.querySelectorAll(el).length > 1 ){
+				return document.querySelectorAll(el);
+			};
+			return document.querySelector(el);
+		};
+		function siblings(element,fn) {
+			var aTmp = [], oParent = element.parentElement || element.parentNode, i;
+			for(i = 0; i < oParent.children.length; i++) {
+				element != oParent.children[i] && aTmp.push(oParent.children[i]);
+			}
+			fn && aTmp.forEach(fn);
+			return aTmp;
+		};
+		function setStyle(el,prop,val) {
+			return el.style[prop] = val;
+		}
+		siblings(dom("#three"),function(e){
+			setStyle(e,"color","#FF0");
+		});
+		console.log(siblings(dom("#three")));
+	</script>
+</body>
+</html>

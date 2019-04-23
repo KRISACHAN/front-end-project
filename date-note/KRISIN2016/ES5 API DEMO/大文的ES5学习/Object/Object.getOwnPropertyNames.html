@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var arr = ["a","b","c"];
+
+		console.log(Object.getOwnPropertyNames(arr));//["0", "1", "2", "length"]
+
+		console.log(Object.getOwnPropertyNames(arr).sort(","));//["0", "1", "2", "length"]
+
+		var obj = { 0:"a",1:"b",2:"c" };
+
+		console.log(Object.getOwnPropertyNames(obj));//["0", "1", "2"]
+
+		console.log(Object.getOwnPropertyNames(obj).sort(","));//["0", "1", "2"]
+
+		Object.getOwnPropertyNames(obj).forEach(function(val, idx, array){
+			console.log(val + ":" + obj[val]);
+		});
+		//0:a 1:b 2:c
+
+		//不可枚举的属性
+		var obj2 = Object.create({},{
+			getFoo: {
+				value: function() {
+					return this.foo;
+				},
+				enumerable: false
+			}
+		});
+
+		obj2.foo = 1;
+
+		console.log(Object.getOwnPropertyNames(obj2));//["getFoo", "foo"]
+
+		console.log(Object.getOwnPropertyNames(obj2).sort(","));//["foo", "getFoo"]
+
+		//不会获取到原型链上的属性
+		function ParentClass(){}
+
+		ParentClass.prototype.inheritedMethod = function(){
+			console.log("77岁");
+		};
+
+		function ChildClass(){
+			this.prop = 21;
+			this.method = function(){
+				console.log(this.prop + "岁");
+			};
+		};
+
+		ChildClass.prototype = new ParentClass;
+
+		ChildClass.prototype.prototypeMethod = function(){
+			console.log("喜欢吃零食");
+		};
+
+		console.log(Object.getOwnPropertyNames(new ChildClass()));//["prop", "method"]
+
+		//仅获取不可枚举的属性
+		var target = obj2;
+		var num = Object.getOwnPropertyNames(target);
+		var only = Object.keys(target);
+		var none = num.filter(function(key) {
+			var index = only.indexOf(key);
+			if (index == -1) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+		console.log(none);
+
+		//在 ES5 中，如果参数不是一个对象类型，将抛出一个 TypeError  异常。在 ES6 中， non-object 参数被强制转换为 object 。
+		var test1 = Object.getOwnPropertyNames('foo');
+		console.log(test1);
+		// TypeError: "foo" is not an object (ES5 code)
+
+		var test2 = Object.getOwnPropertyNames('foo');
+		console.log(test2);
+		// ['length', '0', '1', '2']  (ES6 code)
+	</script>
+</body>
+</html>

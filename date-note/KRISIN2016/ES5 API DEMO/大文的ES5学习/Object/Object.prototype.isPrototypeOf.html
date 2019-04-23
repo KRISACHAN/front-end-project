@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		function Fee() {
+			// . . .
+		}
+
+		function Fi() {
+			// . . .
+		}
+		Fi.prototype = new Fee();
+
+		function Fo() {
+			// . . .
+		}
+		Fo.prototype = new Fi();
+
+		function Fum() {
+			// . . .
+		}
+		Fum.prototype = new Fo();
+
+		var fum = new Fum();
+
+		if (Fi.prototype.isPrototypeOf(fum)) {
+			console.log("一脸不常用的样子");
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var arr = [];
+		arr.push("a","b","c");
+
+		console.log(arr);
+		console.log(Object.keys(arr));
+
+		var o = {};
+		Object.defineProperties(o,{
+			"0": {
+				value: "a",
+				writable: true,
+				enumerable: true,
+				configurable: true
+			},
+			"1": {
+				value: "b",
+				writable: true,
+				enumerable: true,
+				configurable: true
+			},
+			"2": {
+				value: "c",
+				writable: true,
+				enumerable: true,
+				configurable: true
+			}
+		});
+		console.log(o);
+		console.log(Object.keys(o));
+
+		var o1 = { d: "4" };
+		Object.defineProperties(o,{
+			"a": {
+				value: "1"
+			},
+			"b": {
+				value: "2"
+			},
+			"c": {
+				value: "3"
+			}
+		});
+
+		o1.a = 2;
+		delete o1.a;
+
+		console.log(o1);
+
+		console.log(Object.keys(o1));
+		//原来 defineProperties 定义的属性默认是不可枚举,不可写,不可配置的，我才知道。。
+
+
+		var o2 = { a : "1", b : "2", c : "3"};
+		console.log(o2);
+		console.log(Object.keys(o2));
+
+		// getFoo是个不可枚举的属性
+		var my_obj = Object.create({}, { getFoo : { value : function () { return this.foo } } });
+		my_obj.foo = 1;
+
+		console.log(Object.keys(my_obj));// foo
+
+	</script>
+</body>
+</html>

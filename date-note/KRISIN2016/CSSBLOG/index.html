@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+	<style>
+		h1 { font-size: 40px; color: #B290B0; text-align: center; }
+		h1:before { content: "HELLO WORLD"; display: block; animation: headfonts 6s 1; display: inline-block; margin-right: 5px; }
+		h1:after { content: ""; display: inline-block; animation: typewriter 8s 1; }
+		@keyframes headfonts{
+			0% { content: "H"; }
+			10% { content: "HE"; }
+			20% { content: "HEL"; }
+			30% { content: "HELL"; }
+			40% { content: "HELLO"; }
+			50% { content: "HELLO W"; }
+			60% { content: "HELLO WO"; }
+			70% { content: "HELLO WOR"; }
+			80% { content: "HELLO WORL"; }
+			90% { content: "HELLO WORL"; }
+			100% { content: "HELLO WORLD"; }
+		}
+		@keyframes typewriter{
+			0% { content: "_"; }
+			80% { content: "_"; }
+			100% { content: ""; }
+		}
+		p { font-size: 30px; color: #F1DDA1; text-align: center; }
+		p:before { content: "这是一个极其不靠谱的博客！"; animation: pfonts 20s 1; display: inline-block; margin-right: 5px; }
+		@keyframes pfonts{
+			0% { content: ""; }
+			35% { content: ""; }
+			40% { content: "这"; }
+			45% { content: "这是"; }
+			50% { content: "这是一"; }
+			55% { content: "这是一个"; }
+			60% { content: "这是一个极"; }
+			65% { content: "这是一个极其"; }
+			70% { content: "这是一个极其不"; }
+			75% { content: "这是一个极其不靠"; }
+			80% { content: "这是一个极其不靠谱"; }
+			85% { content: "这是一个极其不靠谱的"; }
+			90% { content: "这是一个极其不靠谱的博"; }
+			95% { content: "这是一个极其不靠谱的博客"; }
+			100% { content: "这是一个极其不靠谱的博客 ！"; }
+		}
+	</style>
+</head>
+	<body>
+		<h1></h1>
+		<p></p>
+		<a href="/unit.html">这是第一个DEMO</a>
+		<script>
+		</script>
+	</body>
+</html>

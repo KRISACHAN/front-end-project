@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+<body>
+  <script>
+    var Images = new Image();
+    var array = ['http://i4.piimg.com/11340/7f638e192b9079e6.jpg','http://tupian.enterdesk.com/2015/xu/04/17/2/7.jpg','http://pic40.nipic.com/20140408/8840_183717417181_2.jpg','http://tupian.enterdesk.com/2013/mxy/12/11/4/3.jpg'];
+    window.onload = function(){
+      array.forEach(function(e,i,a){
+        Image.src = a;
+      });
+      console.log(Image.src);
+      Image.src.forEach(function(e,i,a){
+        if(e.width !== 0){
+          console.log(e+':这张图片是有的');
+        }
+      })
+    }
+  </script>
+</body>
+</html>

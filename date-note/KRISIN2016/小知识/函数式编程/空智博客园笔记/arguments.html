@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+	<body>
+		<script>
+			"use strict"
+			function Human(...a2){
+				for(var i = 0; i < arguments.length; i++){
+					console.log("传入的第" + (i + 1) +"个参数：" + arguments[i] + "，长度是：" + arguments.length);
+				}
+				return arguments;
+			}
+			Human("kris","陈大文","大帅哥");
+		</script>
+	</body>
+</html>

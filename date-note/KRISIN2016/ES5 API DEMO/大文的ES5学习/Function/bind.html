@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+	<body>
+		<script>
+			//"use strict";
+			console.log(this === window);
+			this.x = 9;
+			var module = {
+				x: 81,
+				getX: function(){
+					return console.log(this.x)
+				}
+			};
+			module.getX();// return 81
+
+			var retrieveX = module.getX;
+			retrieveX();// return 9  this === window
+
+			var retrieve = module.getX();
+			retrieve;// return 81
+
+			var boundGetX = retrieveX.bind(module);
+			boundGetX();// return 81
+
+			function list(){
+				return Array.prototype.slice.call(arguments);
+			}
+			var islist = list(1,2,3);
+			console.log(islist);
+
+			var leadingThirtysevenList = list.bind(undefined, 37);
+			console.log(leadingThirtysevenList());
+
+			var list2 = leadingThirtysevenList(); // [37]
+			console.log(list2);
+
+			var list3 = leadingThirtysevenList(1, 2, 3);
+			console.log(list3);
+
+			function Run() {
+				this.go = parseInt(Math.ceil(Math.random() * 12));
+				this.goWay = function(){
+					return console.log(this.go);
+				}
+			}
+			Run.prototype.boom = function() {
+				window.setTimeout(this.say.bind(this), 1000);
+			}
+			Run.prototype.isboom = function() {
+				window.setTimeout(Run.prototype.say, 1000);
+			}
+			Run.prototype.say =function() {
+				console.log("hello world");
+			}
+			var gogo = new Run();
+			gogo.boom();
+			gogo.goWay();
+			gogo.isboom();
+
+			var unboundSlice = Array.prototype.slice;
+			var slice = Function.prototype.call.bind(unboundSlice);
+
+			var isArr = [1,5,9,6];
+			var isa = slice(isArr);
+			console.log(isa);
+		</script>
+	</body>
+</html>

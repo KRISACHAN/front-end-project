@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<title>jsonp_DEMO</title>
+</head>
+
+<body>
+<div id="content"></div>
+
+<script>
+/*
+	上面引用的script脚本的内容：
+	thisisafunctionname({"name":"Daniel_Yen"});
+*/
+
+function thisisafunctionname(data){
+	var data = eval(data);
+	document.getElementById("content").innerHTML = data.name;
+}
+</script>
+<script src="http://www.zhenxj.com/jsonp.php?callback=thisisafunctionname"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>index</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="800" height="600" style="border:1px solid">你看不到我，看不到我</canvas>
+	<script>
+		var timer = null;
+		var i = 0;
+		var k = -1;
+		var flag = true;
+		timer = setInterval(function(){
+			if(flag){
+				i++;
+				if(i>=200){
+					flag = false;
+					k = 1;
+				}
+			}else{
+				i--;
+				if(i<=-200){
+					flag = true;
+					k = -1;
+				}
+			}
+			var is = 200;
+			var canvas=document.getElementById('myCanvas');
+			var ctx = canvas.getContext("2d");
+			ctx.clearRect(0,0,800,800);
+			ctx.strokeStyle = 'rgb(0,' + Math.floor(Math.random()*255) + ',' + Math.floor(Math.random()*255) + ')';
+			ctx.beginPath();
+			var circle = {
+					x : is+i,//is+(100*Math.cos(i*Math.PI/180)+45),
+					y : is+i,//is+(100*Math.sin(i*Math.PI/180)+45),
+					r : 100+i/2
+			};
+			ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2, true);
+			ctx.stroke();
+			console.log(circle.x+","+i+","+Math.random()+","+flag);
+		},20);
+		timer;
+	</script>
+</body>
+</html>

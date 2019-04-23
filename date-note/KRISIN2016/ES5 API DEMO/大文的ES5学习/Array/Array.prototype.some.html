@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		if (!Array.prototype.some)
+		{
+			Array.prototype.some = function(fun , thisArg )
+			{
+				'use strict';
+
+				if (this === void 0 || this === null)
+					throw new TypeError();
+
+				var t = Object(this);
+				var len = t.length >>> 0;
+				if (typeof fun !== 'function')
+					throw new TypeError();
+
+				var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+				for (var i = 0; i < len; i++)
+				{
+					if (i in t && fun.call(thisArg, t[i], i, t))
+						return true;
+				}
+
+				return false;
+			};
+		}
+		var arr = [1,2,3,4,5];
+		var arr1 = [6,7,8,9,10]
+		var issome = arr.some(function(element, index, array){
+			console.log(array)
+			var result = [];
+			result.push(this);
+			result.push(arr);
+			result.join();
+			console.log(element+"\n"+index+"\n"+array);
+			return element !== result;
+		},arr1);
+		console.log(issome);
+	</script>
+</body>
+</html>

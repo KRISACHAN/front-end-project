@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.a {
+			width: 600px;
+			height: 600px;
+			border: 1px solid;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.b {
+			width: 400px;
+			height: 400px;
+			border: 1px solid;
+			margin: 100px auto;
+			text-align: center;
+		}
+		.c {
+			width: 200px;
+			height: 200px;
+			border: 1px solid;
+			margin: 100px auto;
+			text-align: center;
+		}
+		.red {
+			background: red;
+		}
+		.green {
+			background: green;
+		}
+		.blue {
+			background: blue;
+		}
+		.test {
+
+		}
+		.test:after {
+			content: "我在哪里";
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<div class="a">
+		<div class="b">
+			<div class="c">
+
+			</div>
+		</div>
+	</div>
+	<script>
+		function dom(arg) {
+			return document.querySelector(arg);
+		};
+		var isa = dom(".a");
+		var isb = dom(".b");
+
+		isa.classList.add("red","test");
+		isa.classList.remove("test");
+		isa.classList.toggle("test",!!isa);
+		console.log(isa.classList.contains("foo"));
+
+		isb.classList.add("blue","test");
+
+		DOMTokenList.prototype.adds = function(tokens) {
+			 tokens.split(" ").forEach(function(token) {
+					 this.add(token);
+			 }.bind(this));
+			 return this;
+		};
+		var clList = document.body.classList;
+		clList.adds("child1 child2 child3").toString();
+	</script>
+</body>
+</html>

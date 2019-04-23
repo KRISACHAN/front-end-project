@@ -1,0 +1,24 @@
+view<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		(function(){
+			if(!window.performance && !window.performance.getEntries){
+				return false;
+			}
+			var result = [];
+			window.performance.getEntries().forEach(view => result.push({
+				'url': view.name,
+				'entryType': view.entryType,
+				'type': view.initiatorType,
+				'duration(ms)': view.duration
+			}));
+			console.table(result);
+		})();
+	</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	' use strict ';
+	let chef = foods => {
+		let i = 0;
+		return {
+			next() {
+				let done = (i >= foods.length);
+				let value = !done ? foods[i++] : undefined;
+				return {
+					value: value,
+					done: done
+				}
+			}
+		}
+	}
+
+	let wanghao = chef(['橙子', '例子']);
+	console.log(wanghao.next());
+	console.log(wanghao.next());
+	console.log(wanghao.next());
+	</script>
+</body>
+</html>

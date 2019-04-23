@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta charset="utf-8" />
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+	<body>
+		<script>
+			if(!!Array.from([1,2,3])){
+
+				class UNIT {
+
+					static dom(el){
+						if( el === document || el === window ) {
+							return el;
+						}else if( el.indexOf(".") === -1 && el.indexOf("#") === -1 && el.indexOf(" ") === -1 && el.indexOf(">") !== -1 ){
+							return document.getElementsByTagName(el)[0];
+						}else if(((el.indexOf(".") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 || ((el.indexOf("#") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 ))|| document.querySelectorAll(el).length > 1 ){
+							return document.querySelectorAll(el);
+						};
+						return document.querySelector(el);
+					}
+
+					static css(obj,attr) {
+						obj = document.querySelectorAll(el)[0];
+						if(obj.currentStyle){
+							return obj.currentStyle[attr];
+						} else {
+							return getComputedStyle(obj, false)[attr];
+						};
+					}
+
+					static innerCss(el,obj,attr) {
+						el.innerHTML = UNIT.css(obj,attr);
+					}
+
+				};
+
+			}else{
+
+				alert("ES6都不支持，赶紧换浏览器！");
+				window.location.href="http://browsehappy.com";
+
+			}
+		</script>
+	</body>
+</html>

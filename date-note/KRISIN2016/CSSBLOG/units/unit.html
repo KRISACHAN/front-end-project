@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta charset="utf-8" />
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.units-length {
+			margin: 0 auto;
+			text-align: center;
+		}
+		.units-value {
+			width: 100px;
+			height: 200px;
+			border: 1px solid #F00;
+			text-align: center;
+			margin: 0 auto;
+			font-size: 20px;
+			line-height: 200px;
+		}
+		.html-font-size {
+			margin-top: 30px;
+		}
+	</style>
+</head>
+	<body>
+		<div class="units-length" id="units-length">
+			<div class="units-value" id="units-value">100px</div>
+			<p style="font-size: 30px !important">盒子宽度现在等于<span id="px-num">100px</span></p>
+			<input style="font-size: 15px !important" type="text" size="52" autocomplete="off" value="100" class="units-input" id="units-input">
+			<select style="font-size: 16px !important" id="units-select" autocomplete="off">
+				<option value="px">px</option>
+				<option value="em">em</option>
+				<option value="ex">ex</option>
+				<option value="ch">ch</option>
+				<option value="rem">rem</option>
+				<option value="vw">vw</option>
+				<option value="vh">vh</option>
+				<option value="vm">vm</option>
+				<option value="vmax">vmax</option>
+				<option value="vmin">vmin</option>
+				<option value="%">%</option>
+			</select>
+			<div class="content" style="font-size: 16px !important">
+				<span style="font-size: 30px !important">html font-size:</span>
+				<input style="font-size: 15px !important" type="text" size="20" autocomplete="off" value="16px" class="html-font-size" id="html-font-size">
+			</div>
+		</div>
+		<script>
+			if(!!Array.from([1,2,3])){
+
+				class UNIT {
+
+					static dom(el) {
+						if( el === document || el === window ) {
+							return el;
+						};
+						if( el.indexOf(".") === -1 && el.indexOf("#") === -1 ){
+							return document.getElementsByTagName(el);
+						};
+						if( el.length > 1 ){
+							return document.querySelectorAll(el);
+						};
+						return document.querySelector(el);
+					}
+
+					static css(obj,attr) {
+						obj = document.querySelector(obj);
+						if(obj.currentStyle){
+							return obj.currentStyle[attr];
+						} else {
+							return getComputedStyle(obj, false)[attr];
+						};
+					}
+
+					static innerCss(el,obj,attr) {
+						el.innerHTML = UNIT.css(obj,attr);
+					}
+
+				};
+				const unitsLength = UNIT.dom("#units-length")[0],
+							unitsValue = UNIT.dom("#units-value")[0],
+							unitsInput = UNIT.dom("#units-input")[0],
+							unitsSelect = UNIT.dom("#units-select")[0],
+							unitsOption = UNIT.dom("#units-select option"),
+							htmlFontSize = UNIT.dom("#html-font-size")[0],
+							pxNum = UNIT.dom("#px-num")[0];
+
+				const showPx = e =>{
+					console.log(pxNum.innerHTML);
+					UNIT.innerCss(pxNum,"#units-value","width");
+				};
+
+				const unitsChange = e => {
+					let Index = unitsSelect.selectedIndex,
+						  unitsVal = unitsOption[Index].value,
+						  numVal = unitsInput.value.trim();
+					unitsValue.style.width = numVal + unitsVal;
+					//unitsValue.innerText = numVal + unitsVal;
+					UNIT.innerCss(unitsValue,"#units-value","width");
+					console.log(UNIT.css("#units-value","width"));
+					showPx();
+				};
+
+				const fontChange = e => {
+					let fontVal = htmlFontSize.value;
+					document.documentElement.style.fontSize = fontVal;
+					console.log(fontVal);
+					showPx();
+				};
+
+				const docChange = e => {
+					unitsChange();
+					fontChange();
+					console.log("hasChange");
+				};
+
+				unitsSelect.addEventListener("change",unitsChange,false);
+				unitsInput.addEventListener("input",unitsChange,false);
+				htmlFontSize.addEventListener("input",fontChange,false);
+				window.addEventListener("resize",docChange,false);
+
+			}else{
+
+				alert("ES6都不支持，赶紧换浏览器！");
+				window.location.href="http://browsehappy.com";
+
+			}
+		</script>
+	</body>
+</html>

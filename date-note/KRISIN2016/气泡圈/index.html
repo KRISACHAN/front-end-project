@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.Bubble {
+			width: 100px;
+			height: 100px;
+			border: 1px solid #F9C7C6;
+			position: absolute;
+			transform: translate3d(0,0,0) rotateZ(0deg);
+			animation: round 2s linear infinite;
+		}
+		@keyframes round {
+			0% {
+				transform: translate3d(0,0,0) rotateY(0deg);
+			}
+			50% {
+				transform: translate3d(0,0,0) rotateY(180deg);
+			}
+			100% {
+				transform: translate3d(0,0,0) rotateY(0deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<script>
+		var COLORS = ['#F9C7C6','#B492B2','#B6EAC4','#56E7A0','#5B9CC2','#C5E6D8'];
+		var TIMER = null;
+		document.documentElement.addEventListener("mousedown",Down,false);
+		document.documentElement.addEventListener("mouseup",unDown,false);
+
+		function Down(event){
+			document.documentElement.addEventListener("mousemove",Move,false);
+		};
+		function unDown(event){
+			document.documentElement.removeEventListener("mousemove",Move,false);
+			Boom();
+		}
+		function Move(event){
+			var event = event||window.event;
+			document.body.innerHTML += "<div class='Bubble'></div>";
+			var number = Math.ceil(Math.random()*10);
+			document.querySelectorAll(".Bubble")[document.querySelectorAll(".Bubble").length-1].style.left = event.clientX + "px";
+			document.querySelectorAll(".Bubble")[document.querySelectorAll(".Bubble").length-1].style.top = event.clientY + "px";
+			document.querySelectorAll(".Bubble")[document.querySelectorAll(".Bubble").length-1].style.borderColor = COLORS[number];
+			if( number > 5 ){
+				number -= 5;
+			};
+		};
+		function Boom(event){
+			var event = event||window.event;
+			document.querySelectorAll(".Bubble").forEach(function(value, index, array){
+				array[index].style.left = Math.floor(Math.random()*window.innerWidth*0.9) + "px";
+				array[index].style.top = Math.floor(Math.random()*window.innerHeight*0.9) + "px";
+			});
+		}
+	</script>
+</body>
+</html>

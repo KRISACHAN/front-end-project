@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	padding:0; 
+	margin:0;
+	}
+.loading{
+	   width:25em;
+	   height:8em;
+	   position:relative;
+	   margin:100px auto;
+	}
+.clock{
+	    width:8em;
+		height:8em;
+		position:relative;
+		display:inline-block;
+	}
+.loading .progress{
+	    width:6em;
+		height:6em;
+		position:absolute;
+		top:1em; left:1em;
+		background-color:white;
+		border-radius:50%;
+		line-height:6em;
+		text-align:center;
+	}
+.progress span{
+	   font: 50px/2em Arial;
+	}
+.left,.right{
+	   width:4em;
+	   height:8em;
+	   overflow:hidden;
+	   position:relative;
+	   float:left;
+	   
+	}
+.left{
+	   border-radius:8em 0 0 8em;
+	}
+.right{
+	   border-radius:0 8em 8em 0;
+	}
+.left div,.right div{
+	   content:"";
+	   width:4em;
+	   height:8em;
+	   display:block;
+	   position:absolute;
+	   background-color:white;
+	   border-radius:8em 0 0 8em;
+	   transition:all .3s;
+	   transform-origin:right center;
+	   transform:rotateZ(-180deg);
+	}
+.right div{
+	  border-radius:0 8em 8em 0;
+	  transform-origin:left center;
+	}
+.clock:nth-child(1) .left div,.clock:nth-child(1) .right div{
+	      background-color:#9FF;
+	}
+.clock:nth-child(2) .left div,.clock:nth-child(2) .right div{
+	      background-color:#F99;
+	}
+.clock:nth-child(3) .left div,.clock:nth-child(3) .right div{
+	     background-color:#F03;
+	}
+
+	
+	
+	
+	
+	

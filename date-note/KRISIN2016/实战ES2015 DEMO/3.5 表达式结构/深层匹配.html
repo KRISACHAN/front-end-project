@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	/* 解构别名 */
+	function isData() {
+		return {
+			response: [ 'foo', 'bar' /*......*/ ]
+		}
+	}
+	const { response: data} = isData();
+	console.log(data);
+
+	/* 无法匹配的缺省值 */
+	const { foo, bar } = { foo: 1 }
+	console.log(foo, bar);//1 undefined
+
+	const [ a, b, c ] = [ 1, 2 ];
+	console.log(a, b, c);//1 2 undefined
+
+	//加上默认值
+	const { foo1 = 1 } = { bar1: 1 };
+	console.log(foo1);//1
+
+	const [ a1, b1 = 2 ] = [ 1 ];
+	console.log(a1, b1);
+
+	//深层匹配
+	const { a2, b2: { c2 } } = { a2: 1, b2: { c2:2 } };
+	console.log(a2, c2);// 1 2
+
+	const { d2, e2: [ f2 ] } = { d2: 1, e2: [ 2, 3 ] };
+	console.log(d2 ,f2);// 1 2
+
+	const [ g2, { h2 } ] = [ 1, { h2: 2 } ];
+	console.log(g2, h2);// 1 2
+
+	const [ i2, [ j2 ] ] = [ 1, [ 2, 3 ] ];
+	console.log(i2,j2);//1 2
+
+	const arr = [ 'Mike', 'Peter', 'Ben', 'William', 'John' ];
+	for (const [ index, item ] of arr.entries()) {
+		console.log(index, item);
+		if ( item.match(/^w/) ) break; // 在chrome里，还不支持Array.entries()
+		//现在在Chrome里 arr.entries() 返回ArrayIterator {}
+		//2016/11/1
+
+		//2016/11/7
+		//问题已解决
+	}
+	</script>
+</body>
+</html>

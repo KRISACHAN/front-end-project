@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#circle{
+		position: relative;
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		border: 1px solid #000;
+		margin: 100px auto;
+	}
+	#obj{
+		position: absolute;
+		top: -5px;
+		left: 45px;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: #000;
+	}
+	</style>
+</head>
+<body>
+<div id="circle">
+	<div id="obj"></div>
+</div>
+	<script>
+	window.onload=function(){
+		var obj=document.getElementById('obj');
+		var ox=parseInt(getStyle(obj,'left')),
+				oy=parseInt(getStyle(obj,'top')),
+				deg=0;
+		setInterval(function(){
+			deg++;
+			ox=50*Math.cos(deg*Math.PI/180)+45;
+			oy=50*Math.sin(deg*Math.PI/180)+45;
+			obj.style.left=ox+'px';
+			obj.style.top=oy+'px';
+		},30);
+	}
+	function getStyle(obj,attr){
+		if(getComputedStyle(obj,false)){
+			return getComputedStyle(obj,false)[attr];
+		}else{
+			return obj.currentStyle[attr];
+		}
+	}
+	</script>
+</body>
+</html>

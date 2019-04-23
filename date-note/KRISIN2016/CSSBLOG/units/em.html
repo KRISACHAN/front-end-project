@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<title>em</title>
+	<style>
+		* { margin:0;padding:0; }
+		.father>* { width: 2em; height: 1em; border: 0.1em solid; }
+	</style>
+</head>
+<body>
+	<!--
+		* 块元素 ( 节选几个常用的 )
+		* div - 常用块级容易，也是css layout的主要标签
+		* dl - 定义列表
+		* fieldset - form控制组
+		* form - 交互表单
+		* h1 - 大标题
+		* h2 - 副标题
+		* h3 - 3级标题
+		* h4 - 4级标题
+		* h5 - 5级标题
+		* h6 - 6级标题
+		* ol - 排序表单
+		* p - 段落
+		* ul - 非排序列表
+	-->
+	<!--
+		* 行内元素 ( 节选几个常用的 )
+		* a - 锚点
+		* em - 强调
+		* i - 斜体
+		* input - 输入框
+		* span - 常用内联容器，定义文本内区块
+		* textarea - 多行文本输入框
+	-->
+	<!--
+		* 可变元素（根据上下文决定元素类型）
+		* button - 按钮
+		* del - 删除文本
+		* iframe - inline frame
+		* ins - 插入的文本
+		* map - 图片区块(map)
+	-->
+	<div class="father">
+		<!--
+			* 块级元素
+			* 父级不设置 font-size
+			* 自身不设置 font-size
+		 -->
+		<div>div</div>
+		<dl>dl</dl>
+		<fieldset>fi</fieldset>
+		<form>form</form>
+		<h1>h1</h1>
+		<h2>h2</h2>
+		<h3>h3</h3>
+		<h4>h4</h4>
+		<h5>h5</h5>
+		<h6>h6</h6>
+		<ol>ol</ol>
+		<p>p</p>
+		<ul>ul</ul>
+	</div><br/><br/><br/><br/>
+	<div class="father" style="font-size:30px;">
+		<!--
+			* 块级元素
+			* 父级设置 font-size
+			* 自身不设置 font-size
+		 -->
+		<div>div</div>
+		<dl>dl</dl>
+		<fieldset>fi</fieldset>
+		<form>form</form>
+		<h1>h1</h1>
+		<h2>h2</h2>
+		<h3>h3</h3>
+		<h4>h4</h4>
+		<h5>h5</h5>
+		<h6>h6</h6>
+		<ol>ol</ol>
+		<p>p</p>
+		<ul>ul</ul>
+	</div><br/><br/><br/><br/>
+	<div class="father">
+		<!--
+			* 块级元素
+			* 父级不设置 font-size
+			* 自身设置 font-size
+		 -->
+		<div style="font-size:20px;">div</div>
+		<dl style="font-size:20px;">dl</dl>
+		<fieldset style="font-size:20px;">fi</fieldset>
+		<form style="font-size:20px;">form</form>
+		<h1 style="font-size:20px;">h1</h1>
+		<h2 style="font-size:20px;">h2</h2>
+		<h3 style="font-size:20px;">h3</h3>
+		<h4 style="font-size:20px;">h4</h4>
+		<h5 style="font-size:20px;">h5</h5>
+		<h6 style="font-size:20px;">h6</h6>
+		<ol style="font-size:20px;">ol</ol>
+		<p style="font-size:20px;">p</p>
+		<ul style="font-size:20px;">ul</ul>
+	</div><br/><br/><br/><br/>
+	<div style="font-size:30px;" class="father">
+		<!--
+			* 块级元素
+			* 父级设置 font-size
+			* 自身设置 font-size
+		 -->
+		<div style="font-size:20px;">div</div>
+		<dl style="font-size:20px;">dl</dl>
+		<fieldset style="font-size:20px;">fi</fieldset>
+		<form style="font-size:20px;">form</form>
+		<h1 style="font-size:20px;">h1</h1>
+		<h2 style="font-size:20px;">h2</h2>
+		<h3 style="font-size:20px;">h3</h3>
+		<h4 style="font-size:20px;">h4</h4>
+		<h5 style="font-size:20px;">h5</h5>
+		<h6 style="font-size:20px;">h6</h6>
+		<ol style="font-size:20px;">ol</ol>
+		<p style="font-size:20px;">p</p>
+		<ul style="font-size:20px;">ul</ul>
+	</div><br/><br/><br/><br/>
+	<div class="father">
+		<!--
+			* 行内元素
+			* 父级不设置 font-size
+			* 自身不设置 font-size
+		 -->
+		<a>占位</a><br/>
+		<em>占位</em><br/>
+		<i>占位</i><br/>
+		<input>占位</input><br/>
+		<span>占位</span><br/>
+		<textarea>占位</textarea><br/>
+	</div><br/><br/><br/><br/>
+	<div style="font-size:30px;" class="father">
+		<!--
+			* 行内元素
+			* 父级设置 font-size
+			* 自身不设置 font-size
+		 -->
+		<a>占位</a><br/>
+		<em>占位</em><br/>
+		<i>占位</i><br/>
+		<input>占位</input><br/>
+		<span>占位</span><br/>
+		<textarea>占位</textarea><br/>
+	</div><br/><br/><br/><br/>
+	<div class="father">
+		<!--
+			* 行内元素
+			* 父级不设置 font-size
+			* 自身设置 font-size
+		 -->
+		<a style="font-size:20px;">占位</a><br/>
+		<em style="font-size:20px;">占位</em><br/>
+		<i style="font-size:20px;">占位</i><br/>
+		<input style="font-size:20px;">占位</input><br/>
+		<span style="font-size:20px;">占位</span><br/>
+		<textarea style="font-size:20px;">占位</textarea><br/>
+	</div><br/><br/><br/><br/>
+	<div style="font-size:30px;" class="father">
+		<!--
+			* 行内元素
+			* 父级设置 font-size
+			* 自身设置 font-size
+		 -->
+		<a style="font-size:20px;">占位</a><br/>
+		<em style="font-size:20px;">占位</em><br/>
+		<i style="font-size:20px;">占位</i><br/>
+		<input style="font-size:20px;">占位</input><br/>
+		<span style="font-size:20px;">占位</span><br/>
+		<textarea style="font-size:20px;">占位</textarea><br/>
+	</div><br/><br/><br/><br/>
+	<div>
+		<!--
+			* 独立测试
+		 -->
+		<input style="font-size: 10px;width: 5em;">占位</input><br/>
+		<input style="font-size: 10em;width: 5em;">占位</input><br/>
+		<input style="font-size: 10px;width: 5em;margin: 10%;padding: 10%;">占位</input><br/>
+		<input style="font-size: 10em;width: 5em;margin: 10%;padding: 10%;">占位</input><br/>
+	</div><br/><br/><br/><br/>
+	<div style="font-size: 10px;">
+		<!--
+			* 独立测试
+		 -->
+		<input style="font-size: 10px;width: 5em;">占位</input><br/>
+		<input style="font-size: 10em;width: 5em;">占位</input><br/>
+		<input style="font-size: 10px;width: 5em;margin: 10%;padding: 10%;">占位</input><br/>
+		<input style="font-size: 10em;width: 5em;margin: 10%;padding: 10%;">占位</input><br/>
+	</div><br/><br/><br/><br/>
+	<div style="font-size: 10em;">
+		<!--
+			* 独立测试
+		 -->
+		<input style="font-size: 10px;width: 5em;">占位</input><br/>
+		<input style="font-size: 10em;width: 5em;">占位</input><br/>
+		<input style="font-size: 10px;width: 5em;margin: 10%;padding: 10%;">占位</input><br/>
+		<input style="font-size: 10em;width: 5em;margin: 10%;padding: 10%;">占位</input><br/>
+	</div><br/><br/><br/><br/>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+				content="width=device-width, initial-scale=1">
+	<title>DEMO</title>
+	<link rel="stylesheet" href="assets/css/common.css">
+	<style>
+		html,body,div,img {
+			margin: 0;
+			padding: 0;
+		}
+		#slider {
+			font-size: 0;
+			width: 300px;
+			height: 180px;
+			overflow: hidden;
+		}
+		#slider>img{
+			width: 300px;
+			height: 180px;
+			opacity: 0;
+			position: absolute;
+			left: 300px;
+		}
+		#slider>img:target {
+			opacity: 1;
+			left: 0;
+			transition: all 200ms linear;
+		}
+	</style>
+</head>
+<body>
+	<div id="slider">
+		<img id="slider-0" src="http://image57.360doc.com/DownloadImg/2012/12/1111/28833848_81.jpg" alt="">
+		<img id="slider-1" src="http://image57.360doc.com/DownloadImg/2012/12/1111/28833848_81.jpg" alt="">
+		<img id="slider-2" src="http://www.wallcoo.com/paint/space_1600/wallpapers/1440x900/wallcoo.com_Space_Art_wc.jpg" alt="">
+		<img id="slider-3" src="http://tupian.enterdesk.com/2015/xu/08/13/1/11.jpg" alt="">
+		<img id="slider-4" src="http://d.hiphotos.baidu.com/zhidao/pic/item/bf096b63f6246b60474b7d5fe8f81a4c510fa250.jpg" alt="">
+	</div>
+	<div id="btn">
+		<a href="#slider-1">1</a>
+		<a href="#slider-2">2</a>
+		<a href="#slider-3">3</a>
+		<a href="#slider-4">4</a>
+	</div>
+	<script src="assets/js/common.js"></script>
+</body>
+</html>

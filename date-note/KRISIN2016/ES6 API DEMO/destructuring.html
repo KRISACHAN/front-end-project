@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		'use strict';
+		function breakfast() {
+			return ['cake','tea','apple'];
+		}
+
+		var tmp = breakfast(), dessert = tmp[0], drink = tmp[1], fruit = tmp[2];
+		console.log(dessert, drink, fruit);
+
+		function lunch() {
+			return ['rice','tofu','brosch'];
+		}
+		let [food, fixing, soup] = lunch();
+		console.log(food, fixing, soup);
+	</script>
+</body>
+</html>

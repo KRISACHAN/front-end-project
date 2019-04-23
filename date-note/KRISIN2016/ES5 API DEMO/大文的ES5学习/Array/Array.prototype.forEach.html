@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		if (typeof Array.prototype.forEach != "function") {
+			Array.prototype.forEach = function (fn, context) {
+				for (var k = 0, length = this.length; k < length; k++) {
+					if (typeof fn === "function" && Object.prototype.hasOwnProperty.call(this, k)) {
+						fn.call(context, this[k], k, this);
+					}
+				}
+			};
+		}
+
+		var arr = [7,8,9,"a","b","c"];
+		arr.forEach(function(item,index,array){
+			console.log(item);
+			console.log(index);
+			console.log(array);
+			console.log(this);
+			//item: log 7 8 9 a b c
+			//index: log 1 2 3 4 5
+			//array: log [7, 8, 9, "a", "b", "c"] * length
+			//this === ( arr || this ) ? this === arr : ( this === ( null || undefined ) ? this === window );
+		},this);
+
+		function Counter() {
+			this.sum = 0;
+			this.count = 0;
+		}
+		Counter.prototype.add =function(array) {
+			array.forEach(function(entry) {
+				this.sum += entry;
+				++this.count;
+			}, this);
+		};
+		var obj = new Counter();
+		obj.add([2,5,9]);
+		console.log(obj.count);
+		console.log(obj.sum);
+
+		function copy(obj) {
+			var copy = Object.create(Object.getPrototypeOf(obj));
+			var propNames = Object.getOwnPropertyNames(obj);
+
+			propNames.forEach(function(name) {
+				var desc = Object.getOwnPropertyDescriptor(obj, name);
+				Object.defineProperty(copy, name, desc);
+			});
+			return copy;
+		}
+		var obj1 = { a: 1, b: 2 };
+		var obj2 = copy(obj1); // obj2 looks like obj1 now
+	</script>
+</body>
+</html>

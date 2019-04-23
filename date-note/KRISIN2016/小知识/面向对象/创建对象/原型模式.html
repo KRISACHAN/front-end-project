@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		function Prototype(){}
+
+		/*Prototype.prototype.name = "kris";
+		Prototype.prototype.age = "21";
+		Prototype.prototype.job = "FE";
+		Prototype.prototype.Say = function(){
+			console.log(this.job);
+		};*/
+
+		Prototype.prototype = {
+			constructor : Prototype,
+			name = "kris",
+			job = "FE",
+			Say : function(){
+				console.log(this.job);
+			}
+		}
+
+		var KRIS = new Prototype();
+		KRIS.job = "前端";
+		KRIS.Say();
+	</script>
+</body>
+</html>

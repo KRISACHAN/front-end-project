@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var a = {x:1};
+		var b = Object.create(a);
+		console.log(a);// Object {x: 1}
+		console.log(b);// Object {}
+
+		var c = Object.create(a,{
+			size: {
+				value: "large",
+				enumerable: true
+			},
+			shape: {
+				value: "round",
+				enumerable: true
+			}
+		});
+		console.log(c.size);// large
+		console.log(c.shape);// round
+		console.log(Object.getPrototypeOf(c));// Object {x: 1}
+		console.log(Object.getOwnPropertyDescriptor(c,"shape"));// Object {value: "round", writable: false, enumerable: true, configurable: false}
+
+		var d = Object.create(Object.prototype,{
+			come: {
+				value: "my house",
+				enumerable: true
+			},
+			go: {
+				value: "my office",
+				enumerable: true
+			}
+		});
+		console.log(d.come);// my house
+		console.log(d.go);// my office
+		console.log(Object.getPrototypeOf(d));// Object {}
+		console.log(Object.getOwnPropertyDescriptor(d,"go"));// Object {value: "my office", writable: false, enumerable: true, configurable: false}
+
+		var e = {y:2};
+		var f = Object.create(e);
+		var g = new Object(e);
+		console.log(f);// Object {}
+		console.log(g);// Object {y: 2}
+		console.log(f.__proto__);// Object {y: 2}
+		console.log(g.__proto__);// Object {}
+		//结论：
+		//f继承了e的原型;
+		//g的原型指向e的prototype;
+
+		//Shape - superclass
+		function Shape() {
+			this.x = 0;
+			this.y = 0;
+		}
+
+		Shape.prototype.move = function(x, y) {
+				this.x += x;
+				this.y += y;
+				console.info("Shape moved.");
+		};
+
+		// Rectangle - subclass
+		function Rectangle() {
+			Shape.call(this); //call super constructor.
+		}
+
+		console.log(Rectangle);
+		console.log(Rectangle.prototype);
+		console.log(Rectangle.prototype.constructor);
+
+		Rectangle.prototype = Object.create(Shape);
+
+		console.log(Rectangle.prototype);
+		console.log(Rectangle.prototype.constructor);
+
+		Rectangle.prototype = Object.create(Shape.prototype);
+
+		console.log(Rectangle.prototype);
+		console.log(Rectangle.prototype.constructor);
+
+		var rect = new Rectangle();
+
+		rect instanceof Rectangle //true.
+		rect instanceof Shape //true.
+
+		rect.move(1, 1); //Outputs, "Shape moved."
+	</script>
+</body>
+</html>

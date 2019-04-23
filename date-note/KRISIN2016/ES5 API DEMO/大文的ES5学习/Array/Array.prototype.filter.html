@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+	"use strict";
+		if (typeof Array.prototype.filter != "function") {
+			Array.prototype.filter = function (fn, context) {
+				var arr = [];
+				if (typeof fn === "function") {
+					 for (var k = 0, length = this.length; k < length; k++) {
+							fn.call(context, this[k], k, this) && arr.push(this[k]);
+					 }
+				}
+				return arr;
+			};
+		}
+		var arr = [5,7,8,4,1,2,5,6,3,4,7,1];
+		var filtered = arr.filter(function(item,index,array){
+				return item > 5;
+		},null);
+		console.log(filtered);
+
+	</script>
+</body>
+</html>

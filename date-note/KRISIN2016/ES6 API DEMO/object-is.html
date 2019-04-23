@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		'use strict';
+		let isNaN = Object.is(NaN, NaN);
+		let isZero = Object.is(+0, -0);
+		console.log(isNaN +","+ isZero);
+		console.log((NaN === NaN) +","+ (+0 === -0));
+	</script>
+</body>
+</html>

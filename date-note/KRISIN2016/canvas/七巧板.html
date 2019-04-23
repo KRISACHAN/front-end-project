@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>canvas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <canvas id="canvas" style="border:1px solid #aaa;display:block;margin:50px auto;">
+    当前浏览器不支持Canvas,请更换浏览器后再试！
+    </canvas>
+    <script type="text/javascript">
+        var tangrem = [
+            {p:[{x:0,y:0},{x:800,y:0},{x:400,y:400}],color:"#caff67"},
+            {p:[{x:0,y:0},{x:400,y:400},{x:0,y:800}],color:"#67becf"},
+            {p:[{x:800,y:0},{x:800,y:400},{x:600,y:600},{x:600,y:200}],color:"#ef3d61"},
+            {p:[{x:600,y:200},{x:600,y:600},{x:400,y:400}],color:"#f9f51a"},
+            {p:[{x:400,y:400},{x:600,y:600},{x:400,y:800}],color:"#a594c0"},
+            {p:[{x:200,y:600},{x:400,y:800},{x:0,y:800}],color:"#fa8ecc"},
+            {p:[{x:800,y:400},{x:800,y:800},{x:400,y:800}],color:"#f6ca29"},
+        ];
+        window.onload=function(){
+            var canvas=document.getElementById("canvas");
+            canvas.width=800;
+            canvas.height=800;
+            var context=canvas.getContext("2d");
+            for(var i=0;i<tangrem.length;i++){
+                draw(tangrem[i],context)
+            }
+            function draw(piece,cxt){
+                cxt.beginPath();
+                cxt.moveTo(piece.p[0].x,piece.p[0].y);
+                for (var i = 0; i < piece.p.length; i++) {
+                    cxt.lineTo(piece.p[i].x,piece.p[i].y);
+                };
+                cxt.closePath();
+                cxt.fillStyle=piece.color;
+                cxt.fill();
+                cxt.strokeStyle="black";
+                cxt.lineWidth=3;
+                cxt.stroke();
+            }
+        }
+    </script>
+</body>
+</html>

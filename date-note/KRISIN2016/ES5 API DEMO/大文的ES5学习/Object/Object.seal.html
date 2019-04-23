@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var o = {
+			prop: function(){},
+			foo: "bar"
+		}
+		console.log(Object.isSealed(o) === true); // false
+
+		// New properties may be added, existing properties may be changed or removed.
+		o.foo = "baz";
+		console.log(o.foo); // baz
+
+		Object.defineProperty(o,"foo",{ get: function() { return "yes"; } }); // convert data properties to accessors, or vice versa.
+		console.log(o.foo);
+
+		Object.defineProperty(o,"ooo",{ value: 777 }); /// add new value
+		console.log(o.ooo);
+
+		o.look = 'sunboy';
+		Object.defineProperty(o,"look",{ value: 'i am a sunboy' }); /// changes existing property value
+		console.log(o.look);
+
+		o.lumpy = "woof";
+		console.log(o.lumpy); // woof
+
+		delete o.prop;
+		console.log(o.prop); // undefined
+
+		var o1 = {
+			a: function(){},
+			b: "show"
+		}
+		Object.seal(o1);
+
+		console.log(Object.isSealed(o1) === true); // true
+
+		// Changing property values on a sealed object still works.
+		o1.b = "none";
+		console.log(o1.b);
+
+		// But you can't convert data properties to accessors, or vice versa.
+		//Object.defineProperty(o1,"foo",{ get: function() { return "not yes"; } }); // throws a TypeError
+
+		// Now any changes, other than to property values, will fail.
+		o1.what = "have or not?";
+		console.log(o1.what); // underfined
+
+		delete o1.b;
+		console.log(o1.b); // none
+
+
+		// ...and in strict mode such attempts will throw TypeErrors.
+		/*
+		(function instrict() {
+			'use strict';
+			delete o1.b; // throws a TypeError
+			console.log(o1.b);
+			o1.what = "have or not?"; // throws a TypeError
+			console.log(o1.what);
+		})();
+		*/
+
+		// Attempted additions through Object.defineProperty will also throw.
+		//Object.defineProperty(o1, 'ohai', { value: 17 }); // throws a TypeError
+		Object.defineProperty(o1, 'b', { value: 'eit' }); // changes existing property value
+		console.log(o1.b); // eit;
+	</script>
+</body>
+</html>

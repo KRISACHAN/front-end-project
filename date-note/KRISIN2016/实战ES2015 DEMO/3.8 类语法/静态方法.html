@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	// Syntax: class Name { static fn() {...} }
+	class Animal {
+		constructor(family, specie, hue) {
+			this.family = family
+			this.specie = specie
+			this.hue = hue
+		}
+		yell() {
+			console.log(this.hue)
+		}
+		static extend (constructor, ..._args) {
+			return class extends Animal {
+				constructor(...args) {
+					super(..._args)
+					constructor.call(this, ...args)
+				}
+			}
+		}
+	}
+	const Dog = Animal.extend(function(name) {
+		this.name = name
+	}, 'Canidae', 'Canis lupus', 'Woug')
+	const doge = new Dog('doge');
+	doge.yell();
+	console.log(doge.name);
+	</script>
+</body>
+</html>

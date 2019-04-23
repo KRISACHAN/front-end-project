@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta charset="utf-8" />
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.box {
+			width: 200px;
+			height: 200px;
+			line-height: 200px;
+			border: 1px solid;
+			background: #F8E889;
+			text-align: center;
+			margin: 100px auto 0;
+			transform: rotate(100deg);
+		}
+		.angle {
+			width: 400px;
+			margin: 100px auto 0;
+			text-align: center;
+		}
+	</style>
+</head>
+	<body>
+		<div id="box" class="box">
+			我素个有情怀的盒子
+		</div>
+		<div id="angle" class="angle">
+			<span>transform: rotate </span>
+			<input type="text" size="3" autocomplete="off" value="100" class="angle-input" id="angle-input">
+			<select id="angle-select" class="angle-select" autocomplete="off">
+				<option value="deg">deg</option>
+				<option value="grad">grad</option>
+				<option value="rad">rad</option>
+				<option value="turn">turn</option>
+			</select>
+		</div>
+		<script>
+			if(!!Array.from([1,2,3])){
+
+				class UNIT {
+
+					static dom(el){
+						if( el === document || el === window ) {
+							return el;
+						}else if( el.indexOf(".") === -1 && el.indexOf("#") === -1 && el.indexOf(" ") === -1 && el.indexOf(">") !== -1 ){
+							return document.getElementsByTagName(el)[0];
+						}else if(((el.indexOf(".") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 || ((el.indexOf("#") !== -1  ) && el.indexOf(" ") !== -1 ) || (el.indexOf(">") !== -1 ))|| document.querySelectorAll(el).length > 1 ){
+							return document.querySelectorAll(el);
+						};
+						return document.querySelector(el);
+					}
+
+					static css(obj,attr) {
+						obj = UNIT.dom(obj);
+						if(obj.currentStyle){
+							return obj.currentStyle[attr];
+						} else {
+							return getComputedStyle(obj, false)[attr];
+						};
+					}
+
+					static innerCss(el,obj,attr) {
+						el.innerHTML = UNIT.css(obj,attr);
+					}
+
+				};
+
+				const box = UNIT.dom("#box"),
+							angle = UNIT.dom("#angle"),
+							angleInput = UNIT.dom("#angle-input"),
+							angleSelect = UNIT.dom("#angle-select");
+
+				const unitsChange = e =>{
+					let Index = angleSelect.selectedIndex,
+							angleVal = angleSelect[Index].value;
+							numVal = angleInput.value.trim();
+							box.style.transform=`rotate(${numVal}${angleVal})`;
+							console.log(UNIT.css("#box","transform"));
+				};
+
+				angleSelect.addEventListener("change",unitsChange,false);
+				angleInput.addEventListener("input",unitsChange,false);
+
+			}else{
+
+				alert("ES6都不支持，赶紧换浏览器！");
+				window.location.href="http://browsehappy.com";
+
+			}
+		</script>
+	</body>
+</html>

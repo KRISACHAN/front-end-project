@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#grid {
+			width: 800px;
+			margin: 0 auto;
+			display: grid;
+			background-color: orange;
+
+			/* 分为两列:
+			 * 第一列尺寸由内容大小控制
+			 * 第二列使用剩余空间，但大小从不会小于游戏主机板和控制区域最小宽度
+			 * 游戏主面板和游戏控制区域占在第二列
+			 */
+			grid-definition-columns: auto minmax(min-content, 1fr);
+
+			/* 三行:
+			 * 第一行和最后一行的大小根据内容决定
+			 * 中间一行可以使用剩余空间，但从来不会小于游戏主面板的最小高度
+			 */
+			grid-definition-rows: auto minmax(min-content, 1fr) auto;
+		}
+
+		/*游戏的每一部分都是通过网格线来定义的，每个部分都在其占的行中，如果哪个部分占有的行数多于一行，需要使用跨行来决定*/
+		#title{
+			grid-column: 1;
+			grid-row: 1 ;
+			background-color: red;
+		}
+		#score{
+			grid-column: 1;/* X轴的位置 */
+			grid-row: 3;/* Y轴的位置 */
+			background-color:green;
+		}
+		#stats{
+			grid-column: 1;
+			grid-row: 2;
+			justify-self: start ;
+			background-color:#e9f;
+		}
+		#board{
+			grid-column: 2;
+			grid-row: 1 / span 2;
+			background-color: #ccc;
+		}
+		#controls {
+			grid-column: 2;
+			grid-row: 3;
+			align-self: center;
+			background-color: yellow;
+		}
+
+		/*@media (orientation: portrait) {
+			#grid {
+				display: grid;*/
+
+				/* 使用grid-template定义行、列和区域
+				 * 每个字符串定义行
+				 * 每个单词定义区域
+				 * 字符串中的单词数量确定了列数
+				 * 每个字符串中的单词数量必须相同 */
+
+				/*grid-template: "title stats"
+											 "score stats"
+											 "board board"
+											 "ctrls ctrls";*/
+
+				/* 列和行创建了模板
+				 * 模板属性可以指定一个分级功能
+				 * 模板属性可以定义网格的列与网格行 */
+
+				/*grid-definition-columns: auto minmax(min-content, 1fr);
+				grid-definition-rows: auto auto minmax(min-content, 1fr) auto;
+			}
+		}*/
+
+		/*@media (orientation: landscape) {
+			#grid {
+				display: grid;*/
+
+				/* Again the template property defines areas of the same name,
+				 * but this time positioned differently to better suit a
+				 * landscape orientation. */
+				/*grid-template: "title board"
+											 "stats board"
+											 "score ctrls";
+
+				grid-definition-columns: auto minmax(min-content, 1fr);
+				grid-definition-rows: auto minmax(min-content, 1fr) auto;
+			}
+		}*/
+
+		/* The grid-area property places a grid item into a named
+		 * region (area) of the grid. */
+		/*#title    { grid-area: title }
+		#score    { grid-area: score }
+		#stats    { grid-area: stats }
+		#board    { grid-area: board }
+		#controls { grid-area: ctrls }*/
+		/*非常遗憾的是到目前还没有浏览器支持grid-template属性，不过将来会支持的。这将是广大前端人员的福音。因为有了他布局不在是头痛的事情。*/
+	</style>
+</head>
+<body>
+	<div id="grid">
+		<div id="title">Game Title</div>
+		<div id="score">Score</div>
+		<div id="stats">Stats</div>
+		<div id="board">Board</div>
+		<div id="controls">Controls</div>
+	</div>
+	<script>
+
+	</script>
+</body>
+</html>

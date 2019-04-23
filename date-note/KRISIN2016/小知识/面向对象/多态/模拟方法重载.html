@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		function demo(a){
+			console.log(demo.length);
+			console.log(arguments);
+			console.log(arguments.length);
+		};
+		demo(1,2,3,4);
+
+		function Person() {
+			var args = arguments;
+			if (typeof args[0] === 'object' && args[0]) {
+				if (args[0].name) {
+					this.name = args[0].name;
+				}
+				if(args[0].age){
+					this.age = args[0].age;
+				}
+			} else {
+				if (args[0]) {
+					this.name = args[0];
+				}
+				if (args[1]) {
+					this.age = args[1];
+				}
+			}
+		};
+		//重写 toString 方法
+		Person.prototype.toString = function() {
+				console.log('name='+this.name+', age='+this.age);
+		};
+		var gao = new Person({name:'Gao',age:24});
+		gao.toString(); // name=Gao, age=24
+
+		var ying = new Person('Ying',25);
+		ying.toString(); // name=Ying, age=25
+	</script>
+</body>
+</html>

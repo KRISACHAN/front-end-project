@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		"use strict";
+		if (typeof Array.prototype.lastIndexOf != "function") {
+			Array.prototype.lastIndexOf = function (searchElement, fromIndex) {
+				var index = -1, length = this.length;
+				fromIndex = fromIndex * 1 || length - 1;
+
+				for (var k = length - 1; k > -1; k-=1) {
+						if (k <= fromIndex && this[k] === searchElement) {
+								index = k;
+								break;
+						}
+				}
+				return index;
+			};
+		}
+		function isLastIndexOf(arr,num,way){
+			var isWay = arr.lastIndexOf(num,way);
+			return console.log(isWay);
+		}
+		var arr1 = [2, 5, 9, 2];
+		isLastIndexOf(arr1,2,2);
+		isLastIndexOf(arr1,2);
+		isLastIndexOf(arr1,7);
+
+		var indices = [];
+		var arr2 = ['a','b','c','d','a','d'];
+		var el = 'a';
+		var idx = arr2.lastIndexOf(el);
+
+		while ( idx != -1) {
+			indices.push(idx);
+			idx = (idx > 0 ? arr2.lastIndexOf(el, idx - 1) : -1);
+		}
+
+		console.log(indices);
+	</script>
+</body>
+</html>

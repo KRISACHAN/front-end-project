@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+.loading{
+		margin:100px auto;
+		width:10em;
+		height:10em;
+		position:relative;
+	}
+
+
+.loading .progress{
+		position:absolute;
+		top:1em; left:1em;
+		width:8em;
+		height:8em;
+		border-radius:50%;
+		text-align:center;
+		background:white;
+		line-height:8em;
+	}
+.left,.right{
+		 width:5em;
+		 height:10em;
+		 overflow:hidden;
+		 position:relative;
+		 float:left;
+	}
+.left{
+		border-radius:10em 0 0 10em;
+	}
+.right{
+			border-radius:0 10em 10em 0;
+	}
+.left:after,.right:after{
+		 content:"";
+		 width:5em;
+		 height:10em;
+		 display:block;
+		 position:absolute;
+		 background-color:white;
+		 border-radius:10em 0 0 10em;
+		 background-color:#3FF;
+	}
+.right:after{
+		 border-radius:0 10em 10em 0;
+		 -webkit-animation:rotateB 8s infinite linear;
+		 transform-origin:left center;
+	}
+.left:after{
+			-webkit-animation:rotateA 8s infinite linear;
+		 transform-origin:right center;
+	}
+	@-webkit-keyframes rotateA{
+			 0%,25%{transform:rotateZ(0deg);}
+			 50%,75%{ transform:rotateZ(180deg);}
+			 100%{ transform:rotateZ(360deg);}
+		}
+	@-webkit-keyframes rotateB{
+				25%,50%{ transform:rotateZ(180deg);}
+			75%,100%{ transform:rotateZ(360deg);}
+		}

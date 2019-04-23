@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		let o = {};
+		Object.defineProperties(o,{
+			"a": {
+				value: "chifanla",
+				writable: true,
+				enumerable : true
+			},
+			"b": {
+				value: "duzier",
+				writable: false,
+				enumerable : false
+			}
+		});
+		console.info(o.b); //duzier
+
+		let o1 = {};
+
+		o1.c = 1;
+
+		o1.e = 1;
+
+		Object.defineProperties(o1,{
+			"d": {
+				value: "1"
+			}
+		});
+
+		console.info(o1.c === o1.d); //false
+		console.info(o1.c == o1.d); //true
+		console.info(o1.c === o1.e); //true
+
+		console.log(typeof o1.c); //number
+		console.log(typeof o1.d); //string
+		console.log(typeof o1.e); //number
+
+		let o2 = {};
+
+		o2.f = 1;
+
+		Object.defineProperty(o2, "g", {
+			value : 1,
+			writable : true,
+			configurable : true,
+			enumerable : true
+		});
+
+		console.info(o2.f === o2.g); // true
+
+		console.log(typeof o2.f); // number
+		console.log(typeof o2.g); // number
+
+		let o3 = {};
+
+		o3.h = 1;
+
+		Object.defineProperties(o3,{
+			"i": {
+				value: "1"
+			}
+		});
+
+		Object.defineProperty(o3, "j", {
+			value : 1,
+			writable : true,
+			configurable : true,
+			enumerable : true
+		});
+
+		console.info(o3.h === o3.i); // false
+		console.info(o3.h == o3.i); //true
+		console.info(o3.j === o3.i); //false
+		console.info(o3.j == o3.i); //true
+		console.info(o3.h === o3.j); //true
+
+		console.log(typeof o3.h); //number
+		console.log(typeof o3.i); //string
+		console.log(typeof o3.j); //number
+	</script>
+</body>
+</html>

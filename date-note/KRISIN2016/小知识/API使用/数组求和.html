@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		Array.prototype.sum = function (){
+			for(var sum = 0 , i = 0; i<this.length; i++){
+				sum += parseInt(this[i]);
+			};
+			return sum;
+		};
+		Array.prototype.maxima = function (){
+			for(var i = 0 , maxValue = Number.MIN_VALUE; i < this.length; i++){
+				parseInt(this[i] > maxValue && (maxValue = this[i]));
+			};
+			return maxValue;
+		};
+		var arr = [1,21,3,4,22,45,6,7,32];
+		console.log(arr.join("+") + "=" + arr.sum());
+		console.log(arr.join("|") + "中, 最大的数是:" + arr.maxima());
+	</script>
+</body>
+</html>

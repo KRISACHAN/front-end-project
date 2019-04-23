@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		var arr = [0,1,2,3,4];
+		var arr1 = ["a","b","c","d","e"];
+		arr.reduceRight(function(previousValue, currentValue, index, array){
+			console.log("previousValue："+previousValue);
+			console.log("-----------------------------1");
+			console.log("currentValue："+currentValue);
+			console.log("-----------------------------2");
+			console.log("index："+index);
+			console.log("-----------------------------3");
+			console.log("array："+array);
+			console.log("-----------------------------4");
+			console.log(this);
+			console.log("-----------------------------5");
+		},"hah");
+
+		var total = [0, 1, 2, 3].reduceRight(function(a, b) {
+			console.log(this);
+			return a + b;
+		});
+		console.log(total);
+		console.log(typeof total);//number
+
+		var total1 = [0, 1, 2, 3].reduceRight(function(a, b) {
+			console.log(this);
+			return a + b;
+		},[]);
+		console.log(total1);//3210
+		console.log(typeof total1);//string
+
+		var total2 = [0, 1, 2, 3].reduceRight(function(a, b) {
+			console.log(this);
+			return a + b;
+		},{a:11,b:12,c:13});
+		console.log(total2);//[object Object]3210
+		console.log(typeof total2);//string
+
+		var flattened = [["a", "b"], ["c", "d"], ["e", "f"]].reduceRight(function(a, b) {
+			console.log(this);
+			return a.concat(b);
+		},["1","2","3"]);
+		console.log(flattened);
+	</script>
+</body>
+</html>

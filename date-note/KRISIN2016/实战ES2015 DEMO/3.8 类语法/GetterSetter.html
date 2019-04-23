@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	const Counter = {
+		_count: 0,
+		get value() {
+			return ++this._count
+		}
+	}
+	console.log(Counter.value);
+	console.log(Counter.value);
+	console.log(Counter.value);
+
+	const List = {
+		_array: [],
+
+		set new(value) {
+			this._array.push(value)
+		},
+
+		get last() {
+			return this._array[0]
+		},
+
+		get value() {
+			return this._array
+		}
+	}
+
+	List.new = 1;
+	List.new = 2;
+	List.new = 3;
+	console.log(List.last);
+	console.log(List.value);
+
+	class Point {
+		constructor(x, y) {
+			this.x = x
+			this.y = y
+		}
+
+		get d() {
+			return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))
+		}
+	}
+	const p = new Point(3, 4);
+	console.log(p.d);
+	</script>
+</body>
+</html>

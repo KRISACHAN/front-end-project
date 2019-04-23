@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+	<script>
+		// 新建的对象默认不是密封的.
+		var full = {};
+		Object.isSealed(full);
+		var iamfull = Object.isSealed(full);
+		console.log(iamfull); // false
+
+		// 如果你把一个空对象变的不可扩展,则它同时也会变成个密封对象.
+		var fill = {}
+		Object.preventExtensions(fill);
+		var iamfill = Object.isSealed(fill);
+		console.log(iamfill) // true
+
+		// 但如果这个对象不是空对象,则它不会变成密封对象,因为密封对象的所有自身属性必须是不可配置的.
+		var empty = { name: "kris" };
+		Object.preventExtensions(empty);
+		Object.isSealed(empty); // false
+		var isempty = Object.isSealed(empty);
+		console.log(isempty); // false
+
+		// 如果把这个属性变的不可配置,则这个对象也就成了密封对象.
+		var confable = { age: "21" };
+		Object.defineProperty(confable, "age", { configurable: false });
+		var isconfable = Object.isSealed(confable);
+		console.log(isconfable); // true
+
+		// 最简单的方法来生成一个密封对象,当然是使用Object.seal.
+		var unseal = { say: "hehehe" };
+		Object.seal(unseal);
+		var isunseal = Object.isSealed(unseal);
+		console.log(isunseal); // true
+
+		// 一个密封对象同时也是不可扩展的.
+		Object.isExtensible(unseal);
+		var isisunseal = Object.isExtensible(unseal);
+		console.log(isisunseal); // fasle
+
+		var sealed = {};
+		Object.seal(sealed);
+		// 一个密封对象也可以是一个冻结对象,但不是必须的.
+		Object.isFrozen(sealed);
+		var issealed = Object.isFrozen(sealed);
+		console.log(issealed); // true
+
+		var s = { p: 3 };
+
+		var s2 = Object.seal(s);
+		Object.isFrozen(s2); // false
+
+		var iss2 = Object.isFrozen(s2);
+		console.log(iss2); // false
+		s.p = 4;
+		console.log(s.p); // 4 属性"p"可写
+
+		var s3 = Object.seal({ get p() { return 0; } });
+		Object.isFrozen(s3);
+
+		var ohno = Object.isFrozen(s3);
+		console.log(ohno); //true 访问器属性不考虑可写不可写,只考虑是否可配置
+
+		Object.isSealed(1);
+		var trueorfalse = Object.isSealed(1);
+		console.log(trueorfalse);
+	</script>
+</body>
+</html>
