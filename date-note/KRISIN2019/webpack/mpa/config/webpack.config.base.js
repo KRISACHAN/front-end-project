@@ -116,7 +116,8 @@ const baseConfig = {
             }
         ]
     },
-    plugins: [
+    'externals': {},
+    'plugins': [
         ...HTMLPlugins,
         new CopyWebpackPlugin([
             {
