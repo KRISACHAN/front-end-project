@@ -5,33 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>index</title>
   <style>
-    .moveBox {
-      width: 100px;
-      height: 100px;
-      background: rgba(169, 169, 169, 1);
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
   </style>
 </head>
 <body>
-  <div id="moveBox" class="moveBox"></div>
   <ul>
     <li class="li b"></li>
     <li class="li"></li>
     <li class="li"></li>
   </ul>
   <script src="base.js"></script>
-  <script src="throttle.js"></script>
-  <script src="animate.js"></script>
   <script>
     'use strict';
-    window.onresize = throttle(function () {
-      log(Date.now())
-    }, 500);
-    animate(moveBox).start('left', 500, 1000, 'strongEaseOut');
-    log(dom('#moveBox'));
     log(dom('.li'));
     aFn([1, 2, 3, 4, 5], 'forEach', function (e, i, a) {
       log(e)
