@@ -48,6 +48,11 @@ const webpackProd = {
         new uglifyJSPlugin({
             sourceMap: true,
             include: /\/core/,
+            uglifyOptions: {
+                drop_console: true,
+                drop_debugger: true,
+                warnings: false
+            }
         }),
         new compressionPlugin({
             filename: '[path].br[query]',
