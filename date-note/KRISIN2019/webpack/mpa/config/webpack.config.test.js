@@ -10,4 +10,6 @@ const webpackTest = {
     }
 };
 
+delete webpackBase.entry;
+
 module.exports = webpackMerge(webpackBase, webpackTest);
