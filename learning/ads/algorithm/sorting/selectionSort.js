@@ -1,8 +1,9 @@
 'use strict'
 /**
- * 首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置
- * 再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。
- * 重复第二步，直到所有元素均排序完毕。
+ * 算法步骤：
+ * 1. 首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置；
+ * 2. 再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾；
+ * 3. 重复第二步，直到所有元素均排序完毕。
  */
 /**
  * @ 最差时间复杂度 : O(n²)
@@ -12,20 +13,22 @@
  * @ 空间复杂度 : O(1)
  * @ 排序方式 : In-place 
  */
+const randomList = require('./randomList')
 const selectionSort = arr => {
     const len = arr.length
-    let minIndex
-    for (let i = 0; i < len - 1; ++i) {
-        minIndex = i
-        for (let j = i + 1; j < len; ++j) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j
+    let min, i, j
+    for (i = 0; i < len - 1; ++i) {
+        min = i
+        for (j = i + 1; j < len; ++j) {
+            if (arr[j] < arr[min]) {
+                min = j
             }
         }
-        [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
+        [arr[i], arr[min]] = [arr[min], arr[i]]
     }
     return arr
 }
-const arr = [1, 2, 3, 4 ,8, 2, 5, 8, 7, 8, 11, 13, 17, 19, 20, 22, 5, 30, 29, 28]
-const sortedArr = selectionSort(arr)
+console.time('selectionSort')
+const sortedArr = selectionSort(randomList)
 console.log(sortedArr)
+console.timeEnd('selectionSort')
