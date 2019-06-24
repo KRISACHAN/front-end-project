@@ -39,8 +39,8 @@ const webpackProd = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'static/css/[name].[hash].css',
-            chunkFilename: 'static/css/[id].[hash].css'
+            filename: 'static/css/[name].[chunkhash:8].css',
+            chunkFilename: 'static/css/[id].[chunkhash:8].css'
         }),
         new webpack.HashedModuleIdsPlugin(),
         new cleanWebpackPlugin(['./dist/'], {
@@ -70,7 +70,14 @@ const webpackProd = {
             assetNameRegExp: /\.css$/g,
             cssProcessor: require('cssnano'),
             cssProcessorPluginOptions: {
-            preset: ['default', { discardComments: { removeAll: true } }],
+                preset: [
+                    'default', 
+                    { 
+                        discardComments: { 
+                            removeAll: true 
+                        } 
+                    }
+                ],
             },
             canPrint: true
         })
