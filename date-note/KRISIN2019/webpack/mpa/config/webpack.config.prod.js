@@ -4,6 +4,7 @@ const webpackMerge = require('webpack-merge');
 const cleanWebpackPlugin = require('clean-webpack-plugin');
 const uglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const compressionPlugin = require('compression-webpack-plugin');
 const webpackBase = require('./webpack.config.base.js');
 const {
@@ -64,6 +65,14 @@ const webpackProd = {
             algorithm: 'gzip',
             deleteOriginalAssets: false,
             minRatio: 0.8
+        }),
+        new OptimizeCssAssetsPlugin({
+            assetNameRegExp: /\.css$/g,
+            cssProcessor: require('cssnano'),
+            cssProcessorPluginOptions: {
+            preset: ['default', { discardComments: { removeAll: true } }],
+            },
+            canPrint: true
         })
     ],
     optimization: {}
