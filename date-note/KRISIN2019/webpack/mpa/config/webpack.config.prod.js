@@ -47,15 +47,18 @@ const webpackProd = {
         }),
         new uglifyJSPlugin({
             sourceMap: true,
-            include: /\/core/,
+            exclude: /node_modules/,
             uglifyOptions: {
-                drop_console: true,
-                drop_debugger: true,
-                warnings: false
+                compress: {
+                    drop_console: true,
+                    drop_debugger: true,
+                    warnings: false 
+                },
+                comments: false
             }
         }),
         new compressionPlugin({
-            filename: '[path].br[query]',
+            filename: '[path].gz[query]',
             test: /(\.jsx|\.js|\.css|\.html|\.png|\.jpg|\.webp|\.svg)$/,
             cache: true,
             algorithm: 'gzip',
@@ -63,6 +66,7 @@ const webpackProd = {
             minRatio: 0.8
         })
     ],
+    optimization: {}
     // optimization: {
     //     splitChunks: {
     //         cacheGroups: {
