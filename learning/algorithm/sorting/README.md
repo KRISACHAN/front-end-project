@@ -208,7 +208,7 @@ const selectionSort = arr => {
 
 ```javascript
 const insertionSort = arr => {
-	const len = arr.length
+    const len = arr.length
     let j, temp
     for (let i = 0; i < len; ++i) {
         j = i /* 存储当前索引，便于后续与数组其他元素对比 */
