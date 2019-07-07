@@ -211,12 +211,13 @@ const insertionSort = arr => {
     const len = arr.length
     let j, temp
     for (let i = 0; i < len; ++i) {
-        j = i /* 存储当前索引，便于后续与数组其他元素对比 */
-        while (j > 0 && arr[j - 1] > temp) {
-            arr[j] = arr[j - 1]
-            j--
+        j = i - 1
+        temp = arr[i]
+        while (j >= 0 && arr[j] > temp) {
+          arr[j + 1] = arr[j]
+          j--
         }
-        [arr[j], arr[i]] = [arr[i], arr[i]]
+        arr[j + 1] = temp
     }
     return arr
 }
@@ -259,11 +260,11 @@ const shellSort = arr => {
     let len = arr.length
     for (let g = 0, gLen = gaps.length; g < gaps.length; ++g) {
         for (let i = gaps[g]; i < len; ++i) {
-			let j
+            let temp = arr[i], j
             for (j = i; j >= gaps[g] && arr[j - gaps[g]] > arr[i]; j -= gaps[g]) {
                 arr[j] = arr[j - gaps[g]]
             }
-            [arr[i], arr[j]] = [arr[j], arr[i]]
+            arr[j] = temp
         }
     }
     return arr

@@ -5,11 +5,6 @@ const shellSort = arr => {
     let len = arr.length
     for (let g = 0, gLen = gaps.length; g < gaps.length; ++g) {
         for (let i = gaps[g]; i < len; ++i) {
-            // let j
-            // for (j = i; j >= gaps[g] && arr[j - gaps[g]] > arr[i]; j -= gaps[g]) {
-            //     arr[j] = arr[j - gaps[g]]
-            // }
-            // [arr[i], arr[j]] = [arr[j], arr[i]]
             let temp = arr[i], j
             for (j = i; j >= gaps[g] && arr[j - gaps[g]] > arr[i]; j -= gaps[g]) {
                 arr[j] = arr[j - gaps[g]]
