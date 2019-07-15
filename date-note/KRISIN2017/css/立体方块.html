@@ -26,8 +26,8 @@
       position: absolute;
       left: 0;
       top: 0;
-      width: 200px;
-      height: 200px;
+/*      width: 200px;
+      height: 200px;*/
       background: #C0D7DD;
       opacity: 0.8;
       border: 1px solid #fff;
@@ -36,22 +36,34 @@
       background-size: 20px 20px; /* 渐变间距 */
     }
     .front {
-      transform: rotateY(0) translateZ(100px);
+      width: 200px;
+      height: 100px;
+      transform: rotateY(0) translateZ(50px);
     }
     .back {
-      transform: translateZ(-100px) rotateY(180deg);
+      transform: translateZ(-50px) rotateY(180deg);
+      width: 200px;
+      height: 100px;
     }
     .left {
-      transform: rotateY(-90deg) translateZ(100px);
+      width: 100px;
+      height: 100px;
+      transform: rotateY(-90deg) translateZ(50px);
     }
     .right {
-      transform: rotateY(90deg) translateZ(100px);
+      width: 100px;
+      height: 100px;
+      transform: rotateY(90deg) translateZ(150px);
     }
     .top {
-      transform: rotateX(90deg) translateZ(100px);
+      width: 200px;
+      height: 100px;
+      transform: rotateX(90deg) translateZ(50px);
     }
     .bottom {
-      transform: rotateX(90deg) translateZ(-100px);
+      width: 200px;
+      height: 100px;
+      transform: rotateX(90deg) translateZ(-50px);
     }
     @keyframes rotate {
       0%, 100% {
