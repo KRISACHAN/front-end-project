@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>slider-3D</title>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      :root {
+        --base-color: #03A9F4;
+        --bg-color: #3cba92;
+      }
+      .center {
+        position: absolute;
+        margin: auto;
+        top: 50px;
+        right: 0;
+        left: 0;
+      }
+      .box {
+        width: calc(var(--base-size) * 4);
+        height: var(--base-size);
+      }
+      .slider {
+        width: var(--base-size);
+        height: var(--base-size);
+        color: var(--base-color);
+        perspective: 0px;
+        transform-style: preserve-3d;
+        position: absolute;
+        top: 0;
+        transform: rotateX(0deg);
+      }
+      .slider-1 {
+        left: calc(var(--base-size) * 0);
+        transition: all 1s linear 0s;
+      }
+      .slider-2 {
+        left: calc(var(--base-size) * 1);
+        transition: all 1s linear 0.5s;
+      }
+      .slider-3 {
+        left: calc(var(--base-size) * 2);
+        transition: all 1s linear 1s;
+      }
+      .slider-4 {
+        left: calc(var(--base-size) * 3);
+        transition: all 1s linear 1.5s;
+      }
+      .slider-page {
+        transform-style: preserve-3d;
+        width: var(--base-size);
+        height: var(--base-size);
+        position: relative;
+      }
+      .slider-main {
+        width: var(--base-size);
+        height: var(--base-size);
+        position:absolute;
+        box-sizing: border-box;
+        border: 1px solid currentcolor;
+      }
+      .slider-front {
+        transform: translateZ(calc(var(--base-size) / 2));
+        background-image: url(http://www.33lc.com/article/UploadPic/2012-8/2012891154949207.jpg);
+        border: none;
+      }
+      .slider-bottom {
+        transform: rotateX(-90deg) translateZ(calc(var(--base-size) / 2));
+        background-image: url(http://pic1.win4000.com/wallpaper/3/5858a0ab1ceb6.jpg);
+        border: none;
+      }
+      .slider-back {
+        transform: rotateZ(180deg) translateZ(calc(calc(-1 * var(--base-size)) / 2));
+        background-image: url(http://pic1.win4000.com/wallpaper/2/53cf2c1e5056b.jpg);
+        border: none;
+      }
+      .slider-top {
+        transform: rotateX(90deg) translateZ(calc(var(--base-size) / 2));
+        background-image: url(http://img.zcool.cn/community/03886cf575a66110000018c1b51ca27.jpg);
+        border: none;
+      }
+      .slider-right {
+        visibility: hidden;
+        transform: rotateY(90deg) translateZ(calc(var(--base-size) / 2));
+      }
+      .slider-left {
+        visibility: hidden;
+        transform: rotateY(-90deg) translateZ(calc(var(--base-size) / 2));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box center">
+      <div class="slider slider-1">
+        <div class="slider-page">
+          <div class="slider-main slider-front"></div>
+          <div class="slider-main slider-bottom"></div>
+          <div class="slider-main slider-back"></div>
+          <div class="slider-main slider-top"></div>
+          <div class="slider-main slider-right"></div>
+          <div class="slider-main slider-left"></div>
+        </div>
+      </div>
+      <div class="slider slider-2">
+        <div class="slider-page">
+          <div class="slider-main slider-front"></div>
+          <div class="slider-main slider-bottom"></div>
+          <div class="slider-main slider-back"></div>
+          <div class="slider-main slider-top"></div>
+          <div class="slider-main slider-right"></div>
+          <div class="slider-main slider-left"></div>
+        </div>
+      </div>
+      <div class="slider slider-3">
+        <div class="slider-page">
+          <div class="slider-main slider-front"></div>
+          <div class="slider-main slider-bottom"></div>
+          <div class="slider-main slider-back"></div>
+          <div class="slider-main slider-top"></div>
+          <div class="slider-main slider-right"></div>
+          <div class="slider-main slider-left"></div>
+        </div>
+      </div>
+      <div class="slider slider-4">
+        <div class="slider-page">
+          <div class="slider-main slider-front"></div>
+          <div class="slider-main slider-bottom"></div>
+          <div class="slider-main slider-back"></div>
+          <div class="slider-main slider-top"></div>
+          <div class="slider-main slider-right"></div>
+          <div class="slider-main slider-left"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      'use strict'
+      const baseSize = 200
+      document.documentElement.style.setProperty('--base-size', baseSize + 'px')
+      const sliders = [...document.querySelectorAll('.slider')]
+      const len = sliders - 1
+      sliders.forEach((slider, idx) => {
+        const xPos = (idx * baseSize)
+        const front = slider.querySelector('.slider-front')
+        const bottom = slider.querySelector('.slider-bottom')
+        const back = slider.querySelector('.slider-back')
+        const top = slider.querySelector('.slider-top')
+        front.style = `background-position: -${xPos}px -100px;`
+        bottom.style = `background-position: -${xPos}px -100px;`
+        back.style = `background-position: ${xPos}px 0px;`
+        top.style = `background-position: -${xPos}px -100px;`
+      })
+      const setPos = () => {
+        let index = 0
+        const setRotateX = () => {
+          index++
+          if (index > 3) {
+            index = 0
+          }
+          sliders.forEach(slider => {
+            slider.style.transform = `rotateX(${index * 90}deg)`
+          })
+          setTimeout(() => {
+            setRotateX()
+          }, 3000)
+        }
+        setRotateX()
+      }
+      setPos()
+    </script>
+  </body>
+</html>

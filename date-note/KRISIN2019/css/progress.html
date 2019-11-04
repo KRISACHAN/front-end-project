@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>progress</title>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      progress {
+        -webkit-appearance: none;
+      }
+      ::-webkit-progress-value {
+        background: linear-gradient(
+          -45deg, 
+          transparent 33%, 
+          rgba(0, 0, 0, .1) 33%, 
+          rgba(0,0, 0, .1) 66%, 
+          transparent 66%
+        ),
+        linear-gradient(
+          to top, 
+          rgba(255, 255, 255, .25), 
+          rgba(0, 0, 0, .25)
+        ),
+        linear-gradient(
+          to left,
+          #09c,
+          #f44);
+        border-radius: 2px; 
+        background-size: 35px 20px, 100% 100%, 100% 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <progress max="100" value="80"></progress>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

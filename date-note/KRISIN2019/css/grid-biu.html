@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>box-reflect</title>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      .grid {
+        display: grid;
+        width: 400px;
+        height: 400px;
+        margin: 1em auto;
+      }
+      .border {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: "a b c" "d e f" "g h i";
+      }
+      .a {
+        grid-area: a;
+        border-radius: 0 5px 0 0;
+        border-top: 1px solid currentcolor;
+        border-right: 1px solid currentcolor;
+      }
+      .b {
+        grid-area: b;
+      }
+      .c {
+        grid-area: c;
+      }
+      .d {
+        grid-area: d;
+      }
+      .e {
+        grid-area: e;
+        border-radius: 0 5px 0 0;
+        border-top: 1px solid currentcolor;
+      }
+      .f {
+        grid-area: f;
+      }
+      .g {
+        grid-area: g;
+      }
+      .h {
+        grid-area: h;
+      }
+      .i {
+        grid-area: i;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid border">
+      <div class="a"></div>
+      <div class="b"></div>
+      <div class="c"></div>
+      <div class="d"></div>
+      <div class="e"></div>
+      <div class="f"></div>
+      <div class="g"></div>
+      <div class="h"></div>
+      <div class="i"></div>
+    </div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

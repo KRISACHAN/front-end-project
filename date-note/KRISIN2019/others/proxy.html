@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>demo</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script>
+      'use strict';
+      let arr1 = '1,2,3'.split(',');
+      let obj1 = {};
+      Object.defineProperty(obj1, 'arr', {
+        get() {
+          console.log('getter', arr1);
+          return arr1;
+        },
+        set (newVal, oldVal) {
+          console.log('setter', newVal, oldVal);
+          arr1 = newVal;
+        },
+      });
+
+
+      let arr2 = '1,2,3'.split(',');
+      let proxy = new Proxy(arr2, {
+        get (target, key, receiver) {
+          console.log('get', target, key, receiver);
+          return Reflect.get(target, key, receiver);
+        },
+        set (target, key, value, receiver) {
+          console.log('set', target, key, value, receiver);
+          return Reflect.set(target, key, value, receiver);
+        },
+      });
+      proxy.push(4);
+    </script>
+  </body>
+</html>

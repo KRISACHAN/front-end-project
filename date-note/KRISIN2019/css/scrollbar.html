@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>scrollbar</title>
+    <style>
+      :root {
+        --base-color: #1f2040;
+        --sb-color: #36d1dc;
+        --shadow-color: #4ca1af;
+      }
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        color: var(--base-color);
+      }
+      .box {
+        width: 300px;
+        height: 400px;
+        overflow-y: auto;
+        margin: 10px auto;
+        border: 1px solid currentcolor;
+      }
+      /*
+       * 整个滚动条.
+       */
+      .scrollbar1::-webkit-scrollbar {
+        width: 12px;
+      }
+      /*
+       * 滚动条上的按钮 (上下箭头).
+       */
+      .scrollbar1::-webkit-scrollbar-button {
+      }
+      /*
+       * 滚动条上的滚动滑块.
+       */
+      .scrollbar1::-webkit-scrollbar-thumb {
+        border-radius: 100px;
+        box-shadow: inset 0 0 6px var(--shadow-color);
+      }
+      /*
+       * 滚动条轨道.
+       */
+      .scrollbar1::-webkit-scrollbar-track {
+      }
+      /*
+       * 滚动条没有滑块的轨道部分.
+       */
+      .scrollbar1::-webkit-scrollbar-track-piece {
+        background-color: #FFF;
+      }
+      /*
+       * 当同时有垂直滚动条和水平滚动条时交汇的部分.
+       */
+      .scrollbar1::-webkit-scrollbar-corner {
+
+      }
+      /*
+       * 某些元素的corner部分的部分样式(例:textarea的可拖动按钮).
+       */
+      .scrollbar1::-webkit-resizer {
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box scrollbar1">
+      <h1 align="center">这是标题吼~</h1>
+      <p>人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~人家是段落啦~</p>
+    </div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

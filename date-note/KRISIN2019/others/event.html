@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>demo</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <input type='file' />
+    <script>
+      'use strict'
+      const event = new Event('click')
+      const body = document.querySelector('body')
+      body.addEventListener('click', ev => {
+        console.log('biu')
+      }, false)
+      body.addEventListener('touchmove', ev => {
+        body.dispatchEvent(event)
+      }, false)
+    </script>
+  </body>
+</html>

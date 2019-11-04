@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>details</title>
+    <style>
+      details {
+        width: 120px;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        padding: 0.5em 0.5em 0;
+      }
+
+      summary {
+        font-weight: bold;
+        margin: -0.5em -0.5em 0;
+        padding: 0.5em;
+      }
+
+      details[open] {
+        padding: 0.5em;
+      }
+
+      details[open] summary {
+        border-bottom: 1px solid #aaa;
+        margin-bottom: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <details id="details">
+      <summary>详情</summary>
+      <ol>
+        <li>第一点</li>
+        <li>第二点</li>
+        <li>第三点</li>
+        <li>第四点</li>
+        <li>第五点</li>
+      </ol>
+    </details>
+    <script>
+      'use strict';
+      details.addEventListener('toggle', event => {
+        console.log(event);
+      });
+    </script>
+  </body>
+</html>

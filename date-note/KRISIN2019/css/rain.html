@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>rain</title>
+    <style>
+      :root {
+        --bg-color: #171717;
+        --cloudy-size: 80px;
+        --cloudy-color: #7F7F7F;
+        --cloudy-color2: #3E3E3E;
+        --raindrop-color: rgba(13, 188, 232, .8);
+        --raindrop-color2: rgba(13, 188, 232, .3);
+      }
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      body,
+      html {
+        background-color: var(--bg-color);
+      }
+
+      .cloudy {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 6px;
+        height: 18px;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-radius: 50%;
+        animation: drop .7s infinite linear;
+      }
+
+      .cloudy:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: var(--cloudy-size);
+        height: var(--cloudy-size);
+        transform: translate(-50%, -50%);
+        background-color: var(--cloudy-color);
+        border-radius: 50%;
+        box-shadow: 
+          -60px -20px 0 5px var(--cloudy-color),
+          50px -10px 0 0px var(--cloudy-color),
+          100px -16px 0 0px var(--cloudy-color),
+          -10px -70px 0 10px var(--cloudy-color),
+          60px -60px 0 8px var(--cloudy-color),
+          73px -66px 0 8px var(--cloudy-color2),
+          96px -30px 0 0px var(--cloudy-color2),
+          20px -78px 0 8px var(--cloudy-color2);
+        animation: cloudy 3s ease-in-out infinite;
+      }
+
+      .cloudy:after {
+        content: '';
+        position: absolute;
+        top: 220px;
+        left: 50%;
+        width: calc(var(--cloudy-size) * 3);
+        height: calc(var(--cloudy-size) / 3);
+        transform: translate(-46%, -50%);
+        background-color: rgba(0 ,0 ,0 , .8);
+        border-radius: 50%;
+        animation: cloudy_shadow 3s ease-in-out infinite;
+      }
+
+      @keyframes cloudy {
+        50% {
+          transform: translate(-50%, -70%);
+        }
+        100% {
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      @keyframes cloudy_shadow {
+        50%{
+          transform: translate(-46%, -50%) scale(0.8);
+          background:rgba(0,0,0,.3);
+        }
+        100%{
+          transform: translate(-46%, -50%) scale(1);
+          background:rgba(0,0,0,.8);
+        }
+      }
+
+      @keyframes drop {
+        0% {
+          box-shadow: 
+            -80px 15px var(--raindrop-color2),
+            -50px 65px var(--raindrop-color),
+            -25px 110px var(--raindrop-color),
+            0px 35px var(--raindrop-color2),
+            30px 55px var(--raindrop-color),
+            50px 120px var(--raindrop-color),
+            80px 50px var(--raindrop-color),
+            100px 70px var(--raindrop-color2);
+         }
+        25% {
+          box-shadow: 
+            -80px 45px var(--raindrop-color),
+            -50px 95px var(--raindrop-color),
+            -25px 150px var(--raindrop-color2),
+            0px 60px var(--raindrop-color),
+            30px 90px var(--raindrop-color),
+            50px 150px var(--raindrop-color2),
+            80px 100px var(--raindrop-color),
+            100px 90px var(--raindrop-color);
+        }
+        26% {
+          box-shadow: 
+            -80px 45px var(--raindrop-color),
+            -50px 95px var(--raindrop-color),
+            -25px 45px var(--raindrop-color2),
+            0px 60px var(--raindrop-color),
+            30px 90px var(--raindrop-color),
+            50px 60px var(--raindrop-color2),
+            80px 100px var(--raindrop-color),
+            100px 90px var(--raindrop-color);
+        }
+        50% {
+          box-shadow: 
+            -80px 75px var(--raindrop-color),
+            -50px 130px var(--raindrop-color),
+            -25px 65px var(--raindrop-color),
+            0px 85px var(--raindrop-color),
+            30px 130px var(--raindrop-color),
+            50px 75px var(--raindrop-color),
+            80px 150px var(--raindrop-color),
+            100px 110px var(--raindrop-color);
+        }
+        75% {
+          box-shadow: 
+            -80px 105px var(--raindrop-color),
+            -50px 190px var(--raindrop-color2),
+            -25px 85px var(--raindrop-color),
+            0px 110px var(--raindrop-color),
+            30px 180px var(--raindrop-color2),
+            50px 90px var(--raindrop-color),
+            80px 200px var(--raindrop-color2),
+            100px 130px var(--raindrop-color);
+        }
+        76% {
+          box-shadow: 
+            -80px 105px var(--raindrop-color),
+            -50px 35px var(--raindrop-color2),
+            -25px 85px var(--raindrop-color),
+            0px 110px var(--raindrop-color),
+            30px 20px var(--raindrop-color2),
+            50px 90px var(--raindrop-color),
+            80px 0px var(--raindrop-color2),
+            100px 130px var(--raindrop-color);
+        }
+        100% {
+          box-shadow: 
+            -80px 150px var(--raindrop-color2),
+            -50px 65px var(--raindrop-color),
+            -25px 110px var(--raindrop-color),
+            0px 150px var(--raindrop-color2),
+            30px 55px var(--raindrop-color),
+            50px 120px var(--raindrop-color),
+            80px 50px var(--raindrop-color),
+            100px 160px var(--raindrop-color2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cloudy"></div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>flex-size</title>
+    <style>
+      html,
+      body,
+      div,
+      ul,
+      li {
+        margin: 0;
+        padding: 0;
+      }
+      ul,
+      li {
+        list-style: none;
+      }
+      .wrap {
+        margin: 0 auto 30px auto;
+        text-align: center;
+        padding: 10px;
+      }
+      .content {
+        display: grid;
+      }
+      .content > div {
+        border: 1px solid currentColor;
+        color: #FFF;
+      }
+      .fr-box {
+        background: #32CD32;
+      }
+      .auto-box {
+        background: #87CEEB;
+      }
+      .mc-box {
+        background: #C0C0C0;
+      }
+      .width-box {
+        background: #EE82EE;
+      }
+      .fc-box {
+        background: #FF7F50;
+      }
+      .mm-box {
+        background: #FFD700;
+      }
+      .list {
+        display: flex;
+        margin: 0 auto;
+        padding: 10px;
+      }
+      .list > li {
+        flex: 1;
+        text-align: center;
+        color: #FFF;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <ul class="list">
+        <li class="fr-box">绿色：fr</li>
+        <li class="auto-box">蓝色：auto</li>
+        <li class="mc-box">灰色：max-content</li>
+        <li class="width-box">粉红色：400px</li>
+        <li class="fc-box">橙色：fit-content(200px)</li>
+        <li class="mm-box">黄色：minmax(200px, 400px)</li>
+      </ul>
+    </div>
+    <section class="wrap fr-auto">
+      <div class="content" style="grid-template-columns: 1fr 2fr 1fr;">
+        <div class="fr-box">这是个盒子</div>
+        <div class="fr-box">这是个盒子</div>
+        <div class="fr-box">这是个盒子</div>
+      </div>
+      <div class="content" style="grid-template-columns: auto auto auto;">
+        <div class="auto-box">这是个盒子</div>
+        <div class="auto-box">这是个盒子</div>
+        <div class="auto-box">这是个盒子</div>
+      </div>
+      <div class="content" style="grid-template-columns: auto 1fr auto;">
+        <div class="auto-box">这是个盒子</div>
+        <div class="fr-box">这是个盒子</div>
+        <div class="auto-box">这是个盒子</div>
+      </div>
+      <div class="content" style="grid-template-columns: 1fr auto 1fr;">
+        <div class="fr-box">这是个盒子</div>
+        <div class="auto-box">这是个盒子</div>
+        <div class="fr-box">这是个盒子</div>
+      </div>
+    </section>
+
+    <section class="wrap mc-width">
+      <div class="content" style="grid-template-columns: 1fr max-content 400px;">
+        <div class="fr-box">这是个盒子</div>
+        <div class="mc-box">这是个盒子</div>
+        <div class="width-box">这是个盒子</div>
+      </div>
+      <div class="content" style="grid-template-columns: fit-content(200px) minmax(200px, 400px) 400px;">
+        <div class="fc-box">这是个盒子</div>
+        <div class="mm-box">这是个盒子</div>
+        <div class="width-box">这是个盒子</div>
+      </div>
+      <div class="content" style="grid-template-columns: fit-content(200px) max-content auto;">
+        <div class="fc-box">这是个盒子</div>
+        <div class="mc-box">这是个盒子</div>
+        <div class="auto-box">这是个盒子</div>
+      </div>
+    </section>
+
+    <section class="wrap fc-mm">
+      <div class="content" style="grid-template-columns: 1fr auto fit-content(200px);">
+        <div class="fr-box">这是个盒子</div>
+        <div class="auto-box">这是个盒子</div>
+        <div class="fc-box">这是个盒子</div>
+      </div>
+      <div class="content" style="grid-template-columns: fit-content(200px) minmax(200px, 400px) 400px;">
+        <div class="fc-box">这是个盒子</div>
+        <div class="mm-box">这是个盒子</div>
+        <div class="width-box">这是个盒子</div>
+      </div>
+      <div class="content" style="grid-template-columns: 1fr auto minmax(200px, 400px);">
+        <div class="fr-box">这是个盒子</div>
+        <div class="auto-box">这是个盒子</div>
+        <div class="mm-box">这是个盒子</div>
+      </div>
+    </section>
+  </body>
+</html>

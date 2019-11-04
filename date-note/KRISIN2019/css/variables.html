@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>var</title>
+    <style>
+      .springy-text {
+        color: darkslateblue;
+        animation-name: springy-text;
+        animation-duration: 1s;
+        animation-timing-function: ease-in;
+        animation-delay: 0s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate-reverse;
+        animation-play-state: running;
+        animation-fill-mode: backwards;
+        cursor: wait;
+      }
+      .springy-text:hover {
+        animation-play-state: paused;
+      }
+      @keyframes springy-text {
+        0%   {
+          letter-spacing: 1.2em;
+          color: thistle;
+        }
+        100%   {
+          letter-spacing: 0.1em;
+          color: darkslateblue;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h3 class="springy-text" id="springy">Animations!</h3>
+    <script>
+      'use strict'
+    </script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0pxmaximum-scale=1.0pxuser-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>clip-path</title>
+    <style>
+      .glitch-effect {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        right: 0;
+        color: #FFF;
+        text-align: center;
+        font-size: 50px;
+        letter-spacing: 10px;
+      }
+      .ge-text {
+        position: relative;
+        color: #fff;
+        font-size: 72px;
+        letter-spacing: 0.01em;
+        transform: scale3d(1, 1, 1);
+        width: 400px;
+        height: 100px;
+        background: linear-gradient(to right, #232526, #414345);
+        overflow: hidden;
+      }
+/*      .ge-text::before, .ge-text::after {
+        content: attr(aria-title);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        background: linear-gradient(to right, #232526, #414345);
+        clip-path: inset(79px 50px 43px 0px);
+        overflow: hidden;
+      }*/
+/*      .ge-text::before {
+        left: 7px;
+        animation: glitch-effect 3s infinite linear alternate-reverse;
+      }
+      .ge-text::after {
+        left: 3px;
+        animation: glitch-effect 2s infinite linear alternate-reverse;
+      }*/
+      @keyframes glitch-effect {
+        0% {
+          clip-path: inset(4px 50px 61px 0px);
+        }
+        5% {
+          clip-path: inset(99px 50px 30px 0px);
+        }
+        10% {
+          clip-path: inset(100px 50px 90px 0px);
+        }
+        15% {
+          clip-path: inset(69px 50px 98px 0px);
+        }
+        20% {
+          clip-path: inset(51px 50px 18px 0px);
+        }
+        25% {
+          clip-path: inset(43px 50px 38px 0px);
+        }
+        30% {
+          clip-path: inset(67px 50px 71px 0px);
+        }
+        35% {
+          clip-path: inset(32px 50px 44px 0px);
+        }
+        40% {
+          clip-path: inset(98px 50px 96px 0px);
+        }
+        45% {
+          clip-path: inset(92px 50px 93px 0px);
+        }
+        50% {
+          clip-path: inset(23px 50px 84px 0px);
+        }
+        55% {
+          clip-path: inset(15px 50px 46px 0px);
+        }
+        60% {
+          clip-path: inset(53px 50px 9px 0px);
+        }
+        65% {
+          clip-path: inset(89px 50px 21px 0px);
+        }
+        70% {
+          clip-path: inset(47px 50px 1px 0px);
+        }
+        75% {
+          clip-path: inset(98px 50px 55px 0px);
+        }
+        80% {
+          clip-path: inset(86px 50px 81px 0px);
+        }
+        85% {
+          clip-path: inset(25px 50px 47px 0px);
+        }
+        90% {
+          clip-path: inset(49px 50px 87px 0px);
+        }
+        95% {
+          clip-path: inset(7px 50px 59px 0px);
+        }
+        100% {
+          clip-path: inset(79px 50px 43px 0px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glitch-effect">
+      <div class="ge-text" aria-title="东亚病夫">东亚病夫</div>
+    </div>
+    <script>
+      'use strict'
+    </script>
+  </body>
+</html>

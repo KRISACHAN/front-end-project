@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>sb</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      article {
+        height: 100%;
+      }
+      header,
+      footer {
+        height: 100px;
+        background: #1c92d2;
+      }
+      main {
+        height: calc(100% - 200px);
+        font-size: 0;
+      }
+      main > div {
+        height: 100%;
+        display: inline-block;
+        width: 25%;
+        background: #f2fcfe;
+        font-size: 14.5px;
+      }
+      main > div:nth-child(2) {
+        background: #fffcdc;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <article role="article">
+      <header role="region" aria-labelledby="region-heading"></header>
+      <main role="main">
+        <div></div>
+        <div></div>
+        <div></div>
+      </main>
+      <footer role="contentinfo"></footer>
+    </article>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

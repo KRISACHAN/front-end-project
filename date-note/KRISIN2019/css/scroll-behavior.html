@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <title>scroll-behavior</title>
+  <style>
+    a {
+      display: inline-block;
+      width: 50px;
+      text-decoration: none;
+    }
+    section, nav, div {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+    section {
+      border: 1px solid;
+      width: 350px;
+    }
+    nav {
+      width: 350px;
+      padding: 5px 0;
+      border-bottom: 1px solid;
+    }
+    .scroll-container {
+      display: block;
+      width: 350px;
+      height: 200px;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+    }
+    .scroll-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 5em;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <nav>
+      <a href="#page-1">1</a>
+      <a href="#page-2">2</a>
+      <a href="#page-3">3</a>
+    </nav>
+    <div class="scroll-container">
+      <div class="scroll-page" id="page-1">1</div>
+      <div class="scroll-page" id="page-2">2</div>
+      <div class="scroll-page" id="page-3">3</div>
+    </div>
+  </section>
+  <script>
+  'use strict'
+  </script>
+</body>
+
+</html>

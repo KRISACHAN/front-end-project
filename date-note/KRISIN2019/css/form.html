@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>form</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      input[type="radio"],
+      input[type="checkbox"] {
+        display: none;
+      }
+      :root {
+        --size: 200px;
+        --imgUrl: url(https://krissarea.gitee.io/blog/img/logo.jpg);
+        --lg: linear-gradient(to right, #a8ff78 0%, #78ffd6 90%);
+        --bgColor: #2d0c13;
+        --bgBase: 100% 100%/contain no-repeat;
+      }
+      .form {
+        width: 380px;
+        height: 460px;
+        margin: 1em auto;
+        border: 1px solid currentcolor;
+        padding: 1em;
+        border-radius: 5px;
+      }
+      .form > * {
+        display: block;
+        margin-bottom: 20px;
+      }
+      input[type="button"] {
+        outline: none;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 24px;
+        font-weight: bold;
+        text-shadow: rgba(255, 255, 255, .5) 0 1px 0;
+        user-select: none;
+        padding: 5px 10px;
+        display: inline-block;
+        position: relative;
+        border-radius: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.8);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        background-image: radial-gradient(top, ellipse cover, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
+        transition: background .2s ease-in-out;
+        color: hsl(0, 0%, 40%) !important;
+        background-color: hsl(0, 0%, 75%);
+        box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em 0.3em, inset rgba(0, 0, 0, 0.15) 0 -0.1em 0.3em, hsl(0, 0%, 60%) 0 0.1em 3px, hsl(0, 0%, 45%) 0 0.3em 1px, rgba(0, 0, 0, 0.2) 0 0.5em 5px;
+      }
+      .input-field {
+        position: relative;
+      }
+      .input-field input {
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        height: 35px;
+        width: 100%;
+        padding: 0;
+        box-shadow: none;
+        outline: none;
+        transition: all 0.3s;
+      }
+      .input-field input + span {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: inline-block;
+        max-width: 100%;
+        z-index: 0;
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .input-field span::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #4caf50;
+        transform: scale(0);
+        transition: all .2s ease-out;
+      }
+      .input-field input:focus + span::after {
+        transform: scale(1);
+      }
+
+      .m-radio,
+      .m-checkbox {
+        display: flex;
+        padding: 5px 0;
+        cursor: pointer;
+        align-items: center;
+      }
+      .m-checkbox-inner,
+      .m-checkbox-media {
+        position: relative;
+      }
+      .m-checkbox-media {
+        line-height: 20px;
+        width: 22px;
+        height: 22px;
+        margin-right: 5px;
+        text-align: center;
+        color: #fff;
+        border: 1px solid #d9d9d9;
+      }
+      .m-radio .m-checkbox-media {
+        border-radius: 50%;
+      }
+
+      .m-radio:hover .m-checkbox-media {
+        border-color: #009a61;
+      }
+      .m-radio .m-checkbox-media::after {
+        content:'';
+        position:absolute;
+        top:4px;
+        left:4px;
+        width:12px;
+        height:12px;
+        background:#fff;
+        border-radius:50%;
+        background: #009a61;
+      }
+      .m-radio .m-checkbox-media::after {
+        transform: scale(0);
+        transition: .3s ease;
+        transition-delay: 0ms;
+      }
+      .m-radio > input:checked + .m-checkbox-media {
+        border-color: #009a61;
+        background:#fff;
+      }
+      .m-radio > input:checked + .m-checkbox-media::after {
+         transform: scale(1);
+      }
+      .m-switch {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+      label .m-switch-media {
+        order: 2;
+      }
+      .m-switch-media {
+        display: flex;
+        align-items: center;
+        margin-right: 0.5rem;
+      }
+      .m-switch.m-switch-3 .switch-label {
+        background: #fff;
+      }
+      .m-switch .switch-label {
+        position: relative;
+        display: block;
+        width: 2.5rem;
+        height: 1.5rem;
+        border-radius: 999px;
+        background: #aaa;
+        transition: all 0.35s;
+      }
+      .m-switch.m-switch-3 .switch-label:before {
+        background: transparent;
+        border: solid 2px #e6e6e6;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      .m-switch .switch-label:after {
+        top: 4px;
+        left: 4px;
+        bottom: 4px;
+        width: 1.1rem;
+        background: #aaa;
+        border-radius: 50%;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .m-switch .switch-label:before, .m-switch .switch-label:after {
+        content: '';
+        position: absolute;
+        transition: all 0.35s;
+      }
+      .m-switch .switch-label:before {
+        background: #fff;
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        border-radius: 999px;
+      }
+      .m-switch .m-switch-inner {
+        flex: 1;
+        padding: 0.5rem;
+      }
+
+      .m-switch input[type='checkbox']:checked + .m-switch-media .switch-label {
+          background: #009a61;
+      }
+      .m-switch input[type='checkbox']:checked + .m-switch-media .switch-label::after {
+        background: #009a61;
+        transform: translate3d(1rem, 0, 0);
+      }
+      .m-switch-2 .switch-label {
+        background: #fff;
+      }
+      .m-switch-2 .switch-label::before {
+        background: rgb(189, 189, 189);
+        top: 0.45rem;
+        bottom: 0.45rem;
+        left: 0;
+        right: 0;
+      }
+      .m-switch-2 .switch-label::after {
+        background: rgb(245, 245, 245);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+        left: 0;
+      }
+
+      .m-switch.m-switch-2 input[type='checkbox']:checked + .m-switch-media .switch-label {
+          background: #fff;
+      }
+      .m-switch.m-switch-2 input[type='checkbox']:checked + .m-switch-media .switch-label::before {
+          background: #009a61;
+      }
+      .m-switch.m-switch-2 input[type='checkbox']:checked + .m-switch-media .switch-label::after {
+        background: #fff;
+        transform: translate3d(1.5rem, 0, 0);
+      }
+      .m-switch.m-switch-3 .switch-label::after {
+        background: #fff;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(0, 0, 0, 0.15);
+      }
+
+      .m-switch.m-switch-3 input[type='checkbox']:checked + .m-switch-media .switch-label::after {
+        background: #fff;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(0, 0, 0, 0.15);
+      }
+      .m-switch.m-switch-3 input[type='checkbox']:checked + .m-switch-media .switch-label:before {
+        border-color: #009a61;
+      }
+
+      .checkbox-inline, .radio-inline {
+        vertical-align: top;
+        margin-top: 0;
+        padding-left: 25px;
+      }
+      .radio-inline, .checkbox-inline {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+      }
+      .radio,
+      .checkbox {
+        position: relative;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .checkbox input[type="checkbox"],
+      .checkbox-inline input[type="checkbox"] {
+        position: absolute;
+        margin-left: -20px;
+        margin-top: 4px;
+      }
+      .checkbox input {
+          width: 17px;
+          height: 17px;
+      }
+      .checkbox input {
+        top: 0;
+        left: 0;
+        z-index: 1;
+        cursor: pointer;
+        opacity: 0;
+        margin-top: 0;
+      }
+      .checkbox .input-helper::before {
+        left: 0;
+        border: 1px solid #ccc;
+      }
+      .checkbox .input-helper::before, 
+      .checkbox .input-helper::after {
+        transition: all;
+        transition-duration: 250ms;
+        backface-visibility: hidden;
+        position: absolute;
+        content: "";
+      }
+      .checkbox input:checked + .input-helper::before {
+        transform: scale(0);
+      }
+      .checkbox .input-helper:before {
+        top: 0;
+        width: 17px;
+        height: 17px;
+      }
+      .checkbox input:checked + .input-helper::after {
+        transform: scale(1) rotate(-50deg); 
+        opacity: 1;
+      }
+      .checkbox .input-helper::after {
+        opacity: 0;
+        transform: scale(0) rotate(80deg);
+        width: 22px;
+        height: 9px;
+        border-bottom: 2px solid #009a61;
+        border-left: 2px solid #009a61;
+        border-bottom-left-radius: 2px;
+        left: -1px;
+        top: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="form">
+      <input type="button" size="10" value="按钮" />
+      <div class="input-field">
+        <input type="text" placeholder="账号">
+        <span></span>
+      </div>
+      <div class="input-field">
+        <label for="radio1" class="m-radio">
+          <input type="radio" id="radio1" name="sex1" checked>
+          <div class="m-checkbox-media"></div>
+          <div class="m-checkbox-inner">男</div>
+        </label>
+        <label for="radio2" class="m-radio">
+          <input type="radio" id="radio2" name="sex1">
+          <div class="m-checkbox-media"></div>
+          <div class="m-checkbox-inner">女</div>
+        </label>
+      </div>
+      <div class="box">
+        <label class="m-switch m-switch-3" for="switch1">
+          <input type="checkbox" id="switch1">
+          <div class="m-switch-media">
+            <span class="switch-label"></span>
+          </div>
+          <div class="m-switch-inner">switch1</div>
+        </label>
+        <label class="m-switch" for="switch2">
+          <input type="checkbox" checked id="switch2">
+          <div class="m-switch-media">
+            <span class="switch-label"></span>
+          </div>
+          <div class="m-switch-inner">switch2</div>
+        </label>
+        <label class="m-switch m-switch-2" for="switch3">
+          <input type="checkbox" id="switch3">
+          <div class="m-switch-media">
+            <span class="switch-label"></span>
+          </div>
+          <div class="m-switch-inner">switch3</div>
+        </label>
+      </div>
+      <div class="input-field">
+        <label class="checkbox checkbox-inline">
+          <input type="checkbox" value="option1">
+          <i class="input-helper"></i>
+          checkbox
+        </label>
+        <label class="checkbox checkbox-inline">
+          <input type="checkbox" value="option1">
+          <i class="input-helper"></i>
+          checkbox
+        </label>
+      </div>
+    </form>
+    <script>
+    </script>
+  </body>
+</html>

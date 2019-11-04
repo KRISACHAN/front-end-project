@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <title>input</title>
+  <style>
+    :root {
+      --error-color: red;
+    }
+    .form > input {
+      margin-bottom: 10px;
+    }
+    .form > .f-tips {
+      color: var(--error-color);
+      display: none;
+    }
+    input[type="text"]:invalid ~ input[type="submit"],
+    input[type="password"]:invalid ~ input[type="submit"] {
+      display: none;
+    }
+    input[required]:invalid + span {
+      display: inline;
+    }
+  </style>
+</head>
+
+<body>
+  <form class="form" id="form" method="get" action="/api/form">
+    账号：
+    <input data-title="账号" pattern="[\w]{6,10}" name="account" type="text" required />
+    <span class="f-tips">请输入正确的账号</span>
+    <br />
+    密码：
+    <input data-title="密码" pattern="[\w]{6,10}" name="password" type="password" required />
+    <span class="f-tips">请输入正确的密码</span>
+    <br />
+    <input name="button" type="submit" value="提交" />
+  </form>
+  <script>
+  'use strict'
+  </script>
+</body>
+
+</html>

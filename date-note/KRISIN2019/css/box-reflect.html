@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>box-reflect</title>
+    <style>
+      :root {
+        --base-color: #1f2040;
+      }
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        color: var(--base-color);
+      }
+      .box {
+        width: 400px;
+        height: 700px;
+        border: 2px solid currentcolor;
+        margin: 10px auto;
+        text-align: center;
+        border-radius: 10px;
+      }
+      .img {
+        width: 80%;
+        margin: 0 auto;
+        vertical-align: middle;
+        -webkit-box-reflect: below 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <img class="img" src="https://krissarea.gitee.io/blog/img/logo.jpg" alt="图片">
+    </div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

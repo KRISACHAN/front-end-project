@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>animation</title>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+        filter: contrast(100);
+        background: #fff;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .container {
+        width: 240px;
+        height: 550px;
+        position: absolute;
+        left: 50%;
+        top: 120px;
+        transform: translateX(-50%);
+      }
+      .glass {
+        width: inherit;
+        height: inherit;
+        border: 3px solid;
+        border-top: 0;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+      .water {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 140px;
+        background-color: #30DFF3;
+        filter: blur(5px);
+        animation: raising 300s 2.1s linear infinite;
+      }
+      .waterdrop {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        left: calc(50% - 15px);
+        top: 0;
+        transform: scale(1, 1) translate(0, 0px);
+        background-color: #30DFF3;
+        filter: blur(5px);
+        transform-origin: center;
+        animation: raining 2s 0.5s linear infinite;
+      }
+      .waterdrop::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 15px 26.0px 15px;
+        border-color: transparent transparent #30DFF3 transparent;
+        position: absolute;
+        left: 0;
+        top: -15px;
+      }
+      .wave {
+        width: 120%;
+        height: 20px;
+        position: absolute;
+        left: 50%;
+        top: -20px;
+        background: #30DFF3;
+        filter: blur(5px);
+        transform: translateX(-50%);
+      }
+/*      .wave::before,
+      .wave::after {
+        content: "";
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        top: 250px;
+        left: 50%;
+        background-color: #30DFF3;
+        border-radius: 36%;
+        transform: translate(-50%, -70%) rotate(0);
+        animation: waving 12s linear infinite;
+        z-index: 10;
+        filter: blur(5px);
+      }
+      .wave::after {
+        border-radius: 40%;
+        background-color: #30DFF3;
+        transform: translate(-50%, -60%) rotate(0);
+        animation: waving 20s linear -5s infinite;
+        z-index: 20;
+      }*/
+      @keyframes waving {
+        50% {
+          transform: translate(-50%, -68%) rotate(180deg);
+        }
+        100% {
+          transform: translate(-50%, -60%) rotate(360deg);
+        }
+      }
+      @keyframes raining {
+        0% {
+          transform: scale(1, 1) translate(0, 0px);
+        }
+        25% {
+          transform: scale(0.95, 1.05) translate(0, 70px);
+        }
+        50% {
+          transform: scale(0.9, 1.1) translate(0, 150px);
+        }
+        75% {
+          transform: scale(0.85, 1.15) translate(0, 240px);
+        }
+        100% {
+          transform: scale(0.8, 1.2) translate(0, 340px);
+        }
+      }
+      @keyframes raising {
+        0% {
+          height: 140px;
+        }
+        25% {
+          height: 190px;
+        }
+        50% {
+          height: 250px;
+        }
+        75% {
+          height: 320px;
+        }
+        100% {
+          height: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="glass">
+        <div class="waterdrop"></div>
+        <div class="water">
+          <div class="wave"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

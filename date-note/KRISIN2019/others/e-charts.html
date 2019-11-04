@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title></title>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      .charts {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 800px;
+        height: 600px;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="charts" id="charts"></div>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <script>
+      'use strict'
+      const legend = {
+        data: [
+          'O(1)',
+          'O(log n)',
+          'O(n)',
+          'O(n log n)',
+          'O(n²)',
+          'O(n³)',
+          'O(2^n)',
+        ]
+      }
+
+      const title = {
+        text: '时间复杂度图示'
+      }
+
+      const tooltip = {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#6a7985'
+          }
+        }
+      }
+
+      const grid = {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      }
+
+      const xAxis = [
+        {
+          type : 'category',
+          boundaryGap : false,
+          data : ['1', '1.2', '1.4', '1.6']
+        }
+      ]
+
+      const yAxis = [
+        {
+          type : 'value'
+        }
+      ]
+
+      const series = legend.data.map((data, idx) => {
+        const obj = {}
+        obj.name = data
+        obj.type = 'line'
+        obj.stack = '复杂度'
+        // obj.areaStyle = {}
+        const d = xAxis[0].data
+        if (idx === 0) {
+          obj.data = d.map(_data => 1)
+        }
+        if (idx === 1) {
+          obj.data = d.map(_data => Math.log(+_data))
+        }
+        if (idx === 2) {
+          obj.data = d.map(_data => +_data)
+        }
+        if (idx === 3) {
+          obj.data = d.map(_data => +_data * Math.log(+_data))
+        }
+        if (idx === 4) {
+          obj.data = d.map(_data => Math.pow(+_data, 2))
+        }
+        if (idx === 5) {
+          obj.data = d.map(_data => Math.pow(+_data, 3))
+        }
+        if (idx === 6) {
+          obj.data = d.map(_data => Math.pow(2, +_data))
+        }
+        return obj
+      })
+
+      console.log(series)
+
+      const option = {
+        title,
+        tooltip,
+        legend,
+        grid,
+        xAxis,
+        yAxis,
+        series
+      }
+      const charts = echarts.init(document.getElementById('charts'));
+      charts.setOption(option);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>icon</title>
+    <style>
+      :root {
+        --base-color: #1f2040;
+      }
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .icon-box {
+/*        width: 300px;
+        height: 300px;*/
+        padding: 10px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 10px);
+        border: 1px solid currentcolor;
+        color: var(--base-color);
+      }
+      .icon {
+        display: inline-block;
+      }
+      .icon-sun {
+        border: 2px solid;
+        border-radius: 50%;
+        box-shadow: -18px 0 0 -9px,
+                    18px 0 0 -9px,
+                    0 -18px 0 -9px,
+                    0 18px 0 -9px,
+                    14px 14px 0 -9px,
+                    -14px -14px 0 -9px,
+                    14px -14px 0 -9px,
+                    -14px 14px 0 -9px;
+        width: 20px;
+        height: 20px;
+        margin: 10px;
+      }
+      .icon-moon {
+        width: 24px;
+        height: 24px;
+        margin: 10px;
+        border-radius: 50%;
+        position: relative;
+        background: var(--base-color);
+      }
+      .icon-moon::before {
+        content: "";
+        position: absolute;
+        right: -1px;
+        top: -1px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #FFF;
+      }
+      .icono-heart {
+        width: 20px;
+        height: 20px;
+        margin: 10px;
+        border-left-color: transparent;
+        transform: rotate(45deg);
+        border-radius: 4px 0;
+        position: relative;
+        background: var(--base-color);
+      }
+      .icono-heart::before,
+      .icono-heart::after {
+        content: '';
+        position: absolute;
+      }
+      .icono-heart::before {
+        width: 9px;
+        height: 18px;
+        left: -8px;
+        bottom: 0px;
+        border-radius: 20px 0 0 20px;
+        background: var(--base-color);
+      }
+      .icono-heart::after {
+        width: 18px;
+        height: 9px;
+        right: 0px;
+        top: -8px;
+        border-radius: 20px 20px 0 0;
+        background: var(--base-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="icon-box">
+      <div class="icon icon-sun"></div>
+      <div class="icon icon-moon"></div>
+      <div class="icon icono-heart"></div>
+      <p>懒，画不动了，后面慢慢补吧！</p>
+    </div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

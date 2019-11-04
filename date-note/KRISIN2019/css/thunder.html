@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>thunder</title>
+    <style>
+      :root {
+        --bg-color: #171717;
+        --cloudy-size: 80px;
+        --cloudy-color: #3E3E3E;
+        --cloudy-color2: #7F7F7F;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-color);
+      }
+
+      .cloudy {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 6px;
+        height: 18px;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-radius: 50%;
+      }
+
+      .cloudy:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: var(--cloudy-size);
+        height: var(--cloudy-size);
+        transform: translate(-50%, -50%);
+        background-color: var(--cloudy-color);
+        border-radius: 50%;
+        box-shadow: 
+          -60px -20px 0 5px var(--cloudy-color),
+          50px -10px 0 0px var(--cloudy-color),
+          100px -16px 0 0px var(--cloudy-color),
+          -10px -70px 0 10px var(--cloudy-color),
+          60px -60px 0 8px var(--cloudy-color),
+          73px -66px 0 8px var(--cloudy-color2),
+          96px -30px 0 0px var(--cloudy-color2),
+          20px -78px 0 8px var(--cloudy-color2);
+        animation: cloudy 3s ease-in-out infinite;
+      }
+
+      .cloudy:after {
+        content: '';
+        position: absolute;
+        top: 220px;
+        left: 50%;
+        width: calc(var(--cloudy-size) * 3);
+        height: calc(var(--cloudy-size) / 3);
+        transform: translate(-46%, -50%);
+        background-color: rgba(0 ,0 ,0 , .8);
+        border-radius: 50%;
+        animation: cloudy_shadow 3s ease-in-out infinite;
+      }
+
+      .lightning {
+        position: absolute;
+        transform: rotate(15deg);
+        animation: lightning 3s steps(1, end) infinite;
+      }
+      .lightning:before {
+        content: '';
+        position: absolute;
+        transform: translate(40px, 120px);
+        border-left: 15px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 70px solid yellow;
+      }
+
+      .lightning:after {
+        content: '';
+        position: absolute;
+        transform: translate(25px, 60px);
+        border-left: 15px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 70px solid yellow;
+      }
+
+      @keyframes cloudy {
+        50% {
+          transform: translate(-50%, -70%);
+        }
+        100% {
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      @keyframes cloudy_shadow {
+        50%{
+          transform: translate(-46%, -50%) scale(0.8);
+          background:rgba(0,0,0,.3);
+        }
+        100%{
+          transform: translate(-46%, -50%) scale(1);
+          background:rgba(0,0,0,.8);
+        }
+      }
+
+      @keyframes lightning {
+        0% {
+          transform: translate(0px, 0px) rotate(15deg);
+        }
+        5% {
+          transform: translate(-60px, -30px) rotate(25deg);
+        }
+        10% {
+          transform: translate(40px, 0) rotate(-15deg);
+        }
+        15% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cloudy">
+      <div class="lightning"></div>
+    </div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <title>animation-play-state</title>
+  <style>
+    html,
+    body,
+    div {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .杯子 {
+      width: 220px;
+      height: 400px;
+      border: 3px solid;
+      border-top: 0;
+      margin: 20px auto;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .水 {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 200px;
+      height: 400px;
+      background-color: rgb(118, 218, 255);
+      animation: up 5s 1 linear;
+      animation-play-state: paused;
+    }
+    .水::before,
+    .水::after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      top: 0;
+      left: 50%;
+      background-color: rgba(255, 255, 255, .4);
+      border-radius: 38%;
+      transform: translate(-50%, -70%) rotate(0);
+      animation: rotate 6s linear infinite;
+      z-index: 10;
+    }
+    .水::after {
+      border-radius: 48%;
+      background-color: rgba(255, 255, 255, .9);
+      transform: translate(-50%, -70%) rotate(0);
+      animation: rotate 10s linear -5s infinite;
+      z-index: 20;
+    }
+    @keyframes rotate {
+      50% {
+        transform: translate(-50%, -73%) rotate(180deg);
+      }
+      100% {
+        transform: translate(-50%, -70%) rotate(360deg);
+      }
+    }
+    @keyframes up {
+      0% {
+        height: 100px;
+      }
+      100% {
+        height: 400px;
+      }
+    }
+    .水:active {
+      animation-play-state: running;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="杯子">
+    <h1 class="文本" align="center">点击水杯</h1>
+    <div class="水"></div>
+  </div>
+  <!--
+    /*
+/* Single animation */
+animation-play-state: running;
+animation-play-state: paused;
+
+/* Multiple animations */
+animation-play-state: paused, running, running;
+
+/* Global values */
+animation-play-state: inherited;
+animation-play-state: initial;
+animation-play-state: unset;
+    */
+
+@media (pointer: fine) {
+  input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    border-width: 1px;
+    border-color: blue;
+  }
+}
+
+@media (pointer: coarse) {
+  input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    border-width: 2px;
+    border-color: red;
+  }
+}
+  -->
+  <!--
+@media (pointer: fine)
+@media (pointer: coarse)
+animation-play-state: running;
+animation-play-state: paused;
+animation-play-state: paused, running, running;
+mix-blend-mode: normal | multiply | screen | overlay | darken | lighten | color-dodge | color-burn | hard-light | soft-light | difference | exclusion | hue | saturation | color | luminosity
+  -->
+  <script>
+    'use strict';
+  </script>
+</body>
+
+</html>

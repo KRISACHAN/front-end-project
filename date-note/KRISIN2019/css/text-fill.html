@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>text-fill</title>
+    <style>
+      div {
+        text-align: center;
+        line-height: 3;
+        font-size: 10vh;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 3px #0f2027;
+        background-image: linear-gradient(135deg, #72EDF2 10%, #5151E5 100%);
+        -webkit-background-clip: text;
+        height: 300px;
+        animation: godot 3s linear infinite;
+      }
+      @keyframes godot {
+        from {
+          filter: hue-rotate(0deg);
+        }
+        to {
+          filter: hue-rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div><i>等 待 戈 多</i></div>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>注释解析器</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script>
+      'use strict';
+      const code = `
+//% width="100px" height="200px"
+//% pos.top="50px" pos.left="50px"
+//% writable=true
+//% q.b.d.w.r.f=30 q.b.d.w.r.a=40
+
+code
+code
+code`.trim();
+    
+    // 获取对象类型
+    const get_type = object => Object.prototype.toString.call(object);
+
+    // 注释解析器
+    const annotation_parser = code => {
+      // 把代码字符串转成数组
+      const annotation = code.split('\n');
+      // 过滤非注释内容
+      const annotation_array_filter = annotation_item => annotation_item.indexOf('//%') === 0;
+      // 解析注释数组
+      const annotation_array_parser = annotation_item => {
+        // 循环注释数组里的的元素
+        const result_forEach = result_item => {
+          let annotation_sub_object = {};
+          // 对象转成扁平化数组
+          const array_flattened = data => {
+            // 如果当前对象是数组，则递归遍历子元素
+            if (get_type(data) === '[object Array]') {
+              data.forEach(e => {
+                array_flattened(e);
+              });
+            } else {
+              // 否则则解析元素
+              const new_data = data.split('=');
+              const annotation_sub_object = {};
+              try {
+                annotation_sub_object[new_data[0]] = JSON.parse(new_data[1]);
+              } catch (error) {
+                annotation_sub_object[new_data[0]] = JSON.parse(new_data[1] + '"')
+              };
+              annotation_object = {
+                ...annotation_object,
+                ...annotation_sub_object
+              };
+            };
+          };
+          array_flattened(result_item);
+        };
+        // 把赋值语句分开
+        const result_map = result_item => result_item.match(/\=/g).length > 1 ? result_item.split(' ') : result_item;
+        // 生产新的数组
+        const result = annotation_item.replace('//% ', '')
+                                      .split('/\" /g')
+                                      .map(result_map);
+        result_forEach(result);
+      };
+      let annotation_object = {};
+      // 过滤掉注释里的特殊字符，并且将每一项配置都单独领出来压入数组内
+      annotation.filter(annotation_array_filter)
+                .forEach(annotation_array_parser);
+      console.log(annotation_object);
+      let main_array = [];
+      let main_object = {};
+      // for in循环把每一段配置项都压入数组内
+      for (let annotation_object_key in annotation_object) {
+        const annotation_object_key_array = annotation_object_key.split('.');
+        const annotation_object_value = annotation_object[annotation_object_key];
+        let sub_object = {};
+        // reduce递归给数组每一项都生成树状结构
+        const key_reduce = (accumulator, current_value, current_index, array) => {
+          if (current_index === 0) {
+            sub_object[current_value] = (current_index === array.length - 1 ? annotation_object_value : {});
+            return sub_object[current_value];
+          };
+          accumulator[current_value] = {};
+          if (current_index === array.length - 1) {
+            accumulator[current_value] = annotation_object_value;
+          }
+          return accumulator[current_value];
+        };
+        let level_object = annotation_object_key_array.reduce(key_reduce, annotation_object_key_array[0]);
+        console.log(level_object);
+        level_object = undefined;
+        main_array.push(sub_object);
+        sub_object = undefined;
+      };
+      // 递归把元素里的对象给整理树状结构
+      const tree_data = (key, value, object) => {
+        if (get_type(value) !== '[object Object]') {
+          object[key] = value;
+        } else {
+          if (!object[key]) {
+            object[key] = {};
+          };
+          for (let item in value) {
+            tree_data(item, value[item], object[key]);
+          }
+        };
+      };
+      // 对数组里的每一项进行循环并整理成树状结构
+      const main_array_forEach = e => {
+        const key = Object.keys(e)[0];
+        const value = Object.values(e)[0];
+        tree_data(key, value, main_object);
+      };
+      console.log(main_array);
+      main_array.forEach(main_array_forEach);
+      return main_object;
+    };
+
+    console.log(annotation_parser(code));
+    </script>
+  </body>
+</html>

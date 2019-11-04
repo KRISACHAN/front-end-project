@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>判断星座</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script>
+      'use strict'
+      const getConstellation = (month, day) => {
+        const Constellations = '魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯'
+        const dateKeys ='20,19,21,21,21,22,23,23,23,23,22,22'.split(',')
+        return Constellations.substr(month * 2 - (day < dateKeys[month - 1] ? 2 : 0), 2)
+      }
+      console.log(getConstellation(1, 20)) // 水瓶
+      console.log(getConstellation(2, 20)) // 双鱼
+      console.log(getConstellation(3, 21)) // 白羊
+      console.log(getConstellation(4, 21)) // 金牛
+      console.log(getConstellation(5, 22)) // 双子
+      console.log(getConstellation(6, 22)) // 巨蟹
+      console.log(getConstellation(7, 23)) // 狮子
+      console.log(getConstellation(8, 24)) // 处女
+      console.log(getConstellation(9, 24)) // 天秤
+      console.log(getConstellation(10, 24)) // 天蝎
+      console.log(getConstellation(11, 23)) // 射手
+      console.log(getConstellation(12, 22)) // 魔羯
+    </script>
+  </body>
+</html>

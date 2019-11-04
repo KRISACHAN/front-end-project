@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>戈多来了</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 200%;
+      }
+      noLeftTree {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100px;
+        background: #FFF;
+      }
+      godot,
+      estragon,
+      vladimir {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid;
+        text-align: center;
+      }
+      estragon {
+        top: 0;
+        left: 0;
+      }
+      vladimir {
+        top: 0;
+        right: 0;
+      }
+      godot {
+        left: calc(50% - 25px);
+        top: 1000px;
+      }
+    </style>
+  </head>
+  <body>
+    <noLeftTree id="noLeftTree">
+      <estragon id="estragon">戈戈</estragon>
+      <vladimir id="vladimir">狄狄</vladimir>
+    </noLeftTree>
+    <godot id="godot">戈多</godot>
+    <script>
+      'use strict'
+      const godot = document.querySelector('#godot')
+      const noLeftTree = document.querySelector('#noLeftTree')
+      const ioCallback = entries => {
+        console.log(entries[0].intersectionRatio <= 0 ? '戈多没来，我们先各自干各自的活吧' : '戈多快到了，走，我们集合去')
+      }
+      const ioConfig = {
+        threshold: [0, 0.25, 0.5, 0.75, 1]
+      }
+      const io = new IntersectionObserver(ioCallback, ioConfig)
+      io.observe(godot)
+    </script>
+  </body>
+</html>

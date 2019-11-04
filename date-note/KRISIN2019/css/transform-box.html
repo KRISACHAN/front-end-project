@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>transform-box</title>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      svg {
+        width: 400px; 
+        border:1px solid #d9d9d9;
+        display: block;
+        margin: 20px auto;
+      }
+      #box{
+        transform-origin: 50% 50%;
+        transform-box: fill-box; /* border-box content-box stroke-box view-box */
+        animation: rotateBox 3s linear infinite;
+      }
+      @keyframes rotateBox {
+        to {
+          transform: rotate(360deg); 
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+      <g> 
+        <circle id="center" fill="#ee9ca7" r="1" transform="translate(25 25)" />
+        <circle id="boxcenter" fill="#4286f4" r=".5" transform="translate(15 15)" />
+        <rect id="box" x="10" y="10" width="10" height="10" rx="1" ry="1" stroke="#283048" fill="none" />
+      </g>
+    </svg>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>waterdrop</title>
+    <style>
+      .water-damage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);  
+        width: 200px;
+        height: 200px;
+        perspective: 600px;
+        transform-style: preserve-3d;
+       }
+      .water-drop {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);  
+        z-index: 10;
+        width: 0;
+        height: 0;
+        border: 10px solid #30DFF3;
+        border-radius: 1000px;
+        margin-top: -10px;
+        margin-left: -10px;
+        opacity: 0;
+        transform-style: preserve-3d;
+        transform-origin: 50% 50%;
+        transform: translate(0, -100px) scale(1, 1);
+        animation: water-drop 3000ms cubic-bezier(.56, .18, .92, .69) infinite;
+      }
+      .water-drop::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 7.5px 13.0px 7.5px;
+        border-color: transparent transparent #30DFF3 transparent;
+        position: absolute;
+        left: 50%;
+        top: -20px;
+        transform: translate(-50%, 0);  
+      }
+      @keyframes water-drop {
+        0% {
+          opacity: 0;
+          z-index: 10;
+          transform: translate(0, -100px) scale(1, 1);
+        }
+        50% {
+          opacity: 1;
+          z-index: 10;
+          transform: translate(0, 0) scale(0.8, 1.2);
+        }
+        51% {
+          opacity: 1;
+          z-index: 10;
+          margin-top: -10px;
+          margin-left: -10px;
+          border-width: 10px;
+          transform: rotateX(70deg);
+          animation-timing-function: cubic-bezier(.12, .41, .63, .99);
+        }
+        100% {
+          opacity: 0;
+          z-index: 1;
+          margin-top: -200px;
+          margin-left: -200px;
+          border-width: 200px;
+          transform: rotateX(70deg);
+          animation-timing-function: cubic-bezier(.12, .41, .63, .99);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="water-damage">
+      <div class="water-drop"></div>
+    </div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

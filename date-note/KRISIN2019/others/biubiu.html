@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>demo</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script>
+      'use strict';
+      // var test = {
+      //   arr: [3, 2, 1],
+      //   valueOf () {
+      //     console.group('valueOf')
+      //     console.log(this.arr)
+      //     console.groupEnd('valueOf')
+      //     return this.arr.pop()
+      //   },
+      //   toString () {
+      //     console.group('toString')
+      //     console.log(this.arr)
+      //     console.groupEnd('toString')
+      //     return this.arr.pop()
+      //   },
+      //   [Symbol.toPrimitive] () {
+      //     console.group('Symbol.toPrimitive')
+      //     console.log(this.arr)
+      //     console.groupEnd('Symbol.toPrimitive')
+      //     return this.arr.pop()
+      //   }
+      // }
+      // if (test == 1 && test == 2 && test == 3) {
+      //   console.log('biu')
+      // }
+
+      var a = {
+        arr: [3, 2, 1],
+        valueOf () {
+          console.group('valueOf')
+          console.log(this.arr)
+          console.groupEnd('valueOf')
+          return this.arr.pop()
+        }
+      }
+      if (a == 1 && a == 2 && a == 3) {
+        console.log('biu')
+      }
+
+      var b = {
+        arr: [3, 2, 1],
+        toString () {
+          console.group('toString')
+          console.log(this.arr)
+          console.groupEnd('toString')
+          return this.arr.pop()
+        }
+      }
+      if (b == 1 && b == 2 && b == 3) {
+        console.log('biu')
+      }
+
+      var c = {
+        arr: [3, 2, 1],
+        [Symbol.toPrimitive] () {
+          console.group('Symbol.toPrimitive')
+          console.log(this.arr)
+          console.groupEnd('Symbol.toPrimitive')
+          return this.arr.pop()
+        }
+      }
+      if (c == 1 && c == 2 && c == 3) {
+        console.log('biu')
+      }
+
+      window.val = 0
+      Object.defineProperty(window, 'd', {
+        get () {
+          return ++this.val
+        }
+      })
+      if (d == 1 && d == 2 && d == 3) {
+        console.log('biu')
+      }
+
+      window.e = [1, 2, 3]
+      e.join = e.shift
+      if (e == 1 && e == 2 && e == 3) {
+        console.log('biu')
+      }
+
+      var f = {
+        reg: /\d/g,
+        valueOf () {
+          return this.reg.exec(123)[0]
+        }
+      }
+      if (f == 1 && f == 2 && f == 3) {
+        console.log('biu')
+      }
+    </script>
+  </body>
+</html>

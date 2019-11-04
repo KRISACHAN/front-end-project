@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>五星红旗</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+      li {
+        list-style: none;
+      }
+      .flag {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        animation: wave ease-in-out infinite;
+      }
+      .flag > li {
+        height: 100%;
+        float: left;
+        background-image: url("flag.jpg");
+        background-size: auto 100%;
+        animation: flag ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="flag" class="flag"></ul>
+    <script>
+      'use strict'
+      const flag = document.querySelector('#flag')
+      const image = new Image()
+      image.src = 'flag.jpg'
+      const flagWidth = 800
+      const flagHeight = 640
+      let imgWidth = ''
+      let imgHeight = ''
+      const imgRender = ({
+        sliceCount = 70,
+        amplitude = 20,
+        period = 1.5,
+        duration = 2,
+      }) => {
+        const style = document.createElement('style')
+        const styleSplinter = []
+        const sliceCountPerPeriod = Math.floor(sliceCount / period)
+        const sliceWidth = imgWidth / sliceCount
+        const formula = sliceCountPerPeriod + 'n+'
+        const delay = (duration * period / sliceCount)
+        for (let i = 0; i < sliceCount; ++i) {
+          if (i < sliceCountPerPeriod) {
+            styleSplinter.push(`
+              .flag > li:nth-child(${formula + i}) {
+                animation-delay: -${delay * (sliceCountPerPeriod - i)}s;
+              }
+            `)
+          }
+          styleSplinter.push(`
+            .flag > li:nth-child(${i}) {
+              background-position: -${i * sliceWidth}px 0;
+            }
+          `)
+        }
+        styleSplinter.push(`
+          @keyframes flag {
+            0% { transform: translate3d(0, ${amplitude}px, 0); }
+            50% { transform: translate3d(0, ${-amplitude}px, 0); }
+            100% { transform: translate3d(0, ${amplitude}px, 0); }
+          }
+          @keyframes wave {
+            0% { transform: translate3d(0, ${-amplitude}px, 0); }
+            50% { transform: translate3d(0, ${amplitude}px, 0); }
+            100% { transform: translate3d(0, ${-amplitude}px, 0); }
+          }
+          .flag {
+            animation-duration: ${duration}s;
+            animation-delay: -${delay * sliceCountPerPeriod}s;
+          }
+          .flag > li {
+            animation-duration: ${duration}s;
+            width: ${imgWidth / sliceCount}px;
+          }
+        `)
+        style.innerHTML = styleSplinter.join('')
+        flag.innerHTML = new Array(sliceCount + 1).join('<li></li>')
+        document.documentElement.appendChild(style)
+      }
+      image.onload = () => {
+        imgWidth = image.width
+        imgHeight = image.height
+        const ratio = image.width / image.height
+        if (imgWidth > flagWidth) {
+          imgWidth = flagWidth
+          imgHeight = imgWidth / ratio
+        }
+        if (imgHeight > flagHeight) {
+          imgWidth = imgHeight * ratio
+          imgHeight = flagHeight
+        }
+        flag.style.width = imgWidth + 'px'
+        flag.style.height = imgHeight + 'px'
+        flag.style.marginLeft = -imgWidth / 2 + 'px'
+        flag.style.marginTop = -imgHeight / 2 + 'px'
+        imgRender({
+          sliceCount: 70,
+          amplitude: 20,
+          period: 1.5,
+          duration: 2,
+        })
+      }
+    </script>
+  </body>
+</html>

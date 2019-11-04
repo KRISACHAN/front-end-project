@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>sb</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+      body {
+        color: #fff;
+        background-color: #232526;
+      }
+      .box {
+        text-align: center;
+      }
+      .clip-text {
+        font-size: 6em;
+        font-weight: bold;
+        line-height: 1;
+        position: relative;
+        display: inline-block;
+        margin: .25em;
+        padding: .5em .75em;
+        text-align: center;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-image: url(https://picsum.photos/480/200?random);
+      }
+      .clip-text::before,
+      .clip-text::after {
+        position: absolute;
+        content: '';
+      }
+      .clip-text::before {
+        z-index: -2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: inherit;
+      }
+      .clip-text::after {
+        z-index: -1;
+        top: .3em;
+        right: .3em;
+        bottom: .3em;
+        left: .3em;
+        background-image: linear-gradient(25deg, #5207fc, #6a5ff9, #7096f4, #65caee);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="clip-text">fish head</div>
+    </div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

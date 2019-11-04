@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>你比划我猜</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      section,
+      div,
+      span {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #283048;
+      }
+      nav {
+        float: left;
+        width: 180px;
+        height: 100%;
+        overflow-y: auto;
+        background: #FFF;
+      }
+      nav > a {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        line-height: 50px;
+      }
+      section {
+        float: right;
+        width: calc(100% - 222px);
+        height: 100%;
+        overflow: hidden;
+        scroll-behavior: smooth;
+      }
+      section > div {
+        color: #FFF;
+        font-weight: bolder;
+        font-size: 300px;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+      }
+      section > div > span {
+        display: block;
+        text-align: center;
+        margin: 0 auto;
+      }
+      ::-webkit-scrollbar {
+        background: rgba(255, 255, 255, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="nav"></nav>
+    <section id="section"></section>
+    <script>
+      'use strict'
+      window.onload = event => {
+        let pageIndex = 1
+        const urlChangeHandle = event => {
+          console.log(event)
+          const {
+            newURL
+          } = event
+          const current = newURL.replace(/.+\#page\-(\d)/, '$1')
+          pageIndex = +current
+          console.log(pageIndex)
+          history.pushState(
+            {}, 
+            window.location.href, 
+            window.location.origin + window.location.pathname
+          )
+        }
+        window.onhashchange = urlChangeHandle
+        const words = '必胜客，俯卧撑，牙刷，香水，韩国，香蕉，汽车，狗，金鸡独立，太阳，电风扇，海底捞，广场舞，戒指，口红，中国，西瓜，自行车，羊，指手画脚，月亮，手电筒，麦当劳，青蛙跳，眼镜，洗面奶，美国，瓜子，飞机，牛，一箭双雕，星星，冰箱，肯德基，跑步，手表，面膜，日本，花生，火车，马，三人成虎，地球，热水器'.split('，')
+        const sectionDF = document.createDocumentFragment()
+        const navDF = document.createDocumentFragment()
+        words.forEach((word, idx) => {
+          const div = document.createElement('div')
+          const a = document.createElement('a')
+          word
+            .split('')
+            .forEach((w, i) => {
+              const span = document.createElement('span')
+              const text = document.createTextNode(w)
+              span.appendChild(text)
+              div.appendChild(span)
+            })
+          div.id = `page-${idx + 1}`
+          a.href = `#page-${idx + 1}`
+          a.id = `tag${idx + 1}`
+          const aText = document.createTextNode(`第${idx + 1}题`)
+          sectionDF.appendChild(div)
+          a.appendChild(aText)
+          navDF.appendChild(a)
+        })
+        section.appendChild(sectionDF)
+        nav.appendChild(navDF)
+
+        const throttle = function (fn, delay) {
+          let timer = null
+          return function () {
+            let context = this, args = arguments
+            clearTimeout(timer)
+            timer = setTimeout(function () {
+              fn.apply(context, args)
+            }, delay)
+          }
+        }
+        
+        const upDownHandler = event => {
+          const {
+            key
+          } = event
+          if (pageIndex === 1 && key === 'ArrowUp') {
+            return
+          }
+          if (pageIndex === words.length && key === 'ArrowDown') {
+            return
+          }
+          const keyObj = {
+            'ArrowUp': () => {
+              pageIndex--
+            },
+            'ArrowDown': () => {
+              pageIndex++
+            },
+          }
+          if (keyObj[key]) {
+            keyObj[key]()
+            document.querySelector(`#tag${pageIndex}`).click()
+          }
+        }
+        const keydownHander = 
+        document.querySelector('body').onkeydown = throttle(upDownHandler, 500)
+      }
+    </script>
+  </body>
+</html>

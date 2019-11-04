@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>五星红旗</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+      li {
+        list-style: none;
+      }
+      .flag {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        animation: wave ease-in-out infinite;
+      }
+      .flag > li {
+        height: 100%;
+        float: left;
+        background-image: url("flag.jpg");
+        background-size: auto 100%;
+        animation: flag ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="flag" class="flag"></ul>
+    <script>
+      'use strict'
+      var flagEle = document.getElementById('flag')
+      var image = new Image()
+      image.src = 'flag.jpg'
+
+      var IMG_MAX_WIDTH = 600
+      var IMG_MAX_HEIGHT = 600
+      var imgHeight
+      var imgWidth
+
+      image.onload = function () {
+        imgWidth = image.width
+        imgHeight = image.height
+        var ratio = image.width / image.height
+        if (imgWidth > IMG_MAX_WIDTH) {
+          imgWidth = IMG_MAX_WIDTH
+          imgHeight = imgWidth / ratio
+        }
+        if (imgHeight > IMG_MAX_HEIGHT) {
+          imgWidth = imgHeight * ratio
+          imgHeight = IMG_MAX_HEIGHT
+        }
+
+        flagEle.style.width = imgWidth + 'px'
+        flagEle.style.height = imgHeight + 'px'
+        flagEle.style.marginLeft = -imgWidth / 2 + 'px'
+        flagEle.style.marginTop = -imgHeight / 2 + 'px'
+
+        splitImg(80, 20, 1.5, 2)
+      }
+
+      /**
+      * 分割图片
+      * @param sliceCount 切片数量
+      * @param amplitude 振幅
+      * @param period 固定周期个数
+      * @param duration 一个周期的时长
+      */
+      function splitImg (sliceCount, amplitude, period, duration) {
+        var styleEle = document.createElement('style')
+        // styleEle.innerHTML = 'body{background: red}'
+        var styleHtmlAry = []
+        var sliceCountPerPeriod = Math.floor(sliceCount / period)
+        var sliceWidth = imgWidth / sliceCount
+        var formula = sliceCountPerPeriod + 'n+'
+        var interval = duration * period / sliceCount
+
+        // 添加动画延时
+        for (var i = 0; i < sliceCount + 1; i++) {
+          if (i < sliceCountPerPeriod) {
+            styleHtmlAry.push('#flag > li:nth-child(' + formula + i + ') { ')
+            styleHtmlAry.push('animation-delay: -' + (interval * (sliceCountPerPeriod - i)) + 's;')
+            styleHtmlAry.push('}')
+          }
+          styleHtmlAry.push('#flag > li:nth-child(' + i + ') { background-position: -' + (i * sliceWidth) + 'px 0; }') // 设置切片背景
+        }
+
+        // 添加关键帧动画
+        styleHtmlAry.push('@keyframes flag {')
+        styleHtmlAry.push('0% { transform: translate3d(0, ' + amplitude + 'px, 0); }')
+        styleHtmlAry.push('50% { transform: translate3d(0, ' + (-amplitude) + 'px, 0); }')
+        styleHtmlAry.push('100% { transform: translate3d(0, ' + amplitude + 'px, 0); }')
+        styleHtmlAry.push('}')
+
+        // 添加反向关键帧动画
+        styleHtmlAry.push('@keyframes wave {')
+        styleHtmlAry.push('0% { transform: translate3d(0, ' + (-amplitude) + 'px, 0); }')
+        styleHtmlAry.push('50% { transform: translate3d(0, ' + amplitude + 'px, 0); }')
+        styleHtmlAry.push('100% { transform: translate3d(0, ' + (-amplitude) + 'px, 0); }')
+        styleHtmlAry.push('}')
+
+        // 容器应用wave动画
+        styleHtmlAry.push('#flag {')
+        styleHtmlAry.push('animation-duration: ' + duration + 's;') // 添加周期时长
+        styleHtmlAry.push('animation-delay: -' + (interval * sliceCountPerPeriod) + 's;')
+        styleHtmlAry.push('}')
+
+        // 切片样式
+        styleHtmlAry.push('#flag > li {')
+        styleHtmlAry.push('animation-duration: ' + duration + 's;') // 添加周期时长
+        styleHtmlAry.push('width: ' + (imgWidth / sliceCount) + 'px;') // 设置切片宽度
+        styleHtmlAry.push('}')
+
+        styleEle.innerHTML = styleHtmlAry.join('')
+
+        // 创建切片元素
+        flagEle.innerHTML = new Array(sliceCount + 1).join('<li></li>')
+
+        document.documentElement.appendChild(styleEle)
+      }
+    </script>
+  </body>
+</html>

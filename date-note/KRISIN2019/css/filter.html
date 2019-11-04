@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>filter</title>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        width: 100px;
+        height: 100px;
+        vertical-align: middle;
+      }
+      .box {
+        width: 600px;
+        margin: 10px auto;
+      }
+      .image-box {
+        width: 150px;
+        height: 150px;
+        float: left;
+      }
+      .filter-blur {
+        filter: blur(2px);
+      }
+      .filter-grayscale {
+        filter: grayscale(100%);
+      }
+      .filter-sepia {
+        filter: sepia(100%);
+      }
+      .filter-saturate {
+        filter: saturate(5)
+      }
+      .filter-hue-rotate {
+        filter: hue-rotate(180deg);
+      }
+      .filter-invert {
+        filter: invert(1);
+      }
+      .filter-opacity {
+        filter: opacity(.5)
+      }
+      .filter-brightness {
+        filter: brightness(3)
+      }
+      .filter-contrast {
+        filter: contrast(.5)
+      }
+      .filter-drop-shadow {
+        filter: drop-shadow(10px 10px 5px #000);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-blur" alt="">
+        <p>blur</p>
+      </div>
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-grayscale" alt="">
+        <p>grayscale</p>
+      </div>
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-sepia" alt="">
+        <p>sepia</p>
+      </div>
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-saturate" alt="">
+        <p>saturate</p>
+      </div>
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-hue-rotate" alt="">
+        <p>hue-rotate</p>
+      </div>
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-invert" alt="">
+        <p>invert</p>
+      </div>
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-opacity" alt="">
+        <p>opacity</p>
+      </div>
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-brightness" alt="">
+        <p>brightness</p>
+      </div>
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-contrast" alt="">
+        <p>contrast</p>
+      </div>
+      <div class="image-box">
+        <img src="http://img.171u.com/image/1107/2606404449119.jpg" class="filter-drop-shadow" alt="">
+        <p>drop-shadow</p>
+      </div>
+    </div>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>戈多来了</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      godot,
+      estragon,
+      vladimir {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid;
+        top: 25px;
+        text-align: center;
+      }
+      godot,
+      estragon {
+        left: 0px;
+      }
+      vladimir {
+        right: 0px;
+      }
+      noLeftTree {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 150px;
+        height: 100px;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <godot id="godot">戈多</godot>
+    <noLeftTree id="noLeftTree">
+      <estragon id="estragon">戈戈</estragon>
+      <vladimir id="vladimir">狄狄</vladimir>
+    </noLeftTree>
+    <script>
+      'use strict'
+      Object.defineProperty(godot, 'style', {
+        get() {
+          return this.getAttribute('style')
+        },
+        set(data) {
+          this.setAttribute('style', data)
+          const distance = (noLeftTree.offsetLeft - this.offsetLeft)
+          console.log(distance >= 51 ? '戈多没来，我们先各自干各自的活吧' : '戈多快到了，走，我们集合去')
+        }
+      })
+      const whereIsGodot = start => {
+        if (start) {
+          let d = 0
+          const godotRun = () => {
+            if (noLeftTree.offsetLeft - 51 >= d) {
+              setTimeout(() => {
+                d++
+                godot.style = `left: ${d}px`
+                godotRun()
+              }, 16)
+            }
+          }
+          godotRun()
+        }
+      }
+    </script>
+  </body>
+</html>

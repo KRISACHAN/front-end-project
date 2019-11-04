@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>cascade</title>
+    <style>
+      body {
+        color: #398EEA;
+        background: #DDDDDD;
+      }
+      blockquote {
+        border-radius: 5px;
+        padding: 15px;
+        background: #0F60B6;
+        color: #FFFFFF;
+        display: table;
+      }
+      .all-unset {
+        all: unset;
+      }
+      .all-initial {
+        all: initial;
+      }
+      .all-inherit {
+        all: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 aria-level="1">鸡汤大全</h1>
+    <section aria-level="2">
+      <h2 role="heading">名言警句</h2>
+      <blockquote cite="https://www.juzimi.com/album/3903593">
+        人若志趣不远，心不在焉，虽学不成。
+        <cite>— 张载</cite>
+      </blockquote>
+    </section>
+    <section aria-level="2">
+      <h2 role="heading">名言警句（all: unset）</h2>
+      <blockquote class="all-unset" cite="https://www.juzimi.com/album/3903593">
+        人若志趣不远，心不在焉，虽学不成。
+        <cite>— 张载</cite>
+      </blockquote>
+    </section>
+    <section aria-level="2">
+      <h2 role="heading">名言警句（all: initial）</h2>
+      <blockquote class="all-initial" cite="https://www.juzimi.com/album/3903593">
+        人若志趣不远，心不在焉，虽学不成。
+        <cite>— 张载</cite>
+      </blockquote>
+    </section>
+    <section aria-level="2">
+      <h2 role="heading">名言警句（all: inherit）</h2>
+      <blockquote class="all-inherit" cite="https://www.juzimi.com/album/3903593">
+        人若志趣不远，心不在焉，虽学不成。
+        <cite>— 张载</cite>
+      </blockquote>
+    </section>
+  </body>
+</html>

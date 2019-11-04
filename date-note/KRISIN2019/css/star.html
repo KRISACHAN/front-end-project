@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>star</title>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .container1,
+      .container2
+       {
+        font-size: 60px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+      }
+      .container1 input {
+        opacity: 0;
+        position: absolute;
+      }
+      .container1 label {
+        color: #aaa;
+        text-decoration: none;
+        -webkit-transition: color .4s;
+        -moz-transition: color .4s;
+        -o-transition: color .4s;
+        transition: color .4s;
+      }
+      .container1 label:hover ~ label,
+      .container1 input:focus ~ label,
+      .container1 label:hover {
+        color: #cc163a;
+        cursor: pointer;
+      }
+
+
+      .container2 label {
+        cursor: pointer;
+        font-size: 60px;
+      }
+      .container2 input {
+        opacity: 0;
+        position: absolute;
+      }
+      .container2 label:hover ~ label,
+      .container2 label:hover,
+      .container2 input:focus ~ label,
+      .container2 input:checked ~ label {
+        color: #cc163a;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="container1">
+      <input name="star1" id="s1" type="radio" /><label for="s1">☆</label>
+      <input name="star1" id="s2" type="radio" /><label for="s2">☆</label>
+      <input name="star1" id="s3" type="radio" /><label for="s3">☆</label>
+      <input name="star1" id="s4" type="radio" /><label for="s4">☆</label>
+      <input name="star1" id="s5" type="radio" /><label for="s5">☆</label>
+    </section>
+    <section class="container2">
+      <input type="radio" name="star2" id="s6">
+      <label for="s6">☆</label>
+      <input type="radio" name="star2" id="s7">
+      <label for="s7">☆</label>
+      <input type="radio" name="star2" id="s8">
+      <label for="s8">☆</label>
+      <input type="radio" name="star2" id="s9">
+      <label for="s9">☆</label>
+      <input type="radio" name="star2" id="s10">
+      <label for="s10">☆</label>
+    </section>
+    <script>
+      'use strict';
+    </script>
+  </body>
+</html>

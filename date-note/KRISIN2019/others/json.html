@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>json</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script>
+      'use strict'
+      /*
+       * @types: 获取元素类型
+       * @params: Boolean | Number | String | Function | Array | Date | RegExp | Undefined | Null | Object | Arguments | Error | Window | HTMLDocument | Map | Set | WeakMap
+       */
+      Object.prototype.types = function () {
+        var toString = Object.prototype.toString
+        var map = {
+          '[object Boolean]': 'boolean',
+          '[object Number]': 'number',
+          '[object String]': 'string',
+          '[object Function]': 'function',
+          '[object Array]': 'array',
+          '[object Date]': 'date',
+          '[object RegExp]': 'regExp',
+          '[object Undefined]': 'undefined',
+          '[object Null]': 'null',
+          '[object Object]': 'object',
+          '[object Arguments]': 'arguments',
+          '[object Error]': 'error',
+          '[object Window]': 'window',
+          '[object HTMLDocument]': 'document',
+        };
+        var el = this instanceof Element ? 'element' : map[toString.call(this)];
+        return el
+      }
+
+      Object.prototype.stfy = function () {
+        const type = this.types()
+        const typeObj = {
+          'boolean': data => '' + !!data,
+          'number': data => data + '',
+          'string': data => `"${data}"`,
+          'function': data => undefined,
+          'array': data => {
+            let res = '['
+            for (let i = 0, len = data.length; i < len; ++i) {
+              let cur = data[i].stfy()
+              res += (cur)
+            }
+            res += ']'
+            return res
+          },
+          'date': data => data.toJSON(),
+          'regExp': data => '{}',
+          'undefined': data => 'undefined',
+          'null': data => 'null',
+          'object': data => {
+            let res = '{'
+            for (let key in data) {
+              if (data.hasOwnProperty(key)) {
+                let cur = data[key].stfy()
+                if (cur) {
+                  res += `"${key}:${cur}"`
+                }
+              }
+            }
+            res += '}'
+            return res
+          },
+          'arguments': data => {
+            let res = '{'
+            for (let i = 0, len = data.length; i < len; ++i) {
+              let cur = `"${i}:${data[i]}${(i === len - 1) ? '' : ','}"`
+            }
+            res += '}'
+            return res
+          },
+          'error': data => '{}',
+          'window': data => new Error('Converting circular structure to JSON'),
+          'document': data => '{}',
+        }
+        if (typeObj[type]) {
+          return typeObj[type](this)
+        } else {
+          console.log('嘤嘤嘤，内置对象太多，写不过来')
+          return JSON.stringify(this)
+        }
+      }
+    </script>
+  </body>
+</html>
