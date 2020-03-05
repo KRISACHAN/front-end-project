@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>Typed OM</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        background: linear-gradient(to right, #2c3e50, #4ca1af);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box" id="box"></div>
+    <script>
+      'use strict'
+      box.attributeStyleMap.set('width', CSS.px(200))
+      box.attributeStyleMap.set('height', CSS.px(200))
+      const [x, y] = 'width,height'
+                        .split(',')
+                        .map(val => Number.parseInt(box.computedStyleMap().get(val)))
+      box.attributeStyleMap.set('transform', new CSSTranslate(CSS.px(x), CSS.px(y)))
+      console.log(box.computedStyleMap().get('transform'))
+      console.log(window.getComputedStyle(box, null)['transform'])
+    </script>
+  </body>
+</html>

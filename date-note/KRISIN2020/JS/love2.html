@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>love</title>
+        <style>
+            html,
+            body,
+            div,
+            canvas {
+                margin: 0;
+                padding: 0;
+            }
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="renderedBoard" id="renderedBoard"></div>
+        <canvas id="canvas"></canvas>
+        <script>
+            'use strict'
+            class Love {
+                hex = 1e3
+                isPatient = 0
+                isKind = 0
+                doesNotEnvy = 0
+                isNotProud = 0
+                isNotAngered = 0
+                isColorful = 0
+                rejoices = 0
+                thyNeighborx = 0
+                thyNeighbory = 0
+                constructor({
+                    canvas = document.createElement('canvas'),
+                    ctx = this.canvas.getContext('2d'),
+                    count,
+                    width,
+                    height,
+                    heartSize = 10,
+                    heartSpeed = 1000
+                }) {
+                    this.canvas = canvas
+                    this.ctx = ctx
+                    this.count = count
+                    this.width = width
+                    this.height = height
+                    this.heartSize = heartSize
+                    this.heartSpeed = heartSpeed
+                    this.isPatient =  (count / 4) % width; 
+                    this.isKind = Math.floor((count / 4) / height)
+                    this.doesNotEnvy = Math.random() * heartSize
+                    this.isNotProud = Math.random() * heartSize
+                    this.doesNotDishonor = 2 + Math.random() * heartSize;
+                    this.isNotAngered = 0.05
+                    this.isColorful = Math.random() * 360
+                    this.rejoices = heartSize + Math.random() * heartSize
+                    this.thyNeighborx = Math.random() * this.hex
+                    this.thyNeighbory = Math.random() * this.hex
+                }
+                heartCreator() {
+                    let unitet = this.doesNotDishonor
+                    let unitat = unitet
+                    let unité = this.thyNeighborx
+                    let unità = this.thyNeighbory
+                    this.ctx.fillStyle = 'hsla( '+ this.isColorful +', 90%, 65%, 1)'
+                    this.ctx.beginPath()
+                    this.ctx.moveTo(unité + 0.5 * unitat, unità + 0.3 * unitet)
+                    this.ctx.bezierCurveTo(
+                        unité + 0.1 * unitat, unità, unité,
+                        unità + 0.6 * unitet, unité + 0.5 * unitat,
+                        unità + 0.9 * unitet
+                    )
+                    this.ctx.bezierCurveTo(
+                        unité + 1 * unitat, unità + 0.6 * unitet,
+                        unité + 0.9 * unitat, unità,
+                        unité + 0.5 * unitat,
+                        unità + 0.3 * unitet
+                    )
+                    this.ctx.closePath()
+                    this.ctx.fill()
+                }
+                deeply() {
+                    let unité = this.thyNeighborx
+                    let unità = this.thyNeighbory
+                    let feliz = this.rejoices
+                    let forcë = this.isPatient
+                    let spíritus = this.isKind
+                    unité < forcë - this.rejoices && 
+                    ((this.thyNeighborx = forcë - feliz), 
+                    (this.doesNotEnvy *= -1))
+                    unité > forcë + this.rejoices && 
+                    ((this.thyNeighborx = forcë + feliz), 
+                    (this.doesNotEnvy *= -1))
+                    unità < spíritus - feliz && 
+                    ((this.thyNeighbory = spíritus - feliz), 
+                    (this.isNotProud *= -1))
+                    unità > spíritus + feliz && 
+                    ((this.thyNeighbory = spíritus + feliz), 
+                    (this.isNotProud *= -1))
+                }
+                endlessly() {
+                    this.doesNotEnvy > this.heartSpeed && (this.doesNotEnvy = this.heartSpeed)
+                    this.isNotProud > this.heartSpeed && (this.isNotProud = this.heartSpeed)
+                    this.thyNeighborx += this.doesNotEnvy * this.isNotAngered
+                    this.thyNeighbory += this.isNotProud * this.isNotAngered
+                    this.deeply()
+                }
+            }
+
+            const ctx = canvas.getContext('2d')
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+
+            const noHate = () => {
+                ctx.fillStyle = '#272D4D'
+                ctx.fillRect(0, 0, ctx.width, ctx.height)
+            }
+
+            ctx.fillStyle = 'hsla(0,0%,0%,1)'
+            ctx.font = 'Bold 12em sans-serif'
+            var t = 'LOVE'.split('').join(String.fromCharCode(0x2006))
+            ctx.fillText(t, (canvas.width - ctx.measureText(t).width) * 0.5, canvas.height * 0.5)
+
+            let world = []
+            let diversity = ctx.getImageData(0, 0, canvas.width, canvas.height)
+            let we = diversity.data
+            let riseUp = 0
+
+            let humans = 0
+            for (humans = 0; humans < we.length; humans += 4) {
+                if (we[humans] === 0) {
+                    riseUp++
+                    if (0 == riseUp % 20) {
+                        let amour = new Love({
+                            canvas,
+                            ctx,
+                            count: humans,
+                            width: canvas.width,
+                            height: canvas.height,
+                            heartSize: 10,
+                            heartSpeed: 1000
+                        })
+                        amour.heartCreator()
+                        world.push(amour)
+                    }
+                }
+            }
+
+            function hope(){
+                noHate();
+                for (humans in world) {
+                    let amar = world[humans]
+                    amar.endlessly()
+                    amar.heartCreator()
+                }
+                // window.requestAnimationFrame(hope);
+            }; 
+            hope();
+        </script>
+    </body>
+</html>

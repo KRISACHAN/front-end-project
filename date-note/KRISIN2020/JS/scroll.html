@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <title>scroll</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      padding: 500px;
+      width: 2000px;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    #box {
+      width: 150px;
+      height: 150px;
+      background: url(https://fish-pond-1253945200.cos.ap-guangzhou.myqcloud.com/img/base/logo.jpg) no-repeat 0% 0%/contain;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <button class="btn" data-pos="start-start"></button>
+    <button class="btn" data-pos="start-center"></button>
+    <button class="btn" data-pos="start-end"></button>
+    <button class="btn" data-pos="start-nearest"></button>
+    <button class="btn" data-pos="center-start"></button>
+    <button class="btn" data-pos="center-center"></button>
+    <button class="btn" data-pos="center-end"></button>
+    <button class="btn" data-pos="center-nearest"></button>
+    <button class="btn" data-pos="end-start"></button>
+    <button class="btn" data-pos="end-center"></button>
+    <button class="btn" data-pos="end-end"></button>
+    <button class="btn" data-pos="end-nearest"></button>
+    <button class="btn" data-pos="nearest-start"></button>
+    <button class="btn" data-pos="nearest-center"></button>
+    <button class="btn" data-pos="nearest-end"></button>
+    <button class="btn" data-pos="nearest-nearest"></button>
+  </header>
+
+  <div id="box"></div>
+  <script>
+    'use strict';
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+      button.innerText = button.dataset.pos;
+      button.onclick = function () {
+        const [block, inline] = button.dataset.pos.split('-');
+        document.querySelector('#box').scrollIntoView({
+          behavior: 'smooth',
+          block,
+          inline
+        });
+      };
+    });
+  </script>
+</body>
+
+</html>

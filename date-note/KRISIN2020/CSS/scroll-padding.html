@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <title>scroll-padding</title>
+  <style>
+    .no-support {
+      text-align: center;
+      padding: 5px;
+      width: 450px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #ee6620;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    @supports(scroll-snap-type: both mandatory) {
+      .no-support {
+        display: none;
+      }
+    }
+
+    .example-wrapper {
+      text-align: center;
+      width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .container {
+      width: 360px;
+      height: 360px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 10px;
+      border: 2px solid #333;
+      overflow: auto ;
+      position: relative;
+    }
+
+    .element {
+      width: 300px;
+      height: 300px;
+      scroll-snap-align: start;
+      scroll-snap-stop: normal;
+      color: white;
+      font-size: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .element:nth-child(1) {
+      background: #1d1e21;
+    }
+    .element:nth-child(2) {
+      background: #ee6620;
+    }
+    .element:nth-child(3) {
+      background: #777ba0;
+    }
+    .element:nth-child(4) {
+      background: #da1e62;
+    }
+
+    .both-mandatory {
+      scroll-snap-type: both mandatory;
+    }
+
+    .scroll-wrapper {
+      position: relative;
+    }
+
+    .scroll-padding-top,
+    .scroll-padding-left {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 360px;
+      background: pink;
+      opacity: 0.5;
+      display: block;
+      z-index: 2;
+    }
+
+    .scroll-padding-top {
+      top: 2px;
+    }
+
+    .both-scroll .wrapper {
+      width: 620px;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 300px 300px;
+      grid-gap: 10px;
+      padding: 100px 100px 400px 100px; /* To give more space to scroll */
+    }
+
+    .padding-0px {
+      scroll-padding: 0px 0px 0px 0px;
+    }
+
+    .padding-50px {
+      scroll-padding: 50px 0px 0px 50px;
+    }
+
+    .padding-100px {
+      scroll-padding: 100px 0px 0px 100px;
+    }
+
+    .scroll-wrapper-50px .scroll-padding-top,
+    .scroll-wrapper-50px .scroll-padding-left {
+      height: 50px;
+      line-height: 50px;
+    }
+
+    .scroll-wrapper-50px .scroll-padding-left {
+      transform: rotate(-90deg);
+      left: calc(-1 * 360px / 2 + 50px / 2 + 2px);
+      top: calc(360px / 2 - 50px / 2 + 2px);
+    }
+
+    .scroll-wrapper-100px .scroll-padding-top,
+    .scroll-wrapper-100px .scroll-padding-left {
+      height: 100px;
+      line-height: 100px;
+    }
+
+    .scroll-wrapper-100px .scroll-padding-left {
+      transform: rotate(-90deg);
+      left: calc(-1 * 360px / 2 + 100px / 2 + 2px);
+      top: calc(360px / 2 - 100px / 2 + 2px);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="no-support">
+    <p>Heads up: It doesn't look like your browser supports scroll snapping! Check <a
+        href="https://caniuse.com/#feat=css-snappoints">Can I use</a> for current browser support. Maybe try opening this
+      CodePen in a different browser, like Chrome?</p>
+  </div>
+  <div class="example-wrapper">
+    <p>On all examples, scroll slowly to "feel" the snap points.</p>
+
+    <p><code>scroll-padding: 0px 0px 0px 0px;</code></p>
+
+    <div class="container both-scroll both-mandatory padding-0px">
+      <div class="wrapper">
+        <div class="element">1</div>
+        <div class="element">2</div>
+        <div class="element">3</div>
+        <div class="element">4</div>
+      </div>
+    </div>
+
+    <p><code>scroll-padding: 50px 0px 0px 50px;</code></p>
+
+    <div class="scroll-wrapper scroll-wrapper-50px">
+      <div class="scroll-padding-top">scroll-padding-top</div>
+      <div class="scroll-padding-left">scroll-padding-left</div>
+      <div class="container both-scroll both-mandatory padding-50px">
+        <div class="wrapper">
+          <div class="element">1</div>
+          <div class="element">2</div>
+          <div class="element">3</div>
+          <div class="element">4</div>
+        </div>
+      </div>
+    </div>
+
+    <p><code>scroll-padding: 100px 0px 0px 100px;</code></p>
+
+    <div class="scroll-wrapper scroll-wrapper-100px">
+      <div class="scroll-padding-top">scroll-padding-top</div>
+      <div class="scroll-padding-left">scroll-padding-left</div>
+      <div class="container both-scroll both-mandatory padding-100px">
+        <div class="wrapper">
+          <div class="element">1</div>
+          <div class="element">2</div>
+          <div class="element">3</div>
+          <div class="element">4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    'use strict';
+  </script>
+</body>
+
+</html>

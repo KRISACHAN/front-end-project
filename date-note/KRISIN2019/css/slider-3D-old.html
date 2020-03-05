@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>slider-3D</title>
+    <style>
+      html,
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      :root {
+        --base-size: 500px;
+        --base-color: #03A9F4;
+        --bg-color: #3cba92;
+      }
+      .center {
+        position: absolute;
+        margin: auto;
+        top: 20px;
+        right: 0;
+        left: 0;
+      }
+      .slider {
+/*        overflow: hidden;*/
+        width: var(--base-size);
+        height: var(--base-size);
+        color: var(--base-color);
+/*        border: 1px solid currentcolor;*/
+/*        box-shadow: 0 3px 5px #ddd;*/
+        display: flex;
+      }
+      .slider-page {
+        height: inherit;
+        flex: 1;
+        position: relative;
+/*         transform-origin: 0 50%; */
+        transform-style: preserve-3d;
+      }
+      .slider-1 {
+        transform: rotateX(45deg);
+      }
+      .slider-page > .slider-main {
+        position: absolute;
+        left: 0;
+        top: 0;
+/*        background-color: var(--bg-color);*/
+        height: inherit;
+        width: 100%;
+        border: 1px solid currentcolor;
+        box-sizing: border-box;
+      }
+      .slider-page > .slider-front {
+        filter: hue-rotate(45deg);
+        transform: rotateY(0) translateZ(250px);
+      }
+      .slider-page > .slider-back {
+        filter: hue-rotate(90deg);
+        transform: translateZ(-250px) rotateY(180deg);
+      }
+      .slider-page > .slider-top {
+        filter: hue-rotate(135deg);
+        transform: rotateX(90deg) translateZ(250px);
+      }
+      .slider-page > .slider-bottom {
+        filter: hue-rotate(180deg);
+        transform: rotateX(90deg) translateZ(-250px);
+      }
+      .slider-page > .slider-left {
+        width: var(--base-size);
+        filter: hue-rotate(225deg);
+        transform: rotateY(-90deg) translateZ(125px);
+      }
+      .slider-page > .slider-right {
+        width: var(--base-size);
+        filter: hue-rotate(270deg);
+        transform: rotateY(90deg) translateZ(-250px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slider center">
+      <div class="slider-page slider-1">
+        <div class="slider-main slider-front"></div>
+        <div class="slider-main slider-back"></div>
+        <div class="slider-main slider-top"></div>
+        <div class="slider-main slider-bottom"></div>
+        <div class="slider-main slider-left"></div>
+        <div class="slider-main slider-right"></div>
+      </div>
+      <div class="slider-page slider-2"></div>
+      <div class="slider-page slider-3"></div>
+      <div class="slider-page slider-4"></div>
+    </div>
+  </body>
+</html>

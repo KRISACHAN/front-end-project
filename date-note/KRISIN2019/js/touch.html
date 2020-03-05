@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>touch</title>
+    <style>
+      html,
+      body,
+      #log {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .a,
+      .b {
+        position: absolute;
+        bottom: 0;
+        width: 40%;
+        height: 100%;
+        border: 1px solid;
+      }
+      .a {
+        left: 0;
+      }
+      .b {
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="a" id="a"></div>
+    <div class="b" id="b"></div>
+    <script>
+      //设置事件处理程序
+      function startup(el) {
+        el.addEventListener("touchstart", handleStart, false);
+        el.addEventListener("touchend", handleEnd, false);
+        el.addEventListener("touchcancel", handleCancel, false);
+        el.addEventListener("touchleave", handleEnd, false);
+        el.addEventListener("touchmove", handleMove, false);
+      }
+
+      //处理触摸开始事件
+      function handleStart(evt) {
+        evt.preventDefault(); //阻止事件的默认行为
+        log("touchstart.");
+      }
+
+      //处理触摸移动事件
+      function handleMove(evt) {
+        evt.preventDefault();
+        log(evt)
+      }
+
+      //处理触摸结束事件
+      function handleEnd(evt) {
+        evt.preventDefault();
+        log("touchend/touchleave.");
+      }
+
+      //处理触摸对出事件
+      function handleCancel(evt) {
+        evt.preventDefault();
+        log("touchcancel.");
+      }
+
+      //记录日志
+      function log(msg) {
+        var {
+          changedTouches
+        } = msg
+        if (changedTouches) {
+          var p = document.getElementById('log');
+          const ids = [...changedTouches].map(ev => ev.identifier);
+          msg.target.innerHTML = msg.target.innerHTML + '\n' + msg.target.id;
+        }
+      }
+
+      startup(document.querySelector('.a'))
+      startup(document.querySelector('.b'))
+    </script>
+  </body>
+</html>

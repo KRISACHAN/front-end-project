@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        div div img{
+            width:300px;
+            height:300px;
+            position:absolute;
+        }
+        div div{
+            -webkit-transition: all 1s;
+        }
+        #img1{
+            -webkit-transform: translateZ(150px);
+        }
+        #img2{
+            -webkit-transform: rotateX(-90deg) translateZ(150px);
+        }
+        #img3{
+            -webkit-transform: rotateZ(180deg) translateZ(-150px);
+        }
+        #img4{
+            -webkit-transform: rotateX(90deg) translateZ(150px);
+        }
+        #img5{
+            -webkit-transform:rotateY(90deg) translateZ(150px);
+        }
+        #img6{
+            -webkit-transform: rotateY(-90deg) translateZ(150px);
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-left: 100px;height:300px;width:300px;position:absolute;perspective: 1000px;">
+        <div id="box" style="transform-style: preserve-3d;height:300px;width:300px;position: relative;">
+            <img id="img1" src="1.jpg" />
+            <img id="img2" src="2.jpg" />
+            <img id="img3" src="3.jpg" />
+            <img id="img4" src="4.jpg" />
+            <img id="img5" src="5.jpg" />
+            <img id="img6" src="6.jpg" />
+        </div>
+    </div>
+    <div style="margin-left: 700px;margin-top: 100px;">
+        <input id="btn1" type="button" value="向上翻转90度" />
+        <input id="btn2" type="button" name="" value="向左翻转90度" />
+        <input id="btn3" type="button" value="向右翻转90度" />
+        <input id="btn4" type="button" name="" value="向下翻转90度" />
+    </div>
+    <script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        var x=0;
+        var y=0;
+        var box=$("#box");
+        $('#btn1').on("click",function(){
+            var value=90+x*90;
+            box.css("-webkit-transform","rotateX("+value+"deg)");
+            x++;
+        });
+        $('#btn2').on("click",function(){
+            var value=y*90+90;
+            box.css("-webkit-transform","rotateY("+value+"deg)");
+            y++;
+        });
+        $('#btn3').on("click",function(){
+            y--;
+            var value=y*90;
+            box.css("-webkit-transform","rotateX("+value+"deg)");
+
+        });
+        $('#btn4').on("click",function(){
+            x--;
+            var value=x*90;
+            box.css("-webkit-transform","rotateX("+value+"deg)");
+            
+        });
+    </script>
+</body>
+</html>
