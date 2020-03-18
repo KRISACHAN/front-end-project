@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="screen-Orientation" content="portrait" />
+    <meta name="x5-Orientation" content="portrait" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>css-tic-tac-toe</title>
+    <style>
+        :root {
+            --color1: #2e317c;
+            --color2: #863020;
+            --color3: #eef7f2;
+            --color4: #20894d;
+            --bgColor1: #131824;
+            --bgColor2: rgba(53, 51, 60, 0.8);
+            --bgColor3: rgba(255, 255, 255, 1);
+            --bgColor4: #c4d7d6;
+            --bgColor5: rgba(26, 148, 188, 0.8);
+        }
+
+        html,
+        body,
+        div {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--color1);
+        }
+
+        h2 {
+            margin: 20px 0;
+            color: var(--color2);
+        }
+
+        input[type='radio'],
+        input[type='checkbox'] {
+            position: absolute;
+            top: -9999px;
+        }
+
+        .container {
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+
+        #c-menu,
+        #c-result {
+            background: var(--bgColor2);
+            text-align: center;
+            width: 800px;
+            height: 800px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+
+        #c-menu {
+            display: block;
+        }
+
+        #c-result {
+            color: var(--color3);
+        }
+
+        #c-menu>div {
+            background: var(--bgColor3);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .c-menu-toggle {
+            display: inline-block;
+        }
+
+        .c-menu-toggle>span {
+            line-height: 1.6;
+        }
+
+        .c-label-toggle {
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+            background: var(--bgColor4);
+            vertical-align: bottom;
+            margin: 0 10px;
+            border-radius: 16px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .c-label-toggle::before {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 16px;
+            height: 16px;
+            top: 4px;
+            left: 4px;
+            background: var(--color1);
+            border-radius: 100%;
+            transition: all 0.25s;
+        }
+
+        .c-btn,
+        input[type='reset'] {
+            width: 100%;
+            display: inline-block;
+            background: var(--bgColor1);
+            color: var(--color3);
+            border-radius: 5px;
+            margin-top: 32px;
+            padding: 5px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .c-btn:hover {
+            background: var(--bgColor2);
+        }
+
+        #start:checked~form #c-menu {
+            display: none;
+        }
+
+        #first:checked~form #c-menu label[for='first']::before {
+            left: 28px;
+            background: var(--color2);
+        }
+
+        .c-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #c-board {
+            width: 600px;
+            height: 600px;
+            display: grid;
+            grid-template-columns: repeat(3, 200px);
+            grid-template-rows: repeat(3, auto);
+        }
+
+        .c-grid {
+            margin: 5px;
+            position: relative;
+        }
+
+        .c-grid>label,
+        .c-grid>div {
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--bgColor5);
+        }
+
+        .c-grid>div {
+            display: none;
+            overflow: hidden;
+        }
+
+        #c-computer {
+            width: 200px;
+            position: absolute;
+            top: 700px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        #c-computer label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: pointer;
+        }
+
+        #c-computer>label:active {
+            position: static !important;
+            margin-left: 1000px !important;
+            background: none !important;
+            font-size: 0;
+        }
+
+        #c-computer>label:active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -50px;
+            left: 0;
+            bottom: 0;
+            z-index: 5;
+        }
+
+        #c-radio-0-X:checked~#c-radio-4-X:checked~#c-radio-8-O:checked~#c-computer label[for='c-radio-2-O'],
+        #c-radio-0-X:checked~#c-radio-4-X:checked~#c-radio-8-O:checked~#c-computer label[for='c-radio-6-O'],
+        #c-radio-2-X:checked~#c-radio-4-X:checked~#c-radio-6-O:checked~#c-computer label[for='c-radio-0-O'],
+        #c-radio-2-X:checked~#c-radio-4-X:checked~#c-radio-6-O:checked~#c-computer label[for='c-radio-8-O'],
+        #c-radio-2-O:checked~#c-radio-4-X:checked~#c-radio-6-X:checked~#c-computer label[for='c-radio-0-O'],
+        #c-radio-2-O:checked~#c-radio-4-X:checked~#c-radio-6-X:checked~#c-computer label[for='c-radio-8-O'],
+        #c-radio-0-O:checked~#c-radio-4-X:checked~#c-radio-8-X:checked~#c-computer label[for='c-radio-2-O'],
+        #c-radio-0-O:checked~#c-radio-4-X:checked~#c-radio-8-X:checked~#c-computer label[for='c-radio-6-O'] {
+            z-index: 3;
+        }
+
+        #c-radio-0-O:not(:checked)~#c-radio-2-O:not(:checked)~#c-radio-4-X:checked~#c-radio-6-O:not(:checked)~#c-radio-8-O:not(:checked)~#c-computer label[for='c-radio-0-O'],
+        #c-radio-0-O:not(:checked)~#c-radio-2-O:not(:checked)~#c-radio-4-X:checked~#c-radio-6-O:not(:checked)~#c-radio-8-O:not(:checked)~#c-computer label[for='c-radio-2-O'],
+        #c-radio-0-O:not(:checked)~#c-radio-2-O:not(:checked)~#c-radio-4-X:checked~#c-radio-6-O:not(:checked)~#c-radio-8-O:not(:checked)~#c-computer label[for='c-radio-6-O'],
+        #c-radio-0-O:not(:checked)~#c-radio-2-O:not(:checked)~#c-radio-4-X:checked~#c-radio-6-O:not(:checked)~#c-radio-8-O:not(:checked)~#c-computer label[for='c-radio-8-O'] {
+            z-index: 4;
+        }
+
+        #c-computer,
+        input:checked~input:checked~#c-computer,
+        input:checked~input:checked~input:checked~input:checked~#c-computer,
+        input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-computer,
+        input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-computer {
+            display: none;
+        }
+
+        input:checked~#c-computer,
+        input:checked~input:checked~input:checked~#c-computer,
+        input:checked~input:checked~input:checked~input:checked~input:checked~#c-computer,
+        input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-computer {
+            display: block;
+        }
+
+        label[for$='-X'],
+        input:checked~input:checked~#c-board label[for$='-X'],
+        input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'],
+        input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'],
+        input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'] {
+            z-index: 1;
+        }
+
+        input:checked~#c-board label[for$='-X'],
+        input:checked~input:checked~input:checked~#c-board label[for$='-X'],
+        input:checked~input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'],
+        input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'] {
+            z-index: -1;
+        }
+
+        #first:checked~form #c-computer,
+        #first:checked~form input:checked~input:checked~#c-computer,
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~#c-computer,
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-computer,
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-computer {
+            display: block;
+        }
+
+        #first:checked~form input:checked~#c-computer,
+        #first:checked~form input:checked~input:checked~input:checked~#c-computer,
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~input:checked~#c-computer,
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-computer {
+            display: none;
+        }
+
+        #first:checked~form label[for$='-X'],
+        #first:checked~form input:checked~input:checked~#c-board label[for$='-X'],
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'],
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'],
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'] {
+            z-index: -1;
+        }
+
+        #first:checked~form input:checked~#c-board label[for$='-X'],
+        #first:checked~form input:checked~input:checked~input:checked~#c-board label[for$='-X'],
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'],
+        #first:checked~form input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-board label[for$='-X'] {
+            z-index: 1;
+        }
+
+        input[id*='-0-']:checked~div label[for*='-0-'],
+        input[id*='-1-']:checked~div label[for*='-1-'],
+        input[id*='-2-']:checked~div label[for*='-2-'],
+        input[id*='-3-']:checked~div label[for*='-3-'],
+        input[id*='-4-']:checked~div label[for*='-4-'],
+        input[id*='-5-']:checked~div label[for*='-5-'],
+        input[id*='-6-']:checked~div label[for*='-6-'],
+        input[id*='-7-']:checked~div label[for*='-7-'],
+        input[id*='-8-']:checked~div label[for*='-8-'] {
+            display: none !important;
+        }
+
+        input[id*='-0-']:checked~#c-board #c-grid-0 div,
+        input[id*='-1-']:checked~#c-board #c-grid-1 div,
+        input[id*='-2-']:checked~#c-board #c-grid-2 div,
+        input[id*='-3-']:checked~#c-board #c-grid-3 div,
+        input[id*='-4-']:checked~#c-board #c-grid-4 div,
+        input[id*='-5-']:checked~#c-board #c-grid-5 div,
+        input[id*='-6-']:checked~#c-board #c-grid-6 div,
+        input[id*='-7-']:checked~#c-board #c-grid-7 div,
+        input[id*='-8-']:checked~#c-board #c-grid-8 div {
+            display: block;
+        }
+
+        input[id*='-0-X']:checked~#c-board #c-grid-0 div::before,
+        input[id*='-1-X']:checked~#c-board #c-grid-1 div::before,
+        input[id*='-2-X']:checked~#c-board #c-grid-2 div::before,
+        input[id*='-3-X']:checked~#c-board #c-grid-3 div::before,
+        input[id*='-4-X']:checked~#c-board #c-grid-4 div::before,
+        input[id*='-5-X']:checked~#c-board #c-grid-5 div::before,
+        input[id*='-6-X']:checked~#c-board #c-grid-6 div::before,
+        input[id*='-7-X']:checked~#c-board #c-grid-7 div::before,
+        input[id*='-8-X']:checked~#c-board #c-grid-8 div::before {
+            content: 'X';
+            background: var(--color1);
+            color: var(--color3);
+        }
+
+        input[id*='-0-O']:checked~#c-board #c-grid-0 div::before,
+        input[id*='-1-O']:checked~#c-board #c-grid-1 div::before,
+        input[id*='-2-O']:checked~#c-board #c-grid-2 div::before,
+        input[id*='-3-O']:checked~#c-board #c-grid-3 div::before,
+        input[id*='-4-O']:checked~#c-board #c-grid-4 div::before,
+        input[id*='-5-O']:checked~#c-board #c-grid-5 div::before,
+        input[id*='-6-O']:checked~#c-board #c-grid-6 div::before,
+        input[id*='-7-O']:checked~#c-board #c-grid-7 div::before,
+        input[id*='-8-O']:checked~#c-board #c-grid-8 div::before {
+            content: 'O';
+            background: var(--color2);
+            color: var(--color3);
+        }
+
+        .c-grid>label::before,
+        .c-grid>div::before {
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            font-weight: bold;
+        }
+
+        .c-grid>div::before {
+            padding: 100%;
+        }
+
+        .c-grid>label:hover {
+            cursor: pointer;
+        }
+
+        .c-grid>label[for$='-O']:hover {
+            background: var(--color2);
+            color: var(--color3);
+        }
+
+        .c-grid>label[for$='-O']:hover::before {
+            content: 'O';
+        }
+
+        .c-grid>label[for$='-X']:hover {
+            background: var(--color1);
+            color: var(--color3);
+        }
+
+        .c-grid>label[for$='-X']:hover::before {
+            content: 'X';
+        }
+
+        #c-grid-0 {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        #c-grid-1 {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        #c-grid-2 {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        #c-grid-3 {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        #c-grid-4 {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        #c-grid-5 {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        #c-grid-6 {
+            grid-column: 1;
+            grid-row: 3;
+        }
+
+        #c-grid-7 {
+            grid-column: 2;
+            grid-row: 3;
+        }
+
+        #c-grid-8 {
+            grid-column: 3;
+            grid-row: 3;
+        }
+
+        .c-modal {
+            background: var(--bgColor3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+            z-index: 2;
+        }
+
+        #c-info {
+            text-align: center;
+            font-size: 32px;
+            line-height: 2.2;
+            padding: 20px;
+            border-radius: 10px;
+            color: var(--color4);
+            background: var(--bgColor3);
+        }
+
+        #c-info::before {
+            content: '没输没赢~';
+        }
+
+        input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#c-result,
+        #c-radio-0-X:checked~#c-radio-1-X:checked~#c-radio-2-X:checked~#c-result,
+        #c-radio-3-X:checked~#c-radio-4-X:checked~#c-radio-5-X:checked~#c-result,
+        #c-radio-6-X:checked~#c-radio-7-X:checked~#c-radio-8-X:checked~#c-result,
+        #c-radio-0-X:checked~#c-radio-3-X:checked~#c-radio-6-X:checked~#c-result,
+        #c-radio-1-X:checked~#c-radio-4-X:checked~#c-radio-7-X:checked~#c-result,
+        #c-radio-2-X:checked~#c-radio-5-X:checked~#c-radio-8-X:checked~#c-result,
+        #c-radio-0-X:checked~#c-radio-4-X:checked~#c-radio-8-X:checked~#c-result,
+        #c-radio-2-X:checked~#c-radio-4-X:checked~#c-radio-6-X:checked~#c-result,
+        #c-radio-0-O:checked~#c-radio-1-O:checked~#c-radio-2-O:checked~#c-result,
+        #c-radio-3-O:checked~#c-radio-4-O:checked~#c-radio-5-O:checked~#c-result,
+        #c-radio-6-O:checked~#c-radio-7-O:checked~#c-radio-8-O:checked~#c-result,
+        #c-radio-0-O:checked~#c-radio-3-O:checked~#c-radio-6-O:checked~#c-result,
+        #c-radio-1-O:checked~#c-radio-4-O:checked~#c-radio-7-O:checked~#c-result,
+        #c-radio-2-O:checked~#c-radio-5-O:checked~#c-radio-8-O:checked~#c-result,
+        #c-radio-0-O:checked~#c-radio-4-O:checked~#c-radio-8-O:checked~#c-result,
+        #c-radio-2-O:checked~#c-radio-4-O:checked~#c-radio-6-O:checked~#c-result {
+            display: block;
+        }
+
+        #c-radio-0-X:checked~#c-radio-1-X:checked~#c-radio-2-X:checked~#c-result #c-info::before,
+        #c-radio-3-X:checked~#c-radio-4-X:checked~#c-radio-5-X:checked~#c-result #c-info::before,
+        #c-radio-6-X:checked~#c-radio-7-X:checked~#c-radio-8-X:checked~#c-result #c-info::before,
+        #c-radio-0-X:checked~#c-radio-3-X:checked~#c-radio-6-X:checked~#c-result #c-info::before,
+        #c-radio-1-X:checked~#c-radio-4-X:checked~#c-radio-7-X:checked~#c-result #c-info::before,
+        #c-radio-2-X:checked~#c-radio-5-X:checked~#c-radio-8-X:checked~#c-result #c-info::before,
+        #c-radio-0-X:checked~#c-radio-4-X:checked~#c-radio-8-X:checked~#c-result #c-info::before,
+        #c-radio-2-X:checked~#c-radio-4-X:checked~#c-radio-6-X:checked~#c-result #c-info::before {
+            content: '恭喜你赢了~';
+        }
+
+        #c-radio-0-O:checked~#c-radio-1-O:checked~#c-radio-2-O:checked~#c-result #c-info::before,
+        #c-radio-3-O:checked~#c-radio-4-O:checked~#c-radio-5-O:checked~#c-result #c-info::before,
+        #c-radio-6-O:checked~#c-radio-7-O:checked~#c-radio-8-O:checked~#c-result #c-info::before,
+        #c-radio-0-O:checked~#c-radio-3-O:checked~#c-radio-6-O:checked~#c-result #c-info::before,
+        #c-radio-1-O:checked~#c-radio-4-O:checked~#c-radio-7-O:checked~#c-result #c-info::before,
+        #c-radio-2-O:checked~#c-radio-5-O:checked~#c-radio-8-O:checked~#c-result #c-info::before,
+        #c-radio-0-O:checked~#c-radio-4-O:checked~#c-radio-8-O:checked~#c-result #c-info::before,
+        #c-radio-2-O:checked~#c-radio-4-O:checked~#c-radio-6-O:checked~#c-result #c-info::before {
+            content: '可惜你输了~';
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" id="first" />
+    <input type="radio" id="start" />
+    <form id="container" class="container">
+        <input type="radio" name="c-radio-0" id="c-radio-0-X" />
+        <input type="radio" name="c-radio-0" id="c-radio-0-O" />
+        <input type="radio" name="c-radio-1" id="c-radio-1-X" />
+        <input type="radio" name="c-radio-1" id="c-radio-1-O" />
+        <input type="radio" name="c-radio-2" id="c-radio-2-X" />
+        <input type="radio" name="c-radio-2" id="c-radio-2-O" />
+        <input type="radio" name="c-radio-3" id="c-radio-3-X" />
+        <input type="radio" name="c-radio-3" id="c-radio-3-O" />
+        <input type="radio" name="c-radio-4" id="c-radio-4-X" />
+        <input type="radio" name="c-radio-4" id="c-radio-4-O" />
+        <input type="radio" name="c-radio-5" id="c-radio-5-X" />
+        <input type="radio" name="c-radio-5" id="c-radio-5-O" />
+        <input type="radio" name="c-radio-6" id="c-radio-6-X" />
+        <input type="radio" name="c-radio-6" id="c-radio-6-O" />
+        <input type="radio" name="c-radio-7" id="c-radio-7-X" />
+        <input type="radio" name="c-radio-7" id="c-radio-7-O" />
+        <input type="radio" name="c-radio-8" id="c-radio-8-X" />
+        <input type="radio" name="c-radio-8" id="c-radio-8-O" />
+        <h1>纯CSS井字棋</h1>
+        <div id="c-board" class="c-center">
+            <div class="c-grid" id="c-grid-0">
+                <label for="c-radio-0-X"></label>
+                <div></div>
+            </div>
+            <div class="c-grid" id="c-grid-1">
+                <label for="c-radio-1-X"></label>
+                <div></div>
+            </div>
+            <div class="c-grid" id="c-grid-2">
+                <label for="c-radio-2-X"></label>
+                <div></div>
+            </div>
+            <div class="c-grid" id="c-grid-3">
+                <label for="c-radio-3-X"></label>
+                <div></div>
+            </div>
+            <div class="c-grid" id="c-grid-4">
+                <label for="c-radio-4-X"></label>
+                <div></div>
+            </div>
+            <div class="c-grid" id="c-grid-5">
+                <label for="c-radio-5-X"></label>
+                <div></div>
+            </div>
+            <div class="c-grid" id="c-grid-6">
+                <label for="c-radio-6-X"></label>
+                <div></div>
+            </div>
+            <div class="c-grid" id="c-grid-7">
+                <label for="c-radio-7-X"></label>
+                <div></div>
+            </div>
+            <div class="c-grid" id="c-grid-8">
+                <label for="c-radio-8-X"></label>
+                <div></div>
+            </div>
+        </div>
+        <div id="c-computer" class="c-btn">
+            电脑走！
+            <label for="c-radio-0-O"></label>
+            <label for="c-radio-1-O"></label>
+            <label for="c-radio-2-O"></label>
+            <label for="c-radio-3-O"></label>
+            <label for="c-radio-4-O"></label>
+            <label for="c-radio-5-O"></label>
+            <label for="c-radio-6-O"></label>
+            <label for="c-radio-7-O"></label>
+            <label for="c-radio-8-O"></label>
+        </div>
+        <div id="c-menu" class="c-modal">
+            <div class="c-center">
+                <div>
+                    <h2>谁先走？</h2>
+                    <div class="c-menu-toggle">
+                        <span>我鸭~</span>
+                        <label for="first" class="c-label-toggle"></label>
+                        <span>电脑鸭~</span>
+                    </div>
+                    <label for="start" id="c-btn" class="c-btn">开始辣~</label>
+                </div>
+            </div>
+        </div>
+        <div id="c-result" class="c-modal">
+            <div id="c-info" class="c-center">
+                <input type="reset" for="container" value="再来嘛~" />
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
