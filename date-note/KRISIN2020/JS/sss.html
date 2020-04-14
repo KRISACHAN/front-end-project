@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
+        />
+        <meta name="screen-orientation" content="portrait" />
+        <meta name="x5-orientation" content="portrait" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <title>sss</title>
+        <style></style>
+    </head>
+
+    <body>
+        <script>
+            'use strict'
+            /**
+             * function sss (s1: string, s2: string) => string | string[]
+             *
+             * sss('aaba', 'abac') => 'aba'
+             * sss('931990', '133990') => ['3990', '1990']
+             * sss('vue', 'fusev') => 'ue'
+             * sss('ab3dc', 'cae3fd') => 'a3d'
+             */
+            const sss = (s1, s2) => {
+                let max = 0
+                let index = 0
+                let lcsArr = new Array(s1.length)
+
+                // 创建二维数组，每个子解的容器
+                for (let i = 0; i <= s1.length; i++) {
+                    lcsArr[i] = new Array(s2.length)
+                    for (let j = 0; j <= s2.length; j++) {
+                        lcsArr[i][j] = 0
+                    }
+                }
+
+                for (let i = 0; i <= s1.length; i++) {
+                    for (let j = 0; j <= s2.length; j++) {
+                        if (i == 0 || j == 0) {
+                            lcsArr[i][j] = 0
+                        } else {
+                            if (s1[i - 1] == s2[j - 1]) {
+                                console.log({
+                                    s1i: s1[i - 1],
+                                    s2j: s2[j - 1],
+                                    'lcsArr[i][j] = lcsArr[i - 1][j - 1] + 1': (lcsArr[
+                                        i
+                                    ][j] = lcsArr[i - 1][j - 1] + 1),
+                                })
+                                lcsArr[i][j] = lcsArr[i - 1][j - 1] + 1
+                            } else {
+                                lcsArr[i][j] = 0
+                            }
+                        }
+
+                        if (max < lcsArr[i][j]) {
+                            max = lcsArr[i][j]
+                            index = i
+                        }
+                    }
+                }
+
+                if (/^\d+$/g.test(s1 + s2)) {
+                    console.log({
+                        index,
+                        max,
+                        lcsArr,
+                    })
+                }
+
+                let str = ''
+                if (max == 0) {
+                    return
+                } else {
+                    for (let i = index - max; i < index; i++) {
+                        str += s1[i]
+                    }
+                    return str
+                }
+            }
+            console.log(sss('aaba', 'abac'))
+            console.log(sss('931990', '133990'))
+            console.log(sss('vue', 'fusev'))
+            console.log(sss('ab3dc', 'cae3fd'))
+        </script>
+    </body>
+</html>

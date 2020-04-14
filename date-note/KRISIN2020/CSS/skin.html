@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
+        />
+        <meta name="screen-orientation" content="portrait" />
+        <meta name="x5-orientation" content="portrait" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <title>pure css skin</title>
+        <style>
+            .box {
+                --skin-color: yellow;
+                width: 300px;
+                height: 300px;
+                border: currentColor 1px solid;
+                color: var(--skin-color);
+            }
+            #yellow:checked ~ .box {
+                --skin-color: yellow;
+            }
+            #blue:checked ~ .box {
+                --skin-color: blue;
+            }
+            #green:checked ~ .box {
+                --skin-color: green;
+            }
+
+            #yellow:checked ~ .box > span::after {
+                content: '黄色';
+            }
+            #blue:checked ~ .box > span::after {
+                content: '蓝色';
+            }
+            #green:checked ~ .box > span::after {
+                content: '绿色';
+            }
+        </style>
+    </head>
+    <body>
+        黄色：<input type="radio" name="skin" id="yellow" checked /><br />
+        蓝色：<input type="radio" name="skin" id="blue" /><br />
+        绿色：<input type="radio" name="skin" id="green" /><br />
+        <div class="box">
+            <p>请告诉我，我现在是什么颜色</p>
+            <span></span>
+        </div>
+    </body>
+</html>

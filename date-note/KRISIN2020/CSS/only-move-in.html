@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
+        />
+        <meta name="screen-orientation" content="portrait" />
+        <meta name="x5-orientation" content="portrait" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <title>only-move-in</title>
+        <style>
+            .box {
+                width: 200px;
+                height: 200px;
+                position: relative;
+            }
+            .box > span {
+                position: absolute;
+                cursor: pointer;
+            }
+            .box > label {
+                width: 200px;
+                height: 200px;
+                background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586410877530&di=c8cb9007d03dddf2a797c6ad7309dcc0&imgtype=0&src=http%3A%2F%2Fpic39.nipic.com%2F20140325%2F6947145_150220631172_2.jpg)
+                    100% 100% / cover no-repeat;
+                opacity: 0;
+                transition: all ease-in 0.5s;
+                display: block;
+            }
+            #radio {
+                position: absolute;
+                left: -9999999px;
+                top: -999999px;
+                visibility: hidden;
+            }
+            #radio:checked ~ .box > label {
+                opacity: 1;
+            }
+        </style>
+    </head>
+
+    <body>
+        <input type="radio" id="radio" />
+        <div class="box">
+            <span>点击我</span>
+            <label for="radio" class="box" id="box"></label>
+        </div>
+    </body>
+</html>
