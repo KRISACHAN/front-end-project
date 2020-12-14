@@ -4,28 +4,8 @@
  * @params: Boolean | Number | String | Function | Array | Date | RegExp | Undefined | Null | Object | Arguments | Error | Window | HTMLDocument | Map | Set | WeakMap
  */
 Object.prototype.types = function() {
-    var toString = Object.prototype.toString;
-    var map = {
-        "[object Boolean]": "boolean",
-        "[object Number]": "number",
-        "[object String]": "string",
-        "[object Function]": "function",
-        "[object Array]": "array",
-        "[object Date]": "date",
-        "[object RegExp]": "regExp",
-        "[object Undefined]": "undefined",
-        "[object Null]": "null",
-        "[object Object]": "object",
-        "[object Arguments]": "arguments",
-        "[object Error]": "error",
-        "[object Window]": "window",
-        "[object HTMLDocument]": "document",
-        "[object Map]": "map",
-        "[object Set]": "set",
-        "[object WeakMap]": "weakMap"
-    };
-    var el = this instanceof Element ? "element" : map[toString.call(this)];
-    return el;
+    var res = Object.prototype.toString.call(this).replace(/^\[object\s(.+)\]/, '$1').toLowerCase();
+    return this instanceof Element ? "element" : res;
 };
 
 /*
@@ -33,7 +13,10 @@ Object.prototype.types = function() {
  * @params: Array, String, Function
  */
 var aFn = function(array, type, fn) {
-    return !fn ? array : Array.prototype[type]["call"](array, fn);
+    if (fn.types !== 'function' || type.types !== 'string' || array.types !== 'array' || array.length === 0) {
+        return array;
+    };
+    return Array.prototype[type]["call"](array, fn);
 };
 
 /*
@@ -87,7 +70,6 @@ Object.prototype.css = function(attr, value) {
  * @param: Function
  */
 Object.prototype.siblings = function(fn) {
-    var DomArr = [];
     var __self = this;
     var MATCHED = aFn(this.parentNode.childNodes, "filter", function(e, i, a) {
         return e !== __self && e.nodeType === 1 && e.nodeName !== "SCRIPT";
@@ -249,7 +231,7 @@ var fadeIn = function (el) {
         el.style.opacity = +el.style.opacity + (new Date() - last) / 400
         last = +new Date()
         if (+el.style.opacity < 1) {
-            requestAnimationFrame(tick))
+            requestAnimationFrame(tick)
         }
     }
     tick()

@@ -34,7 +34,7 @@
   var observer = {
     version: '1.2.1',
     author: 'kris',
-    date: '2018-06-06',
+    date: '2020-06-06',
     listen: listen,
     trigger: trigger,
     remove: remove
