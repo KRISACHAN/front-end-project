@@ -1,0 +1,19 @@
+.DS_Store
+.well-known
+README.md
+
+# git
+/.git
+*-debug.log
+*-error.log
+
+# editor
+.graphqlconfig
+.editorconfig
+.dockerignore
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+sftp-config.json
+sftp-settings.json

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>vue-app</title>
+    <style>
+      :host {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="http://localhost:3000/vue-app-1.js"></script>
+    <script src="http://localhost:3000/vue-app-2.js"></script>
+    <script type="module">
+      import { html, render } from 'https://unpkg.com/lit-html?module'
+      const message = 'I am message'
+      const app = html`
+        <vue-app-1 message="${message}"></vue-app-1>
+        <vue-app-2 message="${message}"></vue-app-2>
+        <template id="example">
+          <h1>{{title}}</h1>
+
+          <p>{{text}}</p>
+        </template>
+      `
+      render(app, document.body)
+      console.log(window.ENV)
+
+      document.querySelector('vue-app-1').setAttribute('message', '我修改过啦～😳😳😳😳😳')
+    </script>
+  </body>
+</html>
