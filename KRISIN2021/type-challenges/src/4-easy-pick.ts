@@ -19,7 +19,7 @@ interface Expected2 {
     completed: boolean
 }
 
-export type cases = [
+type cases = [
   Expect<Equal<Expected1, MyPick<Todo, 'title'>>>,
   Expect<Equal<Expected2, MyPick<Todo, 'title' | 'completed'>>>,
   MyPick<Todo, 'title' | 'completed' | 'invalid'>,

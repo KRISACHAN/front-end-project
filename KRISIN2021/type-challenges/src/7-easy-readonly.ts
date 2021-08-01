@@ -9,10 +9,10 @@ interface Todo1 {
     description: string
     completed: boolean
     meta: {
-      author: string
+        author: string
     }
 }
 
-export type cases = [
+type cases = [
     Expect<Equal<MyReadonly<Todo1>, Readonly<Todo1>>>,
 ]
