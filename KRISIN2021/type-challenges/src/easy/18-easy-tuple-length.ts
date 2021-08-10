@@ -6,10 +6,10 @@ const spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFL
 type Length<T extends readonly any[]> = T[Extract<keyof T, 'length'>];
 
 type cases = [
-  Expect<Equal<Length<typeof tesla>, 4>>,
-  Expect<Equal<Length<typeof spaceX>, 5>>,
-  // @ts-expect-error
-  Length<5>,
-  // @ts-expect-error
-  Length<'hello world'>,
+    Expect<Equal<Length<typeof tesla>, 4>>,
+    Expect<Equal<Length<typeof spaceX>, 5>>,
+    // @ts-expect-error
+    Length<5>,
+    // @ts-expect-error
+    Length<'hello world'>,
 ]

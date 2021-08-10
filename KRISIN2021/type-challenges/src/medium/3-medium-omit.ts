@@ -3,18 +3,18 @@ import { Equal, Expect } from '@type-challenges/utils'
 type MyOmit<T, K extends string | number | symbol> = { [P in Exclude<keyof T, K>]: T[P]; }
 
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+    title: string
+    description: string
+    completed: boolean
 }
 
 interface Expected1 {
-  title: string
-  completed: boolean
+    title: string
+    completed: boolean
 }
 
 interface Expected2 {
-  title: string
+    title: string
 }
 
 type cases = [
