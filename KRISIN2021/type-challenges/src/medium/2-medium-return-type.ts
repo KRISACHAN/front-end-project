@@ -1,5 +1,6 @@
 import { Equal, Expect } from '@type-challenges/utils'
 
+// infer: https://stackoverflow.com/questions/60067100/why-is-the-infer-keyword-needed-in-typescript
 type MyReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : any
 
 type ComplexObject = {
