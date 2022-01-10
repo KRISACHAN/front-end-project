@@ -1,0 +1,8 @@
+{
+  "name": "front-end-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/KRISACHAN/front-end-project.git",
+  "author": "krisachan <chenjinwen77@foxmail.com>",
+  "license": "MIT"
+}
