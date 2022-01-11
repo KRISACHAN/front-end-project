@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+Copyright 2018 Google, Inc. All Rights Reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+<link href="https://fonts.googleapis.com/css?family=Bungee+Shade&amp;text=A" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Ops+One&amp;text=B" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Megrim&amp;text=C" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Finger+Paint&amp;text=D" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Faster+One&amp;text=E" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&amp;text=FHoudiniLayoutConstraint-" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nixie+One&amp;text=G" rel="stylesheet">
+<style>
+body { margin: 0; }
+#layout { margin: 10px; border: solid 4px #c9ceb7; height: 400px; background: #E0E4CC; overflow: hidden; resize: both; }
+#actual-layout { height: 100%; display: layout(relative); }
+#actual-layout > div {
+	font-size: 72px;
+  color: white;
+  text-align: center;
+
+  padding: 10px;
+	width: fit-content;
+	contain: paint;
+	resize: both;
+
+  display: flex;
+	align-items: center;
+}
+#slider {
+	font-family: monospace;
+	margin: 20px;
+}
+#slider > div { margin: auto; padding: 10px; width: max-content; border: solid 4px #c9ceb7; }
+h1 { font-family: 'Fredericka the Great', cursive; font-size: 48px; text-align: center; margin: 10px; }
+table { margin: 10px; border: solid 4px #c9ceb7; margin: auto; }
+tr { border-bottom: solid 2px #ccc; }
+td { text-align: center; padding: 2px; }
+input, button, option, select, table { font-family: monospace; }
+input { width: 40px; }
+#A { --relative-name: A; font-family: 'Bungee Shade', cursive; border: solid 4px #5dbdd0; background: #67d2e7; }
+#B { --relative-name: B; font-family: 'Black Ops One', cursive; border: solid 4px #96c6c2; background: #a7dcd9; }
+#C { --relative-name: C; font-family: 'Megrim', cursive; border: solid 4px #db772c; background: #f38530; }
+#D { --relative-name: D; font-family: 'Finger Paint', cursive; border: solid 4px #e05d05; background: #fa6803; }
+#E { --relative-name: E; font-family: 'Faster One', cursive; border: solid 4px #cede7e; background: #e6f78d; }
+#F { --relative-name: F; font-family: 'Fredericka the Great', cursive; border: solid 4px #7cc800; background: #8bde00; }
+#G { --relative-name: G; font-family: 'Nixie One', cursive; border: solid 4px #975aa2; background: #a865b5; }
+</style>
+<body>
+	<h1>Houdini - Constraint Layout</h1>
+  <div id="layout">
+    <div id="actual-layout">
+			<div id="A">A</div>
+			<div style="display: none;" id="B">B</div>
+			<div style="display: none;" id="C">C</div>
+			<div style="display: none;" id="D">D</div>
+			<div style="display: none;" id="E">E</div>
+			<div style="display: none;" id="F">F</div>
+			<div style="display: none;" id="G">G</div>
+		</div>
+	</div>
+  <div id="slider">
+    <div>
+			Children Count: <input value="1" style="width: 200px;" type="range" min="1" max="7">
+    </div>
+	</div>
+  <div id="controls"></div>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
+

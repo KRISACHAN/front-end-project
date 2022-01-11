@@ -1,0 +1,22 @@
+<!doctype html>
+<style>
+  div {
+    --top-width: 80;
+    --top-height: 20;
+    -webkit-mask-image: paint(demo);
+  }
+</style>
+<div>
+  Houdini
+</div>
+<script>
+  if (location.protocol === 'http:' && location.hostname !== 'localhost')
+    location.protocol = 'https:';
+  if ('paintWorklet' in CSS) {
+    CSS.paintWorklet.addModule('demo3.js');
+  } else {
+    document.body.innerHTML = 'You need support for <a href="https://drafts.css-houdini.org/css-paint-api/">CSS Paint API</a> to view this demo :(';
+  }
+</script>
+
+<link rel="stylesheet" href="demo3.css">

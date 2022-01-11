@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+Copyright 2016 Google, Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+  .expando {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .expando {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+  }
+
+  .expando .small {
+    border-radius: 5px;
+    width: 360px;
+    height: 500px;
+    background: orange;
+    position: absolute;
+  }
+
+  .expando .large {
+    background: yellow;
+    border-radius: 5px;
+    width: 360px;
+    height: 500px;
+    position: absolute;
+  }
+</style>
+<body>
+  <div class="expando">
+    <div class="content">
+      <!-- TODO(flackr): We shouldn't need a separate element to apply the offset.
+      Using the same element should fix the stutter but need to figure out how to
+      compose animations in the WebAnimations polyfill. -->
+      <div class="offset">
+        <div class="small">
+          <p>Small content title</p>
+        </div>
+        <div class="large">
+          <p>This is the large form content which contains many additional details.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="../anim-worklet.js"></script>
+<script>
+  window.animationWorkletPolyfill.load().then(_=> {
+    CSS.animationWorklet.addModule('expando-animator.js').then(function(){
+      var expando = document.querySelector('.expando');
+      var offset = document.querySelector('.expando .offset');
+      var content = document.querySelector('.expando .content');
+      var smallContent = document.querySelector('.expando .small');
+      var largeContent = document.querySelector('.expando .large');
+      var expandScale = 13;
+      var effectOptions = {duration: 1000, fill: 'both'};
+
+      const expando_effect = new KeyframeEffect(expando, [{'transform': 'scale(1)'}, {'transform': 'scale(' + expandScale + ')'}], effectOptions);
+      const content_effect = new KeyframeEffect(content, [{'transform': 'scale(1)'}, {'transform': 'scale(' + (1 / expandScale) + ')'}], effectOptions);
+      const offset_effect = new KeyframeEffect(offset, [{'transform': 'translateY(0)'}, {'transform': 'translateY(' + (0.5 * expando.clientWidth * (expandScale - 1)) + 'px)'}], effectOptions);
+      const smallContent_effect = new KeyframeEffect(smallContent, [{'opacity': 1}, {'opacity': 0}], effectOptions);
+      const largeContent_effect = new KeyframeEffect(largeContent, [{'opacity': 0}, {'opacity': 1}], effectOptions);
+
+      window.expandoAnimator = new WorkletAnimation('expando', expando_effect, new DocumentTimeline(), {'expandScale': expandScale});
+      window.contentAnimator = new WorkletAnimation('reverseExpando', content_effect, new DocumentTimeline(), {'expandScale': expandScale});
+      window.offsetAnimator = new WorkletAnimation('expando', offset_effect, new DocumentTimeline(), {'expandScale': expandScale});
+      window.smallContentAnimator = new WorkletAnimation('expando', smallContent_effect, new DocumentTimeline(), {'expandScale': expandScale});
+      window.largeContentAnimator = new WorkletAnimation('expando', largeContent_effect, new DocumentTimeline(), {'expandScale': expandScale});
+
+      window.expandoAnimator.play();
+      window.contentAnimator.play();
+      window.offsetAnimator.play();
+      window.smallContentAnimator.play();
+      window.largeContentAnimator.play();
+    });
+  });
+</script>
+</html>
