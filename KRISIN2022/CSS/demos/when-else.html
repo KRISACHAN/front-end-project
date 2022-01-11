@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>when-else</title>
+        <style>
+            @when media(width >= 400px) and media(pointer: fine) and supports(display: flex) {
+                /* A */
+            } @else supports(caret-color: pink) and supports(background: double-rainbow()) {
+                /* B */
+            } @else {
+                /* C */
+            }
+
+            // 等价于
+            @media (width >= 400px) and (pointer: fine) {
+                @supports (display: flex) {
+                    /* A */
+                }
+                @supports not (display: flex) {
+                    @supports (caret-color: pink) and (background: double-rainbow()) {
+                    /* B */
+                    }
+                    @supports not ((caret-color: pink) and (background: double-rainbow())) {
+                    /* C */
+                    }
+                }
+            }
+            @media not ((width >= 400px) and (pointer: fine)) {
+                @supports (caret-color: pink) and (background: double-rainbow()) {
+                    /* B */
+                }
+                @supports not ((caret-color: pink) and (background: double-rainbow())) {
+                    /* C */
+                }
+            }
+
+            .button {
+                padding: 2rem;
+                @when element(max-width: 400px) {
+                    padding: 1rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+    </body>
+</html>

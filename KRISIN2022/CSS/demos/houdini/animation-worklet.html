@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>animation-worklet</title>
+        <style>
+            div {
+                width: 200px;
+                height: 200px;
+                background-color: hotpink;
+                margin-bottom: 10px;
+                border-radius: 10%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="a"></div>
+        <div id="b"></div>
+    </body>
+    <script language="javascript+animationworklet">
+        registerAnimator('passthrough', class {
+            animate(currentTime, effect) {
+                effect.localTime = currentTime; 
+            }
+        });
+    </script>
+      <script>        
+        function urlFromTag(sel) {
+            const el = document.querySelector(sel);
+            const blob = new Blob([el.textContent], {type: "text/javascript"});
+            return URL.createObjectURL(blob);
+        }
+      
+        async function init() {
+            await CSS.animationWorklet.addModule(urlFromTag("script[language='javascript+animationworklet']"));
+        
+            new WorkletAnimation(
+                'passthrough',
+                new KeyframeEffect(
+                    document.querySelector('#a'), 
+                    [
+                        {
+                            transform: 'translateX(0)'
+                        },
+                        {
+                            transform: 'translateX(500px)'
+                        }
+                    ],
+                    {
+                        duration: 2000, 
+                        iterations: Number.POSITIVE_INFINITY
+                    }
+                ),
+                document.timeline
+            ).play();
+        
+            // new Animation(
+            //     new KeyframeEffect(
+            //     document.querySelector('#b'), 
+            //     [
+            //         {
+            //         transform: 'translateX(0)'
+            //         },
+            //         {
+            //         transform: 'translateX(500px)'
+            //         }
+            //     ],
+            //     {
+            //         duration: 2000, 
+            //         iterations: Number.POSITIVE_INFINITY
+            //     }
+            //     ),
+            //     document.timeline
+            // ).play();
+        }
+        init();
+        
+      </script>
+</html>

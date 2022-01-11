@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>properties-and-values-api</title>
+        <style>
+            @property --radius {
+                syntax: "<length>";
+                inherits: false;
+                initial-value: 100px;
+            }
+            .⚽️ {
+                margin: 100px auto 0;
+                width: 100px;
+                height: 100px;
+                line-height: 100px;
+                --stop-color: red;
+                background: var(--stop-color);
+                transition: --stop-color 1s;
+                cursor: pointer;
+                border-radius: var(--radius);
+                text-align: center;
+                font-size: 50px;
+            }
+            .⚽️:hover {
+                --stop-color: green;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="⚽️">⚽️</div>
+        <script>
+            CSS.registerProperty({
+                name: "--stop-color",
+                syntax: "<color>",
+                inherits: false,
+                initialValue: "rgba(0,0,0,0)"
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>container</title>
+        <style>
+            *,
+            *:after,
+            *:before {
+                box-sizing: border-box;
+            }
+            body {
+                min-height: 100vh;
+                display: grid;
+                place-items: center;
+                overflow: hidden;
+                background: #405a6d;
+            }
+            .container {
+                contain: layout size style;
+                /* --css-contain: layout size style; */
+                resize: both;
+                overflow: hidden;
+                position: relative;
+                min-height: 200px;
+                min-width: 200px;
+                max-height: 500px;
+                max-width: 500px;
+            }
+            .container:active .arrow {
+                display: none;
+            }
+            .arrow {
+                height: 30px;
+                width: 20px;
+                background: #fff;
+                position: absolute;
+                bottom: 15px;
+                right: 0;
+                transform-origin: 50% 100%;
+                transform: rotate(-15deg);
+                -webkit-clip-path: polygon(50% 100%, 100% 60%, 60% 60%, 65% 0, 35% 0, 35% 60%, 0 60%);
+                clip-path: polygon(50% 100%, 100% 60%, 60% 60%, 65% 0, 35% 0, 35% 60%, 0 60%);
+                animation: bounce 0.5s infinite linear;
+            }
+            .t-shirt {
+                height: 100%;
+                width: 100%;
+            }
+            .t-shirt path {
+                fill: hsl(var(--hue, 10), 60%, 65%);
+                stroke: #333;
+                transform: scaleX(var(--width, 1)) scaleY(var(--length, 1));
+                transform-origin: 50% 0%;
+                transition: transform 0.2s cubic-bezier(.2,.7,.8,1.7), fill 0.2s cubic-bezier(.2,.7,.8,1.7);
+            }
+            .t-shirt__badge {
+                height: 15%;
+                width: 15%;
+                background: #fff;
+                border-radius: 5%;
+                border: 2px solid #333;
+                position: absolute;
+                top: 30%;
+                left: 55%;
+                transform: translate(-50%, 0%);
+            }
+            .t-shirt__badge:before {
+                content: '';
+                position: absolute;
+                z-index: -1;
+                height: 110%;
+                width: 10%;
+                background: #bf9540;
+                bottom: 95%;
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+            .t-shirt__badge:after {
+                content: var(--size, "S");
+                font-family: sans-serif;
+                font-weight: bold;
+                color: hsl(0, 0%, 20%);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .t-shirt__container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(var(--scale, 1)) scaleX(1);
+                width: 200px;
+                height: 200px;
+                transition: transform 0.1s, background 0.1s;
+            }
+            @container (min-width: 300px) and (min-height: 300px) {
+                .t-shirt__container {
+                    --scale: 1.5;
+                    --size: "M";
+                    --hue: 210;
+                }
+            }
+            @container (min-width: 400px) and (min-height: 400px) {
+                .t-shirt__container {
+                    --scale: 2;
+                    --size: "L";
+                    --hue: 104;
+                }
+            }
+            @container (min-width: 500px) and (min-height: 500px) {
+                .t-shirt__container {
+                    --scale: 2.5;
+                    --size: "XL";
+                    --hue: 280;
+                }
+            }
+            /* @media --css-container and (min-width: 300px) and (min-height: 300px) {
+                .t-shirt__container {
+                    --scale: 1.5;
+                    --size: "M";
+                    --hue: 210;
+                }
+            }
+            @media --css-container and (min-width: 400px) and (min-height: 400px) {
+                .t-shirt__container {
+                    --scale: 2;
+                    --size: "L";
+                    --hue: 104;
+                }
+            }
+            @media --css-container and (min-width: 500px) and (min-height: 500px) {
+                .t-shirt__container {
+                    --scale: 2.5;
+                    --size: "XL";
+                    --hue: 280;
+                }
+            } */
+            .instructions {
+                position: absolute;
+                right: 1rem;
+                bottom: 1rem;
+                font-family: sans-serif;
+                font-weight: bold;
+                padding: 0.5rem;
+                border-radius: 5%;
+                background: #fafafa;
+            }
+
+            @keyframes bounce {
+                0, 100% {
+                    transform: rotate(-15deg) translate(0, 0) scale(1);
+                }
+                50% {
+                    transform: rotate(-15deg) translate(0, -15%) scale(1.15);
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="t-shirt__container">
+                <svg class="t-shirt" viewBox="0 0 440 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M5.6545 116.193L111.549
+                            4H162.242C163.583 13.6241
+                            170.379 21.7997
+                            179.708 27.5871C190.208
+                            34.1014 204.464
+                            38 220
+                            38C235.536 38
+                            249.792 34.1014
+                            260.292 27.5871C269.621
+                            21.7997 276.417
+                            13.6241 277.758
+                            4H327.998L433.892 116.193L366.987
+                            179.341L332.909 143.236C331.784
+                            142.044 330.046 141.659
+                            328.523 142.265C327
+                            142.87 326 144.343
+                            326 145.982V356H114V145.501C114
+                            143.862 113
+                            142.389 111.477
+                            141.784C109.954 141.179
+                            108.216 141.564
+                            107.091 142.756L72.5592
+                            179.341L5.6545 116.193Z"
+                        fill="#C4C4C4"
+                        stroke="black"
+                        stroke-width="8"
+                        stroke-linejoin="round"
+                    ></path>
+                </svg>
+                <div class="t-shirt__badge"></div>
+            </div>
+            <div class="arrow"></div>
+        </div>
+        <script src="https://unpkg.com/cqfill"></script>
+    </body>
+</html>

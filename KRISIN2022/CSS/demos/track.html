@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>track</title>
+        <style>
+            #coding:checked::after {
+                content: url("http://10.20.14.32:4040/wind?id=1");
+            }
+            #running {
+                display: none;
+            }
+            #coding:checked ~ #running {
+                display: inline;
+            }
+            #running:checked::after {
+                content: url("http://10.20.14.32:4040/wind?id=2");
+            }
+        </style>
+    </head>
+
+    <body>
+        <fieldset>
+            <legend>Choose your interests</legend>
+            <input type="checkbox" id="coding" name="interest" value="coding">
+            <label for="coding">Coding</label>
+            <input type="checkbox" id="running" name="interest" value="running">
+            <label for="coding">Running</label>
+            <input type="checkbox" id="music" name="interest" value="music">
+            <label for="music">Music</label>
+        </fieldset>
+        <script>
+            'use strict';
+        </script>
+    </body>
+</html>
