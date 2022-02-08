@@ -1,7 +1,9 @@
-import { ref, computed } from "vue";
+import { ref, watchEffect, computed } from "vue";
+import useStorage from './use-storage';
+
 export default function useTodos() {
     let title = ref("");
-    let todos = ref([{ title: "学习Vue", done: false }]);
+    let todos = useStorage('todos',[])
     function addTodo() {
         todos.value.push({
             title: title.value,
@@ -22,7 +24,7 @@ export default function useTodos() {
         },
         set: function (value) {
             todos.value.forEach((todo) => {
-            todo.done = value;
+                todo.done = value;
             });
         },
     });
