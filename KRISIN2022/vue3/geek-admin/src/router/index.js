@@ -4,6 +4,7 @@ import {
 } from 'vue-router'
 import Home from '../pages/home.vue'
 import About from '../pages/about.vue'
+import Todos from '../pages/todos.vue'
 
 const routes = [
     {
@@ -15,6 +16,11 @@ const routes = [
         path: '/about',
         name: 'About',
         component: About
+    },
+    {
+        path: '/todos',
+        name: 'Todos',
+        component: Todos
     }
 ]
 
