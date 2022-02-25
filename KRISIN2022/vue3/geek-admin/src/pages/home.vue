@@ -1,8 +1,11 @@
 <template>
-    <h1>这是首页</h1>
-    <TodoList />    
+  <Rate v-model="score">课程评分:</Rate>
+  <Rate v-model="score" theme="green">课程评分:</Rate>
 </template>
 
+
 <script setup>
-import TodoList from '../components/todo-list.vue'
+import { ref } from 'vue'
+import Rate from '../components/rate.vue'
+const score = ref(3.5)
 </script>
