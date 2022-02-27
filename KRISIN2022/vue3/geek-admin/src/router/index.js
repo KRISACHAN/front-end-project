@@ -5,6 +5,7 @@ import {
 import Home from '../pages/home.vue'
 import About from '../pages/about.vue'
 import Todos from '../pages/todos.vue'
+import Counter from '../pages/counter.vue'
 
 const routes = [
     {
@@ -21,6 +22,11 @@ const routes = [
         path: '/todos',
         name: 'Todos',
         component: Todos
+    },
+    {
+        path: '/counter',
+        name: 'Counter',
+        component: Counter
     }
 ]
 
