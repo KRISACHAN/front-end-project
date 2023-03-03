@@ -1,0 +1,16 @@
+{
+  "name": "importmap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^3.18.0"
+  }
+}

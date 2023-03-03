@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>import map demo</title>
+    <!-- 官方文档：https://github.com/WICG/import-maps -->
+    <!-- DEMO 来源：https://www.digitalocean.com/community/tutorials/how-to-dynamically-import-javascript-with-import-maps -->
+    <!-- systemjs-importmap 文档：https://github.com/systemjs/systemjs/blob/main/docs/import-maps.md -->
+    <script type="systemjs-importmap">
+        {
+            "imports": {
+                "hello": "./public/hello.js",
+                "lodash": "https://unpkg.com/lodash@4.17.21/lodash.js"
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.js"></script>
+    <script type="systemjs-module" src="import:hello"></script>
+</head>
+<body>
+
+</body>
+</html>
