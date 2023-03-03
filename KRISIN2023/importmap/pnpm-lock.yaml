@@ -1,7 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
+  lodash-es: ^4.17.21
   rollup: ^3.18.0
+
+dependencies:
+  lodash-es: 4.17.21
 
 devDependencies:
   rollup: 3.18.0
@@ -15,6 +19,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /rollup/3.18.0:
     resolution: {integrity: sha512-J8C6VfEBjkvYPESMQYxKHxNOh4A5a3FlP+0BETGo34HEcE4eTlgCrO2+eWzlu2a/sHs2QUkZco+wscH7jhhgWg==}
