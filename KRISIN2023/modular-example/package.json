@@ -1,0 +1,17 @@
+{
+    "name": "modular-example",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "build": "rollup -c",
+      "dev": "rollup -c -w"
+    },
+    "devDependencies": {
+        "@rollup/plugin-node-resolve": "^13.0.5",
+        "esbuild": "^0.13.4",
+        "rollup": "^2.58.0",
+        "rollup-plugin-esbuild": "^4.5.0",
+        "typescript": "^4.4.3"
+    }
+}

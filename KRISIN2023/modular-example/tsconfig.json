@@ -1,0 +1,56 @@
+{
+    // 编译器选项
+    "compilerOptions": {
+        // 基础URL
+        "baseUrl": "",
+        // 目标语言版本
+        "target": "ESNext",
+        // 模块系统
+        "module": "ESNext",
+        // 库文件
+        "lib": [
+            "DOM",
+            "ESNext"
+        ],
+        // 允许JS文件
+        "allowJs": true,
+        // 跳过库检查
+        "skipLibCheck": true,
+        // 启用ES模块交互
+        "esModuleInterop": true,
+        // 允许合成默认导入
+        "allowSyntheticDefaultImports": true,
+        // 启用严格模式
+        "strict": true,
+        // 强制文件名一致性
+        "forceConsistentCasingInFileNames": true,
+        // 模块解析策略
+        "moduleResolution": "node",
+        // 解析JSON模块
+        "resolveJsonModule": true,
+        // 独立模块
+        "isolatedModules": false,
+        // 不发出输出
+        "noEmit": false,
+        // 启用源映射
+        "sourceMap": true,
+        // JSX处理方式
+        "jsx": "preserve",
+        // 使用字面模块语法
+        "verbatimModuleSyntax": true,
+        // 启用声明
+        "declaration": true,
+        // 声明文件目录
+        "declarationDir": "dist",
+        // 仅发出声明
+        "emitDeclarationOnly": true,
+    },
+    // 包含的文件或目录
+    "include": [
+        "src"
+    ],
+    // 排除的文件或目录
+    "exclude": [
+        "node_modules"
+    ]
+}
