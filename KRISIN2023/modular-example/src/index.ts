@@ -1,3 +1,28 @@
+import { increase } from './increase';
+import { decrease } from './decrease';
+import others, { e } from './others';
+
+function multiply(total: number, value: number): number {
+  return total * value;
+}
+
+function divide(total: number, value: number): number {
+  return total / value;
+}
+
+export function power(total: number, value: number): number {
+  return total ** value;
+}
+
+let total: number = others.a;
+
+total = increase(total, 10);
+total = increase(total, 20);
+total = decrease(total, 5);
+total = multiply(total, e);
+
+console.log(`Total is ${total}`);
+
 type DataType = 'NULL' | 'UNDEFINED' | 'BOOLEAN' | 'NUMBER' | 'BIGINT' | 'STRING' | 'SYMBOL' | 'OBJECT' | 'ARRAY' | 'DATE' | 'REGEXP' | 'ERROR' | 'MAP' | 'SET' | 'WEAKMAP' | 'WEAKSET';
 
 const isEqual = (data1: any, data2: any): boolean => data1 === data2;
