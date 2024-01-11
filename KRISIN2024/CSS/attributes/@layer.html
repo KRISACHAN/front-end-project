@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>@layer</title>
+        <style>
+            /**
+                @url https://www.zhangxinxu.com/wordpress/2022/05/deep-in-css-cascade/ CSS必学基础：理解CSS中的级联规则
+                @url https://drafts.csswg.org/css-cascade-4/#cascading Cascade Sorting Order
+                @url https://juejin.cn/post/7320288231111016498?searchId=20240112003659511E9DF74EE0B3D87C78#heading-9 2023 年开始写 CSS 会与众不同
+            */
+            @layer floor4, floor3, floor2, floor1;
+
+            @layer floor1 {
+                .dom1 {
+                    border: 2px solid #C6FFDD;
+                }
+                .dom2 {
+                    border: 2px solid #C6FFDD;
+                }
+                .dom3 {
+                    border: 2px solid #C6FFDD;
+                }
+                .dom4 {
+                    border: 2px solid #C6FFDD;
+                }
+            }
+
+            @layer floor2 {
+                .dom1 {
+                    border: 2px solid #FBD786;
+                }
+                .dom2 {
+                    border: 2px solid #FBD786;
+                }
+                .dom3 {
+                    border: 2px solid #FBD786;
+                }
+                .dom4 {
+                    border: 2px solid #FBD786;
+                }
+            }
+
+            @layer floor3 {
+                .dom1 {
+                    border: 2px solid #f7797d;
+                }
+                .dom2 {
+                    border: 2px solid #f7797d;
+                }
+                .dom3 {
+                    border: 2px solid #f7797d;
+                }
+                .dom4 {
+                    border: 2px solid #f7797d;
+                }
+            }
+
+            @layer floor4 {
+                .dom1 {
+                    border: 2px solid #0F2027;
+                }
+                .dom2 {
+                    border: 2px solid #0F2027;
+                }
+                .dom3 {
+                    border: 2px solid #0F2027;
+                }
+                .dom4 {
+                    border: 2px solid #0F2027;
+                }
+            }
+
+            .dom {
+                width: 400px;
+                height: 400px;
+                margin: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="dom dom1">dom1</div>
+        <div class="dom dom2">dom2</div>
+        <div class="dom dom3">dom3</div>
+        <div class="dom dom4">dom4</div>
+    </body>
+</html>

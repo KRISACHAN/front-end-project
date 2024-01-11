@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>where</title>
+        <style>
+            /**
+             * @url https://drafts.csswg.org/selectors/#matches-pseudo The Matches-Any Pseudo-class: :is()
+             * @url https://drafts.csswg.org/selectors/#pseudo The Specificity-adjustment Pseudo-class: :where()
+             * @url https://developer.mozilla.org/en-US/docs/Web/CSS/:where :where()
+             */
+            :root {
+                --theme-bg-color: #c0392b;
+                --title-color: #155799;
+            }
+
+            .scope {
+                width: 300px;
+                height: 300px;
+                background: var(--theme-bg-color);
+                margin-bottom: 8px;
+
+                h2 {
+                    color: var(--title-color);
+                }
+
+                footer {
+                    a {
+                        color: blue;
+                    }
+                }
+            }
+
+            @scope (.scope-is) {
+                :scope {
+                    --theme-bg-color: #159957;
+                }
+                :is(section.styling, aside.styling, footer.styling) {
+                    a {
+                        color: red;
+                    }
+                }
+            }
+
+            @scope (.scope-where) {
+                :scope {
+                    --theme-bg-color: #6190e8;
+                }
+                :where(section.styling, aside.styling, footer.styling) {
+                    a {
+                        color: orange;
+                    }
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <article class="scope scope-is">
+            <h2>:is()-styled links</h2>
+            <section class="styling">
+              <p>
+                Here is my main content. This
+                <a href="https://mozilla.org">contains a link</a>.
+              </p>
+            </section>
+
+            <aside class="styling">
+              <p>
+                Here is my aside content. This
+                <a href="https://developer.mozilla.org">also contains a link</a>.
+              </p>
+            </aside>
+
+            <footer class="styling">
+              <p>
+                This is my footer, also containing
+                <a href="https://github.com/mdn">a link</a>.
+              </p>
+            </footer>
+        </article>
+
+        <article class="scope scope-where">
+            <h2>:where()-styled links</h2>
+            <section class="styling">
+              <p>
+                Here is my main content. This
+                <a href="https://mozilla.org">contains a link</a>.
+              </p>
+            </section>
+
+            <aside class="styling">
+              <p>
+                Here is my aside content. This
+                <a href="https://developer.mozilla.org">also contains a link</a>.
+              </p>
+            </aside>
+
+            <footer class="styling">
+              <p>
+                This is my footer, also containing
+                <a href="https://github.com/mdn">a link</a>.
+              </p>
+            </footer>
+        </article>
+    </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>intrinsic_sizing_keywords</title>
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            :root {
+                --var-col: auto;
+            }
+
+            .wrap {
+                display: inline-block;
+                width: 500px;
+                padding: 20px;
+            }
+
+            .container {
+                display: grid;
+                grid-template-columns: repeat(3, var(--var-col));
+                grid-template-rows: 200px auto;
+                gap: 10px;
+                border: 1px solid darkorange;
+                padding: 1em;
+                max-width: 30rem;
+            }
+
+            .box {
+                background: #f7797d;
+            }
+        </style>
+    </head>
+
+    <body>
+        <article>
+            <div class="wrap">
+                <h2>Intrinsic sizing: auto</h2>
+                <div style="--var-col: auto" class="container">
+                    <div class="box">Item one</div>
+                    <div class="box">Item two</div>
+                    <div class="box">Item three has more text </div>
+                    <div class="box">Item four</div>
+                    <div class="box">Item five</div>
+                </div>
+            </div>
+
+
+            <div class="wrap">
+                <h2>Intrinsic sizing: min-content</h2>
+                <div style="--var-col: min-content" class="container">
+                    <div class="box">Item one</div>
+                    <div class="box">Item two</div>
+                    <div class="box">Item three has more text </div>
+                    <div class="box">Item four</div>
+                    <div class="box">Item five</div>
+                </div>
+            </div>
+
+            <div class="wrap">
+                <h2>Intrinsic sizing: max-content</h2>
+                <div style="--var-col: max-content" class="container">
+                    <div class="box">Item one</div>
+                    <div class="box">Item two</div>
+                    <div class="box">Item three has more text </div>
+                    <div class="box">Item four</div>
+                    <div class="box">Item five</div>
+                </div>
+            </div>
+
+            <div class="wrap">
+                <h2>Intrinsic sizing: fit-content(7em)</h2>
+                <div style="--var-col: fit-content(7em)" class="container">
+                    <div class="box">Item one</div>
+                    <div class="box">Item two</div>
+                    <div class="box">Item three has more text </div>
+                    <div class="box">Item four</div>
+                    <div class="box">Item five</div>
+                </div>
+            </div>
+        </article>
+    </body>
+</html>

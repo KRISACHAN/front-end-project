@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>the_fr_unit</title>
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            :root {
+                --var-col: auto;
+            }
+
+            .wrap {
+                display: inline-block;
+                width: 500px;
+                padding: 20px;
+            }
+
+            .container {
+                display: grid;
+                grid-template-columns: 1fr 1fr var(--var-col);
+                grid-template-rows: 200px auto;
+                gap: 10px;
+                border: 1px solid darkorange;
+                padding: 1em;
+                max-width: 30rem;
+            }
+
+            .box {
+                background: #f7797d;
+
+                &.blue {
+                    background: #b9f6ca;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <article>
+            <div class="wrap">
+                <h2>1 <code>fr</code></h2>
+                <div style="--var-col: 1fr" class="container">
+                    <div class="box">Item one</div>
+                    <div class="box">Item two</div>
+                    <div class="box blue">Item three has more text </div>
+                    <div class="box">Item four</div>
+                    <div class="box">Item five</div>
+                </div>
+            </div>
+
+
+            <div class="wrap">
+                <h2>2 <code>fr</code></h2>
+                <div style="--var-col: 2fr" class="container">
+                    <div class="box">Item one</div>
+                    <div class="box">Item two</div>
+                    <div class="box blue">Item three has more text </div>
+                    <div class="box">Item four</div>
+                    <div class="box">Item five</div>
+                </div>
+            </div>
+
+            <div class="wrap">
+                <h2>3 <code>fr</code></h2>
+                <div style="--var-col: 3fr" class="container">
+                    <div class="box">Item one</div>
+                    <div class="box">Item two</div>
+                    <div class="box blue">Item three has more text </div>
+                    <div class="box">Item four</div>
+                    <div class="box">Item five</div>
+                </div>
+            </div>
+
+            <div class="wrap">
+                <h2>4 <code>fr</code></h2>
+                <div style="--var-col: 4fr" class="container">
+                    <div class="box">Item one</div>
+                    <div class="box">Item two</div>
+                    <div class="box blue">Item three has more text </div>
+                    <div class="box">Item four</div>
+                    <div class="box">Item five</div>
+                </div>
+            </div>
+        </article>
+    </body>
+</html>
