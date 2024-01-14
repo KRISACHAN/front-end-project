@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <title>@scope</title>
+        <style>
+            /**
+                @url https://fullystacked.net/scope-in-css/ An introduction to @scope in CSS
+                @url https://developer.chrome.com/docs/css-ui/at-scope?hl=zh-cn#the_difference_between_scope_and_inside_scope 使用 CSS @scope at-rule 限制选择器的覆盖面
+            */
+            :root {
+                --theme-bg-color: #c0392b;
+            }
+
+            .scope {
+                width: 300px;
+                height: 300px;
+                background: var(--theme-bg-color);
+                margin-bottom: 8px;
+            }
+
+            @scope (.scope1) {
+                :scope {
+                    --theme-bg-color: #159957;
+                }
+
+                h2 {
+                    color: #155799;
+                }
+
+                @scope (.content1) to (.content1-1) {
+                    p {
+                        font-size: 20px;
+                    }
+                }
+            }
+
+            @scope (.scope2) {
+                :scope {
+                    --theme-bg-color: #6190e8;
+                }
+
+                h2 {
+                    color: #a7bfe8;
+                }
+            }
+
+            @scope (.scope3) {
+                :scope {
+                    --theme-bg-color: #4568DC;
+                }
+
+                h2 {
+                    color: #B06AB3;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>I am scope</h1>
+        <section class="scope scope1">
+            <h2>I am scope1</h2>
+            <div class="content1">
+                <p>I am content1 p</p>
+
+                <div class="content1-1">
+                    <p>I am content1-1 p</p>
+                </div>
+            </div>
+        </section>
+        <section class="scope scope2">
+            <h2>I am scope2</h2>
+        </section>
+        <section class="scope scope3">
+            <h2>I am scope3</h2>
+        </section>
+    </body>
+</html>
