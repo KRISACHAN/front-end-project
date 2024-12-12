@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+    app:
+        build:
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        volumes:
+            - ..:/app:cached
+            - node_modules:/app/node_modules
+        ports:
+            - '5173:5173' # Vite 开发服务器
+            - '9229:9229' # Node.js 调试端口
+        command: sleep infinity
+        environment:
+            - NODE_ENV=development
+            - VITE_APP_TITLE=Simple GPT
+            - VITE_API_BASE_URL=http://localhost:3000
+        # 配置资源限制
+        deploy:
+            resources:
+                limits:
+                    memory: 4G
+                reservations:
+                    memory: 1G
+
+volumes:
+    node_modules:

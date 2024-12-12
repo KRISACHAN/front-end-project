@@ -1,0 +1,7 @@
+.git/
+node_modules/
+public/
+sql/
+dist-app/
+tests/
+pnpm-lock.yaml

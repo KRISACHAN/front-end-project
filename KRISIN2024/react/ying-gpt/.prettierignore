@@ -1,0 +1,14 @@
+.git/
+node_modules/
+pnpm-lock.yaml
+.turbo/
+dist/
+public/
+.env*.development
+.env*.production
+.env
+.gitignore
+.prettierignore
+.prettierrc
+.eslintignore
+.eslintrc

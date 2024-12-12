@@ -1,0 +1,48 @@
+{
+    "name": "Simple GPT Dev",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/app",
+
+    // 配置 VS Code 设置
+    "customizations": {
+        "vscode": {
+            // 安装推荐的插件
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "bradlc.vscode-tailwindcss",
+                "formulahendry.auto-rename-tag",
+                "streetsidesoftware.code-spell-checker",
+                "stylelint.vscode-stylelint",
+                "christian-kohler.path-intellisense",
+                "formulahendry.auto-close-tag"
+            ],
+            // 应用 VS Code 设置
+            "settings": {
+                "editor.formatOnSave": true,
+                "editor.defaultFormatter": "esbenp.prettier-vscode",
+                "editor.codeActionsOnSave": {
+                    "source.fixAll.eslint": "explicit",
+                    "source.fixAll.stylelint": "explicit"
+                }
+            }
+        }
+    },
+
+    // 使用 zsh 作为默认 shell
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "20"
+        }
+    },
+
+    // 容器启动后执行的命令
+    "postCreateCommand": "pnpm install",
+
+    // 转发端口
+    "forwardPorts": [5173],
+
+    // 远程用户
+    "remoteUser": "node"
+}

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+    app:
+        container_name: simple-gpt
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - NODE_ENV=production
+        ports:
+            - '80:80'
+        volumes:
+            - .:/app
+            - /app/node_modules
+        environment:
+            - NODE_ENV=production
+            - VITE_APP_TITLE=Simple GPT
+            - VITE_API_BASE_URL=https://api.example.com
+        healthcheck:
+            test: ['CMD', 'curl', '-f', 'http://localhost:80/health']
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+        deploy:
+            resources:
+                limits:
+                    memory: 1G
+                reservations:
+                    memory: 512M
+        restart: unless-stopped

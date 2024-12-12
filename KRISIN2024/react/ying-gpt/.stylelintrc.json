@@ -1,0 +1,51 @@
+{
+    "extends": ["stylelint-config-standard"],
+    "plugins": ["stylelint-order"],
+    "overrides": [
+        {
+            "files": ["**/*.scss"],
+            "customSyntax": "postcss-scss"
+        },
+        {
+            "files": ["**/*.less"],
+            "customSyntax": "postcss-less"
+        }
+    ],
+    "rules": {
+        "declaration-block-no-duplicate-properties": true,
+        "declaration-block-no-shorthand-property-overrides": true,
+        "block-no-empty": true,
+        "comment-no-empty": true,
+        "no-descending-specificity": null,
+        "no-invalid-position-at-import-rule": null,
+        "at-rule-no-unknown": [
+            true,
+            {
+                "ignoreAtRules": [
+                    "tailwind",
+                    "apply",
+                    "variants",
+                    "responsive",
+                    "screen",
+                    "layer"
+                ]
+            }
+        ],
+        "no-empty-source": null,
+        "selector-class-pattern": null,
+        "keyframes-name-pattern": null,
+        "selector-pseudo-class-no-unknown": [
+            true,
+            {
+                "ignorePseudoClasses": ["global"]
+            }
+        ],
+        "function-no-unknown": [
+            true,
+            {
+                "ignoreFunctions": ["theme"]
+            }
+        ]
+    },
+    "ignoreFiles": ["node_modules/**/*", "dist/**/*"]
+}

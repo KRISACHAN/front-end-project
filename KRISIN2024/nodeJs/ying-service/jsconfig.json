@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@app/*": ["./app/*"],
+            "@core/*": ["./app/core/*"],
+            "@middlewares/*": ["./app/middlewares/*"],
+            "@api/*": ["./app/api/*"],
+            "@dao/*": ["./app/dao/*"],
+            "@models/*": ["./app/models/*"],
+            "@services/*": ["./app/services/*"],
+            "@validators/*": ["./app/validators/*"],
+            "@config/*": ["./app/config/*"],
+            "@utils/*": ["./app/utils/*"]
+        }
+    },
+    "exclude": ["node_modules"]
+}
