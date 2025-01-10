@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+.turbo/
+public/
+
+# Environment and configuration files
+.env*
+!.env.example
+
+# Git files
+.git/
+.gitignore
+
+# Package specific
+**/coverage/
+**/.next/
+**/build/
+**/storybook-static/

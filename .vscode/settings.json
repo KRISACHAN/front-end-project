@@ -1,0 +1,21 @@
+{
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": false,
+    "editor.tabSize": 4,
+    "editor.rulers": [100],
+    "editor.formatOnSave": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "editor.suggestSelection": "first",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "explicit",
+        "source.organizeExports": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "es5"
+}

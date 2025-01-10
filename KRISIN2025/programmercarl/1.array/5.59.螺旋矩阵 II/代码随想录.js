@@ -1,15 +1,16 @@
 // https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html
 
-var generateMatrix = function(n) {
-    let startX = startY = 0;   // 起始位置
-    let loop = Math.floor(n/2);   // 旋转圈数
-    let mid = Math.floor(n/2);    // 中间位置
-    let offset = 1;    // 控制每一层填充元素个数
-    let count = 1;     // 更新填充数字
+var generateMatrix = function (n) {
+    let startX = (startY = 0); // 起始位置
+    let loop = Math.floor(n / 2); // 旋转圈数
+    let mid = Math.floor(n / 2); // 中间位置
+    let offset = 1; // 控制每一层填充元素个数
+    let count = 1; // 更新填充数字
     let res = new Array(n).fill(0).map(() => new Array(n).fill(0));
 
     while (loop--) {
-        let row = startX, col = startY;
+        let row = startX,
+            col = startY;
         // 上行从左到右（左闭右开）
         for (; col < n - offset; col++) {
             res[row][col] = count++;

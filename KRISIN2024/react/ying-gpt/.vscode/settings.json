@@ -1,0 +1,65 @@
+{
+    "eslint.run": "onType",
+    "eslint.options": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.useFlatConfig": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": false,
+    "editor.tabSize": 4,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+        "package.json": ".npmrc, .czrc, .prettierrc*, .eslintrc*, .stylelintrc*, .lintstagedrc*, pnpm-lock.yaml, pnpm-workspace.yaml, .editorconfig, .gitignore, .gitattributes, .browserslistrc, commitlint.config.js, monorepo.code-workspace, turbo.json, .changeset/config.json, .babelrc, ecosystem.config.js, docker-compose.yml, Dockerfile, jest.config.js, jsconfig.json, tsconfig.json, tsconfig.*.json, vite.config.ts, vite.config.*.ts, package-lock.json",
+        ".env": ".env.*, .env.*.local, .env.example, .env.development, .env.production, .env.test, .env.development, .env.production",
+        "eslint.config.js": ".eslintignore,eslint.config.js,jest.setup.js, jest.*.js, .stylelintignore, stylelint.config.js, .prettierignore, prettier.config.js, postcss.config.js, tailwind.config.js",
+        "Dockerfile": "docker-compose.yml, .dockerignore",
+        "turbo.json": ".turbo, turbo.*.json",
+        "*.ts": "${capture}.js, ${capture}.d.ts, ${capture}.test.ts, ${capture}.test.tsx, ${capture}.spec.ts, ${capture}.spec.tsx, ${capture}.mock.ts",
+        "*.tsx": "${capture}.css, ${capture}.less, ${capture}.scss, ${capture}.module.css, ${capture}.module.less, ${capture}.module.scss, ${capture}.test.ts, ${capture}.test.tsx, ${capture}.spec.ts, ${capture}.spec.tsx",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.css, ${capture}.less, ${capture}.scss, ${capture}.module.css, ${capture}.module.less, ${capture}.module.scss",
+        "index.ts": "index.d.ts, index.test.ts, index.spec.ts",
+        "index.tsx": "index.css, index.less, index.scss, index.module.css, index.module.less, index.module.scss, index.test.tsx, index.spec.tsx",
+        "page.tsx": "page.css, page.less, page.scss, page.module.css, page.module.less, page.module.scss, page.test.tsx, page.spec.tsx",
+        "layout.tsx": "layout.css, layout.less, layout.scss, layout.module.css, layout.module.less, module.scss, layout.test.tsx, layout.spec.tsx",
+        "component.tsx": "component.css, component.less, component.scss, component.module.css, component.module.less, component.module.scss, component.test.tsx, component.spec.tsx",
+        "router.js": "router.*.js, router.test.js, router.spec.js",
+        "dao.js": "dao.*.js, dao.test.js, dao.spec.js",
+        "service.js": "service.*.js, service.test.js, service.spec.js",
+        "model.js": "model.*.js, model.test.js, model.spec.js",
+        "validator.js": "validator.*.js, validator.test.js, validator.spec.js",
+        "middleware.js": "middleware.*.js, middleware.test.js, middleware.spec.js",
+        "sequelize.js": "sequelize.config.js, sequelize.*.js",
+        "README.md": "LICENSE, CHANGELOG.md, CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md, API.md, DEPLOYMENT.md",
+        "api.ts": "api.d.ts, api.test.ts, api.spec.ts, api.mock.ts",
+        "service.ts": "service.d.ts, service.test.ts, service.spec.ts, service.mock.ts",
+        "hook.ts": "hook.test.ts, hook.spec.ts",
+        "util.ts": "util.test.ts, util.spec.ts",
+        "types.ts": "types.d.ts, types.test.ts, types.spec.ts",
+        "interfaces.ts": "interfaces.d.ts, interfaces.test.ts, interfaces.spec.ts",
+        "constants.ts": "constants.*.ts, constants.test.ts",
+        "config.ts": "config.*.ts, config.test.ts"
+    },
+    "stylelint.enable": true,
+    "stylelint.validate": [
+        "css",
+        "scss",
+        "less",
+        "postcss",
+        "typescript",
+        "typescriptreact"
+    ]
+}
