@@ -1,0 +1,275 @@
+.hooks-demo {
+    padding: 20px;
+  }
+
+  .note {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .hooks-demo section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+  }
+
+  /* UseOptimisticDemo 样式 */
+  .optimistic-demo {
+    max-width: 600px;
+  }
+
+  .message-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .message-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .messages {
+    display: grid;
+    gap: 15px;
+  }
+
+  .message {
+    padding: 15px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .message.pending {
+    opacity: 0.7;
+    border-style: dashed;
+  }
+
+  .message-text {
+    margin: 0 0 10px 0;
+  }
+
+  .message-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .like-button {
+    padding: 5px 10px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .like-button:hover {
+    background: #e9ecef;
+  }
+
+  /* UseFormStateDemo 样式 */
+  .form-state-demo {
+    max-width: 400px;
+  }
+
+  .login-form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .password-input {
+    position: relative;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .form-checkbox {
+    margin: 0;
+  }
+
+  .form-actions {
+    margin-top: 20px;
+  }
+
+  /* UseTransitionDemo 样式 */
+  .transition-demo {
+    max-width: 800px;
+  }
+
+  .search-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .loading-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+  }
+
+  .search-results {
+    display: grid;
+    gap: 15px;
+  }
+
+  .result-item {
+    padding: 15px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+
+  .result-item h3 {
+    margin: 0 0 10px 0;
+  }
+
+  .result-item p {
+    margin: 0;
+    color: #666;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+  }
+
+  /* 通用样式 */
+  .error-message {
+    color: #dc3545;
+    margin: 10px 0;
+    padding: 10px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+  }
+
+  .success-message {
+    color: #28a745;
+    margin: 10px 0;
+    padding: 10px;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+  }
+
+  .pending-indicator {
+    font-size: 0.85em;
+    color: #666;
+  }
+
+  button {
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  button:hover {
+    background: #0056b3;
+  }
+
+  button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  /* 信息展示 */
+  .form-info,
+  .transition-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .form-info h3,
+  .transition-info h3 {
+    margin: 0 0 10px 0;
+  }
+
+  .form-info ul,
+  .transition-info ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .form-info li,
+  .transition-info li {
+    margin: 5px 0;
+    color: #666;
+  }
+
+  /* 响应式布局 */
+  @media (max-width: 768px) {
+    .hooks-demo {
+      padding: 10px;
+    }
+
+    .message-form {
+      flex-direction: column;
+    }
+
+    .form-input,
+    .search-input {
+      font-size: 16px;
+    }
+  }

@@ -1,0 +1,51 @@
+.compiler-demo {
+  padding: 20px;
+}
+
+.compiler-demo section {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.compiler-demo h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.compiler-demo h2 {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.compiler-demo p {
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.expensive-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.simple-counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.simple-counter button {
+  padding: 5px 10px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.complex-calculation {
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}

@@ -1,0 +1,208 @@
+.form-demo {
+    padding: 20px;
+  }
+
+  .note {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .form-demo section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+  }
+
+  /* 基础表单样式 */
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="number"],
+  .form-group input[type="password"],
+  .form-group input[type="tel"],
+  .form-group input[type="date"],
+  .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  /* 单选框和复选框组 */
+  .radio-group,
+  .checkbox-group {
+    display: flex;
+    gap: 15px;
+  }
+
+  .radio-group label,
+  .checkbox-group label,
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  /* 错误消息 */
+  .error {
+    color: #dc3545;
+    font-size: 0.85em;
+    margin-top: 5px;
+  }
+
+  /* 按钮样式 */
+  button {
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  button:hover {
+    background: #0056b3;
+  }
+
+  button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  /* 结果展示 */
+  .result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .result pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* 密码强度指示器 */
+  .password-strength {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .password-strength h4 {
+    margin: 0 0 10px 0;
+    color: #666;
+  }
+
+  .password-strength ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .password-strength li {
+    margin: 5px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .password-strength li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .password-strength li.valid::before {
+    background: #28a745;
+  }
+
+  .password-strength li.invalid::before {
+    background: #dc3545;
+  }
+
+  /* 动态表单样式 */
+  .dynamic-field {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .form-section {
+    margin-bottom: 30px;
+  }
+
+  .form-section h3 {
+    margin-bottom: 15px;
+  }
+
+  .add-btn {
+    background: #28a745;
+    margin-bottom: 20px;
+  }
+
+  .add-btn:hover {
+    background: #218838;
+  }
+
+  .remove-btn {
+    background: #dc3545;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }
+
+  .remove-btn:hover {
+    background: #c82333;
+  }
+
+  /* 响应式布局 */
+  @media (max-width: 768px) {
+    .form-demo {
+      padding: 10px;
+    }
+
+    .radio-group,
+    .checkbox-group {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="number"],
+    .form-group input[type="password"],
+    .form-group input[type="tel"],
+    .form-group input[type="date"],
+    .form-group textarea {
+      font-size: 16px;
+    }
+  }

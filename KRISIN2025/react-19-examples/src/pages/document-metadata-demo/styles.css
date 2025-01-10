@@ -1,0 +1,182 @@
+.metadata-demo {
+    padding: 20px;
+  }
+
+  .note {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .metadata-demo section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+  }
+
+  /* 动态标题演示样式 */
+  .title-demo {
+    max-width: 600px;
+  }
+
+  .demo-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+
+  .input-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  .input-group input {
+    flex: 1;
+  }
+
+  .title-preview {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .preview {
+    font-family: monospace;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  /* Meta 标签演示样式 */
+  .meta-tags-demo {
+    max-width: 800px;
+  }
+
+  .meta-form {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    display: grid;
+    gap: 5px;
+  }
+
+  .form-group label {
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .meta-preview {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .meta-preview pre {
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+
+  .meta-info {
+    padding: 15px;
+    background: #e9ecef;
+    border-radius: 4px;
+  }
+
+  .meta-info ul {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+
+  /* SEO 演示样式 */
+  .seo-demo {
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .seo-form {
+    padding: 20px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+
+  .seo-preview {
+    padding: 20px;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+
+  .preview-section {
+    margin-bottom: 20px;
+  }
+
+  .google-preview {
+    padding: 15px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .preview-title {
+    color: #1a0dab;
+    font-size: 18px;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+
+  .preview-url {
+    color: #006621;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .preview-description {
+    color: #545454;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* 响应式布局 */
+  @media (max-width: 768px) {
+    .seo-demo {
+      grid-template-columns: 1fr;
+    }
+
+    .input-group {
+      flex-direction: column;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      font-size: 16px;
+    }
+  }

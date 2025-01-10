@@ -1,0 +1,94 @@
+.server-component-demo {
+    padding: 20px;
+  }
+
+  .note {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .server-component-demo section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+  }
+
+  .user-profile {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+
+  .user-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .user-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+
+  .post-list {
+    margin-top: 20px;
+  }
+
+  .post {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 20px;
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 10px;
+  }
+
+  .client-server-interaction {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .server-data pre {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    overflow: auto;
+  }
+
+  .client-interaction button {
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .client-interaction button:hover {
+    background: #0056b3;
+  }
+
+  .hybrid-component {
+    display: grid;
+    gap: 20px;
+  }
+
+  .server-content,
+  .client-interaction {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }

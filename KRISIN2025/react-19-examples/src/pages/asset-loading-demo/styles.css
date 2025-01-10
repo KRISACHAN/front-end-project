@@ -1,0 +1,238 @@
+.asset-loading-demo {
+    padding: 20px;
+  }
+
+  .note {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .asset-loading-demo section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+  }
+
+  /* 图片加载演示样式 */
+  .image-loading-demo {
+    max-width: 1200px;
+  }
+
+  .demo-controls {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .control-group {
+    display: flex;
+    gap: 20px;
+    margin: 10px 0;
+  }
+
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+  }
+
+  .image-item {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .image-item:hover {
+    transform: scale(1.05);
+  }
+
+  .image-wrapper {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 比例 */
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+  }
+
+  .modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  /* 字体加载演示样式 */
+  .font-loading-demo {
+    max-width: 800px;
+  }
+
+  .font-preview {
+    margin: 20px 0;
+    padding: 20px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    min-height: 200px;
+  }
+
+  .font-preview.loading {
+    opacity: 0.7;
+  }
+
+  .loading-placeholder {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+  }
+
+  .preview-text {
+    line-height: 1.6;
+  }
+
+  .font-info {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .font-info ul {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+
+  /* 资源优先级演示样式 */
+  .resource-priority-demo {
+    max-width: 1000px;
+  }
+
+  .resources-list {
+    margin: 20px 0;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+
+  .list-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    padding: 10px;
+    background: #f8f9fa;
+    font-weight: 500;
+  }
+
+  .resource-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    cursor: pointer;
+  }
+
+  .resource-item:hover {
+    background: #f8f9fa;
+  }
+
+  .resource-item.selected {
+    background: #e9ecef;
+  }
+
+  .resource-details {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .details-content {
+    margin-top: 10px;
+  }
+
+  .details-content p {
+    margin: 5px 0;
+  }
+
+  /* 性能指标样式 */
+  .performance-metrics {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .metric {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+
+  /* 响应式布局 */
+  @media (max-width: 768px) {
+    .control-group {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .list-header,
+    .resource-item {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .resource-item > span:nth-child(2),
+    .resource-item > span:nth-child(3) {
+      display: none;
+    }
+
+    .metrics {
+      grid-template-columns: 1fr;
+    }
+  }
