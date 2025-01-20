@@ -19,9 +19,10 @@
  * 2. Set 自动去重，确保结果中不会有重复元素
  * 3. 代码更简洁，可读性更好
  */
-var intersection = function(nums1, nums2) {
+var intersection = function (nums1, nums2) {
     // 选择较短的数组创建 Set，可以减少空间使用
-    const [nums, target] = nums1.length < nums2.length ? [nums1, nums2] : [nums2, nums1];
+    const [nums, target] =
+        nums1.length < nums2.length ? [nums1, nums2] : [nums2, nums1];
 
     // 用于存储最终的交集结果
     const res = new Set();

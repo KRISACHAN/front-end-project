@@ -5,29 +5,29 @@
  * @param {string} t
  * @return {boolean}
  */
-var isAnagram = function(s, t) {
-    if(s.length !== t.length) return false;
+var isAnagram = function (s, t) {
+    if (s.length !== t.length) return false;
     const resSet = new Array(26).fill(0);
-    const base = "a".charCodeAt();
-    for(const i of s) {
+    const base = 'a'.charCodeAt();
+    for (const i of s) {
         resSet[i.charCodeAt() - base]++;
     }
-    for(const i of t) {
-        if(!resSet[i.charCodeAt() - base]) return false;
+    for (const i of t) {
+        if (!resSet[i.charCodeAt() - base]) return false;
         resSet[i.charCodeAt() - base]--;
     }
     return true;
 };
 
-var isAnagram = function(s, t) {
-  if(s.length !== t.length) return false;
-  let char_count = new Map();
-  for(let item of s) {
-    char_count.set(item, (char_count.get(item) || 0) + 1) ;
-  }
-  for(let item of t) {
-    if(!char_count.get(item)) return false;
-    char_count.set(item, char_count.get(item)-1);
-  }
-  return true;
+var isAnagram = function (s, t) {
+    if (s.length !== t.length) return false;
+    let char_count = new Map();
+    for (let item of s) {
+        char_count.set(item, (char_count.get(item) || 0) + 1);
+    }
+    for (let item of t) {
+        if (!char_count.get(item)) return false;
+        char_count.set(item, char_count.get(item) - 1);
+    }
+    return true;
 };

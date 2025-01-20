@@ -6,14 +6,15 @@
  * @return {ListNode}
  */
 // 先判断是否是环形链表
-var detectCycle = function(head) {
-    if(!head || !head.next) return null;
-    let slow =head.next, fast = head.next.next;
-    while(fast && fast.next && fast!== slow) {
+var detectCycle = function (head) {
+    if (!head || !head.next) return null;
+    let slow = head.next,
+        fast = head.next.next;
+    while (fast && fast.next && fast !== slow) {
         slow = slow.next;
         fast = fast.next.next;
     }
-    if(!fast || !fast.next ) return null;
+    if (!fast || !fast.next) return null;
     slow = head;
     while (fast !== slow) {
         slow = slow.next;
@@ -22,13 +23,14 @@ var detectCycle = function(head) {
     return slow;
 };
 
-var detectCycle = function(head) {
-    if(!head || !head.next) return null;
-    let slow =head.next, fast = head.next.next;
-    while(fast && fast.next) {
+var detectCycle = function (head) {
+    if (!head || !head.next) return null;
+    let slow = head.next,
+        fast = head.next.next;
+    while (fast && fast.next) {
         slow = slow.next;
         fast = fast.next.next;
-        if(fast == slow) {
+        if (fast == slow) {
             slow = head;
             while (fast !== slow) {
                 slow = slow.next;

@@ -5,7 +5,6 @@ function ListNode(val, next) {
     this.next = next === undefined ? null : next;
 }
 
-
 /**
  * @param {ListNode} head
  * @return {ListNode}
@@ -13,11 +12,11 @@ function ListNode(val, next) {
  * 时间复杂度: O(n) - n为链表长度
  * 空间复杂度: O(1) - 只使用了几个指针变量
  */
-var detectCycle = function(head) {
+var detectCycle = function (head) {
     // 处理边界情况：空链表或只有一个节点
     if (!head || !head.next) {
         return null;
-    };
+    }
 
     // 初始化快慢指针
     // 慢指针每次移动一步，快指针每次移动两步
@@ -40,11 +39,11 @@ var detectCycle = function(head) {
             while (fast !== slow) {
                 slow = slow.next;
                 fast = fast.next;
-            };
+            }
 
             return slow; // 返回环的入口节点
-        };
-    };
+        }
+    }
 
     // 如果快指针到达链表末尾，说明没有环
     return null;

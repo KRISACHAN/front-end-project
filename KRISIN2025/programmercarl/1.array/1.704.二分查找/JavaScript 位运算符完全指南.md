@@ -103,9 +103,9 @@ number >> bitCount;
 
 ```javascript
 if (n & 1) {
-    console.log("奇数");
+    console.log('奇数');
 } else {
-    console.log("偶数");
+    console.log('偶数');
 }
 ```
 
