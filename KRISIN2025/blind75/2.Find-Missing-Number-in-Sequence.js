@@ -41,6 +41,6 @@ function findMissingNumberInSequence(numbers) {
     return expectedSum - realSum;
 }
 
-console.log(findMissingNumberInSequence([1,3,0]));
+console.log(findMissingNumberInSequence([1, 3, 0]));
 console.log(findMissingNumberInSequence([1]));
-console.log(findMissingNumberInSequence([3,0,4,2,1]));
+console.log(findMissingNumberInSequence([3, 0, 4, 2, 1]));

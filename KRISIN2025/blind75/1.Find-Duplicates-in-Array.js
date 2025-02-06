@@ -29,10 +29,10 @@ function findDuplicates(numbers) {
     for (let i = 0, len = numbers.length; i < len; ++i) {
         if (seen.has(numbers[i])) {
             return true;
-        };
+        }
         seen.add(numbers[i]);
-    };
+    }
     return false;
 }
 
-console.log(findDuplicates([10,7,0,0,9]));
+console.log(findDuplicates([10, 7, 0, 0, 9]));
