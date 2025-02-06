@@ -24,7 +24,16 @@
 function countOnesInBinary(num) {
     let count = 0;
     while (num !== 0) {
+        // each time remove a 1 from the rightmost side
+        // For instance
+        // 9     = 1001
+        // 9 - 1 = 1000
+        // 9 & 8 = 1000
+        // 8     = 1000
+        // 8 - 1 = 0111
+        // 8 & 7 = 0000
         num = num & (num - 1);
+        // These means we would record the times until num is 0
         count++;
     }
     return count;
