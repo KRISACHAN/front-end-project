@@ -10,6 +10,9 @@ import UseOptimisticDemo from './pages/useOptimistic/useOptimistic';
 import UseIndex from './pages/use';
 import UseDemo from './pages/use/use';
 
+import RefIndex from './pages/ref';
+import RefDemo from './pages/ref/ref';
+
 function App() {
     return (
         <BrowserRouter>
@@ -54,6 +57,14 @@ function App() {
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <Link to="/ref">ref Demo</Link>
+                            <ul>
+                                <li>
+                                    <Link to="/ref/ref">ref Demo</Link>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
 
@@ -83,6 +94,8 @@ function App() {
                     />
                     <Route path="/use" element={<UseIndex />} />
                     <Route path="/use/use" element={<UseDemo />} />
+                    <Route path="/ref" element={<RefIndex />} />
+                    <Route path="/ref/ref" element={<RefDemo />} />
                     <Route
                         path="/"
                         element={<h1>Welcome to React 19 Features Demo</h1>}
