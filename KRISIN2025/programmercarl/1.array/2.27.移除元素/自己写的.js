@@ -1,12 +1,15 @@
 // https://leetcode.com/problems/remove-element/description/
 
 /**
+ * runtime complexity: O(n)
+ * space complexity: O(1)
+ *
  * @param {number[]} nums
  * @param {number} val
  * @return {number}
  */
 var removeElement = function(nums, val) {
-    // set a slow pointer to update the pre-replaced location
+    // set a slow pointer to track where the next non-val element should be placed
     let slowPointer = 0;
     // use for loop to represent a fast pointer routing
     for (let fastPointer = 0, len = nums.length; fastPointer < len; ++fastPointer) {
@@ -21,6 +24,7 @@ var removeElement = function(nums, val) {
             nums[slowPointer++] = nums[fastPointer];
         };
     };
+    // slow pointer now represents the length of the array after removing val
     return slowPointer;
 };
 
