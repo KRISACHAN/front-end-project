@@ -2,6 +2,9 @@
 // https://leetcode.com/problems/squares-of-a-sorted-array/description/
 
 /**
+ * runtime complexity: O(n)
+ * space complexity: O(n)
+ *
  * @param {number[]} nums
  * @return {number[]}
  */
